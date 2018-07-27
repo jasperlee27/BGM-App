@@ -165,7 +165,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var WalletPage = /** @class */ (function () {
     function WalletPage(navCtrl, navParams) {
-        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.myDataArray = [0, 1, 2, 3];
@@ -179,114 +178,6 @@ var WalletPage = /** @class */ (function () {
                 pointHoverBackgroundColor: '#43A047',
                 pointHoverBorderColor: '#43A047'
             },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#B094FD',
-                borderWidth: '2',
-                pointBackgroundColor: '#B094FD',
-                pointBorderColor: '#B094FD',
-                pointHoverBackgroundColor: '#B094FD',
-                pointHoverBorderColor: '#B094FD'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#FFEB3B',
-                borderWidth: '2',
-                pointBackgroundColor: '#FFEB3B',
-                pointBorderColor: '#FFEB3B',
-                pointHoverBackgroundColor: '#FFEB3B',
-                pointHoverBorderColor: '#FFEB3B'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#F4C100',
-                borderWidth: '2',
-                pointBackgroundColor: '#F4C100',
-                pointBorderColor: '#F4C100',
-                pointHoverBackgroundColor: '#F4C100',
-                pointHoverBorderColor: '#F4C100'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#AE9C00',
-                borderWidth: '2',
-                pointBackgroundColor: '#AE9C00',
-                pointBorderColor: '#AE9C00',
-                pointHoverBackgroundColor: '#AE9C00',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#F48FB1',
-                borderWidth: '2',
-                pointBackgroundColor: '#F48FB1',
-                pointBorderColor: '#F48FB1',
-                pointHoverBackgroundColor: '#F48FB1',
-                pointHoverBorderColor: '#F48FB1'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#CA7B80',
-                borderWidth: '2',
-                pointBackgroundColor: '#CA7B80',
-                pointBorderColor: '#CA7B80',
-                pointHoverBackgroundColor: '#CA7B80',
-                pointHoverBorderColor: '#CA7B80'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#C80043',
-                borderWidth: '2',
-                pointBackgroundColor: '#C80043',
-                pointBorderColor: '#C80043',
-                pointHoverBackgroundColor: '#C80043',
-                pointHoverBorderColor: '#C80043'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#F47300',
-                borderWidth: '2',
-                pointBackgroundColor: '#F47300',
-                pointBorderColor: '#F47300',
-                pointHoverBackgroundColor: '#F47300',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#F2028F',
-                borderWidth: '2',
-                pointBackgroundColor: '#F2028F',
-                pointBorderColor: '#F2028F',
-                pointHoverBackgroundColor: '#F2028F',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#0288D1',
-                borderWidth: '2',
-                pointBackgroundColor: '#0288D1',
-                pointBorderColor: '#0288D1',
-                pointHoverBackgroundColor: '#0288D1',
-                pointHoverBorderColor: '#0288D1'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#7B0090',
-                borderWidth: '2',
-                pointBackgroundColor: '#7B0090',
-                pointBorderColor: '#7B0090',
-                pointHoverBackgroundColor: '#7B0090',
-                pointHoverBorderColor: '#7B0090'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#154774',
-                borderWidth: '2',
-                pointBackgroundColor: '#154774',
-                pointBorderColor: '#154774',
-                pointHoverBackgroundColor: '#154774',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            }
         ];
         this.chartData = [
             { data: this.myDataArray, label: 'PSA' },
@@ -300,18 +191,18 @@ var WalletPage = /** @class */ (function () {
             // },
             responsive: true,
             maintainAspectRatio: false,
-            legend: {
-                position: 'bottom',
-                onClick: function (e) { return e.stopPropagation(); },
-                labels: {
-                    fontFamily: 'Open Sans',
-                    usePointStyle: true,
-                    fontSize: 14,
-                    filter: function (legendItem, chartData) {
-                        return !_this.chartData[legendItem.datasetIndex].hidden;
-                    }
-                }
-            },
+            // legend: {
+            //   position: 'bottom',
+            //   onClick: (e) => e.stopPropagation(),
+            //   labels: {
+            //     fontFamily: 'Open Sans',
+            //     usePointStyle: true,
+            //     fontSize: 14,
+            //     filter: (legendItem, chartData) => {
+            //       return !this.chartData[legendItem.datasetIndex].hidden;
+            //     }
+            //   }
+            // },
             scales: {
                 xAxes: [{
                         type: 'realtime',
@@ -363,40 +254,18 @@ var WalletPage = /** @class */ (function () {
         // this.thisChartUpdate();
         // }
     };
-    WalletPage.prototype.thisChartUpdate = function () {
-        console.log("click button lets go");
-        //this.chartData = [];
-        this.myDataArray = [Math.random(), Math.random(), Math.random(), Math.random()];
-        this.chartData = [
-            { data: this.myDataArray, label: 'PSA' },
-        ];
-        // this.chartData.push(this.myDataArray);
-        // console.log(this.myDataArray);
-        // setTimeout(() => {
-        //   if (this.baseChart) {
-        //     // this.baseChart.update();
-        //     console.log("refreshed");
-        //   }
-        // }, 50);
-        console.log("LABEL HERE " + this.chartData[0].label);
-        this.chartLabels.push('new label: ' + Math.random()); // add new label at end
-        this.chartLabels.splice(0, 1); // remove first label
-        console.log(this.chartData.data);
-        this.chartData[0].data.push(Math.random()); // add new data at end
-        this.chartData[0].data.splice(0, 1); // remove first data point
-        // this.baseChart.update();
-    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__["BaseChartDirective"]),
         __metadata("design:type", Object)
-    ], WalletPage.prototype, "baseChart", void 0);
+    ], WalletPage.prototype, "Game2Chart", void 0);
     WalletPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/'<!--\n  Generated template for the WalletPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Wallet</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<canvas baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n  [legend]="true">\n</canvas>\n\n\n<button ion-button (click)="thisChartUpdate()">Default</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/,
+            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/'<!--\n  Generated template for the WalletPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Wallet</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<canvas id="Game2Chart "#Game2Chart baseChart [chartType]="\'line\'" \n[datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="false">\n</canvas>\n\n\n<button ion-button (click)="thisChartUpdate()">Default</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]) === "function" && _b || Object])
     ], WalletPage);
     return WalletPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=wallet.js.map
@@ -523,7 +392,7 @@ var ContactPage = /** @class */ (function () {
     }
     ContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\contact\contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\contact\contact.html"*/
+            selector: 'page-contact',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\contact\contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n  Does live reload work\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\contact\contact.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]])
     ], ContactPage);
