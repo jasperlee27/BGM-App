@@ -36,7 +36,7 @@ export class WalletPage {
     ];
   
     this.chartData = [
-      { data: this.myDataArray, label:'PSA' },
+      { data:[], label:'PSA' },
     ];
   
     this.chartLabels = [];
@@ -72,12 +72,12 @@ export class WalletPage {
         yAxes: [{
           ticks: {
             min: 0,
-            max: 1,
-            stepSize: 0.1
+            // max: 1,
+            // stepSize: 0.1
           },
           scaleLabel: {
             display: true,
-            labelString: 'Percentage (%)',
+            labelString: 'Times',
             fontSize: 14,
             fontStyle: 'bold',
             fontFamily: 'Open Sans'
@@ -85,25 +85,48 @@ export class WalletPage {
         }],
       },
       elements: {
-        line: {
-          tension: 0
-        }
+        // line: {
+        //   tension: 0
+        // }
       },
       tooltips: {
-        mode: 'x-axis',
-        intersect: false,
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var label = data.datasets[tooltipItem.datasetIndex].label || '';
+        // mode: 'x-axis',
+        // intersect: false,
+        // callbacks: {
+        //   label: function(tooltipItem, data) {
+        //     var label = data.datasets[tooltipItem.datasetIndex].label || '';
   
-            if (label) {
-                label += ': ';
-            }
-            label += tooltipItem.yLabel.toFixed(2) + " %";
-            return label;
-          }
-        }
-      }
+        //     if (label) {
+        //         label += ': ';
+        //     }
+        //     label += tooltipItem.yLabel.toFixed(2) + " %";
+        //     return label;
+        //   }
+        // }
+      },
+      plugins: {
+
+        streaming: {
+          onRefresh: function(chart: any) {
+            // this.datamap = new Map<Number,Number>();
+            // this.datamap.set(0,0);
+            // var count = 0;
+            // var iteration = 0; 
+            // var lineNo = 0;
+            chart.data.datasets.forEach(function(dataset: any) {
+
+              var currDate = Date.now();
+            //  var count = this.getYValue(lineNo, iteration, this.datamap);
+              // var count = Math.random();
+              dataset.data.push({
+                x: currDate,
+                y: Math.random(),
+              });
+            });
+          },
+          delay: 2000,
+          frameRate: 30,
+        }},
     }
   }
   

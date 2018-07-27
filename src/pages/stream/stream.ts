@@ -16,7 +16,7 @@ import { getQueryValue } from '@angular/core/src/view/query';
 })
 export class StreamPage {
   
-  private datamap: any;
+  // private datamap: any;
 
   datasets: any[] = 
       [
@@ -31,8 +31,8 @@ export class StreamPage {
 
       streaming: {
         onRefresh: function(chart: any) {
-          this.datamap = new Map<Number,Number>();
-          this.datamap.set(0,0);
+          // this.datamap = new Map<Number,Number>();
+          // this.datamap.set(0,0);
           var count = 0;
           var iteration = 0; 
           var lineNo = 0;
@@ -61,11 +61,8 @@ export class StreamPage {
 
       }},
     scales: {
-
       xAxes: [{
-
         type: 'realtime'
-
       }]
 
     }
@@ -74,17 +71,17 @@ export class StreamPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
   
-  private getYValue(lineNo, iteration, datamap){
-    if (lineNo === 0){
-      var value= Math.random()
-      datamap.set(iteration, value)
-      return value;
-    }
+  // private getYValue(lineNo, iteration, datamap){
+  //   if (lineNo === 0){
+  //     var value= Math.random()
+  //     datamap.set(iteration, value)
+  //     return value;
+  //   }
     
-    else {
-      return datamap.get(iteration);
-    }
-  }
+  //   else {
+  //     return datamap.get(iteration);
+  //   }
+  // }
   
   ionViewDidLoad() {
     console.log('ionViewDidLoad StreamPage');

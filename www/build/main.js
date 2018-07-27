@@ -69,6 +69,7 @@ var StreamPage = /** @class */ (function () {
     function StreamPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        // private datamap: any;
         this.datasets = [
             { data: [], fill: false, label: 'BitCoin' },
             { data: [], showLine: false, pointRadius: 5, label: 'Short' },
@@ -78,8 +79,8 @@ var StreamPage = /** @class */ (function () {
             plugins: {
                 streaming: {
                     onRefresh: function (chart) {
-                        this.datamap = new Map();
-                        this.datamap.set(0, 0);
+                        // this.datamap = new Map<Number,Number>();
+                        // this.datamap.set(0,0);
                         var count = 0;
                         var iteration = 0;
                         var lineNo = 0;
@@ -110,16 +111,16 @@ var StreamPage = /** @class */ (function () {
             }
         };
     }
-    StreamPage.prototype.getYValue = function (lineNo, iteration, datamap) {
-        if (lineNo === 0) {
-            var value = Math.random();
-            datamap.set(iteration, value);
-            return value;
-        }
-        else {
-            return datamap.get(iteration);
-        }
-    };
+    // private getYValue(lineNo, iteration, datamap){
+    //   if (lineNo === 0){
+    //     var value= Math.random()
+    //     datamap.set(iteration, value)
+    //     return value;
+    //   }
+    //   else {
+    //     return datamap.get(iteration);
+    //   }
+    // }
     StreamPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad StreamPage');
     };
@@ -127,9 +128,10 @@ var StreamPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\stream\stream.html"*/'<!--\n  Generated template for the StreamPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>stream</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<div>\n<canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [options]="options" width=100% height=100%></canvas>\n</div>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\stream\stream.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]) === "function" && _b || Object])
     ], StreamPage);
     return StreamPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=stream.js.map
@@ -180,7 +182,7 @@ var WalletPage = /** @class */ (function () {
             },
         ];
         this.chartData = [
-            { data: this.myDataArray, label: 'PSA' },
+            { data: [], label: 'PSA' },
         ];
         this.chartLabels = [];
         this.chartOptions = {
@@ -215,37 +217,40 @@ var WalletPage = /** @class */ (function () {
                 yAxes: [{
                         ticks: {
                             min: 0,
-                            max: 1,
-                            stepSize: 0.1
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Percentage (%)',
+                            labelString: 'Times',
                             fontSize: 14,
                             fontStyle: 'bold',
                             fontFamily: 'Open Sans'
                         }
                     }],
             },
-            elements: {
-                line: {
-                    tension: 0
+            elements: {},
+            tooltips: {},
+            plugins: {
+                streaming: {
+                    onRefresh: function (chart) {
+                        // this.datamap = new Map<Number,Number>();
+                        // this.datamap.set(0,0);
+                        // var count = 0;
+                        // var iteration = 0; 
+                        // var lineNo = 0;
+                        chart.data.datasets.forEach(function (dataset) {
+                            var currDate = Date.now();
+                            //  var count = this.getYValue(lineNo, iteration, this.datamap);
+                            // var count = Math.random();
+                            dataset.data.push({
+                                x: currDate,
+                                y: Math.random(),
+                            });
+                        });
+                    },
+                    delay: 2000,
+                    frameRate: 30,
                 }
             },
-            tooltips: {
-                mode: 'x-axis',
-                intersect: false,
-                callbacks: {
-                    label: function (tooltipItem, data) {
-                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                        if (label) {
-                            label += ': ';
-                        }
-                        label += tooltipItem.yLabel.toFixed(2) + " %";
-                        return label;
-                    }
-                }
-            }
         };
     }
     WalletPage.prototype.ionViewDidLoad = function () {
