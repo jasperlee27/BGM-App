@@ -147,6 +147,10 @@ var StreamPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__ = __webpack_require__(497);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(585);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -159,6 +163,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+ // (for rxjs < 6) use 'rxjs/observable/timer'
+
 /**
  * Generated class for the WalletPage page.
  *
@@ -167,9 +173,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var WalletPage = /** @class */ (function () {
     function WalletPage(navCtrl, navParams) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.myDataArray = [0, 1, 2, 3];
+        this.variable_increase = 5;
+        this.resetGraph = false;
+        this.count = 10.0;
+        this.countDown = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__["timer"])(0, 1000).pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["take"])(this.count), Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["map"])(function () { return --_this.count; }));
         this.chartColors = [
             {
                 backgroundColor: 'rgba(0,0,0,0)',
@@ -208,14 +219,15 @@ var WalletPage = /** @class */ (function () {
             scales: {
                 xAxes: [{
                         type: 'realtime',
-                        display: true,
+                        display: false,
                         gridLines: [{
-                                type: 'realtime',
+                                // type: 'realtime',
                                 display: false
                             }]
                     }],
                 yAxes: [{
                         ticks: {
+                            beginAtZero: true,
                             min: 0,
                         },
                         scaleLabel: {
@@ -231,28 +243,66 @@ var WalletPage = /** @class */ (function () {
             tooltips: {},
             plugins: {
                 streaming: {
+                    // testFunction: function(){
+                    //   var value = 1;
+                    //   return value;
+                    // },
                     onRefresh: function (chart) {
-                        // this.datamap = new Map<Number,Number>();
-                        // this.datamap.set(0,0);
-                        // var count = 0;
+                        var yValueMultiplier = 1.0;
+                        var maxValueSet = 2.0;
+                        var count = 0;
                         // var iteration = 0; 
                         // var lineNo = 0;
                         chart.data.datasets.forEach(function (dataset) {
                             var currDate = Date.now();
-                            //  var count = this.getYValue(lineNo, iteration, this.datamap);
+                            // var index = 0;
+                            //var count = this.getYValue(lineNo, iteration, this.datamap);
                             // var count = Math.random();
                             dataset.data.push({
                                 x: currDate,
-                                y: Math.random(),
+                                y: yValueMultiplier,
                             });
+                            yValueMultiplier += 0.1;
+                            console.log("my yvalueMultipler " + yValueMultiplier);
+                            // console.log("after increasing count" + this.resetGraph);
+                            // if (count === 20){
+                            //     this.resetGraph=true;
+                            // }
+                            // console.log("until here okay" + this.resetGraph);
+                            // if (this.resetGraph === true){
+                            //   // chart.data.datasets=[];
+                            // }
+                            // this.checkResetGraph();
                         });
+                        // this.resetGraph=true;
+                        // if (this.resetGraph){
+                        //   chart.data.datasets=[];
+                        // }
                     },
                     delay: 2000,
                     frameRate: 30,
                 }
             },
-        };
+        },
+            this.updateVariable();
     }
+    WalletPage.prototype.updateVariable = function () {
+        this.variable_increase += 0.1;
+    };
+    WalletPage.prototype.testFunction = function () {
+        var value = 1;
+        return value;
+    };
+    // private checkResetGraph(){
+    //   if (lineNo === 0){
+    //     var value= Math.random()
+    //     datamap.set(iteration, value)
+    //     return value;
+    //   }
+    //   else {
+    //     return datamap.get(iteration);
+    //   }
+    // }
     WalletPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad WalletPage');
         // while(true){
@@ -265,7 +315,7 @@ var WalletPage = /** @class */ (function () {
     ], WalletPage.prototype, "Game2Chart", void 0);
     WalletPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/'<!--\n  Generated template for the WalletPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Wallet</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<canvas id="Game2Chart "#Game2Chart baseChart [chartType]="\'line\'" \n[datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="false">\n</canvas>\n\n\n<button ion-button (click)="thisChartUpdate()">Default</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/,
+            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/'<!--\n  Generated template for the WalletPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Wallet</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<canvas id="Game2Chart "#Game2Chart baseChart [chartType]="\'line\'" \n[datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="false">\n</canvas>\n{{variable_increase}}\n<br>\nNext game in <h2>{{countDown | async}}</h2>\n\n<button ion-button (click)="thisChartUpdate()">Default</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/,
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]) === "function" && _b || Object])
     ], WalletPage);

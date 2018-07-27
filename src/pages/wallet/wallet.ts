@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular/';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
+import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
+import { take, map } from 'rxjs/operators';
 /**
  * Generated class for the WalletPage page.
  *
@@ -20,9 +22,18 @@ export class WalletPage {
   chartData: any;
   chartLabels: any;
   myDataArray = [0,1,2,3];
+  variable_increase: any = 5;
+  private resetGraph: boolean = false;
+  countDown;
+  count = 10.0;
+  
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.countDown = timer(0,1000).pipe(
+      take(this.count),
+      map(()=> --this.count)
+   );
     this.chartColors = [
       { // BT
         backgroundColor: 'rgba(0,0,0,0)',
@@ -63,14 +74,15 @@ export class WalletPage {
       scales: {
         xAxes: [{
           type: 'realtime',
-          display: true,
+          display: false,
           gridLines: [{
-            type: 'realtime',
+            // type: 'realtime',
             display: false
           }]
         }],
         yAxes: [{
           ticks: {
+            beginAtZero:true,
             min: 0,
             // max: 1,
             // stepSize: 0.1
@@ -106,30 +118,76 @@ export class WalletPage {
       },
       plugins: {
 
-        streaming: {
+        streaming: { 
+          // testFunction: function(){
+          //   var value = 1;
+          //   return value;
+          // },
           onRefresh: function(chart: any) {
-            // this.datamap = new Map<Number,Number>();
-            // this.datamap.set(0,0);
-            // var count = 0;
+            var yValueMultiplier = 1.0;
+            var maxValueSet = 2.0;
+            var count = 0;
             // var iteration = 0; 
             // var lineNo = 0;
             chart.data.datasets.forEach(function(dataset: any) {
 
               var currDate = Date.now();
-            //  var count = this.getYValue(lineNo, iteration, this.datamap);
+              // var index = 0;
+              //var count = this.getYValue(lineNo, iteration, this.datamap);
               // var count = Math.random();
               dataset.data.push({
                 x: currDate,
-                y: Math.random(),
+                y: yValueMultiplier,
               });
-            });
+
+              yValueMultiplier += 0.1;
+              console.log("my yvalueMultipler " + yValueMultiplier);
+            // console.log("after increasing count" + this.resetGraph);
+            // if (count === 20){
+            //     this.resetGraph=true;
+            // }
+            // console.log("until here okay" + this.resetGraph);
+
+            // if (this.resetGraph === true){
+            //   // chart.data.datasets=[];
+            // }
+              // this.checkResetGraph();
+          });
+
+            // this.resetGraph=true;
+            // if (this.resetGraph){
+            //   chart.data.datasets=[];
+            // }
           },
           delay: 2000,
           frameRate: 30,
         }},
-    }
+    },
+
+    this.updateVariable()
   }
   
+
+  private updateVariable(){
+    this.variable_increase +=0.1
+
+  }
+  private testFunction(): number {
+    var value = 1;
+    return value;
+  }
+  // private checkResetGraph(){
+  //   if (lineNo === 0){
+  //     var value= Math.random()
+  //     datamap.set(iteration, value)
+  //     return value;
+  //   }
+    
+  //   else {
+  //     return datamap.get(iteration);
+  //   }
+  // }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
 
