@@ -15,6 +15,30 @@
 
 <ion-content padding>
   
+    <div class="row">
+        <h6>Game ID:{{gameNo}} </h6> 
+    </div>
+    <br>
+    
+    <ion-grid>
+    <ion-row justify-content-center align-items-center>
+        <h3>Current Pool:</h3>
+    </ion-row>
+    <ion-row justify-content-center align-items-center>
+        <h1>$ {{currentPoolNumber | number }}</h1>
+    </ion-row>
+    </ion-grid>
+    
+
+    <ion-segment>
+        <div id="playersHeader">
+            <h5>No. of Players:</h5>
+        </div>
+    </ion-segment>
+    <ion-row justify-content-center align-items-center>
+        <h5>{{noPlayers}}</h5>
+    </ion-row>
+
     <ion-list>
     <ion-list-header>
      Current Leaderboard
@@ -25,7 +49,7 @@
           1. {{bidName1}}
         </ion-label>
         <div item-content>
-          ${{bidValue1}}
+          ${{bidValue1 | number}}
         </div>
     </ion-item>
 
@@ -34,7 +58,7 @@
           2. {{bidName2}}
         </ion-label>
         <div item-content>
-          ${{bidValue2}}
+          ${{bidValue2 | number}}
         </div>
     </ion-item>
 
@@ -43,7 +67,7 @@
           3. {{bidName3}}
         </ion-label>
         <div item-content>
-          ${{bidValue3}}
+          ${{bidValue3 | number}}
         </div>
     </ion-item>
 
@@ -52,7 +76,7 @@
           4. {{bidName4}}
         </ion-label>
         <div item-content>
-          ${{bidValue4}}
+          ${{bidValue4 | number}}
         </div>
     </ion-item>
 
@@ -61,10 +85,21 @@
           5. {{bidName5}}
         </ion-label>
         <div item-content>
-          ${{bidValue5}}
+          ${{bidValue5 | number}}
         </div>
     </ion-item>
   
   </ion-list>
 
+  <div class="row">
+      Balance: {{walletBallance | number}} USD
+  </div>
+  <div class="row"> 
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="liveBidInputAmount">
+              <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>
+    </div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">
+            <button ion-button [disabled]="disabled" (click)="bidGame()">BID</button>
+    </div>
+  </div>
 </ion-content>
