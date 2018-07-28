@@ -33,12 +33,23 @@
 
 </head>
 <body>
-
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
-  <!-- <script type="text/javascript" src='../roulette/raphael-min.js'></script>
-  <script type="text/javascript" src="roulette/mersenne-twister.js"></script>
-  <script type="text/javascript" src="roulette/roulette.js"></script> -->
+  <div id="holder" style="width:400px; height:400px;">
+  </div>
+  <button id="genBtn">Rotate</button>
+  <br />
+  <button id="rmBtn">Remove the winner and rotate</button>
+  <!-- <br>
+  <p>Click <b>Rotate</b> to update.</p> -->
+  <p>Bookmark <a id="bookmarklink" href='./roulette.html'>this link</a> to save your list.</p> 
+  <textarea id="items" name="items" rows="8" cols="15"> </textarea>
+ 
+  <script type="text/javascript" src='assets/js/raphael-min.js'></script>
+  <script type="text/javascript" src="assets/js/mersenne-twister.js"></script>
+  <script type="text/javascript" src="assets/js/roulette.js"></script>
+  
+  <script type="text/javascript" src="assets/js/test.js"></script>
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
@@ -50,6 +61,6 @@
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
-  <!-- <script src="cordova.js"></script> -->
+  <script src="cordova.js"></script>
 </body>
 </html>

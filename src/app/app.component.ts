@@ -5,7 +5,8 @@ import { Platform } from 'ionic-angular/';
 import { App } from 'ionic-angular/components/app/app';
 import { TabsPage } from '../pages/tabs/tabs';
 
-
+declare var testVar;
+declare function init():any;
 @Component({
   templateUrl: 'app.html'
 })
@@ -14,6 +15,9 @@ export class MyApp {
   // platform: Platform;
 
   constructor(platform: Platform, app: App) {
+
+    // alert(testVar);
+
     platform.ready().then(() => {
       // statusBar.styleDefault();
       // splashScreen.hide();

@@ -2,11 +2,7 @@ var paper;
 var arcs = []; //svg object
 var texts= []; //svg object
 var pieText= [
-  'Firefox',
-  'Thunderbird',
-  'Sea Monkey',
-  'Persona',
-  'Bugzilla',
+'0','1','2','3','4','5','6','7'
 ];
 var center = {'x':200, 'y':200};
 var diameter = 180;
@@ -44,7 +40,7 @@ function getRandomDriftDeg(multipliedItems){
 
 function spinToId(id){
   //TODO: Move these config to the top
-  var time = 8000; //ms
+  var time = 5000; //ms
   //var easing = '>'
   var easing = 'cubic-bezier(0,1,0.1,1)' ;
   var rotateAngle = 360 * 9; 
@@ -72,7 +68,7 @@ function getColor(i, total){
 
 
 function drawRouletteShadow(){
-    var offset = 5;
+    var offset = 10;
     var c = paper.circle(center.x, center.y, diameter);
     c.attr("fill", "black");
     c.glow({width:15, offsetx:2.5, offsety:2.5});
@@ -160,7 +156,13 @@ function init(){
 function randomSpin(){
   winnerId = getRandom(multiplyList(pieText).length - 1); //for 5 arcs, the id is 0 to 4
   spinToId(winnerId); 
+  // await sleep(8000);
+  // reset();
 }
+
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 function refreshUi(){
 //Call this to reflect pieText change
@@ -188,7 +190,7 @@ document.body.onload = function(){
   }
   //pieText = parseList();
   refreshUi();
-  init();
+  // init();
 
 
   document.getElementById('genBtn').onclick = function(){

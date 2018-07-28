@@ -1,0 +1,1 @@
+testVar = "heloo from external js";

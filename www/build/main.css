@@ -25684,11 +25684,11 @@ page-roulette #holder {
 
 page-roulette body {
   text-align: center;
-  background-color: #303030;
+  background-color: #000000;
 }
 
 page-roulette p {
-  color: lightgrey;
+  color: #050505;
 }
 
 page-roulette button {
