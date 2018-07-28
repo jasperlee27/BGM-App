@@ -36,7 +36,7 @@
   </div>
   <div class="row"> 
       <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="spinInputAmount">
-          <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>
+          <ion-input type="number" [(ngModel)]="betAmount"  min="0" max="100" placeholder="Amount" [disabled]="disabled"></ion-input>
       </div>
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">
         <button ion-button [disabled]="disabled" (click)="onSpin()">Spin To Win!</button>
