@@ -1,13 +1,23 @@
 page-bidding {
-    // .playersHeader {
-    // padding-left:100px;
-    // text-align: center;
-    // }
+    // background: grey;
+    .mycontent{
+        background-color: white;
+    }
+    .totalPoolAmount {
+        color:red;
+        padding-top:2px;
+        // border-color:red;
+       
+    }
+    
+    .amountContainer{
+        margin-left: 25%;
+        margin-bottom: 10px;
+        border: 1px solid red;
+        height: 30px;
+        width: 50%;
+    }
 
-    // #playersHeader {
-    //     padding-left:100px;
-    //     text-align: center;
-    // }
     .row{
         align-items: center !important;
         text-align: center !important;

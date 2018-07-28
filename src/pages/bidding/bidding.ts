@@ -52,7 +52,6 @@ export class BiddingPage {
     this.bidName5 = 'Tom';
     this.bidValue5 = 4239;
 
-    this.currentPoolString = '2,500,000';
     this.noPlayers=100;
   }
 
@@ -63,11 +62,11 @@ export class BiddingPage {
   bidGame(){
     this.updateWalletBallance(-this.betAmount);
     this.updatePoolAmount(+this.betAmount);
-    this.updateNoPlayers();
+    this.updateNoPlayers(+1);
   }
 
-  updateNoPlayers(){
-    var targetNumber = this.noPlayers + 1;
+  updateNoPlayers(amount: number){
+    var targetNumber = this.noPlayers + amount;
     let interval = setInterval(()=>{
       this.noPlayers++;
       if(this.noPlayers == targetNumber) clearInterval(interval);
@@ -90,6 +89,9 @@ export class BiddingPage {
 
   doRefresh(refresher) {
     console.log('Begin async operation', refresher);
+    console.log("This is math.random " +Math.round(Math.random()*1000));
+    this.updatePoolAmount(Math.round(Math.random() * 1000));
+    this.updateNoPlayers(Math.round(Math.random() * 10));
 
     setTimeout(() => {
       console.log('Async operation has ended');

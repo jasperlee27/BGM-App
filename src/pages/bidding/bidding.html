@@ -13,22 +13,22 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="mycontent" padding>
   
     <div class="row">
         <h6>Game ID:{{gameNo}} </h6> 
     </div>
     <br>
     
-    <ion-grid>
+
     <ion-row justify-content-center align-items-center>
         <h3>Current Pool:</h3>
     </ion-row>
-    <ion-row justify-content-center align-items-center>
-        <h1>$ {{currentPoolNumber | number }}</h1>
-    </ion-row>
-    </ion-grid>
-    
+    <div class="amountContainer">
+      <ion-row justify-content-center align-items-center class="totalPoolAmount">
+          <h1>$ {{currentPoolNumber | number }}</h1>
+      </ion-row>
+    </div>
 
     <ion-segment>
         <div id="playersHeader">
@@ -104,7 +104,7 @@
   </div>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content
+      <ion-refresher-content  
         pullingIcon="arrow-dropdown"
         pullingText="Pull to refresh"
         refreshingSpinner="circles"

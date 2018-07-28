@@ -25678,6 +25678,23 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-bidding .mycontent {
+  background-color: white;
+}
+
+page-bidding .totalPoolAmount {
+  color: red;
+  padding-top: 2px;
+}
+
+page-bidding .amountContainer {
+  margin-left: 25%;
+  margin-bottom: 10px;
+  border: 1px solid red;
+  height: 30px;
+  width: 50%;
+}
+
 page-bidding .row {
   -webkit-box-align: center !important;
   -webkit-align-items: center !important;

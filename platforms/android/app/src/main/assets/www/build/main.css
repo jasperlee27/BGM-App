@@ -25677,3 +25677,38 @@ ion-navbar.toolbar {
   min-height: calc(46px + constant(safe-area-inset-bottom));
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
+
+page-bidding .row {
+  -webkit-box-align: center !important;
+  -webkit-align-items: center !important;
+  -ms-flex-align: center !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+page-roulette #holder {
+  margin: auto;
+}
+
+page-roulette body {
+  text-align: center;
+  background-color: #000000;
+}
+
+page-roulette p {
+  color: #050505;
+}
+
+page-roulette #spinInputAmount {
+  width: 10em;
+  height: 100%;
+}
+
+page-roulette ion-button {
+  background-color: #154774;
+  height: 30px;
+  width: 120px;
+  color: whitesmoke;
+  border-color: grey;
+  border-width: 1em;
+}
