@@ -158,7 +158,9 @@ function init(){
 
 function randomSpin(){
   winnerId = getRandom(multiplyList(pieText).length - 1); //for 5 arcs, the id is 0 to 4
-  spinToId(winnerId); 
+  spinToId(winnerId);
+  // alert("You have won prize " +winnerId); 
+  return winnerId;
   // await sleep(8000);
   // reset();
 }

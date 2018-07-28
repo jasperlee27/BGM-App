@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular/';
+import { NavController, SelectPopover } from 'ionic-angular/';
 import { IonicPage } from '../../../node_modules/ionic-angular/navigation/ionic-page';
+import { AlertController } from 'ionic-angular';
 // import * as Raphael from '../../assets/js/raphael-min.js';
 // import * as mersenne from '../../assets/js/mersenne-twister.js';
 // import * as roulette from '../../assets/js/roulette.js';
@@ -22,26 +23,57 @@ declare var winnerId;
   templateUrl: 'roulette.html'
 })
 export class RoulettePage {
-
-  constructor(public navCtrl: NavController) {
+  disabled= false;
+  walletBallance = 1000;
+  betAmount;
+  
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
     // refreshUi();
     // init();
   }
-  onSpin(){
+
+  async onSpin(){
+    this.disableSpinButton();
     reset();
     init();
     randomSpin();
+    this.updateWalletBallance(-this.betAmount);
     console.log ("My winner ID is " + winnerId);
+    await this.delay(5010);
+    this.presentAlert(winnerId);
   }
 
   ngOnInit(){
     init();
   }
-  // loadScript () { 
-  //   var script = document.createElement('script'); 
-  //   script.type = 'text/javascript'; script.src = '../build/js/roulette.js'; 
-  //   document.body.appendChild(script); 
-  // };
+  
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms));
+  }
+
+  enableSpinButton(){
+    this.disabled= false;
+  }
+
+  disableSpinButton(){
+    this.disabled= true;
+  }
+  
+  updateWalletBallance(amount: number){
+    this.walletBallance += amount;
+  }
+
+  presentAlert(winnerId) {
+    let alert = this.alertCtrl.create({
+      title: 'Congratualations',
+      subTitle: 'You have won ' +winnerId,
+      buttons: ['OK']
+    });
+    alert.present();
+    alert.onDidDismiss(() => {
+      this.enableSpinButton();
+    })
+  }
 
   back() {
     this.navCtrl.pop();

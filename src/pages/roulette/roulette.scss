@@ -1,7 +1,8 @@
 page-roulette {
-#rouletteholder {
+#holder {
   margin:auto;
 }
+
 
 body {
   text-align:center;
@@ -12,8 +13,19 @@ p{
   color:rgb(5, 5, 5);
 }
 
-button {
-  height: 4em;
+#spinInputAmount{
+  width: 10em;
+  height:100%
+}
+ion-button {
+  background-color: #154774;
+  // height: 4em;
+  height: 30px;
+  width: 120px;
+  color: whitesmoke;
+  border-color: grey;
+  border-width: 1em;
+  // margin: 1em;
 }
 
 

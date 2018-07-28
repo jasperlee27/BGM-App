@@ -27,7 +27,7 @@ var WalletPageModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__roulette__["a" /* RoulettePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__roulette__["a" /* RoulettePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__roulette__["a" /* RoulettePage */]),
             ],
         })
     ], WalletPageModule);

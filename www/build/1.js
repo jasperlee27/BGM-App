@@ -27,7 +27,7 @@ var StreamPageModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__stream__["a" /* StreamPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__stream__["a" /* StreamPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__stream__["a" /* StreamPage */]),
             ],
         })
     ], StreamPageModule);
