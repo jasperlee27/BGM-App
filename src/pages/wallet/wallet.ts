@@ -10,7 +10,7 @@ import { take, map } from 'rxjs/operators';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-declare function reset(): any;
+// declare function reset(): any;
 
 @IonicPage()
 @Component({
@@ -190,7 +190,7 @@ export class WalletPage {
   // }
   ngOnInit() {
     // Let's navigate from TabsPage to Page1
-    reset();
+    // reset();
  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');

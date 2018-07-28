@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular/';
 import { IonicPage } from '../../../node_modules/ionic-angular/navigation/ionic-page';
-import * as Raphael from '../../assets/js/raphael-min.js';
-import * as mersenne from '../../assets/js/mersenne-twister.js';
-import * as roulette from '../../assets/js/roulette.js';
+// import * as Raphael from '../../assets/js/raphael-min.js';
+// import * as mersenne from '../../assets/js/mersenne-twister.js';
+// import * as roulette from '../../assets/js/roulette.js';
 
 declare function init():any;
 declare function randomSpin(): any;
@@ -24,9 +24,8 @@ declare var winnerId;
 export class RoulettePage {
 
   constructor(public navCtrl: NavController) {
-    refreshUi();
-    // paper = Raphael("holder");
-    init();
+    // refreshUi();
+    // init();
   }
   onSpin(){
     reset();
@@ -35,6 +34,9 @@ export class RoulettePage {
     console.log ("My winner ID is " + winnerId);
   }
 
+  ngOnInit(){
+    init();
+  }
   // loadScript () { 
   //   var script = document.createElement('script'); 
   //   script.type = 'text/javascript'; script.src = '../build/js/roulette.js'; 

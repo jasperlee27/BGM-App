@@ -4,8 +4,8 @@ var texts= []; //svg object
 var pieText= [
 '0','1','2','3','4','5','6','7'
 ];
-var center = {'x':200, 'y':200};
-var diameter = 180;
+var center = {'x':180, 'y':200};
+var diameter = 120;
 var m = new MersenneTwister(); //move to global to fix the seed
 
 //max not included, 0 to max-1
@@ -122,10 +122,10 @@ function reset(){
   arcs = [];
 }
 
-function parseList(){
-  var list = document.getElementById('items').value.split("\n");
-  return list;
-}
+// function parseList(){
+  // var list = document.getElementById('items').value.split("\n");
+  // return list;
+// }
 
 
 //url related
@@ -147,6 +147,9 @@ function getQueryStringByName(name){
 
 function init(){
   paper = Raphael("holder"); //Don't know why this have to be here
+  // paper = Raphael("rouletteholder");
+  
+
   // Order decides the z-index
   drawRouletteShadow();
   drawArcs();
@@ -166,7 +169,7 @@ function randomSpin(){
 
 function refreshUi(){
 //Call this to reflect pieText change
-  //pieText = parseList();
+  // pieText = parseList();
   document.getElementById('items').value = pieText.join("\n");
   document.getElementById('bookmarklink').href = "./roulette.html?items=" + pieText.join(',');
 
@@ -177,40 +180,40 @@ function refreshUi(){
   }
 }
 
-function removeWinner(){
-  if (pieText.length <= 1) {return;}
-  pieText.splice(winnerId % pieText.length, 1);
-  document.getElementById('items').value = pieText.join("\n");
-}
+// function removeWinner(){
+//   if (pieText.length <= 1) {return;}
+//   pieText.splice(winnerId % pieText.length, 1);
+//   document.getElementById('items').value = pieText.join("\n");
+// }
 
 document.body.onload = function(){
-  var query = getQueryStringByName('items');
-  if (query !== ""){
-    pieText = query.split(',');
-  }
-  //pieText = parseList();
-  refreshUi();
-  // init();
+  // var query = getQueryStringByName('items');
+  // if (query !== ""){
+  //   pieText = query.split(',');
+  // }
+  // pieText = parseList();
+  // refreshUi();
+  init();
 
 
-  document.getElementById('genBtn').onclick = function(){
-    //updateUrl();
-    reset();
-    init();
-    randomSpin();
-    refreshUi();
-  };
+  // document.getElementById('genBtn').onclick = function(){
+  //   //updateUrl();
+  //   reset();
+  //   init();
+  //   randomSpin();
+  //   refreshUi();
+  // };
 
-  document.getElementById('rmBtn').onclick = function(){
-    //pieText = parseList();
-    removeWinner();
-    //updateUrl();
-    reset();
-    init();
-    randomSpin();
-    refreshUi();
-  };
+  // document.getElementById('rmBtn').onclick = function(){
+  //   //pieText = parseList();
+  //   removeWinner();
+  //   //updateUrl();
+  //   reset();
+  //   init();
+  //   randomSpin();
+  //   refreshUi();
+  // };
 
-  //window.onkeydown = (function(evt){if (evt.keyCode === 32 || evt.keyCode === 13){ init();}});
-  //
+  // window.onkeydown = (function(evt){if (evt.keyCode === 32 || evt.keyCode === 13){ init();}});
+  
 };

@@ -25,15 +25,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var RoulettePage = /** @class */ (function () {
     function RoulettePage(navCtrl) {
         this.navCtrl = navCtrl;
-        refreshUi();
-        // paper = Raphael("holder");
-        init();
+        // refreshUi();
+        // init();
     }
     RoulettePage.prototype.onSpin = function () {
         reset();
         init();
         randomSpin();
         console.log("My winner ID is " + winnerId);
+    };
+    RoulettePage.prototype.ngOnInit = function () {
+        init();
     };
     // loadScript () { 
     //   var script = document.createElement('script'); 
@@ -45,12 +47,11 @@ var RoulettePage = /** @class */ (function () {
     };
     RoulettePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-roulette',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\roulette\roulette.html"*/'<ion-header>\n  <ion-navbar>\n    <!-- <button ion-button (click)="back()">Back</button> -->\n    <ion-title>\n      Game 1: Roulette\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n  <!-- <input type="button" ng-click"=randomSpin()" style="float:left;" id=\'spin\' /> -->\n  \n  <!-- <canvas id="canvas" width="500" height="500"></canvas> -->\n  <!-- <div id="holder" style="width:400px; height:400px;">\n  </div>\n  <button id="genBtn">Rotate</button>\n  <br />\n  <button id="rmBtn">Remove the winner and rotate</button>\n  <br>\n  <p>Click <b>Rotate</b> to update.</p>\n  <p>Bookmark <a id="bookmarklink" href=\'./roulette.html\'>this link</a> to save your list.</p> \n  <textarea id="items" name="items" rows="8" cols="15"> </textarea> -->\n\n  \n  <!-- <button id="genBtn">Rotate</button>\n  <br />\n  <button id="rmBtn">Remove the winner and rotate</button>\n  <br> -->\n  <div id="abc" style="width:50x; height:400px;">\n  </div>\n  <button (click)="onSpin()">Spin!</button>\n  <!-- <textarea id="items" name="items" rows="8" cols="15"> </textarea> -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\roulette\roulette.html"*/
+            selector: 'page-roulette',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\roulette\roulette.html"*/'<ion-header>\n  <ion-navbar>\n    <!-- <button ion-button (click)="back()">Back</button> -->\n    <ion-title>\n      Game 1: Roulette\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n  <!-- <input type="button" ng-click"=randomSpin()" style="float:left;" id=\'spin\' /> -->\n  \n  <!-- <canvas id="canvas" width="500" height="500"></canvas> -->\n  <!-- <div id="holder" style="width:400px; height:400px;">\n  </div>\n  <button id="genBtn">Rotate</button>\n  <br />\n  <button id="rmBtn">Remove the winner and rotate</button>\n  <br>\n  <p>Click <b>Rotate</b> to update.</p>\n  <p>Bookmark <a id="bookmarklink" href=\'./roulette.html\'>this link</a> to save your list.</p> \n  <textarea id="items" name="items" rows="8" cols="15"> </textarea>\n  \n  <button id="genBtn">Rotate</button>\n  <br />\n  <button id="rmBtn">Remove the winner and rotate</button>\n  <br> -->\n  <div class="col-xs-12 col-sm-12 col-lg-12" id="holder" style="visibility:visible">\n  <!-- <div id="holder" style="width:100px; height:400px;"> -->\n  </div>\n  <button (click)="onSpin()">Spin!</button>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\roulette\roulette.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]])
     ], RoulettePage);
     return RoulettePage;
-    var _a;
 }());
 
 //# sourceMappingURL=roulette.js.map
@@ -183,6 +184,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
  // (for rxjs < 6) use 'rxjs/observable/timer'
 
+/**
+ * Generated class for the WalletPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+// declare function reset(): any;
 var WalletPage = /** @class */ (function () {
     function WalletPage(navCtrl, navParams) {
         var _this = this;
@@ -317,7 +325,7 @@ var WalletPage = /** @class */ (function () {
     // }
     WalletPage.prototype.ngOnInit = function () {
         // Let's navigate from TabsPage to Page1
-        reset();
+        // reset();
     };
     WalletPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad WalletPage');
@@ -333,10 +341,9 @@ var WalletPage = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/'<!--\n\n  Generated template for the WalletPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Wallet</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n<canvas id="Game2Chart "#Game2Chart baseChart [chartType]="\'line\'" \n\n[datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="false">\n\n</canvas>\n\n{{variable_increase}}\n\n<br>\n\nNext game in <h2>{{countDown | async}}</h2>\n\n\n\n<button ion-button (click)="thisChartUpdate()">Default</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\wallet\wallet.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* NavParams */]])
     ], WalletPage);
     return WalletPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=wallet.js.map

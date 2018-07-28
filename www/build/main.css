@@ -25678,7 +25678,7 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
-page-roulette #holder {
+page-roulette #rouletteholder {
   margin: auto;
 }
 
