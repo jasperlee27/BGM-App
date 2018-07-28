@@ -4,8 +4,8 @@ var texts= []; //svg object
 var pieText= [
 '0','1','2','3','4','5','6','7'
 ];
-var center = {'x':180, 'y':200};
-var diameter = 120;
+var center = {'x':180, 'y':150};
+var diameter = 130;
 var m = new MersenneTwister(); //move to global to fix the seed
 
 //max not included, 0 to max-1
@@ -123,8 +123,8 @@ function reset(){
 }
 
 // function parseList(){
-  // var list = document.getElementById('items').value.split("\n");
-  // return list;
+//   var list = document.getElementById('items').value.split("\n");
+//   return list;
 // }
 
 
@@ -158,9 +158,7 @@ function init(){
 
 function randomSpin(){
   winnerId = getRandom(multiplyList(pieText).length - 1); //for 5 arcs, the id is 0 to 4
-  spinToId(winnerId);
-  // alert("You have won prize " +winnerId); 
-  return winnerId;
+  spinToId(winnerId); 
   // await sleep(8000);
   // reset();
 }
@@ -171,7 +169,7 @@ function randomSpin(){
 
 function refreshUi(){
 //Call this to reflect pieText change
-  // pieText = parseList();
+  pieText = parseList();
   document.getElementById('items').value = pieText.join("\n");
   document.getElementById('bookmarklink').href = "./roulette.html?items=" + pieText.join(',');
 
@@ -195,7 +193,7 @@ document.body.onload = function(){
   // }
   // pieText = parseList();
   // refreshUi();
-  init();
+  // init();
 
 
   // document.getElementById('genBtn').onclick = function(){
