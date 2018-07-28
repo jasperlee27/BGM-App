@@ -61,14 +61,17 @@ export class BiddingPage {
   }
 
   bidGame(){
-
     this.updateWalletBallance(-this.betAmount);
     this.updatePoolAmount(+this.betAmount);
     this.updateNoPlayers();
   }
 
   updateNoPlayers(){
-    this.noPlayers += 1;
+    var targetNumber = this.noPlayers + 1;
+    let interval = setInterval(()=>{
+      this.noPlayers++;
+      if(this.noPlayers == targetNumber) clearInterval(interval);
+    },500)
   }
 
   updateWalletBallance(amount: number){
@@ -76,6 +79,22 @@ export class BiddingPage {
   }
 
   updatePoolAmount(amount: number){
-    this.currentPoolNumber += amount;
+    var targetNumber = this.currentPoolNumber + amount;
+
+    let interval = setInterval(()=>{
+      this.currentPoolNumber++;
+      if(this.currentPoolNumber == targetNumber) clearInterval(interval);
+    },0.1)
+    // this.currentPoolNumber += amount;
   }
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
+
 }
