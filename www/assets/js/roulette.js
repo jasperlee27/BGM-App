@@ -4,7 +4,7 @@ var texts= []; //svg object
 var pieText= [
 '0','1','2','3','4','5','6','7'
 ];
-var center = {'x':160, 'y':150};
+var center = {'x':180, 'y':150};
 var diameter = 130;
 var m = new MersenneTwister(); //move to global to fix the seed
 
@@ -61,14 +61,7 @@ function spinToId(id){
 
 function getColor(i, total){
   var h = i/total;
-  // return "hsl(" + h + ", .7, 0.5)";
-  if (i%2==0)
-  return "rgb(10, 186, 255)";
-
-  else 
-  // return "rgb(255, 193, 5)";
-  return "rgb(255, 87, 41)";
-  
+  return "hsl(" + h + ", .7, 0.5)";
   //return colorArr[i % total % colorArr.length];
   //return colorArr[i];
 }

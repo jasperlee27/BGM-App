@@ -4,8 +4,8 @@ var texts= []; //svg object
 var pieText= [
 '0','1','2','3','4','5','6','7'
 ];
-var center = {'x':200, 'y':200};
-var diameter = 180;
+var center = {'x':180, 'y':150};
+var diameter = 130;
 var m = new MersenneTwister(); //move to global to fix the seed
 
 //max not included, 0 to max-1
@@ -122,10 +122,10 @@ function reset(){
   arcs = [];
 }
 
-function parseList(){
-  var list = document.getElementById('items').value.split("\n");
-  return list;
-}
+// function parseList(){
+//   var list = document.getElementById('items').value.split("\n");
+//   return list;
+// }
 
 
 //url related
@@ -167,18 +167,18 @@ function randomSpin(){
 //   return new Promise(resolve => setTimeout(resolve, ms));
 // }
 
-function refreshUi(){
-//Call this to reflect pieText change
-  pieText = parseList();
-  document.getElementById('items').value = pieText.join("\n");
-  document.getElementById('bookmarklink').href = "./roulette.html?items=" + pieText.join(',');
+// function refreshUi(){
+// //Call this to reflect pieText change
+//   pieText = parseList();
+//   document.getElementById('items').value = pieText.join("\n");
+//   document.getElementById('bookmarklink').href = "./roulette.html?items=" + pieText.join(',');
 
-  if (typeof winnerId === "undefined") {
-    document.getElementById('rmBtn').disabled = true;
-  } else {
-    document.getElementById('rmBtn').disabled = false;
-  }
-}
+//   if (typeof winnerId === "undefined") {
+//     document.getElementById('rmBtn').disabled = true;
+//   } else {
+//     document.getElementById('rmBtn').disabled = false;
+//   }
+// }
 
 // function removeWinner(){
 //   if (pieText.length <= 1) {return;}
@@ -187,13 +187,13 @@ function refreshUi(){
 // }
 
 document.body.onload = function(){
-  var query = getQueryStringByName('items');
-  if (query !== ""){
-    pieText = query.split(',');
-  }
-  pieText = parseList();
-  refreshUi();
-  init();
+  // var query = getQueryStringByName('items');
+  // if (query !== ""){
+  //   pieText = query.split(',');
+  // }
+  // pieText = parseList();
+  // refreshUi();
+  // init();
 
 
   // document.getElementById('genBtn').onclick = function(){
