@@ -3,26 +3,26 @@ page-hashing {
         background-color: #888;
         color: white;
     }
+    .outer-circle {
+       text-align:center;
+       margin-top: -230px !important;
+       // margin-bottom: -5000px;
+       margin-left: 140px;
+       z-index: 200; position:relative;
+     }
     .donut-inner-text {
         text-align:center;
-        margin-top: -200px;
+        margin-top: -114px;
         // margin-bottom: -5000px;
-        margin-left: 40px;
+        margin-left: -84px;
         font-size: 20px;
         font-weight: 400;
         color: white;
         z-index: 1000; position:relative;
      }
-     .outer-circle {
-        text-align:center;
-        margin-top: -60px;
-        // margin-bottom: -5000px;
-        margin-left: 130px;
-        z-index: 200; position:relative;
-      }
       .burst-text {
         text-align:center;
-        margin-top: -110px;
+        margin-top: -50px;
         // margin-bottom: -5000px;
         margin-left: 50px;
         font-size: 30px;
@@ -33,10 +33,10 @@ page-hashing {
      }
      .timer-text {
         text-align:center;
-        margin-top: -40px;
+        margin-top: -20px;
         // margin-bottom: -5000px;
         margin-left: 50px;
-        font-size: 30px;
+        font-size: 26px;
         font-weight: 600;
         color: rgb(238, 241, 24);
         z-index: 1000; position:relative;

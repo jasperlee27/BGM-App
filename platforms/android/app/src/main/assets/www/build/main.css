@@ -25708,10 +25708,18 @@ page-hashing .hashingContent {
   color: white;
 }
 
+page-hashing .outer-circle {
+  text-align: center;
+  margin-top: -230px !important;
+  margin-left: 140px;
+  z-index: 200;
+  position: relative;
+}
+
 page-hashing .donut-inner-text {
   text-align: center;
-  margin-top: -200px;
-  margin-left: 40px;
+  margin-top: -114px;
+  margin-left: -84px;
   font-size: 20px;
   font-weight: 400;
   color: white;
@@ -25719,17 +25727,9 @@ page-hashing .donut-inner-text {
   position: relative;
 }
 
-page-hashing .outer-circle {
-  text-align: center;
-  margin-top: -60px;
-  margin-left: 130px;
-  z-index: 200;
-  position: relative;
-}
-
 page-hashing .burst-text {
   text-align: center;
-  margin-top: -110px;
+  margin-top: -50px;
   margin-left: 50px;
   font-size: 30px;
   font-weight: 600;
@@ -25740,9 +25740,9 @@ page-hashing .burst-text {
 
 page-hashing .timer-text {
   text-align: center;
-  margin-top: -40px;
+  margin-top: -20px;
   margin-left: 50px;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 600;
   color: #eef118;
   z-index: 1000;
