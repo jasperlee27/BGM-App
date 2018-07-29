@@ -60,8 +60,12 @@ function spinToId(id){
 
 
 function getColor(i, total){
-  var h = i/total;
-  return "hsl(" + h + ", .7, 0.5)";
+  // var h = i/total;
+  // return "hsl(" + h + ", .7, 0.5)";
+  if (i%2==0)
+  return "rgb(91,131,242)";
+  else
+  return "rgb(246,55,80)";
   //return colorArr[i % total % colorArr.length];
   //return colorArr[i];
 }
