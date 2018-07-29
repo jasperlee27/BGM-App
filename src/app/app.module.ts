@@ -16,12 +16,14 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HashingPage } from '../pages/hashing/hashing';
 
 @NgModule({
   declarations: [
     MyApp,
     RoulettePage,
     BiddingPage,
+    HashingPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -38,6 +40,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     RoulettePage,
     BiddingPage,
+    HashingPage,
     ContactPage,
     HomePage,
     WalletPage,
