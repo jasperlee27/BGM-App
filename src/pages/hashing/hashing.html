@@ -14,10 +14,7 @@
 
 
 <ion-content class="hashingContent" padding> 
-  <ion-row>
-      Hashing Page Works!
-  </ion-row>
-
+ 
  <br>
    <!-- Graph -->
    <div class="graphCntr" style="display: block; width: 100%; height: 420px;">
@@ -26,7 +23,7 @@
      <!-- (chartClick)="onChartClick($event) -->
     </canvas>
     <div class="donut-inner-text" [style.visibility]="isChartHidden ? 'hidden' : 'visible'">
-        {{multiplier.toFixed(2)}} x
+        {{multiplierDisplay.toFixed(2)}} x
     </div>
     <div class="outer-circle" [style.visibility]="isChartHidden ? 'hidden' : 'visible'">
       <svg xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +33,7 @@
     <div class="burst-text" [style.visibility]="isBurstTextHidden ? 'hidden' : 'visible'">
      Busted @ {{finalValue.toFixed(2)}}x
     </div>
-    <div class="burst-text" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">
+    <div class="timer-text" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">
         Next game in {{countDown | async}} s
     </div>
   </div>

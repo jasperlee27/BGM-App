@@ -27,7 +27,18 @@ page-hashing {
         margin-left: 50px;
         font-size: 30px;
         font-weight: 600;
-        color: orangered;
+        // color: rgb(255, 113, 0);
+        color: red;
+        z-index: 1000; position:relative;
+     }
+     .timer-text {
+        text-align:center;
+        margin-top: -40px;
+        // margin-bottom: -5000px;
+        margin-left: 50px;
+        font-size: 30px;
+        font-weight: 600;
+        color: rgb(238, 241, 24);
         z-index: 1000; position:relative;
      }
 

@@ -25678,12 +25678,75 @@ ion-navbar.toolbar {
   min-height: calc(46px + env(safe-area-inset-bottom));
 }
 
+page-bidding .mycontent {
+  background-color: white;
+}
+
+page-bidding .totalPoolAmount {
+  color: red;
+  padding-top: 2px;
+}
+
+page-bidding .amountContainer {
+  margin-left: 25%;
+  margin-bottom: 10px;
+  border: 1px solid red;
+  height: 30px;
+  width: 50%;
+}
+
 page-bidding .row {
   -webkit-box-align: center !important;
   -webkit-align-items: center !important;
   -ms-flex-align: center !important;
   align-items: center !important;
   text-align: center !important;
+}
+
+page-hashing .hashingContent {
+  background-color: #888;
+  color: white;
+}
+
+page-hashing .donut-inner-text {
+  text-align: center;
+  margin-top: -200px;
+  margin-left: 40px;
+  font-size: 20px;
+  font-weight: 400;
+  color: white;
+  z-index: 1000;
+  position: relative;
+}
+
+page-hashing .outer-circle {
+  text-align: center;
+  margin-top: -60px;
+  margin-left: 130px;
+  z-index: 200;
+  position: relative;
+}
+
+page-hashing .burst-text {
+  text-align: center;
+  margin-top: -110px;
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: red;
+  z-index: 1000;
+  position: relative;
+}
+
+page-hashing .timer-text {
+  text-align: center;
+  margin-top: -40px;
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #eef118;
+  z-index: 1000;
+  position: relative;
 }
 
 page-roulette #holder {

@@ -25733,7 +25733,18 @@ page-hashing .burst-text {
   margin-left: 50px;
   font-size: 30px;
   font-weight: 600;
-  color: orangered;
+  color: red;
+  z-index: 1000;
+  position: relative;
+}
+
+page-hashing .timer-text {
+  text-align: center;
+  margin-top: -40px;
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #eef118;
   z-index: 1000;
   position: relative;
 }
