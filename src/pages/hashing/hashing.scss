@@ -20,5 +20,15 @@ page-hashing {
         margin-left: 130px;
         z-index: 200; position:relative;
       }
+      .burst-text {
+        text-align:center;
+        margin-top: -110px;
+        // margin-bottom: -5000px;
+        margin-left: 50px;
+        font-size: 30px;
+        font-weight: 600;
+        color: orangered;
+        z-index: 1000; position:relative;
+     }
 
 }

@@ -4,139 +4,6 @@ webpackJsonp([5],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-/**
- * Generated class for the HashingPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HashingPage = /** @class */ (function () {
-    function HashingPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.chartData = [
-            { data: [], label: 'Actual Volume ETB', pointRadius: 0 },
-        ];
-        this.chartColors = [{
-                backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgb(255, 113, 0)',
-                pointBackgroundColor: 'rgb(255, 113, 0)',
-                // pointBorderColor: '#fafafa',
-                pointHoverBackgroundColor: 'rgb(255, 113, 0)',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
-            }
-        ];
-        this.chartLabels = [];
-        this.chartOptions = {
-            animation: {
-                duration: 0
-            },
-            scales: {
-                xAxes: [{
-                        display: true,
-                        gridLines: {
-                            display: true,
-                            lineWidth: 0.5,
-                            color: "white"
-                        },
-                        ticks: {
-                            fontColor: "white",
-                            fontSize: 14,
-                            // stepSize: 1,
-                            beginAtZero: true
-                        },
-                    }],
-                yAxes: [{
-                        ticks: {
-                            fontColor: "white",
-                            fontSize: 14,
-                            // stepSize: 1,
-                            min: 1,
-                        },
-                        gridLines: {
-                            display: true,
-                            lineWidth: 0.5,
-                            color: "white",
-                        },
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Multiplier',
-                            fontColor: "white",
-                            fontSize: 14,
-                            fontStyle: 'bold',
-                            fontFamily: 'Open Sans'
-                        }
-                    }],
-            }
-        };
-    }
-    HashingPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.chartData[0].data = [1];
-        this.chartLabels = [0];
-        this.multiplier = 1;
-        var startValue = 1;
-        var increment = 0.01;
-        var currValue = startValue + increment;
-        var startTime = Date.now();
-        var interval = setInterval(function () {
-            var targetNumber = 5.0;
-            _this.chartData[0].data.push(currValue);
-            var currentTime = Date.now();
-            //divide by milliseconds
-            var secondsToPush = (currentTime - startTime) / 1000;
-            _this.chartLabels.push(secondsToPush);
-            _this.chart.refresh();
-            currValue += increment;
-            _this.multiplier = currValue;
-            console.log("Current value " + currValue);
-            console.log("target value " + targetNumber);
-            if (currValue + increment >= targetNumber)
-                clearInterval(interval);
-        }, 100);
-    };
-    HashingPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad HashingPage');
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__["BaseChartDirective"]),
-        __metadata("design:type", Object)
-    ], HashingPage.prototype, "chart", void 0);
-    HashingPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n  Generated template for the HashingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Game 2: Hashing</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="hashingContent" padding> \n  <ion-row>\n      Hashing Page Works!\n  </ion-row>\n\n <br>\n   <!-- Graph -->\n   <div class="graphCntr" style="display: block; width: 100%; height: 420px;">\n     <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="400"\n     [legend]="false">\n     <!-- (chartClick)="onChartClick($event) -->\n    </canvas>\n    <div class="donut-inner-text">\n        {{multiplier.toFixed(2)}} x\n    </div>\n    <div class="outer-circle">\n      <svg xmlns="http://www.w3.org/2000/svg">\n        <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>\n      </svg>\n    </div>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
-    ], HashingPage);
-    return HashingPage;
-    var _a, _b;
-}());
-
-//# sourceMappingURL=hashing.js.map
-
-/***/ }),
-
-/***/ 132:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BiddingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
@@ -227,6 +94,280 @@ var BiddingPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=bidding.js.map
+
+/***/ }),
+
+/***/ 132:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(464);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+ // (for rxjs < 6) use 'rxjs/observable/timer'
+
+/**
+ * Generated class for the HashingPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HashingPage = /** @class */ (function () {
+    function HashingPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.count = 10.0;
+        this.chartData = [
+            { data: [], label: 'Hash Rate', pointRadius: 0, hidden: this.isChartHidden, },
+        ];
+        this.chartColors = [{
+                backgroundColor: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgb(255, 113, 0)',
+                pointBackgroundColor: 'rgb(255, 113, 0)',
+                // pointBorderColor: '#fafafa',
+                pointHoverBackgroundColor: 'rgb(255, 113, 0)',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
+            }
+        ];
+        this.chartLabels = [];
+        this.chartOptions = {
+            animation: {
+                duration: 0
+            },
+            scales: {
+                xAxes: [{
+                        display: true,
+                        gridLines: {
+                            display: true,
+                            lineWidth: 0.5,
+                            color: "white"
+                        },
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            // stepSize: 1,
+                            beginAtZero: true
+                        },
+                    }],
+                yAxes: [{
+                        ticks: {
+                            fontColor: "white",
+                            fontSize: 14,
+                            // stepSize: 1,
+                            min: 1,
+                        },
+                        gridLines: {
+                            display: true,
+                            lineWidth: 0.5,
+                            color: "white",
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Multiplier',
+                            fontColor: "white",
+                            fontSize: 14,
+                            fontStyle: 'bold',
+                            fontFamily: 'Open Sans'
+                        }
+                    }],
+            }
+        };
+    }
+    HashingPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.isChartHidden = false;
+        this.chartData[0].data = [1];
+        this.chartLabels = [0];
+        this.multiplier = 1;
+        var startValue = 1;
+        var increment = 0.01;
+        var currValue = startValue + increment;
+        var startTime = Date.now();
+        this.finalValue = 0; //init as 0 first, to update later.
+        this.isBurstTextHidden = true;
+        this.isTimerHidden = true;
+        var interval = setInterval(function () {
+            var targetNumber = 1.5;
+            _this.chartData[0].data.push(currValue);
+            var currentTime = Date.now();
+            //divide by milliseconds
+            var secondsToPush = (currentTime - startTime) / 1000;
+            _this.chartLabels.push(secondsToPush);
+            _this.chart.refresh();
+            currValue += increment;
+            _this.multiplier = currValue;
+            console.log("Current value " + currValue);
+            console.log("target value " + targetNumber);
+            increment = _this.updateIncrement(currValue);
+            if (currValue + increment >= targetNumber) {
+                clearInterval(interval);
+                _this.displayBurst(targetNumber);
+                _this.isChartHidden = true;
+                _this.chartData[0].hidden = _this.isChartHidden;
+                _this.chart.refresh();
+            }
+        }, 100);
+    };
+    HashingPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad HashingPage');
+    };
+    HashingPage.prototype.displayBurst = function (targetNumber) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.finalValue = targetNumber;
+                        this.isBurstTextHidden = false;
+                        return [4 /*yield*/, this.delay(3000)];
+                    case 1:
+                        _a.sent();
+                        this.startCountdownTimer();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    HashingPage.prototype.startCountdownTimer = function () {
+        var _this = this;
+        this.isBurstTextHidden = true;
+        this.isTimerHidden = false;
+        this.countDown = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__["timer"])(0, 1000).pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["take"])(this.count), Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["map"])(function () { return --_this.count; }));
+    };
+    HashingPage.prototype.delay = function (ms) {
+        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+    };
+    HashingPage.prototype.updateIncrement = function (currValue) {
+        if (currValue >= 10.0) {
+            return 0.50;
+        }
+        else if (currValue >= 9.5) {
+            return 0.45;
+        }
+        else if (currValue >= 9.0) {
+            return 0.40;
+        }
+        else if (currValue >= 8.5) {
+            return 0.35;
+        }
+        else if (currValue >= 8.0) {
+            return 0.30;
+        }
+        else if (currValue >= 7.5) {
+            return 0.25;
+        }
+        else if (currValue >= 7.0) {
+            return 0.210;
+        }
+        else if (currValue >= 6.5) {
+            return 0.195;
+        }
+        else if (currValue >= 6.0) {
+            return 0.180;
+        }
+        else if (currValue >= 5.5) {
+            return 0.165;
+        }
+        else if (currValue >= 5.0) {
+            return 0.14;
+        }
+        else if (currValue >= 4.5) {
+            return 0.125;
+        }
+        else if (currValue >= 4.0) {
+            return 0.10;
+        }
+        else if (currValue >= 3.5) {
+            return 0.085;
+        }
+        else if (currValue >= 3.0) {
+            return 0.075;
+        }
+        else if (currValue >= 2.5) {
+            return 0.06;
+        }
+        else if (currValue >= 2.0) {
+            return 0.04;
+        }
+        else if (currValue >= 1.8) {
+            return 0.03;
+        }
+        else if (currValue >= 1.5) {
+            return 0.02;
+        }
+        else if (currValue >= 1.2) {
+            return 0.015;
+        }
+        else
+            return 0.01;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2__node_modules_ng2_charts__["BaseChartDirective"]),
+        __metadata("design:type", Object)
+    ], HashingPage.prototype, "chart", void 0);
+    HashingPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n  Generated template for the HashingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Game 2: Hashing</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="hashingContent" padding> \n  <ion-row>\n      Hashing Page Works!\n  </ion-row>\n\n <br>\n   <!-- Graph -->\n   <div class="graphCntr" style="display: block; width: 100%; height: 420px;">\n     <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="400"\n     [legend]="false">\n     <!-- (chartClick)="onChartClick($event) -->\n    </canvas>\n    <div class="donut-inner-text" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n        {{multiplier.toFixed(2)}} x\n    </div>\n    <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n      <svg xmlns="http://www.w3.org/2000/svg">\n        <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>\n      </svg>\n    </div>\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n     Busted @ {{finalValue.toFixed(2)}}x\n    </div>\n    <div class="burst-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n        Next game in {{countDown | async}} s\n    </div>\n  </div>\n \n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
+    ], HashingPage);
+    return HashingPage;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=hashing.js.map
 
 /***/ }),
 
@@ -675,11 +816,11 @@ webpackEmptyAsyncContext.id = 146;
 
 var map = {
 	"../pages/bidding/bidding.module": [
-		590,
+		589,
 		4
 	],
 	"../pages/hashing/hashing.module": [
-		589,
+		590,
 		3
 	],
 	"../pages/roulette/roulette.module": [
@@ -721,8 +862,8 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(379);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__wallet_wallet__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__stream_stream__ = __webpack_require__(134);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bidding_bidding__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__hashing_hashing__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__bidding_bidding__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__hashing_hashing__ = __webpack_require__(132);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -820,7 +961,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular___ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(576);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_roulette_roulette__ = __webpack_require__(133);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_bidding_bidding__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_bidding_bidding__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_contact_contact__ = __webpack_require__(577);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(379);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_wallet_wallet__ = __webpack_require__(135);
@@ -830,7 +971,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_ng2_charts_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_status_bar__ = __webpack_require__(579);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_splash_screen__ = __webpack_require__(588);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_hashing_hashing__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_hashing_hashing__ = __webpack_require__(132);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -873,8 +1014,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_11_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular___["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/bidding/bidding.module#BiddingPageModule', name: 'BiddingPage', segment: 'bidding', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }

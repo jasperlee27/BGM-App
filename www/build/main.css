@@ -25727,6 +25727,17 @@ page-hashing .outer-circle {
   position: relative;
 }
 
+page-hashing .burst-text {
+  text-align: center;
+  margin-top: -110px;
+  margin-left: 50px;
+  font-size: 30px;
+  font-weight: 600;
+  color: orangered;
+  z-index: 1000;
+  position: relative;
+}
+
 page-roulette #holder {
   margin: auto;
 }
