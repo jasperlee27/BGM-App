@@ -18,10 +18,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HashingPage } from '../pages/hashing/hashing';
 import { TrehuntPage } from '../pages/trehunt/trehunt';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 @NgModule({
   declarations: [
     MyApp,
+    ProgressBarComponent,
     // RoulettePage,
     TrehuntPage,
     BiddingPage,

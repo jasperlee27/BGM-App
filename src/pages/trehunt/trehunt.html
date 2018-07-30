@@ -20,17 +20,16 @@
   <ion-row>
       <ion-col>
         <div class="style-ex-rate">
-          1 BTC = <span style="color:red">8800</span> USD
+          1 BTC = <span style="color:#4267b2">8800</span> USD
         </div>
       </ion-col>
       <ion-col>
           <div class="style-ex-rate">
-              1 ETH = <span style="color:red">600</span> USD
+              1 ETH = <span style="color:#4267b2">600</span> USD
             </div>
       </ion-col>
   </ion-row>
-
-
+  <br>
   <!-- for coin images row-->
   <ion-row>
     <ion-col>
@@ -45,17 +44,40 @@
   <h6 style="text-align: center">Tickets Sold</h6>
   <ion-row>
       <ion-col>
-        <span style="color:rgb(17, 204, 17); font-size:24px;">{{currBTCtix}}</span> / {{totalBTCtix}}
+        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style=" font-size:12px;">/ {{totalBTCtix}}</span>
       </ion-col>
       <ion-col>
-        <span style="color:rgb(17, 204, 17); font-size:24px;">{{currETHtix}}</span> / {{totalETHtix}}
+        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style=" font-size:12px;">/ {{totalETHtix}}</span>
       </ion-col>
   </ion-row>
+
+
   <!--for current progress bar-->
-
-
-  <!--for current tickets sold-->
+  <ion-row>
+      <ion-col>
+          <progress-bar [progress]="loadBTCProgress"></progress-bar>
+      </ion-col>
+      <ion-col>
+          <progress-bar [progress]="loadETHProgress"></progress-bar>
+      </ion-col>
+  </ion-row>
+  
+  
+  <!--for buying tix header-->
+  <h6 style="text-align: center">Buy <span style=" font-size:12px;">(1 Ticket = $1 USD)</span></h6>
+  <ion-row>
+      <ion-col>
+          No. BTC Ticket:
+          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>
+          <button ion-button small [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>
+      </ion-col>
+      <ion-col>
+          No. ETH Ticket:
+          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>
+          <button ion-button small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>
+      </ion-col>
+  </ion-row>
 
 </ion-grid>
-<!-- <ion-img width="80" height="80" src="../assets/imgs/bitcoin2.png" style= background:transparent></ion-img> -->
+
 </ion-content>

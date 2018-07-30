@@ -18,12 +18,16 @@ export class TrehuntPage {
   totalBTCtix;
   currETHtix;
   totalETHtix;
+  loadBTCProgress;
+  loadETHProgress;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.currBTCtix=7382;
     this.totalBTCtix=8800;
     this.currETHtix=247;
     this.totalETHtix=600;
+    this.loadBTCProgress= ((this.currBTCtix/this.totalBTCtix)*100).toFixed(2);
+    this.loadETHProgress= ((this.currETHtix/this.totalETHtix)*100).toFixed(2);
   }
 
   ionViewDidLoad() {

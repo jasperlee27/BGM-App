@@ -25690,6 +25690,26 @@ ion-navbar.toolbar {
   font-weight: 500;
 }
 
+progress-bar .progress-outer {
+  width: 100%;
+  margin: 10px 2%;
+  padding: 3px;
+  text-align: center;
+  background-color: #f4f4f4;
+  border: 1px solid #dcdcdc;
+  color: #fff;
+  border-radius: 20px;
+}
+
+progress-bar .progress-inner {
+  min-width: 15%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px;
+  border-radius: 15px;
+  background-color: #488aff;
+}
+
 page-bidding .mycontent {
   background-color: white;
 }
@@ -25782,6 +25802,17 @@ page-roulette ion-button {
 
 page-trehunt ion-row {
   text-align: center;
+}
+
+page-trehunt ion-input {
+  padding-left: 28px;
+  width: 80%;
+  height: 40px;
+}
+
+page-trehunt .text-input {
+  text-align: center;
+  padding-left: 10px;
 }
 
 page-trehunt .style-ex-rate {
