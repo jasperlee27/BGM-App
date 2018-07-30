@@ -17,11 +17,13 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HashingPage } from '../pages/hashing/hashing';
+import { TrehuntPage } from '../pages/trehunt/trehunt';
 
 @NgModule({
   declarations: [
     MyApp,
-    RoulettePage,
+    // RoulettePage,
+    TrehuntPage,
     BiddingPage,
     HashingPage,
     ContactPage,
@@ -38,7 +40,8 @@ import { HashingPage } from '../pages/hashing/hashing';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    RoulettePage,
+    // RoulettePage,
+    TrehuntPage,
     BiddingPage,
     HashingPage,
     ContactPage,

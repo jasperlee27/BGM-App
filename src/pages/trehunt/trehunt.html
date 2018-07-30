@@ -1,0 +1,61 @@
+<!--
+  Generated template for the TrehuntPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Game 1: Treasure!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid>
+  <!--for curr exchange rate-->
+  <h2 style="text-align: center">Current Est. Price</h2>
+  <ion-row>
+      <ion-col>
+        <div class="style-ex-rate">
+          1 BTC = <span style="color:red">8800</span> USD
+        </div>
+      </ion-col>
+      <ion-col>
+          <div class="style-ex-rate">
+              1 ETH = <span style="color:red">600</span> USD
+            </div>
+      </ion-col>
+  </ion-row>
+
+
+  <!-- for coin images row-->
+  <ion-row>
+    <ion-col>
+      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>
+    </ion-col>
+    <ion-col>
+      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>
+    </ion-col>
+  </ion-row>
+
+  <!--for current tickets sold-->
+  <h6 style="text-align: center">Tickets Sold</h6>
+  <ion-row>
+      <ion-col>
+        <span style="color:rgb(17, 204, 17); font-size:24px;">{{currBTCtix}}</span> / {{totalBTCtix}}
+      </ion-col>
+      <ion-col>
+        <span style="color:rgb(17, 204, 17); font-size:24px;">{{currETHtix}}</span> / {{totalETHtix}}
+      </ion-col>
+  </ion-row>
+  <!--for current progress bar-->
+
+
+  <!--for current tickets sold-->
+
+</ion-grid>
+<!-- <ion-img width="80" height="80" src="../assets/imgs/bitcoin2.png" style= background:transparent></ion-img> -->
+</ion-content>

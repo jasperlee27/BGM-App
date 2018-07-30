@@ -25779,3 +25779,12 @@ page-roulette ion-button {
   border-color: grey;
   border-width: 1em;
 }
+
+page-trehunt ion-row {
+  text-align: center;
+}
+
+page-trehunt .style-ex-rate {
+  font-size: 16px;
+  font-weight: 700px;
+}

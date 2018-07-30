@@ -7,6 +7,7 @@ import { WalletPage } from '../wallet/wallet';
 import { StreamPage } from '../stream/stream';
 import { BiddingPage } from '../bidding/bidding';
 import { HashingPage } from '../hashing/hashing';
+import { TrehuntPage } from '../trehunt/trehunt';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -14,8 +15,8 @@ import { HashingPage } from '../hashing/hashing';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = RoulettePage;
-  tab3Root = BiddingPage;
+  tab2Root = BiddingPage;
+  tab3Root = TrehuntPage;
   tab4Root = HashingPage;
   // tab4Root = ContactPage;
   tab5Root= WalletPage;
