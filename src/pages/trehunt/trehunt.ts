@@ -28,8 +28,10 @@ export class TrehuntPage {
     this.currETHprice= this.randomIntRange(600,800);
     this.totalBTCtix=8800;
     this.currBTCtix=this.randomIntRange(1,this.totalBTCtix-1);
+    // this.currBTCtix=8700;
     this.totalETHtix=660;
     this.currETHtix=this.randomIntRange(1,this.totalETHtix-1);
+    // this.currETHtix=650;
 
     this.loadBTCProgress= ((this.currBTCtix/this.totalBTCtix)*100).toFixed(2);
     this.loadETHProgress= ((this.currETHtix/this.totalETHtix)*100).toFixed(2);
@@ -65,38 +67,55 @@ export class TrehuntPage {
   }
 
   updateCurrBTCtix(rangeBTCTixIncrease: number){
-    var increment = this.randomIntRange(0,500);
-    // console.log("increment value " + increment);
-    var targetValue = this.currBTCtix + increment;
-    
-    if (targetValue >= this.totalBTCtix){
-      targetValue=this.totalBTCtix;
-    }
 
-    let interval = setInterval(()=>{
-      this.currBTCtix ++;
-      this.loadBTCProgress= ((this.currBTCtix/this.totalBTCtix)*100).toFixed(2);
+    if (this.currBTCtix>=this.totalBTCtix){
+      console.log("BTC terminating early");
+      return;
+    }
+    
+    else{
+      var increment = this.randomIntRange(0,500);
+      // console.log("increment value " + increment);
+      var targetValue = this.currBTCtix + increment;
       console.log("BTC tix target value is " + targetValue);
-     
+      
+      if (targetValue >= this.totalBTCtix){
+        targetValue=this.totalBTCtix;
+      }
+      
+      let interval = setInterval(()=>{
+        this.currBTCtix ++;
+      this.loadBTCProgress= ((this.currBTCtix/this.totalBTCtix)*100).toFixed(2);
+      
       if(this.currBTCtix == targetValue ) clearInterval(interval);
-    },50)
+      },50)
+    }
   }
 
   updateCurrETHtix(rangeETHTixIncrease: number){
-    var increment = this.randomIntRange(0,30);
-    // console.log("increment value " + increment);
-    var targetValue = this.currETHtix + increment;
 
-    if (targetValue >= this.totalETHtix){
-      targetValue=this.totalETHtix;
+    if (this.currETHtix>=this.totalETHtix){
+      console.log("ETH terminating early");
+      return;
     }
-
-    let interval = setInterval(()=>{
-      this.currETHtix ++;
-      this.loadETHProgress= ((this.currETHtix/this.totalETHtix)*100).toFixed(2);
+    
+    else{
+      console.log("Entered else loop");
+      var increment = this.randomIntRange(0,30);
+      // console.log("increment value " + increment);
+      var targetValue = this.currETHtix + increment;
       console.log("ETH tix target value is " + targetValue);
-      if(this.currETHtix == targetValue ) clearInterval(interval);
-    },100)
+
+      if (targetValue >= this.totalETHtix){
+        targetValue=this.totalETHtix;
+      }
+
+      let interval = setInterval(()=>{
+        this.currETHtix ++;
+        this.loadETHProgress= ((this.currETHtix/this.totalETHtix)*100).toFixed(2);
+        if(this.currETHtix == targetValue ) clearInterval(interval);
+      },100)
+    }
   }
 
   randomIntRange(min,max)
