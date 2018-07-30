@@ -25710,26 +25710,18 @@ page-hashing .hashingContent {
 
 page-hashing .outer-circle {
   text-align: center;
+  text-decoration: none !important;
   margin-top: -230px !important;
   margin-left: 140px;
-  z-index: 200;
-  position: relative;
-}
-
-page-hashing .donut-inner-text {
-  text-align: center;
-  margin-top: -114px;
-  margin-left: -84px;
   font-size: 20px;
-  font-weight: 400;
-  color: white;
-  z-index: 1000;
+  color: white !important;
+  z-index: 200;
   position: relative;
 }
 
 page-hashing .burst-text {
   text-align: center;
-  margin-top: -50px;
+  margin-top: -140px;
   margin-left: 50px;
   font-size: 30px;
   font-weight: 600;
@@ -25740,7 +25732,7 @@ page-hashing .burst-text {
 
 page-hashing .timer-text {
   text-align: center;
-  margin-top: -20px;
+  margin-top: -30px;
   margin-left: 50px;
   font-size: 26px;
   font-weight: 600;
