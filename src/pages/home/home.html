@@ -1,34 +1,23 @@
-<ion-header>
-  <ion-navbar>
+<!-- <ion-header> -->
+  <!-- <ion-navbar> -->
     <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+  <!-- </ion-navbar> -->
+<!-- </ion-header> -->
 
-<ion-content padding>
-  <h2>Welcome to BGG!</h2>
-  <p>
-    Testing VSCode IDE
-  </p>
-  <ol>
-    <li>Open a new terminal by pressing (+) icon.</li>
-    <li>Run <code><b>npx</b> ionic serve -c</code></li>
-  </ol>
-  <p>
-    This new project is for BGG
-    that are going to primarily use a Tabbed UI<br>
-    let me add something at 11.46pm so that it works
-  </p>
+<ion-content class="homeContent" padding>
+  <!-- <h1 text-align: center>BGM</h1> -->
+  <ion-grid>
+      <ion-row>
+        <ion-col col-12 col-md-8 offset-md-2>
+          //your content here
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  <div class= "image-center">
+    <ion-img width="180" height="180" src="../assets/imgs/BGM_Logo.jpg" style= background:transparent></ion-img>
+  </div>
+  <button ion-button [navPush]="roulettePage">Go To Bidding</button>
+  <!-- <ion-img width="100" height="100" src="../assets/imgs/BGM_logo2.png" style= background:transparent></ion-img> -->
 
-  <p>
-    
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
-  <ul>
-      <li>This is now to text live reload </li>
-      <li>reload pt2</li>
-      <li>test live reload</li>
-      <li>live reload works</li>
-  </ul>
   
 </ion-content>

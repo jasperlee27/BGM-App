@@ -25773,6 +25773,15 @@ page-hashing .timer-text {
   position: relative;
 }
 
+page-home .homeContent {
+  background-color: #4267b2;
+  color: white;
+}
+
+page-home .image-center {
+  text-align: center;
+}
+
 page-roulette #holder {
   margin: auto;
 }

@@ -24,7 +24,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
   declarations: [
     MyApp,
     ProgressBarComponent,
-    // RoulettePage,
+    RoulettePage,
     TrehuntPage,
     BiddingPage,
     HashingPage,
@@ -42,7 +42,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    // RoulettePage,
+    RoulettePage,
     TrehuntPage,
     BiddingPage,
     HashingPage,
