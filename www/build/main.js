@@ -926,6 +926,7 @@ module.exports = webpackAsyncContext;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(134);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__tabs_tabs__ = __webpack_require__(381);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -935,6 +936,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -951,17 +953,16 @@ var HomePage = /** @class */ (function () {
     HomePage.prototype.login = function () {
         // this.navCtrl.setRoot(TabsPage);
         this.navCtrl.push(this.biddingPage);
-        // this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__tabs_tabs__["a" /* TabsPage */]);
         console.log("login function activated");
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/'<!-- <ion-header> -->\n  <!-- <ion-navbar> -->\n    <ion-title>Home</ion-title>\n  <!-- </ion-navbar> -->\n<!-- </ion-header> -->\n\n<ion-content class="homeContent" padding>\n  <!-- <h1 text-align: center>BGM</h1> -->\n  <!-- <ion-grid>\n      <ion-row>\n        <ion-col col-12 col-md-8 offset-md-2>\n        </ion-col>\n      </ion-row>\n  </ion-grid> -->\n\n  <div class= "image-center">\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" style= background:transparent></ion-img>\n    <!-- <ion-img width="180" height="180" src="../assets/imgs/BGM_Logo_FA.ai"></ion-img> -->\n  </div>\n  <div class="login-form">\n    <!-- <ion-grid>\n      <ion-row>\n        <ion-col col-12 col-md-8 offset-md-2>\n        </ion-col>\n      </ion-row>\n  </ion-grid> -->\n  \n  <button ion-button color="secondary" style="color:black; font-size:16px; font-weight: 600" (click)="login()">LOGIN</button>\n  </div>\n  <!-- <ion-img width="100" height="100" src="../assets/imgs/BGM_logo2.png" style= background:transparent></ion-img> -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/'<!-- <ion-header> -->\n  <!-- <ion-navbar> -->\n    <ion-title>Home</ion-title>\n  <!-- </ion-navbar> -->\n<!-- </ion-header> -->\n\n<ion-content class="homeContent" padding>\n  <!-- <h1 text-align: center>BGM</h1> -->\n  <!-- <ion-grid>\n      <ion-row>\n        <ion-col col-12 col-md-8 offset-md-2>\n        </ion-col>\n      </ion-row>\n  </ion-grid> -->\n\n  <div class= "image-center">\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" style= background:transparent></ion-img>\n    <!-- <ion-img width="180" height="180" src="../assets/imgs/BGM_Logo_FA.ai"></ion-img> -->\n  </div>\n  <div class="login-form">\n    <ion-grid>\n      <!-- username -->\n        <ion-row>\n        <ion-col col-12 col-md-8 offset-md-2>\n            <ion-item>\n                <ion-label floating primary>Username</ion-label>\n                <ion-input type="text" style="height:100%;"></ion-input>\n            </ion-item>\n        </ion-col>\n      </ion-row>\n      <!-- password-->\n      <ion-row>\n        <ion-col col-12 col-md-8 offset-md-2>\n            <ion-item>\n                <ion-label floating primary>Password</ion-label>\n                <ion-input type="password" style="height:100%;"></ion-input>\n                <button ion-button clear item-end (click)=\'showHide()\' style="height:32px;">\n                <ion-icon name="eye" style="font-size:32px;"></ion-icon>\n                </button>\n            </ion-item>\n        </ion-col>\n      </ion-row>\n  </ion-grid>\n  \n  <button ion-button color="secondary" style="color:black; font-size:20px; font-weight: 800" (click)="login()">LOGIN</button>\n  </div>\n  <!-- <ion-img width="100" height="100" src="../assets/imgs/BGM_logo2.png" style= background:transparent></ion-img> -->\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], HomePage);
     return HomePage;
-    var _a;
 }());
 
 //# sourceMappingURL=home.js.map
