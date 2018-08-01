@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { BaseChartDirective } from '../../../node_modules/ng2-charts';
+import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import { BaseChartDirective } from 'ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
 /**

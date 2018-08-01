@@ -25773,15 +25773,15 @@ page-hashing .timer-text {
   position: relative;
 }
 
-page-home .homeContent {
+page-login .loginContent {
   color: white;
 }
 
-page-home .image-center {
+page-login .image-center {
   text-align: center;
 }
 
-page-home .login-form {
+page-login .login-form {
   text-align: center;
   color: red;
 }

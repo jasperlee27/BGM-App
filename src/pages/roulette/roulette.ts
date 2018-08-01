@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, SelectPopover } from 'ionic-angular/';
-import { IonicPage } from '../../../node_modules/ionic-angular/navigation/ionic-page';
-import { AlertController } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular/navigation/ionic-page';
+import { AlertController } from 'ionic-angular/';
 // import * as Raphael from '../../assets/js/raphael-min.js';
 // import * as mersenne from '../../assets/js/mersenne-twister.js';
 // import * as roulette from '../../assets/js/roulette.js';

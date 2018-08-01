@@ -6,7 +6,7 @@ import { MyApp } from './app.component';
 import { RoulettePage } from '../pages/roulette/roulette';
 import { BiddingPage } from '../pages/bidding/bidding';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 import { WalletPage } from '../pages/wallet/wallet';
 import { StreamPage } from '../pages/stream/stream';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -20,6 +20,7 @@ import { HashingPage } from '../pages/hashing/hashing';
 import { TrehuntPage } from '../pages/trehunt/trehunt';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -29,7 +30,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     BiddingPage,
     HashingPage,
     ContactPage,
-    HomePage,
+    LoginPage,
     TabsPage,
     WalletPage,
     StreamPage
@@ -47,7 +48,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     BiddingPage,
     HashingPage,
     ContactPage,
-    HomePage,
+    LoginPage,
     WalletPage,
     TabsPage,
     StreamPage

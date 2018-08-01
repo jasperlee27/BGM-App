@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { RoulettePage } from '../roulette/roulette';
 import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { LoginPage } from '../login/login';
 import { WalletPage } from '../wallet/wallet';
 import { StreamPage } from '../stream/stream';
 import { BiddingPage } from '../bidding/bidding';

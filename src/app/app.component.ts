@@ -4,7 +4,7 @@ import { Platform } from 'ionic-angular/';
 // import { SplashScreen } from '@ionic-native/splash-screen';
 import { App } from 'ionic-angular/components/app/app';
 import { TabsPage } from '../pages/tabs/tabs';
-import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
 
 declare var testVar;
 declare function init():any;
@@ -12,7 +12,7 @@ declare function init():any;
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
 
   // rootPage:any = TabsPage;
   // platform: Platform;
