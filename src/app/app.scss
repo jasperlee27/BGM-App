@@ -18,10 +18,18 @@
     background-color: color($colors, secondary);
 }
 
-.toolbar-title.toolbar-title-md, 
+// ion-header ion-icon.back-button-icon.icon {
+//     color: map-get($colors, dark);
+// }
+
+.back-button{
+    color: map-get($colors, dark);
+}
+
+.toolbar-title.toolbar-title-md,
 .toolbar-title.toolbar-title-ios, 
 .toolbar-title.toolbar-title-wp {
-    color: color($colors, light);
+    color: color($colors, dark);
     font-size: 20px;
     font-weight: 500;
  }

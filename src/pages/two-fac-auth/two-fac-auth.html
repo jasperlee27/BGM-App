@@ -7,19 +7,40 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>twoFacAuth</ion-title>
+    <ion-title><span text-color="dark">2 FA</span></ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
-    <ion-col col-12 text-center>
-        <div class="center">
-          <button class="request-sms-button" ion-button color="secondary" round outline>REQUEST SMS</button>
-        </div>
-    </ion-col>
-
-    <button ion-button color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="verify2FA()">VERIFY</button>
+    <ion-grid>
+      <!-- request SMS-->
+      <ion-row>
+        <ion-col col-12 text-center>
+          <div class="center">
+            <button class="request-sms-button" ion-button color="secondary" round outline>REQUEST<br>SMS</button>
+          </div>
+        </ion-col>
+      </ion-row> 
+      
+      <!-- input SMS box -->
+      <ion-row>
+          <ion-col col-12 text-center>
+              <ion-item text-center no-lines id="rounded" style="width:70%; margin:auto" >
+                  <ion-label floating primary color="secondary">
+                     SMS Verification Code
+                  </ion-label>
+                  <ion-input type="text"></ion-input>
+                  </ion-item>
+          </ion-col>
+        </ion-row> 
+    <br>
+     <!--verify button-->
+      <ion-row>
+        <ion-col col-12 text-center>
+          <button ion-button color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="verify2FA()">VERIFY</button>
+        </ion-col>
+      </ion-row> 
+    </ion-grid>
 </ion-content>
