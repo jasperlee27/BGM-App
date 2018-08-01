@@ -13,7 +13,10 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage {
   biddingPage = BiddingPage;
   roulettePage = RoulettePage;
-  
+  enteredPassword;
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye';
+
   constructor(public navCtrl: NavController) {
     // this.app.getRootNav().setRoot(this.biddingPage);
     // app.setScrollDisabled(true);
@@ -24,5 +27,10 @@ export class LoginPage {
     this.navCtrl.push(this.biddingPage);
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
+  }
+
+  showHide(): any {
+     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+     this.passwordIcon = this.passwordIcon === 'eye' ? 'eye-off' : 'eye';
   }
 }
