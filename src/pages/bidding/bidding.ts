@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the BiddingPage page.
@@ -38,6 +39,8 @@ export class BiddingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     //can init with call post service leader board
+    // this.navCtrl.setRoot(TabsPage);
+    
     this.gameNo= '   12337';
     this.walletBallance= 1000;
     this.currentPoolNumber = 2500000;

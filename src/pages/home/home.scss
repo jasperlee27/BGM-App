@@ -1,6 +1,6 @@
 page-home {
     .homeContent{
-        background-color: color($colors, secondary);
+        // background-color: color($colors, secondary);
         color: white;
         // display: flex;
         // align-items: center;
@@ -10,6 +10,7 @@ page-home {
         // align-items: center!important;
         // align-items: center;
         // justify-content: center;
+        // overflow: hidden;
     }
     .image-center{
         // display: block;
@@ -17,6 +18,11 @@ page-home {
         // margin-right: auto;
         // width: 60%;
         text-align: center;
+    }
+    .login-form
+    {
+    text-align: center;
+    color:red;
     }
 
 }

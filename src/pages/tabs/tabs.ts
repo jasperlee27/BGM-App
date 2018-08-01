@@ -14,13 +14,13 @@ import { TrehuntPage } from '../trehunt/trehunt';
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = BiddingPage;
-  tab3Root = TrehuntPage;
-  tab4Root = HashingPage;
+  // tab1Root = HomePage;
+  tab1Root = BiddingPage;
+  tab2Root = TrehuntPage;
+  tab3Root = HashingPage;
   // tab4Root = ContactPage;
-  tab5Root= WalletPage;
-  tab6Root= StreamPage;
+  tab4Root= WalletPage;
+  tab5Root= StreamPage;
 
   constructor() {
 
