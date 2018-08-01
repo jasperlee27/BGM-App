@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 594:
+/***/ 596:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StreamPageModule", function() { return StreamPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TrehuntPageModule", function() { return TrehuntPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__trehunt__ = __webpack_require__(136);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var StreamPageModule = /** @class */ (function () {
-    function StreamPageModule() {
+var TrehuntPageModule = /** @class */ (function () {
+    function TrehuntPageModule() {
     }
-    StreamPageModule = __decorate([
+    TrehuntPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__stream__["a" /* StreamPage */],
+                __WEBPACK_IMPORTED_MODULE_2__trehunt__["a" /* TrehuntPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__stream__["a" /* StreamPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__trehunt__["a" /* TrehuntPage */]),
             ],
         })
-    ], StreamPageModule);
-    return StreamPageModule;
+    ], TrehuntPageModule);
+    return TrehuntPageModule;
 }());
 
-//# sourceMappingURL=stream.module.js.map
+//# sourceMappingURL=trehunt.module.js.map
 
 /***/ })
 

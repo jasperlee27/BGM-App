@@ -25710,10 +25710,6 @@ progress-bar .progress-inner {
   background-color: #488aff;
 }
 
-page-bidding .mycontent {
-  background-color: white;
-}
-
 page-bidding .totalPoolAmount {
   color: red;
   padding-top: 2px;
@@ -25746,9 +25742,6 @@ page-hashing .outer-circle {
   margin-top: -230px !important;
   margin-left: 140px;
   font-size: 20px;
-  color: white !important;
-  z-index: 200;
-  position: relative;
 }
 
 page-hashing .burst-text {
@@ -25857,4 +25850,29 @@ page-trehunt .text-input {
 page-trehunt .style-ex-rate {
   font-size: 16px;
   font-weight: 700px;
+}
+
+page-two-fac-auth .btn {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  border: 1px solid red;
+}
+
+page-two-fac-auth .button {
+  height: 100px;
+  width: 100px;
+  fill-opacity: 0.4;
+}
+
+page-two-fac-auth .outer-circle {
+  text-align: center;
+  text-decoration: none !important;
+  margin-top: -230px !important;
+  margin-left: 140px;
+  font-size: 20px;
+  color: white !important;
+  z-index: 200;
+  position: relative;
 }

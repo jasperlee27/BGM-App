@@ -3,8 +3,8 @@ import { NavController } from 'ionic-angular/';
 import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
 import { MyApp } from '../../app/app.component';
-import { TabsPage } from '../tabs/tabs';
-
+import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
+// import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-login',
@@ -13,6 +13,7 @@ import { TabsPage } from '../tabs/tabs';
 export class LoginPage {
   biddingPage = BiddingPage;
   roulettePage = RoulettePage;
+  twoFApage= TwoFacAuthPage;
   enteredPassword;
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
@@ -24,7 +25,7 @@ export class LoginPage {
   }
   login(){
     // this.navCtrl.setRoot(TabsPage);
-    this.navCtrl.push(this.biddingPage);
+    this.navCtrl.push(this.twoFApage);
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
   }

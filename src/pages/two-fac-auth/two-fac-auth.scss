@@ -1,0 +1,28 @@
+page-two-fac-auth {
+    .btn {
+        display:block;
+        // text-align: center;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        border: 1px solid red;
+        
+      }
+
+    .button{
+        height:100px;
+        width:100px;
+        fill-opacity: 0.4;
+        // fill: color("secondary");
+    }
+
+    .outer-circle {
+        text-align:center;
+        text-decoration: none !important; 
+        margin-top: -230px !important;
+        margin-left: 140px;
+        font-size: 20px;
+        color:white !important;
+        z-index: 200; position:relative;
+      }
+}

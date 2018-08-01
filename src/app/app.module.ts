@@ -19,6 +19,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HashingPage } from '../pages/hashing/hashing';
 import { TrehuntPage } from '../pages/trehunt/trehunt';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     HashingPage,
     ContactPage,
     LoginPage,
+    TwoFacAuthPage,
     TabsPage,
     WalletPage,
     StreamPage
@@ -49,6 +51,7 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
     HashingPage,
     ContactPage,
     LoginPage,
+    TwoFacAuthPage,
     WalletPage,
     TabsPage,
     StreamPage
