@@ -20,6 +20,7 @@ import { HashingPage } from '../pages/hashing/hashing';
 import { TrehuntPage } from '../pages/trehunt/trehunt';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
+import { HomePage } from '../pages/home/home';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
     HashingPage,
     ContactPage,
     LoginPage,
+    HomePage,
     TwoFacAuthPage,
     TabsPage,
     WalletPage,
@@ -51,6 +53,7 @@ import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
     HashingPage,
     ContactPage,
     LoginPage,
+    HomePage,
     TwoFacAuthPage,
     WalletPage,
     TabsPage,
