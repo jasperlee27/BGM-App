@@ -18,9 +18,12 @@
       <!-- request SMS-->
       <ion-row>
         <ion-col col-12 text-center>
-          <div class="center">
-            <button class="request-sms-button" ion-button color="secondary" round outline>REQUEST<br>SMS</button>
+          <div class="center" [style.visibility]="isRequestHidden ? 'hidden' : 'visible'">
+            <button ion-button [color]="isRequestEnabled ? 'secondary' : 'secondary'" [outline]="isRequestEnabled ? 'false' : 'true'" 
+            [disabled]="isRequestEnabled? null : 'disabled'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">
+            REQUEST<br>SMS</button>
           </div>
+            <div class="timer" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">Request again in {{countDown | async}} s</div>
         </ion-col>
       </ion-row> 
       
