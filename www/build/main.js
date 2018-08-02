@@ -468,6 +468,8 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__ = __webpack_require__(564);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(626);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -483,6 +485,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the HomePage page.
  *
@@ -494,7 +497,38 @@ var HomePage = /** @class */ (function () {
         this.http = http;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client__["connect"]('http://localhost:3000');
     }
+    HomePage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.messages = new Array();
+        console.log("INITIATED");
+        this.socket.on('message-received', function (msg) {
+            _this.messages.push(msg);
+            console.log(msg);
+            console.log(_this.messages);
+        });
+        this.socket.emit('chat message', {
+            msg: 'Client to server, can you hear me server?'
+        });
+        this.socket.on('event2', function (data) {
+            console.log(data);
+            _this.socket.emit('event3', {
+                msg: 'Yes, its working for me!!'
+            });
+        });
+        this.socket.on('event4', function (data) {
+            console.log(data.msg);
+        });
+    };
+    HomePage.prototype.sendMessage = function () {
+        var message = {
+            text: this.messageText
+        };
+        this.socket.emit('send-message', message);
+        // console.log(message.text);
+        this.messageText = '';
+    };
     HomePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad HomePage');
     };
@@ -529,11 +563,12 @@ var HomePage = /** @class */ (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/'<!--\n  Generated template for the HomePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Home</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-row>\n    <ion-col col-12 text-center>\n      <button ion-button small clear color="secondary" style="color:secondary; font-size:14px; font-weight: 600" (click)="logout()">Logout</button>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n      <ion-col col-12 text-center>\n    <ion-img width="200" height="200" src={{this.storyImage}} style=background:transparent></ion-img>\n    </ion-col>\n  </ion-row>\n  <ion-row>\n    {{this.displayStory}}\n  </ion-row>\n  <ion-row>\n    <ion-col col-12 text-center>\n      <button ion-button large color="secondary" style="color:secondary; font-size:30px; font-weight: 600" (click)="getNews()">Get News</button>\n    </ion-col>\n  </ion-row>\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-row>\n\n    <ion-col col-12 text-center>\n\n      <button ion-button small clear color="secondary" style="color:secondary; font-size:14px; font-weight: 600" (click)="logout()">Logout</button>\n\n    </ion-col>\n\n  </ion-row>\n\n  <ion-row>\n\n      <ion-col col-12 text-center>\n\n    <ion-img width="200" height="200" src={{this.storyImage}} style=background:transparent></ion-img>\n\n    </ion-col>\n\n  </ion-row>\n\n  <ion-row>\n\n    {{this.displayStory}}\n\n  </ion-row>\n\n  <ion-row>\n\n    <ion-col col-12 text-center>\n\n      <button ion-button large color="secondary" style="color:secondary; font-size:30px; font-weight: 600" (click)="getNews()">Get News</button>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\home\home.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -1870,6 +1905,13 @@ var ProgressBarComponent = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=progress-bar.js.map
+
+/***/ }),
+
+/***/ 647:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 
