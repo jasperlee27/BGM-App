@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  <ion-row>
+    <ion-col col-12 text-center>
+      <button ion-button small clear color="secondary" style="color:secondary; font-size:14px; font-weight: 600" (click)="logout()">Logout</button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col col-12 text-center>
+    <ion-img width="200" height="200" src={{this.storyImage}} style=background:transparent></ion-img>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    {{this.displayStory}}
+  </ion-row>
+  <ion-row>
+    <ion-col col-12 text-center>
+      <button ion-button large color="secondary" style="color:secondary; font-size:30px; font-weight: 600" (click)="getNews()">Get News</button>
+    </ion-col>
+  </ion-row>
 </ion-content>
