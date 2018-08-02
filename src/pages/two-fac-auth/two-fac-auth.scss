@@ -11,6 +11,10 @@ page-two-fac-auth {
         // fill: color("secondary");
     }
 
+    .request-sms-button.activated {
+        color: color($colors, light);
+    }
+
     #rounded {
         width: 100%;
         height: 100%;

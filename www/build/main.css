@@ -25866,6 +25866,10 @@ page-two-fac-auth .request-sms-button {
   font-size: 20px;
 }
 
+page-two-fac-auth .request-sms-button.activated {
+  color: #f4f4f4;
+}
+
 page-two-fac-auth #rounded {
   width: 100%;
   height: 100%;

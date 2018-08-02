@@ -4,6 +4,7 @@ import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
 import { MyApp } from '../../app/app.component';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
+import { TabsPage } from '../tabs/tabs';
 // import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -28,6 +29,13 @@ export class LoginPage {
     this.navCtrl.push(this.twoFApage);
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
+  }
+
+  viewAsGuest(){
+    // this.navCtrl.setRoot(TabsPage);
+    // this.navCtrl.push(this.twoFApage);
+    this.navCtrl.setRoot(TabsPage);
+    console.log("view as guest only");
   }
 
   showHide(): any {
