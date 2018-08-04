@@ -2,15 +2,15 @@ page-trehunt {
     ion-row {
         text-align: center;
     }
+    
+    h2, h6 {
+        color: #f3ba2e;
+    }
 
     ion-input{
         padding-left:28px;
         width:80%;
         height:40px;
-    }
-    .text-input {
-        text-align: center;
-        padding-left:10px;
     }
 
     .style-ex-rate{

@@ -25708,7 +25708,7 @@ progress-bar .progress-outer {
   margin: 10px 2%;
   padding: 3px;
   text-align: center;
-  background-color: #f4f4f4;
+  background-color: "black";
   border: 1px solid #dcdcdc;
   color: #fff;
   border-radius: 20px;
@@ -25720,7 +25720,9 @@ progress-bar .progress-inner {
   overflow: hidden;
   padding: 5px;
   border-radius: 15px;
-  background-color: #488aff;
+  background-color: #f3ba2e;
+  color: #000000;
+  font-weight: 600;
 }
 
 page-bidding .totalPoolAmount {
@@ -25776,15 +25778,6 @@ page-hashing .timer-text {
   color: #f3ba2e;
   z-index: 1000;
   position: relative;
-}
-
-page-home .title.title-md {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  text-align: center;
 }
 
 page-login ion-icon {
@@ -25857,15 +25850,14 @@ page-trehunt ion-row {
   text-align: center;
 }
 
+page-trehunt h2, page-trehunt h6 {
+  color: #f3ba2e;
+}
+
 page-trehunt ion-input {
   padding-left: 28px;
   width: 80%;
   height: 40px;
-}
-
-page-trehunt .text-input {
-  text-align: center;
-  padding-left: 10px;
 }
 
 page-trehunt .style-ex-rate {
