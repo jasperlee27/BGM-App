@@ -81,10 +81,10 @@ export class HashingPage {
           scaleLabel: {
             display: true,
             labelString: 'Multiplier',
-            fontColor: "white",
+            fontColor: "#f3ba2e",
             fontSize: 14,
             fontStyle: 'bold',
-            fontFamily: 'Open Sans'
+            fontFamily: 'roboto'
           }
         }],
       }

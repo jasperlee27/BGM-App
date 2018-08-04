@@ -1,7 +1,8 @@
 page-hashing {
     .hashingContent{
-        background-color: #888;
-        color: white;
+        // background-color: #888;
+        // color: white;
+        color: color($colors, secondary);
     }
     .outer-circle {
        text-align:center;
@@ -33,7 +34,7 @@ page-hashing {
         margin-left: 50px;
         font-size: 26px;
         font-weight: 600;
-        color: rgb(238, 241, 24);
+        color: color($colors, secondary);
         z-index: 1000; position:relative;
      }
 

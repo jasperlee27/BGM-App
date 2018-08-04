@@ -25736,8 +25736,7 @@ page-bidding .row {
 }
 
 page-hashing .hashingContent {
-  background-color: #888;
-  color: white;
+  color: #f3ba2e;
 }
 
 page-hashing .outer-circle {
@@ -25765,7 +25764,7 @@ page-hashing .timer-text {
   margin-left: 50px;
   font-size: 26px;
   font-weight: 600;
-  color: #eef118;
+  color: #f3ba2e;
   z-index: 1000;
   position: relative;
 }
