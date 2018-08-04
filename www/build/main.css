@@ -17221,7 +17221,7 @@ ion-refresher.refresher-active {
 
 .has-refresher > .scroll-content {
   margin-top: -1px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #f3ba2e;
   -webkit-transition: -webkit-transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: -webkit-transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
@@ -17257,7 +17257,7 @@ ion-refresher-content {
   -webkit-transform-origin: center;
   transform-origin: center;
   font-size: 30px;
-  color: #000;
+  color: #f3ba2e;
   -webkit-transition: 200ms;
   transition: 200ms;
 }
@@ -17265,20 +17265,20 @@ ion-refresher-content {
 .refresher-pulling-text,
 .refresher-refreshing-text {
   text-align: center;
-  font-size: 16px;
-  color: #000;
+  font-size: 18px;
+  color: #f3ba2e;
 }
 
 .refresher-refreshing .spinner-ios line,
 .refresher-refreshing .spinner-ios-small line,
 .refresher-refreshing .spinner-crescent circle {
-  stroke: #000;
+  stroke: #f3ba2e;
 }
 
 .refresher-refreshing .spinner-bubbles circle,
 .refresher-refreshing .spinner-circles circle,
 .refresher-refreshing .spinner-dots circle {
-  fill: #000;
+  fill: #f3ba2e;
 }
 
 ion-refresher-content[state=pulling] .refresher-pulling {
