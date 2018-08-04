@@ -89,6 +89,8 @@ export class HomePage implements OnInit {
   }
   logout() {
     console.log("logout is working fine");
+    // console.log("rootnav = " +this.appCtrl.getRootNav());
+
     this.appCtrl.getRootNav().setRoot(LoginPage);
     //to fix logout
     // this.navCtrl.pop();
