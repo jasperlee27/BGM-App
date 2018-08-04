@@ -25780,6 +25780,10 @@ page-hashing .timer-text {
   position: relative;
 }
 
+page-home .scroll-content {
+  overflow-y: hidden;
+}
+
 page-login ion-icon {
   color: colors(primary);
   margin: auto;

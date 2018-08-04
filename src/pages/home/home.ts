@@ -34,6 +34,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.getNews();
     // this.messages = new Array();
     // console.log("INITIATED");
     // this.socket.on('message-received', (msg: any) => {
