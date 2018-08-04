@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular/';
 import { MyApp } from './app.component';
 import { HTTP } from '@ionic-native/http';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { RoulettePage } from '../pages/roulette/roulette';
 import { BiddingPage } from '../pages/bidding/bidding';
@@ -46,6 +47,7 @@ import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
     BrowserModule,
     HttpModule,
     ChartsModule,
+    BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

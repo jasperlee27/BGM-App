@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
 import { NavController } from 'ionic-angular/';
 import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
@@ -6,11 +6,24 @@ import { MyApp } from '../../app/app.component';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { TabsPage } from '../tabs/tabs';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+
 // import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  animations: [
+    //For login button
+    trigger('fadeIn', [
+      state('in', style({
+        opacity: 1
+      })),
+      transition('void => *', [
+        style({opacity: 0}),
+        animate('1000ms 2000ms ease-in')
+      ])
+    ])
+  ]
 })
 export class LoginPage {
   biddingPage = BiddingPage;
@@ -19,12 +32,12 @@ export class LoginPage {
   enteredPassword;
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
+  loginState: any = "in";
 
   constructor(public navCtrl: NavController, public auth:GlobalAuthProvider) {
-    // this.app.getRootNav().setRoot(this.biddingPage);
-    // app.setScrollDisabled(true);
-    // this.navCtrl.setRoot(TabsPage);
+   
   }
+
   login(){
     // this.navCtrl.setRoot(TabsPage);
     this.auth.setGuestLogin(false);
