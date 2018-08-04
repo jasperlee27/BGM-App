@@ -1028,7 +1028,7 @@ var TwoFacAuthPage = /** @class */ (function () {
                         // );
                         //for 1s countdown
                         this.countDown = Object(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__["timer"])(0, 1000).pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["take"])(noOfCounts), Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["map"])(function () { return (_this.count -= 1); }));
-                        return [4 /*yield*/, this.delay((this.count * 1000))];
+                        return [4 /*yield*/, this.delay((secondsToCount - 1) * 1000)];
                     case 1:
                         _a.sent();
                         this.resetCountdown();

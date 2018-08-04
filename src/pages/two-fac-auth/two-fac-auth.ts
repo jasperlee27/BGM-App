@@ -58,7 +58,7 @@ export class TwoFacAuthPage {
       map(()=> (this.count -= 1))
     );
 
-    await this.delay((this.count*1000));
+    await this.delay((secondsToCount-1)*1000);
     this.resetCountdown();
   }
 
