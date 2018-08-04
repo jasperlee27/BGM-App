@@ -5,6 +5,7 @@ import { RoulettePage } from '../roulette/roulette';
 import { MyApp } from '../../app/app.component';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { TabsPage } from '../tabs/tabs';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 // import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -19,13 +20,14 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public auth:GlobalAuthProvider) {
     // this.app.getRootNav().setRoot(this.biddingPage);
     // app.setScrollDisabled(true);
     // this.navCtrl.setRoot(TabsPage);
   }
   login(){
     // this.navCtrl.setRoot(TabsPage);
+    this.auth.setGuestLogin(false);
     this.navCtrl.push(this.twoFApage);
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
@@ -34,6 +36,7 @@ export class LoginPage {
   viewAsGuest(){
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
+    this.auth.setGuestLogin(true);
     this.navCtrl.setRoot(TabsPage);
     console.log("view as guest only");
   }

@@ -23,6 +23,7 @@ import { TrehuntPage } from '../pages/trehunt/trehunt';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
 import { HomePage } from '../pages/home/home';
+import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     HTTP,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GlobalAuthProvider
   ]
 })
 export class AppModule {}

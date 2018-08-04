@@ -48,7 +48,7 @@
   <!--logout button-->
   <ion-row>
     <ion-col col-12>
-      <button ion-item no-lines color="dark" style="color:secondary;" (click)="logout()">
+      <button ion-item no-lines color="dark" style="color:secondary;" [style.visibility]="isGuest ? 'hidden' : 'visible'" (click)="logout()">
         <span item-left style="color:#f3ba2e; font-size:16px;">
           <span style="padding-right:8px"><ion-icon name="exit"></ion-icon></span>
           Logout

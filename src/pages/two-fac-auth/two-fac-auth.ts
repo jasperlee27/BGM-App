@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { timer } from '../../../node_modules/rxjs/observable/timer';
 import { take, map } from 'rxjs/operators';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 /**
  * Generated class for the TwoFacAuthPage page.
  *
@@ -24,7 +25,7 @@ export class TwoFacAuthPage {
   countDown;
   count = 30.0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: GlobalAuthProvider) {
     this.isRequestHidden=false;
     this.isRequestEnabled=true;
     this.isTimerHidden=true;
@@ -39,6 +40,7 @@ export class TwoFacAuthPage {
   }
 
   verify2FA(){
+    this.auth.setGuestLogin(false);
     this.navCtrl.setRoot(TabsPage);
   }
   

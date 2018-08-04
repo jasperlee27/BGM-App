@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 // import { MyApp } from '../../app/app.component';
 
 /**
@@ -24,13 +25,15 @@ import * as io from 'socket.io-client';
 export class HomePage implements OnInit {
   displayStory: any;
   storyImage: any;
-
   messageText: string;
   messages: Array<any>;
+  isGuest: boolean;
+
   socket: SocketIOClient.Socket;
 
-  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App) {
+  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider) {
     // this.socket = io.connect('http://localhost:3000');
+    this.isGuest = auth.getGuestLogin();
   }
 
   ngOnInit() {
@@ -92,7 +95,7 @@ export class HomePage implements OnInit {
   doNothing(){
     console.log("do nothing for now");
   }
-  
+
   logout() {
     console.log("logout is working fine");
     // console.log("rootnav = " +this.appCtrl.getRootNav());
