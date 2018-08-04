@@ -25682,6 +25682,15 @@ ion-navbar.toolbar {
   background-color: #f3ba2e;
 }
 
+.title.title-md {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
 .back-button {
   color: #222;
 }
@@ -25767,6 +25776,15 @@ page-hashing .timer-text {
   color: #f3ba2e;
   z-index: 1000;
   position: relative;
+}
+
+page-home .title.title-md {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
 }
 
 page-login ion-icon {
