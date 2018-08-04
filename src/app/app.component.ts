@@ -5,6 +5,7 @@ import { Platform } from 'ionic-angular/';
 import { App } from 'ionic-angular/components/app/app';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { StatusBar } from '@ionic-native/status-bar';
 
 declare var testVar;
 declare function init():any;
@@ -17,8 +18,9 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // platform: Platform;
 
-  constructor(platform: Platform,  app: App) {
-
+  constructor(platform: Platform, statusBar: StatusBar, app: App) {
+    statusBar.overlaysWebView(true);
+    statusBar.backgroundColorByHexString('#000000');
     // alert(testVar);
 
     platform.ready().then(() => {

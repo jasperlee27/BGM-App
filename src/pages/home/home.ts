@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   messages: Array<any>;
   isGuest: boolean;
 
-  socket: SocketIOClient.Socket;
+  // socket: SocketIOClient.Socket;
 
   constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider) {
     // this.socket = io.connect('http://178.128.50.224:3001');

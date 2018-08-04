@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 605:
+/***/ 606:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27,7 +27,7 @@ var WalletPageModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__wallet__["a" /* WalletPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__wallet__["a" /* WalletPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__wallet__["a" /* WalletPage */]),
             ],
         })
     ], WalletPageModule);

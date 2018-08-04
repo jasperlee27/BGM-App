@@ -17221,7 +17221,7 @@ ion-refresher.refresher-active {
 
 .has-refresher > .scroll-content {
   margin-top: -1px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #f3ba2e;
   -webkit-transition: -webkit-transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: -webkit-transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
   transition: transform 320ms cubic-bezier(0.36, 0.66, 0.04, 1);
@@ -17257,7 +17257,7 @@ ion-refresher-content {
   -webkit-transform-origin: center;
   transform-origin: center;
   font-size: 30px;
-  color: #000;
+  color: #f3ba2e;
   -webkit-transition: 200ms;
   transition: 200ms;
 }
@@ -17265,20 +17265,20 @@ ion-refresher-content {
 .refresher-pulling-text,
 .refresher-refreshing-text {
   text-align: center;
-  font-size: 16px;
-  color: #000;
+  font-size: 18px;
+  color: #f3ba2e;
 }
 
 .refresher-refreshing .spinner-ios line,
 .refresher-refreshing .spinner-ios-small line,
 .refresher-refreshing .spinner-crescent circle {
-  stroke: #000;
+  stroke: #f3ba2e;
 }
 
 .refresher-refreshing .spinner-bubbles circle,
 .refresher-refreshing .spinner-circles circle,
 .refresher-refreshing .spinner-dots circle {
-  fill: #000;
+  fill: #f3ba2e;
 }
 
 ion-refresher-content[state=pulling] .refresher-pulling {
@@ -25682,6 +25682,15 @@ ion-navbar.toolbar {
   background-color: #f3ba2e;
 }
 
+.title.title-md {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
 .back-button {
   color: #222;
 }
@@ -25699,7 +25708,7 @@ progress-bar .progress-outer {
   margin: 10px 2%;
   padding: 3px;
   text-align: center;
-  background-color: #f4f4f4;
+  background-color: "black";
   border: 1px solid #dcdcdc;
   color: #fff;
   border-radius: 20px;
@@ -25711,7 +25720,9 @@ progress-bar .progress-inner {
   overflow: hidden;
   padding: 5px;
   border-radius: 15px;
-  background-color: #488aff;
+  background-color: #f3ba2e;
+  color: #000000;
+  font-weight: 600;
 }
 
 page-bidding .totalPoolAmount {
@@ -25736,8 +25747,7 @@ page-bidding .row {
 }
 
 page-hashing .hashingContent {
-  background-color: #888;
-  color: white;
+  color: #f3ba2e;
 }
 
 page-hashing .outer-circle {
@@ -25765,9 +25775,13 @@ page-hashing .timer-text {
   margin-left: 50px;
   font-size: 26px;
   font-weight: 600;
-  color: #eef118;
+  color: #f3ba2e;
   z-index: 1000;
   position: relative;
+}
+
+page-home .scroll-content {
+  overflow-y: hidden;
 }
 
 page-login ion-icon {
@@ -25840,15 +25854,14 @@ page-trehunt ion-row {
   text-align: center;
 }
 
+page-trehunt h2, page-trehunt h6 {
+  color: #f3ba2e;
+}
+
 page-trehunt ion-input {
   padding-left: 28px;
   width: 80%;
   height: 40px;
-}
-
-page-trehunt .text-input {
-  text-align: center;
-  padding-left: 10px;
 }
 
 page-trehunt .style-ex-rate {
