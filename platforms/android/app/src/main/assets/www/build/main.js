@@ -60,7 +60,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/'<!-- <ion-header> -->\n\n  <!-- <ion-navbar> -->\n\n    <ion-title>User Log In</ion-title>\n\n  <!-- </ion-navbar> -->\n\n<!-- </ion-header> -->\n\n\n\n<ion-content class="loginContent" padding>\n\n  <div class= "image-center">\n\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" [@fadeIn]="fadeState" style= background:transparent></ion-img>\n\n  </div>\n\n  <div class="login-form">\n\n    <ion-grid>\n\n      <!-- username -->\n\n        <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n          <ion-item no-lines id="rounded" >\n\n            <ion-label floating primary color="secondary">\n\n              <ion-icon name="person"></ion-icon>   Username\n\n            </ion-label>\n\n            <ion-input type="text"></ion-input>\n\n                \n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- password-->\n\n      <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n            <ion-item no-lines id="rounded">\n\n                <ion-label floating primary color="secondary">\n\n                <ion-icon name="lock"></ion-icon> Password\n\n                </ion-label>\n\n                <ion-input [type]="passwordType" clearOnEdit="false"></ion-input>\n\n                <ion-icon item-end [name]="passwordIcon" class="passwordIcon" color="secondary" (click)=\'showHide()\'></ion-icon>\n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n  <br>\n\n  <button ion-button small color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="login()">LOGIN</button>\n\n  <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <button ion-button small clear color="secondary" style="color:secondary; font-size:14px; font-weight: 600" (click)="viewAsGuest()">View As Guest</button>\n\n      </ion-col>\n\n  </ion-row> \n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/'<!-- <ion-header> -->\n\n  <!-- <ion-navbar> -->\n\n    <ion-title>User Log In</ion-title>\n\n  <!-- </ion-navbar> -->\n\n<!-- </ion-header> -->\n\n\n\n<ion-content class="loginContent" padding>\n\n  <div class= "image-center">\n\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" [@fadeIn]="fadeState" style= background:transparent></ion-img>\n\n  </div>\n\n  <div class="login-form">\n\n    <ion-grid>\n\n      <!-- username -->\n\n        <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState" >\n\n            <ion-label floating primary color="secondary">\n\n              <ion-icon name="person"></ion-icon>   Username\n\n            </ion-label>\n\n            <ion-input type="text"></ion-input>\n\n                \n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- password-->\n\n      <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n            <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState">\n\n                <ion-label floating primary color="secondary">\n\n                <ion-icon name="lock"></ion-icon> Password\n\n                </ion-label>\n\n                <ion-input [type]="passwordType" clearOnEdit="false"></ion-input>\n\n                <ion-icon item-end [name]="passwordIcon" class="passwordIcon" color="secondary" (click)=\'showHide()\'></ion-icon>\n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n  <br>\n\n  <button ion-button small color="secondary" [@loginFadeIn]="fadeState" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="login()">LOGIN</button>\n\n  <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <button ion-button small clear color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600" (click)="viewAsGuest()">View As Guest</button>\n\n      </ion-col>\n\n  </ion-row> \n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/,
             animations: [
                 //For login button
                 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('fadeIn', [
@@ -70,6 +70,38 @@ var LoginPage = /** @class */ (function () {
                     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('void => *', [
                         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0 }),
                         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])('1000ms 2000ms ease-in')
+                    ])
+                ]),
+                //for log in form
+                Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('flyInBottomSlow', [
+                    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["state"])('in', Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
+                        transform: 'translate3d(0,0,0)'
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('void => *', [
+                        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ transform: 'translate3d(0,2000px,0' }),
+                        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])('3500ms ease-in-out')
+                    ])
+                ]),
+                //For the [password] form
+                // trigger('bounceInBottom', [
+                //   state('in', style({
+                //     transform: 'translate3d(0,0,0)'
+                //     })),
+                //     transition('void => *', [
+                //       animate('3000ms 1000ms ease-in', keyframes([
+                //       style({transform: 'translate3d(0,2000px,0)', offset: 0}),
+                //       style({transform: 'translate3d(0,-20px,0)', offset: 0.9}),
+                //       style({transform: 'translate3d(0,0,0)', offset: 1})
+                //       ]))
+                //     ])
+                //   ]),
+                Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('loginFadeIn', [
+                    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["state"])('in', Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({
+                        opacity: 1
+                    })),
+                    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["transition"])('void => *', [
+                        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["style"])({ opacity: 0 }),
+                        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["animate"])('1000ms 4500ms ease-in')
                     ])
                 ])
             ]
@@ -547,7 +579,7 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_login__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(348);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_timeout__ = __webpack_require__(567);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(569);
@@ -1339,7 +1371,81 @@ var TrehuntPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 146:
+/***/ 156:
+/***/ (function(module, exports) {
+
+function webpackEmptyAsyncContext(req) {
+	// Here Promise.resolve().then() is used instead of new Promise() to prevent
+	// uncatched exception popping up in devtools
+	return Promise.resolve().then(function() {
+		throw new Error("Cannot find module '" + req + "'.");
+	});
+}
+webpackEmptyAsyncContext.keys = function() { return []; };
+webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
+module.exports = webpackEmptyAsyncContext;
+webpackEmptyAsyncContext.id = 156;
+
+/***/ }),
+
+/***/ 200:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"../pages/bidding/bidding.module": [
+		602,
+		8
+	],
+	"../pages/hashing/hashing.module": [
+		603,
+		7
+	],
+	"../pages/home/home.module": [
+		604,
+		6
+	],
+	"../pages/roulette/roulette.module": [
+		605,
+		5
+	],
+	"../pages/splash-logo/splash-logo.module": [
+		607,
+		4
+	],
+	"../pages/stream/stream.module": [
+		606,
+		3
+	],
+	"../pages/trehunt/trehunt.module": [
+		608,
+		2
+	],
+	"../pages/two-fac-auth/two-fac-auth.module": [
+		609,
+		1
+	],
+	"../pages/wallet/wallet.module": [
+		610,
+		0
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids)
+		return Promise.reject(new Error("Cannot find module '" + req + "'."));
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(ids[0]);
+	});
+};
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = 200;
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ 391:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1394,80 +1500,6 @@ var SplashLogoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 157:
-/***/ (function(module, exports) {
-
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncatched exception popping up in devtools
-	return Promise.resolve().then(function() {
-		throw new Error("Cannot find module '" + req + "'.");
-	});
-}
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 157;
-
-/***/ }),
-
-/***/ 201:
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"../pages/bidding/bidding.module": [
-		602,
-		8
-	],
-	"../pages/hashing/hashing.module": [
-		603,
-		7
-	],
-	"../pages/home/home.module": [
-		604,
-		6
-	],
-	"../pages/roulette/roulette.module": [
-		605,
-		5
-	],
-	"../pages/splash-logo/splash-logo.module": [
-		606,
-		4
-	],
-	"../pages/stream/stream.module": [
-		607,
-		3
-	],
-	"../pages/trehunt/trehunt.module": [
-		608,
-		2
-	],
-	"../pages/two-fac-auth/two-fac-auth.module": [
-		609,
-		1
-	],
-	"../pages/wallet/wallet.module": [
-		610,
-		0
-	]
-};
-function webpackAsyncContext(req) {
-	var ids = map[req];
-	if(!ids)
-		return Promise.reject(new Error("Cannot find module '" + req + "'."));
-	return __webpack_require__.e(ids[1]).then(function() {
-		return __webpack_require__(ids[0]);
-	});
-};
-webpackAsyncContext.keys = function webpackAsyncContextKeys() {
-	return Object.keys(map);
-};
-webpackAsyncContext.id = 201;
-module.exports = webpackAsyncContext;
-
-/***/ }),
-
 /***/ 392:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1492,7 +1524,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular___ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(595);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(596);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(349);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(348);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(597);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_roulette_roulette__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_bidding_bidding__ = __webpack_require__(138);
@@ -1501,10 +1533,10 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_wallet_wallet__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_stream_stream__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_tabs_tabs__ = __webpack_require__(113);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_splash_logo_splash_logo__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_splash_logo_splash_logo__ = __webpack_require__(391);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts__ = __webpack_require__(600);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(390);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(389);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_splash_screen__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_hashing_hashing__ = __webpack_require__(139);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_trehunt_trehunt__ = __webpack_require__(145);
@@ -1574,8 +1606,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
@@ -1618,252 +1650,252 @@ var AppModule = /** @class */ (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 207,
-	"./af.js": 207,
-	"./ar": 208,
-	"./ar-dz": 209,
-	"./ar-dz.js": 209,
-	"./ar-kw": 210,
-	"./ar-kw.js": 210,
-	"./ar-ly": 211,
-	"./ar-ly.js": 211,
-	"./ar-ma": 212,
-	"./ar-ma.js": 212,
-	"./ar-sa": 213,
-	"./ar-sa.js": 213,
-	"./ar-tn": 214,
-	"./ar-tn.js": 214,
-	"./ar.js": 208,
-	"./az": 215,
-	"./az.js": 215,
-	"./be": 216,
-	"./be.js": 216,
-	"./bg": 217,
-	"./bg.js": 217,
-	"./bm": 218,
-	"./bm.js": 218,
-	"./bn": 219,
-	"./bn.js": 219,
-	"./bo": 220,
-	"./bo.js": 220,
-	"./br": 221,
-	"./br.js": 221,
-	"./bs": 222,
-	"./bs.js": 222,
-	"./ca": 223,
-	"./ca.js": 223,
-	"./cs": 224,
-	"./cs.js": 224,
-	"./cv": 225,
-	"./cv.js": 225,
-	"./cy": 226,
-	"./cy.js": 226,
-	"./da": 227,
-	"./da.js": 227,
-	"./de": 228,
-	"./de-at": 229,
-	"./de-at.js": 229,
-	"./de-ch": 230,
-	"./de-ch.js": 230,
-	"./de.js": 228,
-	"./dv": 231,
-	"./dv.js": 231,
-	"./el": 232,
-	"./el.js": 232,
-	"./en-au": 233,
-	"./en-au.js": 233,
-	"./en-ca": 234,
-	"./en-ca.js": 234,
-	"./en-gb": 235,
-	"./en-gb.js": 235,
-	"./en-ie": 236,
-	"./en-ie.js": 236,
-	"./en-il": 237,
-	"./en-il.js": 237,
-	"./en-nz": 238,
-	"./en-nz.js": 238,
-	"./eo": 239,
-	"./eo.js": 239,
-	"./es": 240,
-	"./es-do": 241,
-	"./es-do.js": 241,
-	"./es-us": 242,
-	"./es-us.js": 242,
-	"./es.js": 240,
-	"./et": 243,
-	"./et.js": 243,
-	"./eu": 244,
-	"./eu.js": 244,
-	"./fa": 245,
-	"./fa.js": 245,
-	"./fi": 246,
-	"./fi.js": 246,
-	"./fo": 247,
-	"./fo.js": 247,
-	"./fr": 248,
-	"./fr-ca": 249,
-	"./fr-ca.js": 249,
-	"./fr-ch": 250,
-	"./fr-ch.js": 250,
-	"./fr.js": 248,
-	"./fy": 251,
-	"./fy.js": 251,
-	"./gd": 252,
-	"./gd.js": 252,
-	"./gl": 253,
-	"./gl.js": 253,
-	"./gom-latn": 254,
-	"./gom-latn.js": 254,
-	"./gu": 255,
-	"./gu.js": 255,
-	"./he": 256,
-	"./he.js": 256,
-	"./hi": 257,
-	"./hi.js": 257,
-	"./hr": 258,
-	"./hr.js": 258,
-	"./hu": 259,
-	"./hu.js": 259,
-	"./hy-am": 260,
-	"./hy-am.js": 260,
-	"./id": 261,
-	"./id.js": 261,
-	"./is": 262,
-	"./is.js": 262,
-	"./it": 263,
-	"./it.js": 263,
-	"./ja": 264,
-	"./ja.js": 264,
-	"./jv": 265,
-	"./jv.js": 265,
-	"./ka": 266,
-	"./ka.js": 266,
-	"./kk": 267,
-	"./kk.js": 267,
-	"./km": 268,
-	"./km.js": 268,
-	"./kn": 269,
-	"./kn.js": 269,
-	"./ko": 270,
-	"./ko.js": 270,
-	"./ky": 271,
-	"./ky.js": 271,
-	"./lb": 272,
-	"./lb.js": 272,
-	"./lo": 273,
-	"./lo.js": 273,
-	"./lt": 274,
-	"./lt.js": 274,
-	"./lv": 275,
-	"./lv.js": 275,
-	"./me": 276,
-	"./me.js": 276,
-	"./mi": 277,
-	"./mi.js": 277,
-	"./mk": 278,
-	"./mk.js": 278,
-	"./ml": 279,
-	"./ml.js": 279,
-	"./mn": 280,
-	"./mn.js": 280,
-	"./mr": 281,
-	"./mr.js": 281,
-	"./ms": 282,
-	"./ms-my": 283,
-	"./ms-my.js": 283,
-	"./ms.js": 282,
-	"./mt": 284,
-	"./mt.js": 284,
-	"./my": 285,
-	"./my.js": 285,
-	"./nb": 286,
-	"./nb.js": 286,
-	"./ne": 287,
-	"./ne.js": 287,
-	"./nl": 288,
-	"./nl-be": 289,
-	"./nl-be.js": 289,
-	"./nl.js": 288,
-	"./nn": 290,
-	"./nn.js": 290,
-	"./pa-in": 291,
-	"./pa-in.js": 291,
-	"./pl": 292,
-	"./pl.js": 292,
-	"./pt": 293,
-	"./pt-br": 294,
-	"./pt-br.js": 294,
-	"./pt.js": 293,
-	"./ro": 295,
-	"./ro.js": 295,
-	"./ru": 296,
-	"./ru.js": 296,
-	"./sd": 297,
-	"./sd.js": 297,
-	"./se": 298,
-	"./se.js": 298,
-	"./si": 299,
-	"./si.js": 299,
-	"./sk": 300,
-	"./sk.js": 300,
-	"./sl": 301,
-	"./sl.js": 301,
-	"./sq": 302,
-	"./sq.js": 302,
-	"./sr": 303,
-	"./sr-cyrl": 304,
-	"./sr-cyrl.js": 304,
-	"./sr.js": 303,
-	"./ss": 305,
-	"./ss.js": 305,
-	"./sv": 306,
-	"./sv.js": 306,
-	"./sw": 307,
-	"./sw.js": 307,
-	"./ta": 308,
-	"./ta.js": 308,
-	"./te": 309,
-	"./te.js": 309,
-	"./tet": 310,
-	"./tet.js": 310,
-	"./tg": 311,
-	"./tg.js": 311,
-	"./th": 312,
-	"./th.js": 312,
-	"./tl-ph": 313,
-	"./tl-ph.js": 313,
-	"./tlh": 314,
-	"./tlh.js": 314,
-	"./tr": 315,
-	"./tr.js": 315,
-	"./tzl": 316,
-	"./tzl.js": 316,
-	"./tzm": 317,
-	"./tzm-latn": 318,
-	"./tzm-latn.js": 318,
-	"./tzm.js": 317,
-	"./ug-cn": 319,
-	"./ug-cn.js": 319,
-	"./uk": 320,
-	"./uk.js": 320,
-	"./ur": 321,
-	"./ur.js": 321,
-	"./uz": 322,
-	"./uz-latn": 323,
-	"./uz-latn.js": 323,
-	"./uz.js": 322,
-	"./vi": 324,
-	"./vi.js": 324,
-	"./x-pseudo": 325,
-	"./x-pseudo.js": 325,
-	"./yo": 326,
-	"./yo.js": 326,
-	"./zh-cn": 327,
-	"./zh-cn.js": 327,
-	"./zh-hk": 328,
-	"./zh-hk.js": 328,
-	"./zh-tw": 329,
-	"./zh-tw.js": 329
+	"./af": 206,
+	"./af.js": 206,
+	"./ar": 207,
+	"./ar-dz": 208,
+	"./ar-dz.js": 208,
+	"./ar-kw": 209,
+	"./ar-kw.js": 209,
+	"./ar-ly": 210,
+	"./ar-ly.js": 210,
+	"./ar-ma": 211,
+	"./ar-ma.js": 211,
+	"./ar-sa": 212,
+	"./ar-sa.js": 212,
+	"./ar-tn": 213,
+	"./ar-tn.js": 213,
+	"./ar.js": 207,
+	"./az": 214,
+	"./az.js": 214,
+	"./be": 215,
+	"./be.js": 215,
+	"./bg": 216,
+	"./bg.js": 216,
+	"./bm": 217,
+	"./bm.js": 217,
+	"./bn": 218,
+	"./bn.js": 218,
+	"./bo": 219,
+	"./bo.js": 219,
+	"./br": 220,
+	"./br.js": 220,
+	"./bs": 221,
+	"./bs.js": 221,
+	"./ca": 222,
+	"./ca.js": 222,
+	"./cs": 223,
+	"./cs.js": 223,
+	"./cv": 224,
+	"./cv.js": 224,
+	"./cy": 225,
+	"./cy.js": 225,
+	"./da": 226,
+	"./da.js": 226,
+	"./de": 227,
+	"./de-at": 228,
+	"./de-at.js": 228,
+	"./de-ch": 229,
+	"./de-ch.js": 229,
+	"./de.js": 227,
+	"./dv": 230,
+	"./dv.js": 230,
+	"./el": 231,
+	"./el.js": 231,
+	"./en-au": 232,
+	"./en-au.js": 232,
+	"./en-ca": 233,
+	"./en-ca.js": 233,
+	"./en-gb": 234,
+	"./en-gb.js": 234,
+	"./en-ie": 235,
+	"./en-ie.js": 235,
+	"./en-il": 236,
+	"./en-il.js": 236,
+	"./en-nz": 237,
+	"./en-nz.js": 237,
+	"./eo": 238,
+	"./eo.js": 238,
+	"./es": 239,
+	"./es-do": 240,
+	"./es-do.js": 240,
+	"./es-us": 241,
+	"./es-us.js": 241,
+	"./es.js": 239,
+	"./et": 242,
+	"./et.js": 242,
+	"./eu": 243,
+	"./eu.js": 243,
+	"./fa": 244,
+	"./fa.js": 244,
+	"./fi": 245,
+	"./fi.js": 245,
+	"./fo": 246,
+	"./fo.js": 246,
+	"./fr": 247,
+	"./fr-ca": 248,
+	"./fr-ca.js": 248,
+	"./fr-ch": 249,
+	"./fr-ch.js": 249,
+	"./fr.js": 247,
+	"./fy": 250,
+	"./fy.js": 250,
+	"./gd": 251,
+	"./gd.js": 251,
+	"./gl": 252,
+	"./gl.js": 252,
+	"./gom-latn": 253,
+	"./gom-latn.js": 253,
+	"./gu": 254,
+	"./gu.js": 254,
+	"./he": 255,
+	"./he.js": 255,
+	"./hi": 256,
+	"./hi.js": 256,
+	"./hr": 257,
+	"./hr.js": 257,
+	"./hu": 258,
+	"./hu.js": 258,
+	"./hy-am": 259,
+	"./hy-am.js": 259,
+	"./id": 260,
+	"./id.js": 260,
+	"./is": 261,
+	"./is.js": 261,
+	"./it": 262,
+	"./it.js": 262,
+	"./ja": 263,
+	"./ja.js": 263,
+	"./jv": 264,
+	"./jv.js": 264,
+	"./ka": 265,
+	"./ka.js": 265,
+	"./kk": 266,
+	"./kk.js": 266,
+	"./km": 267,
+	"./km.js": 267,
+	"./kn": 268,
+	"./kn.js": 268,
+	"./ko": 269,
+	"./ko.js": 269,
+	"./ky": 270,
+	"./ky.js": 270,
+	"./lb": 271,
+	"./lb.js": 271,
+	"./lo": 272,
+	"./lo.js": 272,
+	"./lt": 273,
+	"./lt.js": 273,
+	"./lv": 274,
+	"./lv.js": 274,
+	"./me": 275,
+	"./me.js": 275,
+	"./mi": 276,
+	"./mi.js": 276,
+	"./mk": 277,
+	"./mk.js": 277,
+	"./ml": 278,
+	"./ml.js": 278,
+	"./mn": 279,
+	"./mn.js": 279,
+	"./mr": 280,
+	"./mr.js": 280,
+	"./ms": 281,
+	"./ms-my": 282,
+	"./ms-my.js": 282,
+	"./ms.js": 281,
+	"./mt": 283,
+	"./mt.js": 283,
+	"./my": 284,
+	"./my.js": 284,
+	"./nb": 285,
+	"./nb.js": 285,
+	"./ne": 286,
+	"./ne.js": 286,
+	"./nl": 287,
+	"./nl-be": 288,
+	"./nl-be.js": 288,
+	"./nl.js": 287,
+	"./nn": 289,
+	"./nn.js": 289,
+	"./pa-in": 290,
+	"./pa-in.js": 290,
+	"./pl": 291,
+	"./pl.js": 291,
+	"./pt": 292,
+	"./pt-br": 293,
+	"./pt-br.js": 293,
+	"./pt.js": 292,
+	"./ro": 294,
+	"./ro.js": 294,
+	"./ru": 295,
+	"./ru.js": 295,
+	"./sd": 296,
+	"./sd.js": 296,
+	"./se": 297,
+	"./se.js": 297,
+	"./si": 298,
+	"./si.js": 298,
+	"./sk": 299,
+	"./sk.js": 299,
+	"./sl": 300,
+	"./sl.js": 300,
+	"./sq": 301,
+	"./sq.js": 301,
+	"./sr": 302,
+	"./sr-cyrl": 303,
+	"./sr-cyrl.js": 303,
+	"./sr.js": 302,
+	"./ss": 304,
+	"./ss.js": 304,
+	"./sv": 305,
+	"./sv.js": 305,
+	"./sw": 306,
+	"./sw.js": 306,
+	"./ta": 307,
+	"./ta.js": 307,
+	"./te": 308,
+	"./te.js": 308,
+	"./tet": 309,
+	"./tet.js": 309,
+	"./tg": 310,
+	"./tg.js": 310,
+	"./th": 311,
+	"./th.js": 311,
+	"./tl-ph": 312,
+	"./tl-ph.js": 312,
+	"./tlh": 313,
+	"./tlh.js": 313,
+	"./tr": 314,
+	"./tr.js": 314,
+	"./tzl": 315,
+	"./tzl.js": 315,
+	"./tzm": 316,
+	"./tzm-latn": 317,
+	"./tzm-latn.js": 317,
+	"./tzm.js": 316,
+	"./ug-cn": 318,
+	"./ug-cn.js": 318,
+	"./uk": 319,
+	"./uk.js": 319,
+	"./ur": 320,
+	"./ur.js": 320,
+	"./uz": 321,
+	"./uz-latn": 322,
+	"./uz-latn.js": 322,
+	"./uz.js": 321,
+	"./vi": 323,
+	"./vi.js": 323,
+	"./x-pseudo": 324,
+	"./x-pseudo.js": 324,
+	"./yo": 325,
+	"./yo.js": 325,
+	"./zh-cn": 326,
+	"./zh-cn.js": 326,
+	"./zh-hk": 327,
+	"./zh-hk.js": 327,
+	"./zh-tw": 328,
+	"./zh-tw.js": 328
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -1893,8 +1925,7 @@ webpackContext.id = 451;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(114);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(390);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_splash_logo_splash_logo__ = __webpack_require__(146);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(389);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1911,7 +1942,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var MyApp = /** @class */ (function () {
     // rootPage:any = TabsPage;
     // platform: Platform;
@@ -1920,10 +1950,10 @@ var MyApp = /** @class */ (function () {
         statusBar.overlaysWebView(true);
         statusBar.backgroundColorByHexString('#000000');
         // alert(testVar);
+        splashScreen.hide();
         platform.ready().then(function () {
-            var splash = modalCtrl.create(__WEBPACK_IMPORTED_MODULE_6__pages_splash_logo_splash_logo__["a" /* SplashLogoPage */]);
-            splash.present();
-            // splashScreen.hide();
+            // let splash = modalCtrl.create(SplashLogoPage);
+            // splash.present();
             platform.registerBackButtonAction(function () {
                 // this.navCtrl.pop();
             });
