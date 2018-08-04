@@ -13,7 +13,7 @@ import { LoginPage } from '../pages/login/login';
 import { WalletPage } from '../pages/wallet/wallet';
 import { StreamPage } from '../pages/stream/stream';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
@@ -36,6 +36,7 @@ import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
     BiddingPage,
     HashingPage,
     ContactPage,
+    SplashLogoPage,
     LoginPage,
     HomePage,
     TwoFacAuthPage,
@@ -58,6 +59,7 @@ import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
     BiddingPage,
     HashingPage,
     ContactPage,
+    SplashLogoPage,
     LoginPage,
     HomePage,
     TwoFacAuthPage,

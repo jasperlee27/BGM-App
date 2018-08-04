@@ -68,8 +68,8 @@
       "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   },
   "description": "An Ionic project for Monaca Platform"

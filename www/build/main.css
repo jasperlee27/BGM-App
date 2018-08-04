@@ -25703,6 +25703,13 @@ ion-navbar.toolbar {
   font-weight: 500;
 }
 
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
 progress-bar .progress-outer {
   width: 100%;
   margin: 10px 2%;
@@ -25848,6 +25855,53 @@ page-roulette ion-button {
   color: whitesmoke;
   border-color: grey;
   border-width: 1em;
+}
+
+.ios page-splash-logo .scroll-content, .md page-splash-logo .scroll-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.scroll-content {
+  overflow-y: hidden;
+}
+
+@-webkit-keyframes fadeInAndSpin {
+  100% {
+    opacity: 1;
+    -webkit-transform: rotate3d(1, 1, 0, 0deg);
+    transform: rotate3d(1, 1, 0, 0deg);
+  }
+}
+
+@keyframes fadeInAndSpin {
+  100% {
+    opacity: 1;
+    -webkit-transform: rotate3d(1, 1, 0, 0deg);
+    transform: rotate3d(1, 1, 0, 0deg);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  100% {
+    opacity: 1;
+  }
 }
 
 page-trehunt ion-row {
