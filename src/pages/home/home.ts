@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
 // import { HTTP } from '@ionic-native/http';
@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
+// import { MyApp } from '../../app/app.component';
 
 /**
  * Generated class for the HomePage page.
@@ -28,8 +29,8 @@ export class HomePage implements OnInit {
   messages: Array<any>;
   socket: SocketIOClient.Socket;
 
-  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams) {
-    this.socket = io.connect('http://localhost:3000');
+  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App) {
+    // this.socket = io.connect('http://localhost:3000');
   }
 
   ngOnInit() {
@@ -88,6 +89,7 @@ export class HomePage implements OnInit {
   }
   logout() {
     console.log("logout is working fine");
+    this.appCtrl.getRootNav().setRoot(LoginPage);
     //to fix logout
     // this.navCtrl.pop();
     // this.navCtrl.popToRoot();

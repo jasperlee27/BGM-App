@@ -27,7 +27,7 @@ var TrehuntPageModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2__trehunt__["a" /* TrehuntPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__trehunt__["a" /* TrehuntPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__trehunt__["a" /* TrehuntPage */]),
             ],
         })
     ], TrehuntPageModule);
