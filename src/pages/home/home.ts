@@ -88,19 +88,15 @@ export class HomePage implements OnInit {
         });
 
   }
+
+  doNothing(){
+    console.log("do nothing for now");
+  }
+  
   logout() {
     console.log("logout is working fine");
     // console.log("rootnav = " +this.appCtrl.getRootNav());
-
     this.appCtrl.getRootNav().setRoot(LoginPage);
-    //to fix logout
-    // this.navCtrl.pop();
-    // this.navCtrl.popToRoot();
-    // this.navCtrl.last()
-    // this.navCtrl.setRoot(LoginPage).then(res => {
-    // if success push the first page in line
-    // this.navCtrl.push(LoginPage);
-    // });
-    // this.navCtrl.setRoot(LoginPage);
+  
   }
 }
