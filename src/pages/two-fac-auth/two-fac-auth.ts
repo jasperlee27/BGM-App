@@ -47,11 +47,18 @@ export class TwoFacAuthPage {
     this.count = secondsToCount;
     var noOfCounts = (this.count*10)
     
-    this.countDown = timer(0,100).pipe(
+    //for 0.1s countdown
+    // this.countDown = timer(0,100).pipe(
+    //   take(noOfCounts),
+    //   map(()=> (this.count -= 0.1).toFixed(1))
+    // );
+    //for 1s countdown
+    this.countDown = timer(0,1000).pipe(
       take(noOfCounts),
-      map(()=> (this.count -= 0.1).toFixed(1))
+      map(()=> (this.count -= 1))
     );
-    await this.delay((this.count*1000)+400);
+
+    await this.delay((this.count*1000));
     this.resetCountdown();
   }
 
