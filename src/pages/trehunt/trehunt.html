@@ -15,20 +15,34 @@
 
 <ion-content padding>
 <ion-grid>
-  <!--for curr exchange rate-->
-  <h2 style="text-align: center">Current Est. Price</h2>
+  <!--for curr game id-->
+  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->
   <ion-row>
       <ion-col>
-        <div class="style-ex-rate">
-          1 BTC = <span style="color:#f3ba2e">{{currBTCprice}}</span> USD
+        <div class="style-game-id">
+          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>
         </div>
       </ion-col>
       <ion-col>
-          <div class="style-ex-rate">
-              1 ETH = <span style="color:#f3ba2e">{{currETHprice}}</span> USD
+          <div class="style-game-id">
+              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>
             </div>
       </ion-col>
   </ion-row>
+  <!-- for current tix own -->
+  <ion-row>
+    <ion-col>
+      <div class="style-current-tix">
+        You own: <span style="color:#f3ba2e">1005</span> tix
+      </div>
+    </ion-col>
+    <ion-col>
+      <div class="style-current-tix">
+        You own: <span style="color:#f3ba2e">6</span> tix
+      </div>
+    </ion-col>
+</ion-row>
+  
   <br>
   <!-- for coin images row-->
   <ion-row>
@@ -41,7 +55,7 @@
   </ion-row>
 
   <!--for current tickets sold-->
-  <h6 style="text-align: center">Tickets Sold</h6>
+  <h6 style="text-align: center">Total Tickets Sold</h6>
   <ion-row>
       <ion-col>
         <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>

@@ -14,6 +14,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular/';
   templateUrl: 'trehunt.html',
 })
 export class TrehuntPage {
+  currBTCGameID: string;
+  currETHGameID: string;
   currBTCtix;
   totalBTCtix;
   currETHtix;
@@ -27,6 +29,9 @@ export class TrehuntPage {
     this.currBTCprice= this.randomIntRange(8000,10000);
     this.currETHprice= this.randomIntRange(600,800);
     this.totalBTCtix=8800;
+    this.currBTCGameID='BTC027';
+    this.currETHGameID='ETH005';
+
     this.currBTCtix=this.randomIntRange(1,this.totalBTCtix-1);
     // this.currBTCtix=8700;
     this.totalETHtix=660;
