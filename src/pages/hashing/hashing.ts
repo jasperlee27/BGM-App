@@ -47,11 +47,18 @@ export class HashingPage {
     this.chartLabels=[];
     
     this.chartOptions={
+      maintainAspectRatio: true,
       animation: {
         duration: 0
       },
+      elements:{
+        line: {
+          tension:0
+        }
+      },
       scales: {
         xAxes: [{
+          offset: true,
           display: true,
           gridLines: {
             display: false,
@@ -61,23 +68,74 @@ export class HashingPage {
           ticks: {
             fontColor: "white",
             fontSize: 14,
-            stepSize: 0.5,
             display: false,
             beginAtZero: true
           },
+
+
         }],
         yAxes: [{
+          offset: true,
           ticks: {
             fontColor: "white",
-            fontSize: 14,
-            // display: !this.isChartHidden,
-            stepSize: 1,
+            fontSize: 12,
+            padding: -5,
+				    // mirror: true,
+            display: true,
+            // drawTicks: true,
+            stepSize: 0.01,
             min: 1,
+            maxTicksLimit: 6,
+            suggestedMax: 2,
+            callback: function(value) {
+              if (value >=40){
+                if (value%20 === 0){
+                  return value.toFixed(0)+'x';
+                }
+                else{
+                  return undefined;
+                }
+              }
+              
+              else if (value >= 20){
+                if (value % 10 === 0){
+                  return value.toFixed(0)+'x';
+                }
+
+                else {
+                  return undefined;
+                }
+              }
+              
+              else if (value >= 8){
+                if (value % 5 === 0){
+                  return value.toFixed(0)+'x';
+                }
+                else{
+                  return undefined;
+                }
+              }
+              //value less than 10
+              else if (value % 2 === 0){
+                return value.toFixed(0)+'x';
+              }
+
+              else if (value ===1 ){
+                return value+'x';
+              }
+
+              else {
+                return undefined;
+              }
+            },
           },
           gridLines: {
+            lineWidth: 0.5,
             display: false,
-            lineWidth:0.5,
+            drawTicks: true,
             color: "white",
+            offsetGridLines: true,
+            tickMarkLength: 10,
           },
           scaleLabel: {
             display: false,
@@ -102,7 +160,7 @@ export class HashingPage {
     this.isTimerHidden = true;
     this.chartData[0].data=[1];
     this.chartLabels= [0];
-    this.generateChart(12.6);
+    this.generateChart(33.58);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HashingPage');
@@ -110,13 +168,13 @@ export class HashingPage {
   
   generateChart(targetValue: number){
     //init necess. control variables
-    this.chartLabels= []; //clear chartlabels
+    // this.chartLabels= [0,1,2,3,4,5]; //initial array
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
     this.isChartHidden = false;
     this.chartData[0].hidden = false;
     this.chartData[0].data=[1];
-    this.chartLabels= [0];
+    this.chartLabels= [0,1,2,3,4,5];
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
 
@@ -152,7 +210,7 @@ export class HashingPage {
         this.chartData[0].hidden = this.isChartHidden;
         this.chart.refresh();
       }
-    },126)
+    },150)
 
   }
 
