@@ -32,13 +32,13 @@ export class HashingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chartData=[
-      { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: this.isChartHidden,},
+      { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: true,},
     ];
 
     this.chartColors=[{ // Actual Volume ETB
       backgroundColor: 'rgba(0, 0, 0, 0)',
-      borderColor: 'rgb(255, 113, 0)',
-      pointBackgroundColor: 'rgb(255, 113, 0)',
+      borderColor: "#f3ba2e",
+      pointBackgroundColor: "#f3ba2e",
       // pointBorderColor: '#fafafa',
       pointHoverBackgroundColor: 'rgb(255, 113, 0)', //changing inside hover box legend
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
@@ -61,7 +61,7 @@ export class HashingPage {
           ticks: {
             fontColor: "white",
             fontSize: 14,
-            // stepSize: 1,
+            stepSize: 0.5,
             display: false,
             beginAtZero: true
           },
@@ -70,8 +70,8 @@ export class HashingPage {
           ticks: {
             fontColor: "white",
             fontSize: 14,
-        
-            // stepSize: 1,
+            // display: !this.isChartHidden,
+            stepSize: 1,
             min: 1,
           },
           gridLines: {
@@ -102,7 +102,7 @@ export class HashingPage {
     this.isTimerHidden = true;
     this.chartData[0].data=[1];
     this.chartLabels= [0];
-    this.generateChart(1.3);
+    this.generateChart(12.6);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HashingPage');
@@ -114,7 +114,7 @@ export class HashingPage {
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
     this.isChartHidden = false;
-    this.chartData[0].hidden = this.isChartHidden;
+    this.chartData[0].hidden = false;
     this.chartData[0].data=[1];
     this.chartLabels= [0];
     this.multiplierDisplay = 1;
@@ -225,24 +225,30 @@ export class HashingPage {
       return 0.060;
     }
     else if (currValue >= 3.5){
-      return 0.050;
+      return 0.054;
     }
     else if (currValue >= 3.0){
-      return 0.040;
+      return 0.045;
     }
     else if (currValue >= 2.5){
-      return 0.035;
+      return 0.0380;
     }
-    else if (currValue >= 2.0){
-      return 0.030;
+    else if (currValue >= 2){
+      return 0.0360;
     }
     else if (currValue >= 1.8){
-      return 0.025;
+      return 0.0320;
     }
     else if (currValue >= 1.5){
-      return 0.02;
+      return 0.028;
     }
     else if (currValue >= 1.3){
+      return 0.024;
+    }
+    else if (currValue >= 1.2){
+      return 0.02;
+    }
+    else if (currValue >= 1.1){
       return 0.015;
     }
 
