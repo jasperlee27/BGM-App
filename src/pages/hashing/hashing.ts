@@ -54,7 +54,7 @@ export class HashingPage {
         xAxes: [{
           display: true,
           gridLines: {
-            display: true,
+            display: false,
             lineWidth: 0.5,
             color: "white"
           },
@@ -62,6 +62,7 @@ export class HashingPage {
             fontColor: "white",
             fontSize: 14,
             // stepSize: 1,
+            display: false,
             beginAtZero: true
           },
         }],
@@ -74,12 +75,12 @@ export class HashingPage {
             min: 1,
           },
           gridLines: {
-            display: true,
+            display: false,
             lineWidth:0.5,
             color: "white",
           },
           scaleLabel: {
-            display: true,
+            display: false,
             labelString: 'Multiplier',
             fontColor: "#f3ba2e",
             fontSize: 14,
