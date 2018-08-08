@@ -47,6 +47,9 @@ export class HashingPage {
     this.chartLabels=[];
     
     this.chartOptions={
+      tooltips:{
+        display:false,
+      },
       maintainAspectRatio: true,
       animation: {
         duration: 0
