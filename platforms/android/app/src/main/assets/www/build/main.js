@@ -152,7 +152,7 @@ var TabsPage = /** @class */ (function () {
         this.tab5Root = __WEBPACK_IMPORTED_MODULE_2__stream_stream__["a" /* StreamPage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\tabs\tabs.html"*/'<ion-tabs>\n  <!-- <ion-tab [root]="tab2Root" tabTitle="Roulette" tabIcon="flower"></ion-tab> -->\n  <!-- <ion-tab [root]="tab1Root" tabTitle="Bidding" tabIcon="pricetag"></ion-tab> -->\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Treasure" tabIcon="key"></ion-tab>\n  <!-- <ion-tab [root]="tab4Root" tabTitle="Contact" tabIcon="contacts"></ion-tab> -->\n  <ion-tab [root]="tab3Root" tabTitle="Hashing" tabIcon="lock"></ion-tab>\n  <ion-tab [root]="tab4Root" tabTitle="Wallet" tabIcon="logo-usd"></ion-tab>\n  <ion-tab [root]="tab5Root" tabTitle="Stream" tabIcon="pulse"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\tabs\tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <!-- <ion-tab [root]="tab2Root" tabTitle="Roulette" tabIcon="flower"></ion-tab> -->\n\n  <!-- <ion-tab [root]="tab1Root" tabTitle="Bidding" tabIcon="pricetag"></ion-tab> -->\n\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Treasure" tabIcon="key"></ion-tab>\n\n  <!-- <ion-tab [root]="tab4Root" tabTitle="Contact" tabIcon="contacts"></ion-tab> -->\n\n  <ion-tab [root]="tab3Root" tabTitle="Hashing" tabIcon="lock"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="Wallet" tabIcon="logo-usd"></ion-tab>\n\n  <ion-tab [root]="tab5Root" tabTitle="Stream" tabIcon="pulse"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\tabs\tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -250,7 +250,7 @@ var BiddingPage = /** @class */ (function () {
     };
     BiddingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-bidding',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\bidding\bidding.html"*/'<!--\n  Generated template for the BiddingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Game 1: Live Bidding</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="mycontent" padding>\n  \n    <div class="row">\n        <h6>Game ID:{{gameNo}} </h6> \n    </div>\n    <br>\n    \n\n    <ion-row justify-content-center align-items-center>\n        <h3>Current Pool:</h3>\n    </ion-row>\n    <div class="amountContainer">\n      <ion-row justify-content-center align-items-center class="totalPoolAmount">\n          <h1>$ {{currentPoolNumber | number }}</h1>\n      </ion-row>\n    </div>\n\n    <ion-segment>\n        <div id="playersHeader">\n            <h5>No. of Players:</h5>\n        </div>\n    </ion-segment>\n    <ion-row justify-content-center align-items-center>\n        <h5>{{noPlayers}}</h5>\n    </ion-row>\n\n    <ion-list>\n    <ion-list-header>\n     Current Leaderboard\n    </ion-list-header>\n\n    <ion-item>\n        <ion-label>\n          1. {{bidName1}}\n        </ion-label>\n        <div item-content>\n          ${{bidValue1 | number}}\n        </div>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>\n          2. {{bidName2}}\n        </ion-label>\n        <div item-content>\n          ${{bidValue2 | number}}\n        </div>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>\n          3. {{bidName3}}\n        </ion-label>\n        <div item-content>\n          ${{bidValue3 | number}}\n        </div>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>\n          4. {{bidName4}}\n        </ion-label>\n        <div item-content>\n          ${{bidValue4 | number}}\n        </div>\n    </ion-item>\n\n    <ion-item>\n        <ion-label>\n          5. {{bidName5}}\n        </ion-label>\n        <div item-content>\n          ${{bidValue5 | number}}\n        </div>\n    </ion-item>\n  \n  </ion-list>\n\n  <div class="row">\n      Balance: {{walletBallance | number}} USD\n  </div>\n  <div class="row"> \n    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="liveBidInputAmount">\n              <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>\n    </div>\n    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">\n            <button ion-button [disabled]="disabled" (click)="bidGame()">BID</button>\n    </div>\n  </div>\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n      <ion-refresher-content  \n        pullingIcon="arrow-dropdown"\n        pullingText="Pull to refresh"\n        refreshingSpinner="circles"\n        refreshingText="Refreshing...">\n      </ion-refresher-content>\n    </ion-refresher>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\bidding\bidding.html"*/,
+            selector: 'page-bidding',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\bidding\bidding.html"*/'<!--\n\n  Generated template for the BiddingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 1: Live Bidding</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="mycontent" padding>\n\n  \n\n    <div class="row">\n\n        <h6>Game ID:{{gameNo}} </h6> \n\n    </div>\n\n    <br>\n\n    \n\n\n\n    <ion-row justify-content-center align-items-center>\n\n        <h3>Current Pool:</h3>\n\n    </ion-row>\n\n    <div class="amountContainer">\n\n      <ion-row justify-content-center align-items-center class="totalPoolAmount">\n\n          <h1>$ {{currentPoolNumber | number }}</h1>\n\n      </ion-row>\n\n    </div>\n\n\n\n    <ion-segment>\n\n        <div id="playersHeader">\n\n            <h5>No. of Players:</h5>\n\n        </div>\n\n    </ion-segment>\n\n    <ion-row justify-content-center align-items-center>\n\n        <h5>{{noPlayers}}</h5>\n\n    </ion-row>\n\n\n\n    <ion-list>\n\n    <ion-list-header>\n\n     Current Leaderboard\n\n    </ion-list-header>\n\n\n\n    <ion-item>\n\n        <ion-label>\n\n          1. {{bidName1}}\n\n        </ion-label>\n\n        <div item-content>\n\n          ${{bidValue1 | number}}\n\n        </div>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>\n\n          2. {{bidName2}}\n\n        </ion-label>\n\n        <div item-content>\n\n          ${{bidValue2 | number}}\n\n        </div>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>\n\n          3. {{bidName3}}\n\n        </ion-label>\n\n        <div item-content>\n\n          ${{bidValue3 | number}}\n\n        </div>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>\n\n          4. {{bidName4}}\n\n        </ion-label>\n\n        <div item-content>\n\n          ${{bidValue4 | number}}\n\n        </div>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label>\n\n          5. {{bidName5}}\n\n        </ion-label>\n\n        <div item-content>\n\n          ${{bidValue5 | number}}\n\n        </div>\n\n    </ion-item>\n\n  \n\n  </ion-list>\n\n\n\n  <div class="row">\n\n      Balance: {{walletBallance | number}} USD\n\n  </div>\n\n  <div class="row"> \n\n    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="liveBidInputAmount">\n\n              <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>\n\n    </div>\n\n    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">\n\n            <button ion-button [disabled]="disabled" (click)="bidGame()">BID</button>\n\n    </div>\n\n  </div>\n\n\n\n  <ion-refresher (ionRefresh)="doRefresh($event)">\n\n      <ion-refresher-content  \n\n        pullingIcon="arrow-dropdown"\n\n        pullingText="Pull to refresh"\n\n        refreshingSpinner="circles"\n\n        refreshingText="Refreshing...">\n\n      </ion-refresher-content>\n\n    </ion-refresher>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\bidding\bidding.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */]])
     ], BiddingPage);
@@ -334,13 +334,14 @@ var HashingPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.count = 10.0;
+        this.isArrowHidden = true;
         this.chartData = [
-            { data: [], label: 'Hash Rate', pointRadius: 0, hidden: this.isChartHidden, },
+            { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 6 },
         ];
         this.chartColors = [{
                 backgroundColor: 'rgba(0, 0, 0, 0)',
-                borderColor: 'rgb(255, 113, 0)',
-                pointBackgroundColor: 'rgb(255, 113, 0)',
+                borderColor: "#f3ba2e",
+                pointBackgroundColor: "#f3ba2e",
                 // pointBorderColor: '#fafafa',
                 pointHoverBackgroundColor: 'rgb(255, 113, 0)',
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
@@ -348,38 +349,105 @@ var HashingPage = /** @class */ (function () {
         ];
         this.chartLabels = [];
         this.chartOptions = {
+            tooltips: {
+                display: false,
+            },
+            maintainAspectRatio: true,
             animation: {
                 duration: 0
             },
+            elements: {
+                line: {
+                    tension: 0
+                }
+            },
             scales: {
                 xAxes: [{
+                        //   type: 'time',
+                        //   time: {
+                        //     unit: 'month',
+                        //     format: 'timeFormat'
+                        // },
+                        offset: true,
                         display: true,
                         gridLines: {
-                            display: true,
-                            lineWidth: 0.5,
+                            display: false,
+                            // lineWidth: 0.5,
                             color: "white"
                         },
                         ticks: {
                             fontColor: "white",
+                            display: false,
                             fontSize: 14,
-                            // stepSize: 1,
-                            beginAtZero: true
+                            // stepSize:0.01,
+                            // callback: function(tick, index, array) {
+                            //   return (index % 20) ? "" : parseFloat(tick).toFixed(0);
+                            // },
+                            // autoSkip: true,
+                            // maxTicksLimit: 3,
+                            maxRotation: 0,
+                            minRotation: 0,
                         },
                     }],
                 yAxes: [{
+                        offset: true,
                         ticks: {
                             fontColor: "white",
-                            fontSize: 14,
-                            // stepSize: 1,
+                            fontSize: 12,
+                            padding: -5,
+                            // mirror: true,
+                            display: true,
+                            // drawTicks: true,
+                            stepSize: 0.01,
                             min: 1,
+                            maxTicksLimit: 5,
+                            suggestedMax: 2,
+                            callback: function (value) {
+                                if (value >= 40) {
+                                    if (value % 20 === 0) {
+                                        return value.toFixed(0) + 'x --  ';
+                                    }
+                                    else {
+                                        return undefined;
+                                    }
+                                }
+                                else if (value >= 20) {
+                                    if (value % 10 === 0) {
+                                        return value.toFixed(0) + 'x --  ';
+                                    }
+                                    else {
+                                        return undefined;
+                                    }
+                                }
+                                else if (value >= 8) {
+                                    if (value % 5 === 0) {
+                                        return value.toFixed(0) + 'x --  ';
+                                    }
+                                    else {
+                                        return undefined;
+                                    }
+                                }
+                                else if (value % 2 === 0) {
+                                    return value.toFixed(0) + 'x --  ';
+                                }
+                                else if (value === 1) {
+                                    return value + 'x --  ';
+                                }
+                                else {
+                                    return undefined;
+                                }
+                            },
                         },
                         gridLines: {
-                            display: true,
                             lineWidth: 0.5,
+                            display: true,
+                            drawTicks: true,
                             color: "white",
+                            offsetGridLines: true,
+                            tickMarkLength: -6,
                         },
                         scaleLabel: {
-                            display: true,
+                            display: false,
                             labelString: 'Multiplier',
                             fontColor: "#f3ba2e",
                             fontSize: 14,
@@ -399,8 +467,8 @@ var HashingPage = /** @class */ (function () {
         this.isBurstTextHidden = true;
         this.isTimerHidden = true;
         this.chartData[0].data = [1];
-        this.chartLabels = [0];
-        this.generateChart(1.3);
+        this.chartLabels = [0, 1];
+        this.generateChart(33.58);
     };
     HashingPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad HashingPage');
@@ -408,13 +476,14 @@ var HashingPage = /** @class */ (function () {
     HashingPage.prototype.generateChart = function (targetValue) {
         var _this = this;
         //init necess. control variables
-        this.chartLabels = []; //clear chartlabels
+        // this.chartLabels= [0,1,2,3,4,5]; //initial array
         this.isBurstTextHidden = true;
         this.isTimerHidden = true;
         this.isChartHidden = false;
-        this.chartData[0].hidden = this.isChartHidden;
+        this.chartData[0].hidden = false;
         this.chartData[0].data = [1];
-        this.chartLabels = [0];
+        // this.chartLabels= [0,1];
+        this.chartLabels = [0, 1];
         this.multiplierDisplay = 1;
         this.finalValue = 0; //init as 0 first, to update later.
         var startTime = Date.now();
@@ -434,6 +503,9 @@ var HashingPage = /** @class */ (function () {
             console.log("Current value " + currValue);
             console.log("target value " + targetNumber);
             increment = _this.updateIncrement(currValue);
+            if (currValue >= 1.99) {
+                _this.isArrowHidden = false;
+            }
             if (currValue + increment >= targetNumber) {
                 currentTime = Date.now();
                 _this.chartData[0].data.push(targetNumber);
@@ -442,10 +514,11 @@ var HashingPage = /** @class */ (function () {
                 clearInterval(interval);
                 _this.displayBurst(targetNumber);
                 _this.isChartHidden = true;
+                _this.isArrowHidden = true;
                 _this.chartData[0].hidden = _this.isChartHidden;
                 _this.chart.refresh();
             }
-        }, 126);
+        }, 100);
     };
     HashingPage.prototype.displayBurst = function (targetNumber) {
         return __awaiter(this, void 0, void 0, function () {
@@ -492,34 +565,34 @@ var HashingPage = /** @class */ (function () {
     };
     HashingPage.prototype.updateIncrement = function (currValue) {
         if (currValue >= 10.0) {
-            return 0.300;
-        }
-        else if (currValue >= 9.5) {
-            return 0.275;
-        }
-        else if (currValue >= 9.0) {
-            return 0.250;
-        }
-        else if (currValue >= 8.5) {
-            return 0.225;
-        }
-        else if (currValue >= 8.0) {
             return 0.200;
         }
-        else if (currValue >= 7.5) {
+        else if (currValue >= 9.5) {
+            return 0.185;
+        }
+        else if (currValue >= 9.0) {
             return 0.170;
         }
+        else if (currValue >= 8.5) {
+            return 0.155;
+        }
+        else if (currValue >= 8.0) {
+            return 0.140;
+        }
+        else if (currValue >= 7.5) {
+            return 0.130;
+        }
         else if (currValue >= 7.0) {
-            return 0.150;
-        }
-        else if (currValue >= 6.5) {
-            return 0.135;
-        }
-        else if (currValue >= 6.0) {
             return 0.120;
         }
+        else if (currValue >= 6.5) {
+            return 0.110;
+        }
+        else if (currValue >= 6.0) {
+            return 0.100;
+        }
         else if (currValue >= 5.5) {
-            return 0.105;
+            return 0.095;
         }
         else if (currValue >= 5.0) {
             return 0.085;
@@ -531,24 +604,30 @@ var HashingPage = /** @class */ (function () {
             return 0.060;
         }
         else if (currValue >= 3.5) {
-            return 0.050;
+            return 0.054;
         }
         else if (currValue >= 3.0) {
-            return 0.040;
+            return 0.045;
         }
         else if (currValue >= 2.5) {
-            return 0.035;
+            return 0.0380;
         }
-        else if (currValue >= 2.0) {
-            return 0.030;
+        else if (currValue >= 2) {
+            return 0.0360;
         }
         else if (currValue >= 1.8) {
-            return 0.025;
+            return 0.0300;
         }
         else if (currValue >= 1.5) {
-            return 0.02;
+            return 0.027;
         }
         else if (currValue >= 1.3) {
+            return 0.0235;
+        }
+        else if (currValue >= 1.2) {
+            return 0.02;
+        }
+        else if (currValue >= 1.1) {
             return 0.015;
         }
         else
@@ -560,7 +639,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n  Generated template for the HashingPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Game 2: Hashing</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content class="hashingContent" padding> \n \n <br>\n   <!-- Graph -->\n   <div class="graphCntr" style="display: block; width: 100%; height: 420px;">\n\n     <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="400"\n     [legend]="false">\n     <!-- (chartClick)="onChartClick($event) -->\n    </canvas>\n\n    <div class= "circle-cntr">\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n        <svg xmlns="http://www.w3.org/2000/svg">\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay.toFixed(2)}} x</text>\n        </svg>\n      </div>\n    </div>\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n     Busted @ {{finalValue.toFixed(2)}}x\n    </div>\n    \n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n        Next game in {{countDown | async}} s\n    </div>\n  </div>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding> \n\n \n\n <br>\n\n   <!-- Graph -->\n\n   <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n     <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="300"\n\n     [legend]="false">\n\n     <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class= "arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'"> \n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style= background:transparent></ion-img>\n\n    </div>\n\n    \n\n    <div class= "circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay.toFixed(2)}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n     Busted @ {{finalValue.toFixed(2)}}x\n\n    </div>\n\n    \n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n        Next game in {{countDown | async}} s\n\n    </div>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */]])
     ], HashingPage);
@@ -946,7 +1025,7 @@ var TwoFacAuthPage = /** @class */ (function () {
     };
     TwoFacAuthPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-two-fac-auth',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\two-fac-auth\two-fac-auth.html"*/'<!--\n  Generated template for the TwoFacAuthPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar align-title="center">\n    <ion-title><span text-color="dark">2 FA</span></ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <ion-grid>\n      <!-- request SMS-->\n      <ion-row>\n        <ion-col col-12 text-center>\n          <div class="center" [style.visibility]="isRequestHidden ? \'hidden\' : \'visible\'">\n            <button ion-button [color]="isRequestEnabled ? \'secondary\' : \'secondary\'" [outline]="isRequestEnabled ? \'false\' : \'true\'" \n            [disabled]="isRequestEnabled? null : \'disabled\'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">\n            REQUEST<br>SMS</button>\n          </div>\n            <div class="timer" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">Request again in {{countDown | async}} s</div>\n        </ion-col>\n      </ion-row> \n      \n      <!-- input SMS box -->\n      <ion-row>\n          <ion-col col-12 text-center>\n              <ion-item text-center no-lines id="rounded" style="width:70%; margin:auto" >\n                  <ion-label floating primary color="secondary">\n                     SMS Verification Code\n                  </ion-label>\n                  <ion-input type="text"></ion-input>\n                  </ion-item>\n          </ion-col>\n        </ion-row> \n    <br>\n     <!--verify button-->\n      <ion-row>\n        <ion-col col-12 text-center>\n          <button ion-button small color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="verify2FA()">VERIFY</button>\n        </ion-col>\n      </ion-row> \n      \n    </ion-grid>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\two-fac-auth\two-fac-auth.html"*/,
+            selector: 'page-two-fac-auth',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\two-fac-auth\two-fac-auth.html"*/'<!--\n\n  Generated template for the TwoFacAuthPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar align-title="center">\n\n    <ion-title><span text-color="dark">2 FA</span></ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n      <!-- request SMS-->\n\n      <ion-row>\n\n        <ion-col col-12 text-center>\n\n          <div class="center" [style.visibility]="isRequestHidden ? \'hidden\' : \'visible\'">\n\n            <button ion-button [color]="isRequestEnabled ? \'secondary\' : \'secondary\'" [outline]="isRequestEnabled ? \'false\' : \'true\'" \n\n            [disabled]="isRequestEnabled? null : \'disabled\'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">\n\n            REQUEST<br>SMS</button>\n\n          </div>\n\n            <div class="timer" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">Request again in {{countDown | async}} s</div>\n\n        </ion-col>\n\n      </ion-row> \n\n      \n\n      <!-- input SMS box -->\n\n      <ion-row>\n\n          <ion-col col-12 text-center>\n\n              <ion-item text-center no-lines id="rounded" style="width:70%; margin:auto" >\n\n                  <ion-label floating primary color="secondary">\n\n                     SMS Verification Code\n\n                  </ion-label>\n\n                  <ion-input type="text"></ion-input>\n\n                  </ion-item>\n\n          </ion-col>\n\n        </ion-row> \n\n    <br>\n\n     <!--verify button-->\n\n      <ion-row>\n\n        <ion-col col-12 text-center>\n\n          <button ion-button small color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="verify2FA()">VERIFY</button>\n\n        </ion-col>\n\n      </ion-row> \n\n      \n\n    </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\two-fac-auth\two-fac-auth.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */]])
     ], TwoFacAuthPage);
@@ -1280,6 +1359,8 @@ var TrehuntPage = /** @class */ (function () {
         this.currBTCprice = this.randomIntRange(8000, 10000);
         this.currETHprice = this.randomIntRange(600, 800);
         this.totalBTCtix = 8800;
+        this.currBTCGameID = 'BTC027';
+        this.currETHGameID = 'ETH005';
         this.currBTCtix = this.randomIntRange(1, this.totalBTCtix - 1);
         // this.currBTCtix=8700;
         this.totalETHtix = 660;
@@ -1360,7 +1441,7 @@ var TrehuntPage = /** @class */ (function () {
     };
     TrehuntPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-trehunt',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/'<!--\n  Generated template for the TrehuntPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Game 1: Treasure!</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<ion-grid>\n  <!--for curr exchange rate-->\n  <h2 style="text-align: center">Current Est. Price</h2>\n  <ion-row>\n      <ion-col>\n        <div class="style-ex-rate">\n          1 BTC = <span style="color:#f3ba2e">{{currBTCprice}}</span> USD\n        </div>\n      </ion-col>\n      <ion-col>\n          <div class="style-ex-rate">\n              1 ETH = <span style="color:#f3ba2e">{{currETHprice}}</span> USD\n            </div>\n      </ion-col>\n  </ion-row>\n  <br>\n  <!-- for coin images row-->\n  <ion-row>\n    <ion-col>\n      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>\n    </ion-col>\n    <ion-col>\n      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>\n    </ion-col>\n  </ion-row>\n\n  <!--for current tickets sold-->\n  <h6 style="text-align: center">Tickets Sold</h6>\n  <ion-row>\n      <ion-col>\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>\n      </ion-col>\n      <ion-col>\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>\n      </ion-col>\n  </ion-row>\n\n\n  <!--for current progress bar-->\n  <ion-row>\n      <ion-col>\n          <progress-bar [progress]="loadBTCProgress"></progress-bar>\n      </ion-col>\n      <ion-col>\n          <progress-bar [progress]="loadETHProgress"></progress-bar>\n      </ion-col>\n  </ion-row>\n  \n  \n  <!--for buying tix header-->\n  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>\n  <ion-row>\n      <ion-col>\n          No. BTC Ticket:\n          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>\n          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>\n      </ion-col>\n      <ion-col>\n          No. ETH Ticket:\n          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>\n          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>\n      </ion-col>\n  </ion-row>\n</ion-grid>\n\n<ion-refresher (ionRefresh)="doRefresh($event)">\n  <ion-refresher-content  \n    pullingIcon="arrow-dropdown"\n    pullingText="Pull to refresh"\n    refreshingSpinner="circles"\n    refreshingText="Refreshing...">\n  </ion-refresher-content>\n</ion-refresher>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/,
+            selector: 'page-trehunt',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/'<!--\n\n  Generated template for the TrehuntPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 1: Treasure!</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n<ion-grid>\n\n  <!--for curr game id-->\n\n  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->\n\n  <ion-row>\n\n      <ion-col>\n\n        <div class="style-game-id">\n\n          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>\n\n        </div>\n\n      </ion-col>\n\n      <ion-col>\n\n          <div class="style-game-id">\n\n              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>\n\n            </div>\n\n      </ion-col>\n\n  </ion-row>\n\n  <!-- for current tix own -->\n\n  <ion-row>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">1005</span> tix\n\n      </div>\n\n    </ion-col>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">6</span> tix\n\n      </div>\n\n    </ion-col>\n\n</ion-row>\n\n  \n\n  <br>\n\n  <!-- for coin images row-->\n\n  <ion-row>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <!--for current tickets sold-->\n\n  <h6 style="text-align: center">Total Tickets Sold</h6>\n\n  <ion-row>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>\n\n      </ion-col>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>\n\n      </ion-col>\n\n  </ion-row>\n\n\n\n\n\n  <!--for current progress bar-->\n\n  <ion-row>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadBTCProgress"></progress-bar>\n\n      </ion-col>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadETHProgress"></progress-bar>\n\n      </ion-col>\n\n  </ion-row>\n\n  \n\n  \n\n  <!--for buying tix header-->\n\n  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>\n\n  <ion-row>\n\n      <ion-col>\n\n          No. BTC Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>\n\n          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>\n\n      </ion-col>\n\n      <ion-col>\n\n          No. ETH Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>\n\n          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>\n\n      </ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n\n\n<ion-refresher (ionRefresh)="doRefresh($event)">\n\n  <ion-refresher-content  \n\n    pullingIcon="arrow-dropdown"\n\n    pullingText="Pull to refresh"\n\n    refreshingSpinner="circles"\n\n    refreshingText="Refreshing...">\n\n  </ion-refresher-content>\n\n</ion-refresher>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */]])
     ], TrehuntPage);
@@ -1421,11 +1502,11 @@ var map = {
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		609,
+		610,
 		1
 	],
 	"../pages/wallet/wallet.module": [
-		610,
+		609,
 		0
 	]
 };
@@ -1489,7 +1570,7 @@ var SplashLogoPage = /** @class */ (function () {
     };
     SplashLogoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-splash-logo',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\splash-logo\splash-logo.html"*/'<!--\n  Generated template for the SplashLogoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<!-- <ion-header>\n\n  <ion-navbar>\n    <ion-title>splashLogo</ion-title>\n  </ion-navbar>\n\n</ion-header> -->\n\n\n<ion-content padding>\n    <div class= "image-center">\n        <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" style= background:transparent></ion-img>\n      </div>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\splash-logo\splash-logo.html"*/,
+            selector: 'page-splash-logo',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\splash-logo\splash-logo.html"*/'<!--\n\n  Generated template for the SplashLogoPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<!-- <ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>splashLogo</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header> -->\n\n\n\n\n\n<ion-content padding>\n\n    <div class= "image-center">\n\n        <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" style= background:transparent></ion-img>\n\n      </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\splash-logo\splash-logo.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], SplashLogoPage);
@@ -1609,8 +1690,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] }
                     ]
                 }),
             ],
@@ -2031,7 +2112,7 @@ var ProgressBarComponent = /** @class */ (function () {
     ], ProgressBarComponent.prototype, "progress", void 0);
     ProgressBarComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'progress-bar',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\components\progress-bar\progress-bar.html"*/'<!-- Generated template for the ProgressBarComponent component -->\n<div class="progress-outer">\n    <div class="progress-inner" [style.width]="progress + \'%\'">\n        {{progress}}%\n    </div>\n</div>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\components\progress-bar\progress-bar.html"*/
+            selector: 'progress-bar',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\components\progress-bar\progress-bar.html"*/'<!-- Generated template for the ProgressBarComponent component -->\n\n<div class="progress-outer">\n\n    <div class="progress-inner" [style.width]="progress + \'%\'">\n\n        {{progress}}%\n\n    </div>\n\n</div>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\components\progress-bar\progress-bar.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], ProgressBarComponent);

@@ -64,18 +64,30 @@ export class HashingPage {
       },
       scales: {
         xAxes: [{
+        //   type: 'time',
+        //   time: {
+        //     unit: 'month',
+        //     format: 'timeFormat'
+        // },
           offset: true,
           display: true,
           gridLines: {
             display: false,
-            lineWidth: 0.5,
+            // lineWidth: 0.5,
             color: "white"
           },
           ticks: {
             fontColor: "white",
-            fontSize: 14,
             display: false,
-            beginAtZero: true
+            fontSize: 14,
+            // stepSize:0.01,
+            // callback: function(tick, index, array) {
+            //   return (index % 20) ? "" : parseFloat(tick).toFixed(0);
+            // },
+            // autoSkip: true,
+            // maxTicksLimit: 3,
+            maxRotation: 0,
+            minRotation: 0,
           },
 
 
@@ -91,7 +103,7 @@ export class HashingPage {
             // drawTicks: true,
             stepSize: 0.01,
             min: 1,
-            maxTicksLimit: 6,
+            maxTicksLimit: 5,
             suggestedMax: 2,
             callback: function(value) {
               if (value >=40){
@@ -137,7 +149,7 @@ export class HashingPage {
           },
           gridLines: {
             lineWidth: 0.5,
-            display: false,
+            display: true,
             drawTicks: true,
             color: "white",
             offsetGridLines: true,
@@ -180,7 +192,9 @@ export class HashingPage {
     this.isChartHidden = false;
     this.chartData[0].hidden = false;
     this.chartData[0].data=[1];
+    // this.chartLabels= [0,1];
     this.chartLabels= [0,1];
+
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
 
@@ -221,7 +235,7 @@ export class HashingPage {
         this.chartData[0].hidden = this.isChartHidden;
         this.chart.refresh();
       }
-    },150)
+    },100)
 
   }
 

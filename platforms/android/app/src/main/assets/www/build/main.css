@@ -25754,15 +25754,25 @@ page-hashing .hashingContent {
 page-hashing .outer-circle {
   text-align: center;
   text-decoration: none !important;
-  margin-top: -230px !important;
-  margin-left: 140px;
-  font-size: 20px;
+  margin-top: 10% !important;
+  margin-left: 40%;
+  font-size: 24px;
+  z-index: 200;
+  position: relative;
+}
+
+page-hashing .arrow-head {
+  text-align: end;
+  margin-right: -10%;
+  margin-top: -86%;
+  z-index: 1000;
+  position: relative;
 }
 
 page-hashing .burst-text {
   text-align: center;
-  margin-top: -140px;
-  margin-left: 50px;
+  margin-top: -40%;
+  margin-left: 7%;
   font-size: 30px;
   font-weight: 600;
   color: red;
@@ -25772,8 +25782,8 @@ page-hashing .burst-text {
 
 page-hashing .timer-text {
   text-align: center;
-  margin-top: -30px;
-  margin-left: 50px;
+  margin-top: -10%;
+  margin-left: 7%;
   font-size: 26px;
   font-weight: 600;
   color: #f3ba2e;
@@ -25912,8 +25922,13 @@ page-trehunt ion-input {
   height: 40px;
 }
 
-page-trehunt .style-ex-rate {
-  font-size: 16px;
+page-trehunt .style-game-id {
+  font-size: 18px;
+  font-weight: 700px;
+}
+
+page-trehunt .style-current-tix {
+  font-size: 14px;
   font-weight: 700px;
 }
 
