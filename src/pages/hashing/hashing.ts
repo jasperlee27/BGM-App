@@ -25,16 +25,19 @@ export class HashingPage {
   multiplierDisplay;
   finalValue;
   isChartHidden: boolean;
+  isArrowHidden: boolean;
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
   countDown;
   count = 10.0;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.isArrowHidden= true;
     this.chartData=[
       { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: true, borderWidth:6},
     ];
-
+    
     this.chartColors=[{ // Actual Volume ETB
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderColor: "#f3ba2e",
@@ -193,6 +196,7 @@ export class HashingPage {
       //divide by milliseconds
       var secondsToPush = (currentTime - startTime) / 1000;
       this.chartLabels.push(secondsToPush.toFixed(2));
+      
       this.chart.refresh();
       currValue += increment;
       this.multiplierDisplay=currValue;
@@ -200,7 +204,10 @@ export class HashingPage {
       console.log("target value " +targetNumber);
 
       increment= this.updateIncrement(currValue);
-
+      if (currValue >=1.99)
+      {
+        this.isArrowHidden=false;
+      }
       if(currValue + increment >= targetNumber){
         currentTime= Date.now();
         this.chartData[0].data.push(targetNumber);
@@ -210,6 +217,7 @@ export class HashingPage {
         
         this.displayBurst(targetNumber);
         this.isChartHidden = true;
+        this.isArrowHidden= true;
         this.chartData[0].hidden = this.isChartHidden;
         this.chart.refresh();
       }
