@@ -96,7 +96,7 @@ export class HashingPage {
             callback: function(value) {
               if (value >=40){
                 if (value%20 === 0){
-                  return value.toFixed(0)+'x';
+                  return value.toFixed(0)+'x --  ';
                 }
                 else{
                   return undefined;
@@ -105,7 +105,7 @@ export class HashingPage {
               
               else if (value >= 20){
                 if (value % 10 === 0){
-                  return value.toFixed(0)+'x';
+                  return value.toFixed(0)+'x --  ';
                 }
 
                 else {
@@ -115,7 +115,7 @@ export class HashingPage {
               
               else if (value >= 8){
                 if (value % 5 === 0){
-                  return value.toFixed(0)+'x';
+                  return value.toFixed(0)+'x --  ';
                 }
                 else{
                   return undefined;
@@ -123,11 +123,11 @@ export class HashingPage {
               }
               //value less than 10
               else if (value % 2 === 0){
-                return value.toFixed(0)+'x';
+                return value.toFixed(0)+'x --  ';
               }
 
               else if (value ===1 ){
-                return value+'x';
+                return value+'x --  ';
               }
 
               else {
@@ -141,7 +141,7 @@ export class HashingPage {
             drawTicks: true,
             color: "white",
             offsetGridLines: true,
-            tickMarkLength: 10,
+            tickMarkLength: -6,
           },
           scaleLabel: {
             display: false,

@@ -7,24 +7,24 @@ page-hashing {
     .outer-circle {
        text-align:center;
        text-decoration: none !important; 
-       margin-top: 30px !important;
-       margin-left: 140px;
-       font-size: 20px;
+       margin-top: 10% !important;
+       margin-left: 40%;
+       font-size: 24px;
        z-index: 200; position:relative;
      }
 
      .arrow-head {
         text-align: end;
-        margin-right: -28px;
-        margin-top: -290px;
+        margin-right: -10%;
+        margin-top: -86%;
         z-index: 1000; position:relative;
      }
 
       .burst-text {
         text-align:center;
-        margin-top: -120px;
+        margin-top: -40%;
         // margin-bottom: -5000px;
-        margin-left: 10px;
+        margin-left: 7%;
         font-size: 30px;
         font-weight: 600;
         // color: rgb(255, 113, 0);
@@ -33,9 +33,9 @@ page-hashing {
      }
      .timer-text {
         text-align:center;
-        margin-top: -30px;
+        margin-top: -10%;
         // margin-bottom: -5000px;
-        margin-left: 50px;
+        margin-left: 7%;
         font-size: 26px;
         font-weight: 600;
         color: color($colors, secondary);
