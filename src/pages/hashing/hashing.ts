@@ -32,7 +32,7 @@ export class HashingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.chartData=[
-      { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: true,},
+      { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: true, borderWidth:6},
     ];
 
     this.chartColors=[{ // Actual Volume ETB
@@ -156,13 +156,13 @@ export class HashingPage {
   ngOnInit(){
     this.isChartHidden = false;
     this.chartData[0].data=[1];
-    this.chartLabels= [0];
+    this.chartLabels= [0]
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
     this.chartData[0].data=[1];
-    this.chartLabels= [0];
+    this.chartLabels= [0,1];
     this.generateChart(33.58);
   }
   ionViewDidLoad() {
@@ -177,7 +177,7 @@ export class HashingPage {
     this.isChartHidden = false;
     this.chartData[0].hidden = false;
     this.chartData[0].data=[1];
-    this.chartLabels= [0,1,2,3,4,5];
+    this.chartLabels= [0,1];
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
 
@@ -247,34 +247,34 @@ export class HashingPage {
 
   updateIncrement(currValue: number){
     if (currValue >= 10.0){
-      return 0.300;
-    }
-    else if (currValue >= 9.5){
-      return 0.275;
-    }
-    else if (currValue >= 9.0){
-      return 0.250;
-    }
-    else if (currValue >= 8.5){
-      return 0.225;
-    }
-    else if (currValue >= 8.0){
       return 0.200;
     }
-    else if (currValue >= 7.5){
+    else if (currValue >= 9.5){
+      return 0.185;
+    }
+    else if (currValue >= 9.0){
       return 0.170;
     }
+    else if (currValue >= 8.5){
+      return 0.155;
+    }
+    else if (currValue >= 8.0){
+      return 0.140;
+    }
+    else if (currValue >= 7.5){
+      return 0.130;
+    }
     else if (currValue >= 7.0){
-      return 0.150;
-    }
-    else if (currValue >= 6.5){
-      return 0.135;
-    }
-    else if (currValue >= 6.0){
       return 0.120;
     }
+    else if (currValue >= 6.5){
+      return 0.110;
+    }
+    else if (currValue >= 6.0){
+      return 0.100;
+    }
     else if (currValue >= 5.5){
-      return 0.105;
+      return 0.095;
     }
     else if (currValue >= 5.0){
       return 0.085;
@@ -298,17 +298,23 @@ export class HashingPage {
       return 0.0360;
     }
     else if (currValue >= 1.8){
-      return 0.0320;
+      return 0.0300;
     }
     else if (currValue >= 1.5){
-      return 0.028;
+      return 0.027;
     }
     else if (currValue >= 1.3){
-      return 0.024;
+      return 0.0235;
     }
+    // else if (currValue >= 1.25){
+    //   return 0.022;
+    // }
     else if (currValue >= 1.2){
       return 0.02;
     }
+    // else if (currValue >= 1.2){
+    //   return 0.018;
+    //}
     else if (currValue >= 1.1){
       return 0.015;
     }

@@ -13,11 +13,16 @@ page-hashing {
        z-index: 200; position:relative;
      }
 
-
+     .arrow-head {
+        text-align: end;
+        margin-right: -28px;
+        margin-top: -290px;
+        // z-index: 1000; position:relative;
+     }
 
       .burst-text {
         text-align:center;
-        margin-top: -140px;
+        margin-top: 160px;
         // margin-bottom: -5000px;
         margin-left: 50px;
         font-size: 30px;
