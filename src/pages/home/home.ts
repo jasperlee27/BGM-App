@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Platform, ModalController } from 'ionic-angular/';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
@@ -8,6 +9,8 @@ import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
 import * as io from 'socket.io-client';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
+
 // import { MyApp } from '../../app/app.component';
 
 /**
@@ -31,7 +34,7 @@ export class HomePage implements OnInit {
 
   // socket: SocketIOClient.Socket;
 
-  constructor(private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider) {
+  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider, public nativeAudio: NativeAudio) {
     // this.socket = io.connect('http://178.128.50.224:3001');
     // console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
@@ -71,7 +74,11 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    this.platform.ready().then(() => {
+      this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+        this.nativeAudio.play('bgmLoopHome');
+      });
+    });
   }
 
   getNews() {

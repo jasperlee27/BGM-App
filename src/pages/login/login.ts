@@ -1,5 +1,5 @@
 import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
-import { NavController } from 'ionic-angular/';
+import { NavController, Platform } from 'ionic-angular/';
 import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
 import { MyApp } from '../../app/app.component';
@@ -7,6 +7,7 @@ import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { TabsPage } from '../tabs/tabs';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
+import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -20,7 +21,7 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
         opacity: 1
       })),
       transition('void => *', [
-        style({opacity: 0}),
+        style({ opacity: 0 }),
         animate('1000ms 2000ms ease-in')
       ])
     ]),
@@ -31,7 +32,7 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
         transform: 'translate3d(0,0,0)'
       })),
       transition('void => *', [
-        style({transform: 'translate3d(0,2000px,0'}),
+        style({ transform: 'translate3d(0,2000px,0' }),
         animate('3500ms ease-in-out')
       ])
     ]),
@@ -55,31 +56,37 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
         opacity: 1
       })),
       transition('void => *', [
-        style({opacity: 0}),
+        style({ opacity: 0 }),
         animate('1000ms 4500ms ease-in')
       ])
     ])
   ]
 })
+
 export class LoginPage {
   biddingPage = BiddingPage;
   roulettePage = RoulettePage;
-  twoFApage= TwoFacAuthPage;
+  twoFApage = TwoFacAuthPage;
   enteredPassword;
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
   loginState: any = "in";
 
-  constructor(public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth:GlobalAuthProvider) {
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private nativeAudio: NativeAudio) {
   }
-  
-  ngOnInit(){
-    // this.smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
-    // this.smartAudio.play('startGame3');
+
+  ionViewDidLoad() {
+    this.platform.ready().then(() => {
+      this.nativeAudio.preloadComplex('bgmLoopLogin', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+        this.nativeAudio.play('bgmLoopLogin');
+      });
+    });
   }
-  login(){  
+
+  login() {
     // this.smartAudio.play('startGame3');
     this.smartAudio.play('tabSwitch');
+    this.smartAudio.loop('tabSwitch2');
     // this.navCtrl.setRoot(TabsPage);
     this.auth.setGuestLogin(false);
     this.navCtrl.push(this.twoFApage);
@@ -87,7 +94,7 @@ export class LoginPage {
     console.log("login function activated");
   }
 
-  viewAsGuest(){
+  viewAsGuest() {
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
     this.auth.setGuestLogin(true);
@@ -96,7 +103,7 @@ export class LoginPage {
   }
 
   showHide(): any {
-     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-     this.passwordIcon = this.passwordIcon === 'eye' ? 'eye-off' : 'eye';
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye' ? 'eye-off' : 'eye';
   }
 }

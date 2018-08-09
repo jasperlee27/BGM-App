@@ -46,10 +46,12 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.ngOnInit = function () {
         // this.smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
         // this.smartAudio.play('startGame3');
+        // this.smartAudio.play('tabSwitch');
     };
     LoginPage.prototype.login = function () {
         // this.smartAudio.play('startGame3');
         this.smartAudio.play('tabSwitch');
+        this.smartAudio.loop('tabSwitch2');
         // this.navCtrl.setRoot(TabsPage);
         this.auth.setGuestLogin(false);
         this.navCtrl.push(this.twoFApage);
@@ -2052,21 +2054,25 @@ var MyApp = /** @class */ (function () {
     // rootPage:any = TabsPage;
     // platform: Platform;
     function MyApp(platform, statusBar, splashScreen, app, modalCtrl, smartAudio, nativeAudio) {
-        this.nativeAudio = nativeAudio;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
-        statusBar.overlaysWebView(true);
-        statusBar.backgroundColorByHexString('#000000');
+        // statusBar.overlaysWebView(true);
+        // statusBar.backgroundColorByHexString('#000000');
         // alert(testVar);
         // splashScreen.hide();
+        this.nativeAudio = nativeAudio;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
         platform.ready().then(function () {
+            statusBar.overlaysWebView(true);
+            statusBar.backgroundColorByHexString('#000000');
             // let splash = modalCtrl.create(SplashLogoPage);
             // splash.present();
             splashScreen.hide();
             smartAudio.preload('bgmLoop', 'assets/audio/backgroundMusic.mp3', 'complex');
             // smartAudio.loop('bgmLoop');
             // smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
-            smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3', 'complex');
-            smartAudio.loop('tabSwitch');
+            smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3', 'simple');
+            smartAudio.play('tabSwitch');
+            smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3', 'complex');
+            smartAudio.loop('tabSwitch2');
             //   platform.registerBackButtonAction(() => {
             //     this.navCtrl.pop();
             // });
@@ -2075,10 +2081,9 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__["a" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__["a" /* App */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["g" /* ModalController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__["a" /* NativeAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__["a" /* NativeAudio */]) === "function" && _g || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__["a" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__["a" /* NativeAudio */]])
     ], MyApp);
     return MyApp;
-    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -2186,9 +2191,15 @@ var SmartAudioProvider = /** @class */ (function () {
     function SmartAudioProvider(nativeAudio, platform) {
         this.nativeAudio = nativeAudio;
         //html5 init
-        this.audioType = 'html5';
+        this.audioType = 'native';
         //sounds array keep track of sounds to use in application
         this.sounds = [];
+        this.onSuccessPlaying = function (data) {
+            console.log("did call loop", data);
+        };
+        this.onError = function (data) {
+            console.log("loop hit error", data);
+        };
         //switch to native
         if (platform.is('cordova')) {
             this.audioType = 'native';
@@ -2209,7 +2220,7 @@ var SmartAudioProvider = /** @class */ (function () {
                 this.nativeAudio.preloadSimple(key, asset);
             }
             else {
-                this.nativeAudio.preloadComplex(key, asset, 1.0, 2, 0);
+                this.nativeAudio.preloadComplex(key, asset, 1, 1, 0);
             }
             var audio = {
                 key: key,
@@ -2237,27 +2248,29 @@ var SmartAudioProvider = /** @class */ (function () {
         }
     };
     SmartAudioProvider.prototype.loop = function (key) {
+        console.log("Calling generic loop...");
         var audio = this.sounds.find(function (sound) {
+            console.log("finding sound key");
+            console.log("Found sound key " + sound.key + " " + key);
             return sound.key === key;
         });
         if (audio.type === 'html5') {
             var audioAsset = new Audio(audio.asset);
+            console.log("Calling html 5 type...");
             audioAsset.play();
         }
         else {
-            this.nativeAudio.loop(audio.asset).then(function (res) {
-                console.log(res);
-            }, function (err) {
-                console.log(err);
-            });
+            console.log("Did it come to loop?");
+            console.log("What is audio key " + audio.key);
+            console.log("What is audio asset " + audio.asset);
+            this.nativeAudio.loop(audio.key).then(this.onSuccessPlaying, this.onError);
         }
     };
     SmartAudioProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__["a" /* NativeAudio */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__["a" /* NativeAudio */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__["a" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__["a" /* Platform */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__["a" /* Platform */]])
     ], SmartAudioProvider);
     return SmartAudioProvider;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=smart-audio.js.map

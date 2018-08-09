@@ -12,7 +12,7 @@ import { Platform } from '../../../node_modules/ionic-angular/platform/platform'
 @Injectable()
 export class SmartAudioProvider {
   //html5 init
-  audioType: string = 'html5';
+  audioType: string = 'native';
   //sounds array keep track of sounds to use in application
   sounds: any = [];
 
@@ -35,12 +35,12 @@ export class SmartAudioProvider {
 
     //else type native, preload simple
     else {
-      if  (complexity==='simple'){
+      if (complexity === 'simple') {
         this.nativeAudio.preloadSimple(key, asset);
       }
 
       else {
-        this.nativeAudio.preloadComplex(key, asset, 1, 1,0);
+        this.nativeAudio.preloadComplex(key, asset, 1, 1, 0);
       }
 
       let audio = {
@@ -75,20 +75,32 @@ export class SmartAudioProvider {
   }
 
   loop(key) {
-
+    console.log("Calling generic loop...")
     let audio = this.sounds.find((sound) => {
+      console.log("finding sound key");
+      console.log("Found sound key " +sound.key + " " + key);
       return sound.key === key;
-    });
+    }); 
+
     if (audio.type === 'html5') {
       let audioAsset = new Audio(audio.asset);
+      console.log("Calling html 5 type...")
       audioAsset.play();
     }
     else {
-      this.nativeAudio.loop(audio.asset).then((res) => {
-        console.log(res);
-      }, (err) => {
-        console.log(err);
-      });
+      console.log("Did it come to loop?")
+      console.log("What is audio key " + audio.key);
+      console.log("What is audio asset " + audio.asset);
+      this.nativeAudio.loop(audio.key).then(this.onSuccessPlaying, this.onError);
     }
   }
+
+  onSuccessPlaying = data => {
+    console.log("did call loop", data);
+  };
+
+  onError = data => {
+    console.log("loop hit error", data);
+  };
+
 }

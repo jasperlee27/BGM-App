@@ -22,6 +22,9 @@
     "cordova-plugin-ionic-webview": {
       "PACKAGE_NAME": "io.com.bgm"
     },
+    "cordova-plugin-nativeaudio": {
+      "PACKAGE_NAME": "io.com.bgm"
+    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "io.com.bgm"
     },
@@ -29,9 +32,6 @@
       "PACKAGE_NAME": "io.com.bgm"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.com.bgm"
-    },
-    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "io.com.bgm"
     }
   },
