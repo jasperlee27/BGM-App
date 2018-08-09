@@ -7,24 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>slotsdraw</ion-title>
+    <ion-title>Lucky Draw</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <!-- <div id="machine">
-    <div>Madrid</div>
-    <div>London</div>
-    <div>New York</div>
-  </div> -->
-
-  <!-- <script src="../../../node_modules/jquery-slotmachine/dist/slotmachine.min.js"></script> -->
-
-  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-  <script src="http://josex2r.github.io/jQuery-SlotMachine/dist/jquery.slotmachine.js"></script>
-  <script src="http://josex2r.github.io/jQuery-SlotMachine/dist/slotmachine.js"></script> -->
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -98,7 +87,9 @@
         </div>
       </ion-col>
     </ion-row>
+    <ion-col col-12 text-center>
+      <button ion-button id="casinoShuffle" (click)="randomSpin()" type="button" class="ShuffleBtn">Shuffle!</button>
+    </ion-col>
   </ion-grid>
-  <button id="casinoShuffle" (click)="randomSpin()" type="button" class="btn btn-primary btn-lg">Shuffle!</button>
 
 </ion-content>

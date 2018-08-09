@@ -1,4 +1,4 @@
-webpackJsonp([9],{
+webpackJsonp([10],{
 
 /***/ 115:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,7 +6,7 @@ webpackJsonp([9],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(140);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(144);
@@ -47,14 +47,13 @@ var LoginPage = /** @class */ (function () {
         this.passwordIcon = 'eye';
         this.loginState = "in";
     }
-    LoginPage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            _this.nativeAudio.preloadComplex('bgmLoopLogin', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.play('bgmLoopLogin');
-            });
-        });
-    };
+    // ionViewDidLoad() {
+    //   this.platform.ready().then(() => {
+    //     this.nativeAudio.preloadComplex('bgmLoopLogin', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+    //       this.nativeAudio.play('bgmLoopLogin');
+    //     });
+    //   });
+    // }
     LoginPage.prototype.login = function () {
         // this.smartAudio.play('startGame3');
         this.smartAudio.play('tabSwitch');
@@ -193,7 +192,7 @@ var TabsPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BiddingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -291,7 +290,7 @@ var BiddingPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__ = __webpack_require__(68);
@@ -680,13 +679,13 @@ var HashingPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(577);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(579);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(579);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(581);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(57);
@@ -759,14 +758,13 @@ var HomePage = /** @class */ (function () {
         //   // console.log(message.text);
         //   this.messageText = '';
     };
-    HomePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.play('bgmLoopHome');
-            });
-        });
-    };
+    // ionViewDidLoad() {
+    //   this.platform.ready().then(() => {
+    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+    //       this.nativeAudio.play('bgmLoopHome');
+    //     });
+    //   });
+    // }
     HomePage.prototype.getNews = function () {
         var _this = this;
         console.log("button is working fine");
@@ -811,7 +809,7 @@ var HomePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoulettePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -941,7 +939,7 @@ var RoulettePage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TwoFacAuthPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(68);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
@@ -1077,7 +1075,7 @@ var TwoFacAuthPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WalletPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(109);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__ = __webpack_require__(68);
@@ -1270,8 +1268,8 @@ var WalletPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StreamPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(568);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(569);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1369,7 +1367,8 @@ var StreamPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrehuntPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(148);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1379,6 +1378,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 /**
@@ -1421,6 +1421,14 @@ var TrehuntPage = /** @class */ (function () {
             console.log('Async operation has ended');
             refresher.complete();
         }, 2000);
+    };
+    TrehuntPage.prototype.viewBTCResults = function () {
+        console.log("Going to BTC lucky draw");
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__["a" /* SlotsdrawPage */]);
+    };
+    TrehuntPage.prototype.viewETHResults = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__["a" /* SlotsdrawPage */]);
+        console.log("Going to ETH lucky draw");
     };
     TrehuntPage.prototype.updateBTCETHPrice = function () {
         this.currBTCprice = this.randomIntRange(8000, 10000);
@@ -1476,7 +1484,7 @@ var TrehuntPage = /** @class */ (function () {
     };
     TrehuntPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-trehunt',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/'<!--\n\n  Generated template for the TrehuntPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 1: Treasure!</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n<ion-grid>\n\n  <!--for curr game id-->\n\n  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->\n\n  <ion-row>\n\n      <ion-col>\n\n        <div class="style-game-id">\n\n          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>\n\n        </div>\n\n      </ion-col>\n\n      <ion-col>\n\n          <div class="style-game-id">\n\n              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>\n\n            </div>\n\n      </ion-col>\n\n  </ion-row>\n\n  <!-- for current tix own -->\n\n  <ion-row>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">1005</span> tix\n\n      </div>\n\n    </ion-col>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">6</span> tix\n\n      </div>\n\n    </ion-col>\n\n</ion-row>\n\n  \n\n  <br>\n\n  <!-- for coin images row-->\n\n  <ion-row>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <!--for current tickets sold-->\n\n  <h6 style="text-align: center">Total Tickets Sold</h6>\n\n  <ion-row>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>\n\n      </ion-col>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>\n\n      </ion-col>\n\n  </ion-row>\n\n\n\n\n\n  <!--for current progress bar-->\n\n  <ion-row>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadBTCProgress"></progress-bar>\n\n      </ion-col>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadETHProgress"></progress-bar>\n\n      </ion-col>\n\n  </ion-row>\n\n  \n\n  \n\n  <!--for buying tix header-->\n\n  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>\n\n  <ion-row>\n\n      <ion-col>\n\n          No. BTC Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>\n\n          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>\n\n      </ion-col>\n\n      <ion-col>\n\n          No. ETH Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>\n\n          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>\n\n      </ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n\n\n<ion-refresher (ionRefresh)="doRefresh($event)">\n\n  <ion-refresher-content  \n\n    pullingIcon="arrow-dropdown"\n\n    pullingText="Pull to refresh"\n\n    refreshingSpinner="circles"\n\n    refreshingText="Refreshing...">\n\n  </ion-refresher-content>\n\n</ion-refresher>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/,
+            selector: 'page-trehunt',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/'<!--\n\n  Generated template for the TrehuntPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 1: Treasure!</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n<ion-grid>\n\n  <!--for curr game id-->\n\n  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->\n\n  <ion-row>\n\n      <ion-col>\n\n        <div class="style-game-id">\n\n          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>\n\n        </div>\n\n      </ion-col>\n\n      <ion-col>\n\n          <div class="style-game-id">\n\n              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>\n\n            </div>\n\n      </ion-col>\n\n  </ion-row>\n\n  <!-- for view game results -->\n\n  <ion-row>\n\n    <ion-col>\n\n        <button ion-button small color="secondary" style="text-transform: none;" [disabled]="BTCTixDisabled" (click)="viewBTCResults()">View BTC Results</button>\n\n    </ion-col>\n\n    <ion-col>\n\n        <button ion-button color="secondary"  style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>\n\n    </ion-col>\n\n</ion-row>\n\n  <!-- for current tix own -->\n\n  <ion-row>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">1005</span> tix\n\n      </div>\n\n    </ion-col>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">6</span> tix\n\n      </div>\n\n    </ion-col>\n\n</ion-row>\n\n  \n\n  <br>\n\n  <!-- for coin images row-->\n\n  <ion-row>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <!--for current tickets sold-->\n\n  <h6 style="text-align: center">Total Tickets Sold</h6>\n\n  <ion-row>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>\n\n      </ion-col>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>\n\n      </ion-col>\n\n  </ion-row>\n\n\n\n\n\n  <!--for current progress bar-->\n\n  <ion-row>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadBTCProgress"></progress-bar>\n\n      </ion-col>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadETHProgress"></progress-bar>\n\n      </ion-col>\n\n  </ion-row>\n\n  \n\n  \n\n  <!--for buying tix header-->\n\n  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>\n\n  <ion-row>\n\n      <ion-col>\n\n          No. BTC Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>\n\n          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>\n\n      </ion-col>\n\n      <ion-col>\n\n          No. ETH Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>\n\n          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>\n\n      </ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n\n\n<ion-refresher (ionRefresh)="doRefresh($event)">\n\n  <ion-refresher-content  \n\n    pullingIcon="arrow-dropdown"\n\n    pullingText="Pull to refresh"\n\n    refreshingSpinner="circles"\n\n    refreshingText="Refreshing...">\n\n  </ion-refresher-content>\n\n</ion-refresher>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */]])
     ], TrehuntPage);
@@ -1487,7 +1495,154 @@ var TrehuntPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 158:
+/***/ 148:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SlotsdrawPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(570);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+// declare function shuffle();
+/**
+ * Generated class for the SlotsdrawPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var SlotsdrawPage = /** @class */ (function () {
+    function SlotsdrawPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    SlotsdrawPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SlotsdrawPage');
+    };
+    SlotsdrawPage.prototype.ngAfterViewInit = function () {
+        __WEBPACK_IMPORTED_MODULE_2_jquery__(document).ready(function () {
+            var btnShuffle = document.querySelector("#casinoShuffle");
+            //first machine
+            var element1 = document.querySelector('#machine1');
+            var machine1 = new SlotMachine(element1, {
+                active: 2,
+                auto: false,
+                direction: 'up',
+                delay: 300,
+            });
+            var element2 = document.querySelector('#machine2');
+            var machine2 = new SlotMachine(element2, {
+                active: 7,
+                auto: false,
+                direction: 'up',
+                delay: 500,
+            });
+            var element3 = document.querySelector('#machine3');
+            var machine3 = new SlotMachine(element3, {
+                active: 3,
+                auto: false,
+                delay: 800,
+            });
+            var element4 = document.querySelector('#machine4');
+            var machine4 = new SlotMachine(element4, {
+                active: 3,
+                auto: false,
+                delay: 900,
+            });
+            var element5 = document.querySelector('#machine5');
+            var machine5 = new SlotMachine(element5, {
+                active: 1,
+                auto: false,
+                delay: 1100,
+            });
+            setTimeout(function () {
+                machine1.shuffle(10, onComplete);
+                machine2.shuffle(20, onComplete);
+                machine3.shuffle(30, onComplete);
+                machine4.shuffle(45, onComplete);
+                machine5.shuffle(50, onComplete);
+            }, 0);
+            function onComplete(active) {
+                console.log("Spin finish");
+            }
+        });
+        // btnShuffle.addEventListener('click', () => {
+        //   // for (var i=0; i<10; i++){
+        // setTimeout(function(){
+        //   machine1.shuffle(10);
+        //   machine2.shuffle(15);
+        //   machine3.shuffle(20);
+        //   machine4.shuffle(25);
+        //   machine5.shuffle(30);
+        // machine1.shuffle(10);
+        // machine2.shuffle(20);
+        // machine3.shuffle(30);
+        // machine4.shuffle(40);
+        // machine5.shuffle(50);
+        // }, 10);
+        // })
+        // this.randomSpin();
+    };
+    SlotsdrawPage.prototype.randomSpin = function () {
+        __WEBPACK_IMPORTED_MODULE_2_jquery__('#casinoShuffle').text('white');
+        var element1 = document.querySelector('#machine1');
+        var machine1 = new SlotMachine(element1, {
+            active: 1,
+            delay: 300,
+        });
+        machine1.shuffle();
+        var element2 = document.querySelector('#machine2');
+        var machine2 = new SlotMachine(element2, {
+            active: 1,
+            delay: 500,
+        });
+        var element3 = document.querySelector('#machine3');
+        var machine3 = new SlotMachine(element3, {
+            active: 1,
+            delay: 800,
+        });
+        var element4 = document.querySelector('#machine4');
+        var machine4 = new SlotMachine(element4, {
+            active: 1,
+            delay: 900,
+        });
+        var element5 = document.querySelector('#machine5');
+        var machine5 = new SlotMachine(element5, {
+            active: 1,
+            delay: 1100,
+        });
+        machine1.shuffle(10);
+        machine2.shuffle(20);
+        machine3.shuffle(30);
+        machine4.shuffle(40);
+        machine5.shuffle(50);
+    };
+    SlotsdrawPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-slotsdraw',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\slotsdraw\slotsdraw.html"*/'<!--\n  Generated template for the SlotsdrawPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>slotsdraw</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <!-- <div id="machine">\n    <div>Madrid</div>\n    <div>London</div>\n    <div>New York</div>\n  </div> -->\n\n  <!-- <script src="../../../node_modules/jquery-slotmachine/dist/slotmachine.min.js"></script> -->\n\n  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>\n  <script src="http://josex2r.github.io/jQuery-SlotMachine/dist/jquery.slotmachine.js"></script>\n  <script src="http://josex2r.github.io/jQuery-SlotMachine/dist/slotmachine.js"></script> -->\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <div id="machine1" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col>\n        <div id="machine2" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col>\n        <div id="machine3" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col>\n        <div id="machine4" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col>\n        <div id="machine5" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  <button id="casinoShuffle" (click)="randomSpin()" type="button" class="btn btn-primary btn-lg">Shuffle!</button>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\slotsdraw\slotsdraw.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]])
+    ], SlotsdrawPage);
+    return SlotsdrawPage;
+}());
+
+//# sourceMappingURL=slotsdraw.js.map
+
+/***/ }),
+
+/***/ 159:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -1500,48 +1655,52 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 158;
+webpackEmptyAsyncContext.id = 159;
 
 /***/ }),
 
-/***/ 202:
+/***/ 203:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/bidding/bidding.module": [
-		604,
-		8
+		606,
+		9
 	],
 	"../pages/hashing/hashing.module": [
-		605,
-		7
+		607,
+		8
 	],
 	"../pages/home/home.module": [
-		606,
-		6
+		608,
+		7
 	],
 	"../pages/roulette/roulette.module": [
-		607,
+		609,
+		6
+	],
+	"../pages/slotsdraw/slotsdraw.module": [
+		610,
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
-		608,
+		611,
 		4
 	],
 	"../pages/stream/stream.module": [
-		609,
+		612,
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
-		610,
+		614,
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		611,
+		613,
 		1
 	],
 	"../pages/wallet/wallet.module": [
-		612,
+		615,
 		0
 	]
 };
@@ -1556,18 +1715,18 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 202;
+webpackAsyncContext.id = 203;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 393:
+/***/ 394:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashLogoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(118);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1616,13 +1775,13 @@ var SplashLogoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 394:
+/***/ 395:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(395);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(402);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(396);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(403);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1630,44 +1789,46 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 402:
+/***/ 403:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__(36);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular___ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(597);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(598);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(351);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(599);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular___ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(599);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(600);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_platform_browser_animations__ = __webpack_require__(601);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_roulette_roulette__ = __webpack_require__(143);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_bidding_bidding__ = __webpack_require__(140);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__ = __webpack_require__(601);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__ = __webpack_require__(603);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_login_login__ = __webpack_require__(115);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_wallet_wallet__ = __webpack_require__(145);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_stream_stream__ = __webpack_require__(146);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_tabs_tabs__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_splash_logo_splash_logo__ = __webpack_require__(393);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts__ = __webpack_require__(602);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_splash_logo_splash_logo__ = __webpack_require__(394);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts__ = __webpack_require__(604);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_status_bar__ = __webpack_require__(392);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_splash_screen__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_hashing_hashing__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_trehunt_trehunt__ = __webpack_require__(147);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_progress_bar_progress_bar__ = __webpack_require__(603);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_progress_bar_progress_bar__ = __webpack_require__(605);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(144);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_home_home__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_global_auth_global_auth__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_native_audio__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_smart_audio_smart_audio__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_slotsdraw_slotsdraw__ = __webpack_require__(148);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1704,6 +1865,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_20__components_progress_bar_progress_bar__["a" /* ProgressBarComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_roulette_roulette__["a" /* RoulettePage */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_trehunt_trehunt__["a" /* TrehuntPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_slotsdraw_slotsdraw__["a" /* SlotsdrawPage */],
                 __WEBPACK_IMPORTED_MODULE_8__pages_bidding_bidding__["a" /* BiddingPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_hashing_hashing__["a" /* HashingPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__["a" /* ContactPage */],
@@ -1726,10 +1888,11 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -1739,6 +1902,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_7__pages_roulette_roulette__["a" /* RoulettePage */],
                 __WEBPACK_IMPORTED_MODULE_19__pages_trehunt_trehunt__["a" /* TrehuntPage */],
+                __WEBPACK_IMPORTED_MODULE_26__pages_slotsdraw_slotsdraw__["a" /* SlotsdrawPage */],
                 __WEBPACK_IMPORTED_MODULE_8__pages_bidding_bidding__["a" /* BiddingPage */],
                 __WEBPACK_IMPORTED_MODULE_18__pages_hashing_hashing__["a" /* HashingPage */],
                 __WEBPACK_IMPORTED_MODULE_9__pages_contact_contact__["a" /* ContactPage */],
@@ -1768,256 +1932,256 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 453:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 208,
-	"./af.js": 208,
-	"./ar": 209,
-	"./ar-dz": 210,
-	"./ar-dz.js": 210,
-	"./ar-kw": 211,
-	"./ar-kw.js": 211,
-	"./ar-ly": 212,
-	"./ar-ly.js": 212,
-	"./ar-ma": 213,
-	"./ar-ma.js": 213,
-	"./ar-sa": 214,
-	"./ar-sa.js": 214,
-	"./ar-tn": 215,
-	"./ar-tn.js": 215,
-	"./ar.js": 209,
-	"./az": 216,
-	"./az.js": 216,
-	"./be": 217,
-	"./be.js": 217,
-	"./bg": 218,
-	"./bg.js": 218,
-	"./bm": 219,
-	"./bm.js": 219,
-	"./bn": 220,
-	"./bn.js": 220,
-	"./bo": 221,
-	"./bo.js": 221,
-	"./br": 222,
-	"./br.js": 222,
-	"./bs": 223,
-	"./bs.js": 223,
-	"./ca": 224,
-	"./ca.js": 224,
-	"./cs": 225,
-	"./cs.js": 225,
-	"./cv": 226,
-	"./cv.js": 226,
-	"./cy": 227,
-	"./cy.js": 227,
-	"./da": 228,
-	"./da.js": 228,
-	"./de": 229,
-	"./de-at": 230,
-	"./de-at.js": 230,
-	"./de-ch": 231,
-	"./de-ch.js": 231,
-	"./de.js": 229,
-	"./dv": 232,
-	"./dv.js": 232,
-	"./el": 233,
-	"./el.js": 233,
-	"./en-au": 234,
-	"./en-au.js": 234,
-	"./en-ca": 235,
-	"./en-ca.js": 235,
-	"./en-gb": 236,
-	"./en-gb.js": 236,
-	"./en-ie": 237,
-	"./en-ie.js": 237,
-	"./en-il": 238,
-	"./en-il.js": 238,
-	"./en-nz": 239,
-	"./en-nz.js": 239,
-	"./eo": 240,
-	"./eo.js": 240,
-	"./es": 241,
-	"./es-do": 242,
-	"./es-do.js": 242,
-	"./es-us": 243,
-	"./es-us.js": 243,
-	"./es.js": 241,
-	"./et": 244,
-	"./et.js": 244,
-	"./eu": 245,
-	"./eu.js": 245,
-	"./fa": 246,
-	"./fa.js": 246,
-	"./fi": 247,
-	"./fi.js": 247,
-	"./fo": 248,
-	"./fo.js": 248,
-	"./fr": 249,
-	"./fr-ca": 250,
-	"./fr-ca.js": 250,
-	"./fr-ch": 251,
-	"./fr-ch.js": 251,
-	"./fr.js": 249,
-	"./fy": 252,
-	"./fy.js": 252,
-	"./gd": 253,
-	"./gd.js": 253,
-	"./gl": 254,
-	"./gl.js": 254,
-	"./gom-latn": 255,
-	"./gom-latn.js": 255,
-	"./gu": 256,
-	"./gu.js": 256,
-	"./he": 257,
-	"./he.js": 257,
-	"./hi": 258,
-	"./hi.js": 258,
-	"./hr": 259,
-	"./hr.js": 259,
-	"./hu": 260,
-	"./hu.js": 260,
-	"./hy-am": 261,
-	"./hy-am.js": 261,
-	"./id": 262,
-	"./id.js": 262,
-	"./is": 263,
-	"./is.js": 263,
-	"./it": 264,
-	"./it.js": 264,
-	"./ja": 265,
-	"./ja.js": 265,
-	"./jv": 266,
-	"./jv.js": 266,
-	"./ka": 267,
-	"./ka.js": 267,
-	"./kk": 268,
-	"./kk.js": 268,
-	"./km": 269,
-	"./km.js": 269,
-	"./kn": 270,
-	"./kn.js": 270,
-	"./ko": 271,
-	"./ko.js": 271,
-	"./ky": 272,
-	"./ky.js": 272,
-	"./lb": 273,
-	"./lb.js": 273,
-	"./lo": 274,
-	"./lo.js": 274,
-	"./lt": 275,
-	"./lt.js": 275,
-	"./lv": 276,
-	"./lv.js": 276,
-	"./me": 277,
-	"./me.js": 277,
-	"./mi": 278,
-	"./mi.js": 278,
-	"./mk": 279,
-	"./mk.js": 279,
-	"./ml": 280,
-	"./ml.js": 280,
-	"./mn": 281,
-	"./mn.js": 281,
-	"./mr": 282,
-	"./mr.js": 282,
-	"./ms": 283,
-	"./ms-my": 284,
-	"./ms-my.js": 284,
-	"./ms.js": 283,
-	"./mt": 285,
-	"./mt.js": 285,
-	"./my": 286,
-	"./my.js": 286,
-	"./nb": 287,
-	"./nb.js": 287,
-	"./ne": 288,
-	"./ne.js": 288,
-	"./nl": 289,
-	"./nl-be": 290,
-	"./nl-be.js": 290,
-	"./nl.js": 289,
-	"./nn": 291,
-	"./nn.js": 291,
-	"./pa-in": 292,
-	"./pa-in.js": 292,
-	"./pl": 293,
-	"./pl.js": 293,
-	"./pt": 294,
-	"./pt-br": 295,
-	"./pt-br.js": 295,
-	"./pt.js": 294,
-	"./ro": 296,
-	"./ro.js": 296,
-	"./ru": 297,
-	"./ru.js": 297,
-	"./sd": 298,
-	"./sd.js": 298,
-	"./se": 299,
-	"./se.js": 299,
-	"./si": 300,
-	"./si.js": 300,
-	"./sk": 301,
-	"./sk.js": 301,
-	"./sl": 302,
-	"./sl.js": 302,
-	"./sq": 303,
-	"./sq.js": 303,
-	"./sr": 304,
-	"./sr-cyrl": 305,
-	"./sr-cyrl.js": 305,
-	"./sr.js": 304,
-	"./ss": 306,
-	"./ss.js": 306,
-	"./sv": 307,
-	"./sv.js": 307,
-	"./sw": 308,
-	"./sw.js": 308,
-	"./ta": 309,
-	"./ta.js": 309,
-	"./te": 310,
-	"./te.js": 310,
-	"./tet": 311,
-	"./tet.js": 311,
-	"./tg": 312,
-	"./tg.js": 312,
-	"./th": 313,
-	"./th.js": 313,
-	"./tl-ph": 314,
-	"./tl-ph.js": 314,
-	"./tlh": 315,
-	"./tlh.js": 315,
-	"./tr": 316,
-	"./tr.js": 316,
-	"./tzl": 317,
-	"./tzl.js": 317,
-	"./tzm": 318,
-	"./tzm-latn": 319,
-	"./tzm-latn.js": 319,
-	"./tzm.js": 318,
-	"./ug-cn": 320,
-	"./ug-cn.js": 320,
-	"./uk": 321,
-	"./uk.js": 321,
-	"./ur": 322,
-	"./ur.js": 322,
-	"./uz": 323,
-	"./uz-latn": 324,
-	"./uz-latn.js": 324,
-	"./uz.js": 323,
-	"./vi": 325,
-	"./vi.js": 325,
-	"./x-pseudo": 326,
-	"./x-pseudo.js": 326,
-	"./yo": 327,
-	"./yo.js": 327,
-	"./zh-cn": 328,
-	"./zh-cn.js": 328,
-	"./zh-hk": 329,
-	"./zh-hk.js": 329,
-	"./zh-tw": 330,
-	"./zh-tw.js": 330
+	"./af": 209,
+	"./af.js": 209,
+	"./ar": 210,
+	"./ar-dz": 211,
+	"./ar-dz.js": 211,
+	"./ar-kw": 212,
+	"./ar-kw.js": 212,
+	"./ar-ly": 213,
+	"./ar-ly.js": 213,
+	"./ar-ma": 214,
+	"./ar-ma.js": 214,
+	"./ar-sa": 215,
+	"./ar-sa.js": 215,
+	"./ar-tn": 216,
+	"./ar-tn.js": 216,
+	"./ar.js": 210,
+	"./az": 217,
+	"./az.js": 217,
+	"./be": 218,
+	"./be.js": 218,
+	"./bg": 219,
+	"./bg.js": 219,
+	"./bm": 220,
+	"./bm.js": 220,
+	"./bn": 221,
+	"./bn.js": 221,
+	"./bo": 222,
+	"./bo.js": 222,
+	"./br": 223,
+	"./br.js": 223,
+	"./bs": 224,
+	"./bs.js": 224,
+	"./ca": 225,
+	"./ca.js": 225,
+	"./cs": 226,
+	"./cs.js": 226,
+	"./cv": 227,
+	"./cv.js": 227,
+	"./cy": 228,
+	"./cy.js": 228,
+	"./da": 229,
+	"./da.js": 229,
+	"./de": 230,
+	"./de-at": 231,
+	"./de-at.js": 231,
+	"./de-ch": 232,
+	"./de-ch.js": 232,
+	"./de.js": 230,
+	"./dv": 233,
+	"./dv.js": 233,
+	"./el": 234,
+	"./el.js": 234,
+	"./en-au": 235,
+	"./en-au.js": 235,
+	"./en-ca": 236,
+	"./en-ca.js": 236,
+	"./en-gb": 237,
+	"./en-gb.js": 237,
+	"./en-ie": 238,
+	"./en-ie.js": 238,
+	"./en-il": 239,
+	"./en-il.js": 239,
+	"./en-nz": 240,
+	"./en-nz.js": 240,
+	"./eo": 241,
+	"./eo.js": 241,
+	"./es": 242,
+	"./es-do": 243,
+	"./es-do.js": 243,
+	"./es-us": 244,
+	"./es-us.js": 244,
+	"./es.js": 242,
+	"./et": 245,
+	"./et.js": 245,
+	"./eu": 246,
+	"./eu.js": 246,
+	"./fa": 247,
+	"./fa.js": 247,
+	"./fi": 248,
+	"./fi.js": 248,
+	"./fo": 249,
+	"./fo.js": 249,
+	"./fr": 250,
+	"./fr-ca": 251,
+	"./fr-ca.js": 251,
+	"./fr-ch": 252,
+	"./fr-ch.js": 252,
+	"./fr.js": 250,
+	"./fy": 253,
+	"./fy.js": 253,
+	"./gd": 254,
+	"./gd.js": 254,
+	"./gl": 255,
+	"./gl.js": 255,
+	"./gom-latn": 256,
+	"./gom-latn.js": 256,
+	"./gu": 257,
+	"./gu.js": 257,
+	"./he": 258,
+	"./he.js": 258,
+	"./hi": 259,
+	"./hi.js": 259,
+	"./hr": 260,
+	"./hr.js": 260,
+	"./hu": 261,
+	"./hu.js": 261,
+	"./hy-am": 262,
+	"./hy-am.js": 262,
+	"./id": 263,
+	"./id.js": 263,
+	"./is": 264,
+	"./is.js": 264,
+	"./it": 265,
+	"./it.js": 265,
+	"./ja": 266,
+	"./ja.js": 266,
+	"./jv": 267,
+	"./jv.js": 267,
+	"./ka": 268,
+	"./ka.js": 268,
+	"./kk": 269,
+	"./kk.js": 269,
+	"./km": 270,
+	"./km.js": 270,
+	"./kn": 271,
+	"./kn.js": 271,
+	"./ko": 272,
+	"./ko.js": 272,
+	"./ky": 273,
+	"./ky.js": 273,
+	"./lb": 274,
+	"./lb.js": 274,
+	"./lo": 275,
+	"./lo.js": 275,
+	"./lt": 276,
+	"./lt.js": 276,
+	"./lv": 277,
+	"./lv.js": 277,
+	"./me": 278,
+	"./me.js": 278,
+	"./mi": 279,
+	"./mi.js": 279,
+	"./mk": 280,
+	"./mk.js": 280,
+	"./ml": 281,
+	"./ml.js": 281,
+	"./mn": 282,
+	"./mn.js": 282,
+	"./mr": 283,
+	"./mr.js": 283,
+	"./ms": 284,
+	"./ms-my": 285,
+	"./ms-my.js": 285,
+	"./ms.js": 284,
+	"./mt": 286,
+	"./mt.js": 286,
+	"./my": 287,
+	"./my.js": 287,
+	"./nb": 288,
+	"./nb.js": 288,
+	"./ne": 289,
+	"./ne.js": 289,
+	"./nl": 290,
+	"./nl-be": 291,
+	"./nl-be.js": 291,
+	"./nl.js": 290,
+	"./nn": 292,
+	"./nn.js": 292,
+	"./pa-in": 293,
+	"./pa-in.js": 293,
+	"./pl": 294,
+	"./pl.js": 294,
+	"./pt": 295,
+	"./pt-br": 296,
+	"./pt-br.js": 296,
+	"./pt.js": 295,
+	"./ro": 297,
+	"./ro.js": 297,
+	"./ru": 298,
+	"./ru.js": 298,
+	"./sd": 299,
+	"./sd.js": 299,
+	"./se": 300,
+	"./se.js": 300,
+	"./si": 301,
+	"./si.js": 301,
+	"./sk": 302,
+	"./sk.js": 302,
+	"./sl": 303,
+	"./sl.js": 303,
+	"./sq": 304,
+	"./sq.js": 304,
+	"./sr": 305,
+	"./sr-cyrl": 306,
+	"./sr-cyrl.js": 306,
+	"./sr.js": 305,
+	"./ss": 307,
+	"./ss.js": 307,
+	"./sv": 308,
+	"./sv.js": 308,
+	"./sw": 309,
+	"./sw.js": 309,
+	"./ta": 310,
+	"./ta.js": 310,
+	"./te": 311,
+	"./te.js": 311,
+	"./tet": 312,
+	"./tet.js": 312,
+	"./tg": 313,
+	"./tg.js": 313,
+	"./th": 314,
+	"./th.js": 314,
+	"./tl-ph": 315,
+	"./tl-ph.js": 315,
+	"./tlh": 316,
+	"./tlh.js": 316,
+	"./tr": 317,
+	"./tr.js": 317,
+	"./tzl": 318,
+	"./tzl.js": 318,
+	"./tzm": 319,
+	"./tzm-latn": 320,
+	"./tzm-latn.js": 320,
+	"./tzm.js": 319,
+	"./ug-cn": 321,
+	"./ug-cn.js": 321,
+	"./uk": 322,
+	"./uk.js": 322,
+	"./ur": 323,
+	"./ur.js": 323,
+	"./uz": 324,
+	"./uz-latn": 325,
+	"./uz-latn.js": 325,
+	"./uz.js": 324,
+	"./vi": 326,
+	"./vi.js": 326,
+	"./x-pseudo": 327,
+	"./x-pseudo.js": 327,
+	"./yo": 328,
+	"./yo.js": 328,
+	"./zh-cn": 329,
+	"./zh-cn.js": 329,
+	"./zh-hk": 330,
+	"./zh-hk.js": 330,
+	"./zh-tw": 331,
+	"./zh-tw.js": 331
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2033,21 +2197,21 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 453;
+webpackContext.id = 454;
 
 /***/ }),
 
-/***/ 597:
+/***/ 599:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(391);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(392);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(57);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2076,7 +2240,6 @@ var MyApp = /** @class */ (function () {
         // statusBar.backgroundColorByHexString('#000000');
         // alert(testVar);
         // splashScreen.hide();
-        var _this = this;
         this.nativeAudio = nativeAudio;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_login_login__["a" /* LoginPage */];
         platform.ready().then(function () {
@@ -2085,9 +2248,9 @@ var MyApp = /** @class */ (function () {
             splashScreen.hide();
             // let splash = modalCtrl.create(SplashLogoPage);
             // splash.present();
-            _this.nativeAudio.preloadComplex('bgmLoop', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.play('bgmLoop');
-            });
+            // this.nativeAudio.preloadComplex('bgmLoop', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {     
+            //     this.nativeAudio.play('bgmLoop');
+            // });
             // smartAudio.preload('bgmLoop', 'assets/audio/backgroundMusic.mp3', 'complex');
             // smartAudio.loop('bgmLoop');
             // smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
@@ -2112,13 +2275,13 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 601:
+/***/ 603:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ContactPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2147,7 +2310,7 @@ var ContactPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 603:
+/***/ 605:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2213,7 +2376,9 @@ var SmartAudioProvider = /** @class */ (function () {
     function SmartAudioProvider(nativeAudio, platform) {
         this.nativeAudio = nativeAudio;
         //html5 init
-        this.audioType = 'native';
+        //use html5 when using ionic serve
+        this.audioType = 'html5';
+        // audioType: string = 'native';
         //sounds array keep track of sounds to use in application
         this.sounds = [];
         this.onSuccessPlaying = function (data) {
@@ -2350,5 +2515,5 @@ var GlobalAuthProvider = /** @class */ (function () {
 
 /***/ })
 
-},[394]);
+},[395]);
 //# sourceMappingURL=main.js.map

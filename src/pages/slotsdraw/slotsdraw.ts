@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as $ from "jquery";
+import * as jquerySlot from '../../assets/js/jquery.slotmachine.js';
+import * as jsSlot from '../../assets/js/jquery.slotmachine.js';
 
 declare var SlotMachine;
+
+// <script type="text/javascript" src="assets/js/slotmachine.js"></script>
+
+
 // declare function shuffle();
 /**
  * Generated class for the SlotsdrawPage page.
@@ -97,42 +103,48 @@ export class SlotsdrawPage {
     // machine5.shuffle(50);
     // }, 10);
     // })
-  // this.randomSpin();
-}
+    // this.randomSpin();
+  }
 
-randomSpin() {
-  $('#casinoShuffle').text('white');
-  const element1 = document.querySelector('#machine1');
-  const machine1 = new SlotMachine(element1, {
-    active: 1,
-    delay: 300,
-  });
-  machine1.shuffle();
-  const element2 = document.querySelector('#machine2');
-  const machine2 = new SlotMachine(element2, {
-    active: 1,
-    delay: 500,
-  });
-  const element3 = document.querySelector('#machine3');
-  const machine3 = new SlotMachine(element3, {
-    active: 1,
-    delay: 800,
-  });
-  const element4 = document.querySelector('#machine4');
-  const machine4 = new SlotMachine(element4, {
-    active: 1,
-    delay: 900,
-  });
-  const element5 = document.querySelector('#machine5');
-  const machine5 = new SlotMachine(element5, {
-    active: 1,
-    delay: 1100,
-  });
+  randomSpin() {
+    // $('#casinoShuffle').text('Spin');
+    const element1 = document.querySelector('#machine1');
+    const machine1 = new SlotMachine(element1, {
+      active: 1,
+      delay: 300,
+    });
+    machine1.shuffle();
+    const element2 = document.querySelector('#machine2');
+    const machine2 = new SlotMachine(element2, {
+      active: 1,
+      delay: 500,
+    });
+    const element3 = document.querySelector('#machine3');
+    const machine3 = new SlotMachine(element3, {
+      active: 1,
+      delay: 800,
+    });
+    const element4 = document.querySelector('#machine4');
+    const machine4 = new SlotMachine(element4, {
+      active: 1,
+      delay: 900,
+    });
+    const element5 = document.querySelector('#machine5');
+    const machine5 = new SlotMachine(element5, {
+      active: 1,
+      delay: 1100,
+    });
 
-  machine1.shuffle(10);
-  machine2.shuffle(20);
-  machine3.shuffle(30);
-  machine4.shuffle(40);
-  machine5.shuffle(50);
-}
+    setTimeout(function () {
+      machine1.shuffle(10, onComplete);
+      machine2.shuffle(20, onComplete);
+      machine3.shuffle(30, onComplete);
+      machine4.shuffle(45, onComplete);
+      machine5.shuffle(50, onComplete);
+    }, 0);
+
+    function onComplete(active) {
+      console.log("Spin finish on button click");
+    }
+  }
 }

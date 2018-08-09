@@ -25861,6 +25861,13 @@ page-roulette ion-button {
   border-width: 1em;
 }
 
+page-slotsdraw .machine {
+  height: 50px;
+  max-height: 50px;
+  font-size: 50px;
+  display: inline-block;
+}
+
 .ios page-splash-logo .scroll-content, .md page-splash-logo .scroll-content {
   display: -webkit-box;
   display: -webkit-flex;
