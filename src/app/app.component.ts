@@ -34,9 +34,9 @@ export class MyApp {
       splashScreen.hide();
       // let splash = modalCtrl.create(SplashLogoPage);
       // splash.present();
-      this.nativeAudio.preloadComplex('bgmLoop', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {     
-          this.nativeAudio.play('bgmLoop');
-      });
+      // this.nativeAudio.preloadComplex('bgmLoop', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {     
+      //     this.nativeAudio.play('bgmLoop');
+      // });
       // smartAudio.preload('bgmLoop', 'assets/audio/backgroundMusic.mp3', 'complex');
       // smartAudio.loop('bgmLoop');
 

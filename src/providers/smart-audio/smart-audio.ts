@@ -12,7 +12,10 @@ import { Platform } from '../../../node_modules/ionic-angular/platform/platform'
 @Injectable()
 export class SmartAudioProvider {
   //html5 init
-  audioType: string = 'native';
+  //use html5 when using ionic serve
+  audioType: string = 'html5';
+  // audioType: string = 'native';
+
   //sounds array keep track of sounds to use in application
   sounds: any = [];
 

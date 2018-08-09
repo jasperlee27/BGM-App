@@ -73,13 +73,13 @@ export class HomePage implements OnInit {
   //   this.messageText = '';
   }
 
-  ionViewDidLoad() {
-    this.platform.ready().then(() => {
-      this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-        this.nativeAudio.play('bgmLoopHome');
-      });
-    });
-  }
+  // ionViewDidLoad() {
+  //   this.platform.ready().then(() => {
+  //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+  //       this.nativeAudio.play('bgmLoopHome');
+  //     });
+  //   });
+  // }
 
   getNews() {
     console.log("button is working fine");

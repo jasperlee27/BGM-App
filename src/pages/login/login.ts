@@ -75,13 +75,13 @@ export class LoginPage {
   constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private nativeAudio: NativeAudio) {
   }
 
-  ionViewDidLoad() {
-    this.platform.ready().then(() => {
-      this.nativeAudio.preloadComplex('bgmLoopLogin', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-        this.nativeAudio.play('bgmLoopLogin');
-      });
-    });
-  }
+  // ionViewDidLoad() {
+  //   this.platform.ready().then(() => {
+  //     this.nativeAudio.preloadComplex('bgmLoopLogin', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+  //       this.nativeAudio.play('bgmLoopLogin');
+  //     });
+  //   });
+  // }
 
   login() {
     // this.smartAudio.play('startGame3');
