@@ -6,6 +6,7 @@ import { MyApp } from '../../app/app.component';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { TabsPage } from '../tabs/tabs';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -69,11 +70,12 @@ export class LoginPage {
   passwordIcon: string = 'eye';
   loginState: any = "in";
 
-  constructor(public navCtrl: NavController, public auth:GlobalAuthProvider) {
+  constructor(public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth:GlobalAuthProvider) {
    
   }
 
   login(){
+    this.smartAudio.play('tabSwitch');
     // this.navCtrl.setRoot(TabsPage);
     this.auth.setGuestLogin(false);
     this.navCtrl.push(this.twoFApage);
