@@ -71,10 +71,14 @@ export class LoginPage {
   loginState: any = "in";
 
   constructor(public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth:GlobalAuthProvider) {
-   
   }
-
-  login(){
+  
+  ngOnInit(){
+    // this.smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
+    // this.smartAudio.play('startGame3');
+  }
+  login(){  
+    // this.smartAudio.play('startGame3');
     this.smartAudio.play('tabSwitch');
     // this.navCtrl.setRoot(TabsPage);
     this.auth.setGuestLogin(false);

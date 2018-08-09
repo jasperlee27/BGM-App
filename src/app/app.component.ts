@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { NativeAudio } from '../../node_modules/@ionic-native/native-audio';
 
 
 declare var testVar;
@@ -21,7 +22,7 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // platform: Platform;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider, private nativeAudio: NativeAudio) {
     statusBar.overlaysWebView(true);
     statusBar.backgroundColorByHexString('#000000');
     // alert(testVar);
@@ -31,7 +32,14 @@ export class MyApp {
       // let splash = modalCtrl.create(SplashLogoPage);
       // splash.present();
       splashScreen.hide();
-      smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3');
+      smartAudio.preload('bgmLoop', 'assets/audio/backgroundMusic.mp3', 'complex');
+      // smartAudio.loop('bgmLoop');
+
+      // smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
+      smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3','simple');
+      smartAudio.play('tabSwitch');
+      smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3','complex');
+      smartAudio.loop('tabSwitch2');
     //   platform.registerBackButtonAction(() => {
     //     this.navCtrl.pop();
     // });

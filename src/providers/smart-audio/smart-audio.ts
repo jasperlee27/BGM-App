@@ -21,10 +21,9 @@ export class SmartAudioProvider {
     if (platform.is('cordova')) {
       this.audioType = 'native';
     }
-
   }
   //key is sound string id, asset is path
-  preload(key, asset) {
+  preload(key, asset, complexity) {
     if (this.audioType === 'html5') {
       let audio = {
         key: key,
@@ -33,13 +32,20 @@ export class SmartAudioProvider {
       };
       this.sounds.push(audio);
     }
-    //preload simple for simple sounds
+
+    //else type native, preload simple
     else {
-      this.nativeAudio.preloadSimple(key, asset);
+      if  (complexity==='simple'){
+        this.nativeAudio.preloadSimple(key, asset);
+      }
+
+      else {
+        this.nativeAudio.preloadComplex(key, asset, 1, 1,0);
+      }
 
       let audio = {
         key: key,
-        asset: key,
+        asset: asset,
         type: 'native'
       };
 
@@ -53,12 +59,32 @@ export class SmartAudioProvider {
     let audio = this.sounds.find((sound) => {
       return sound.key === key;
     });
+
     if (audio.type === 'html5') {
       let audioAsset = new Audio(audio.asset);
       audioAsset.play();
-    } 
+    }
+    //else audio type native
     else {
       this.nativeAudio.play(audio.asset).then((res) => {
+        console.log(res);
+      }, (err) => {
+        console.log(err);
+      });
+    }
+  }
+
+  loop(key) {
+
+    let audio = this.sounds.find((sound) => {
+      return sound.key === key;
+    });
+    if (audio.type === 'html5') {
+      let audioAsset = new Audio(audio.asset);
+      audioAsset.play();
+    }
+    else {
+      this.nativeAudio.loop(audio.asset).then((res) => {
         console.log(res);
       }, (err) => {
         console.log(err);
