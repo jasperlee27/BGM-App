@@ -27,6 +27,7 @@ import { HomePage } from '../pages/home/home';
 import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
+import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
     ProgressBarComponent,
     RoulettePage,
     TrehuntPage,
+    SlotsdrawPage,
     BiddingPage,
     HashingPage,
     ContactPage,
@@ -57,6 +59,7 @@ import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
     MyApp,
     RoulettePage,
     TrehuntPage,
+    SlotsdrawPage,
     BiddingPage,
     HashingPage,
     ContactPage,

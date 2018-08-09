@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import { SlotsdrawPage } from '../slotsdraw/slotsdraw';
 
 /**
  * Generated class for the TrehuntPage page.
@@ -64,6 +65,16 @@ export class TrehuntPage {
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
+  }
+
+  viewBTCResults(){
+    console.log("Going to BTC lucky draw");
+    this.navCtrl.push(SlotsdrawPage);
+  }
+
+  viewETHResults(){
+    this.navCtrl.push(SlotsdrawPage);
+    console.log("Going to ETH lucky draw");
   }
   
   updateBTCETHPrice(){

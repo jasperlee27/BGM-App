@@ -29,6 +29,15 @@
             </div>
       </ion-col>
   </ion-row>
+  <!-- for view game results -->
+  <ion-row>
+    <ion-col>
+        <button ion-button small color="secondary" style="text-transform: none;" [disabled]="BTCTixDisabled" (click)="viewBTCResults()">View BTC Results</button>
+    </ion-col>
+    <ion-col>
+        <button ion-button color="secondary"  style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>
+    </ion-col>
+</ion-row>
   <!-- for current tix own -->
   <ion-row>
     <ion-col>
