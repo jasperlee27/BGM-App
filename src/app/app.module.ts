@@ -25,7 +25,8 @@ import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
 import { HomePage } from '../pages/home/home';
 import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
-
+import { NativeAudio } from '@ionic-native/native-audio';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 
 @NgModule({
   declarations: [
@@ -71,8 +72,10 @@ import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
     StatusBar,
     SplashScreen,
     HTTP,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    GlobalAuthProvider
+    NativeAudio,
+    SmartAudioProvider,
+    GlobalAuthProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

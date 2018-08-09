@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
+import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 
 
 declare var testVar;
@@ -20,19 +21,20 @@ export class MyApp {
   // rootPage:any = TabsPage;
   // platform: Platform;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider) {
     statusBar.overlaysWebView(true);
     statusBar.backgroundColorByHexString('#000000');
     // alert(testVar);
-    splashScreen.hide();
+    // splashScreen.hide();
 
     platform.ready().then(() => {
       // let splash = modalCtrl.create(SplashLogoPage);
       // splash.present();
-
-      platform.registerBackButtonAction(() => {
-        // this.navCtrl.pop();
-    });
+      splashScreen.hide();
+      smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3');
+    //   platform.registerBackButtonAction(() => {
+    //     this.navCtrl.pop();
+    // });
   })
  }
 }

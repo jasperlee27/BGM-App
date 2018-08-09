@@ -9,6 +9,7 @@ import { BiddingPage } from '../bidding/bidding';
 import { HashingPage } from '../hashing/hashing';
 import { TrehuntPage } from '../trehunt/trehunt';
 import { HomePage } from '../home/home';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -23,7 +24,11 @@ export class TabsPage {
   tab4Root= WalletPage;
   tab5Root= StreamPage;
 
-  constructor() {
+  constructor(public smartAudio: SmartAudioProvider) {
 
+  }
+
+  playTabSwitchound(){
+    this.smartAudio.play('tabSwitch');
   }
 }
