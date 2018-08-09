@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import { SlotsdrawPage } from '../slotsdraw/slotsdraw';
 
 /**
@@ -25,14 +25,19 @@ export class TrehuntPage {
   loadETHProgress;
   currBTCprice;
   currETHprice;
+  amountBTCtix: any;
+  amountETHtix: any;
+  currOwnBTCtix: number;
+  currOwnETHtix: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
     this.currBTCprice= this.randomIntRange(8000,10000);
     this.currETHprice= this.randomIntRange(600,800);
     this.totalBTCtix=8800;
     this.currBTCGameID='BTC027';
     this.currETHGameID='ETH005';
-
+    this.currOwnBTCtix= this.randomIntRange(1,5000);
+    this.currOwnETHtix= this.randomIntRange(1,283);
     this.currBTCtix=this.randomIntRange(1,this.totalBTCtix-1);
     // this.currBTCtix=8700;
     this.totalETHtix=660;
@@ -133,7 +138,41 @@ export class TrehuntPage {
       },100)
     }
   }
+  buyBTCtix(){
+    console.log("bought " + this.amountBTCtix + " BTC Tix");
+    this.presentAlert(this.amountBTCtix, 'BTC');
+    this.currOwnBTCtix += parseInt(this.amountBTCtix);
+  }
 
+  buyETHtix(){
+    console.log("bought " + this.amountETHtix + " ETH Tix");
+    this.presentAlert(this.amountETHtix, 'ETH');
+    this.currOwnETHtix += parseInt(this.amountETHtix);
+  }
+
+  presentAlert(amountTix, type) {
+    let alert = this.alertCtrl.create({
+      title: 'SUCCESS',
+      subTitle: 'You have bought ' + amountTix +' ' + type + ' tickets',
+      message:  'Your tickets: <br>' + this.getListOfTickets(amountTix,type),
+      buttons: ['OK']
+    });
+    alert.present();
+    alert.onDidDismiss(() => {
+    })
+  }
+  getListOfTickets(amountTix, type){
+    
+    var stringToReturn = '<ul>'
+
+    for (var i=0; i<amountTix; i++){
+      stringToReturn += '<li>' + type.toString()+ i.toString() +  '</li>';
+    }
+
+    stringToReturn += '</ul>'
+    return stringToReturn;
+
+  }
   randomIntRange(min,max)
   {
     return Math.floor(Math.random()*(max-min+1)+min);
