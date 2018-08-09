@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as $ from "jquery";
-import { getLocaleNumberFormat } from '../../../node_modules/@angular/common';
 
 declare var SlotMachine;
 // declare function shuffle();
@@ -33,95 +32,107 @@ export class SlotsdrawPage {
       //first machine
       const element1 = document.querySelector('#machine1');
       const machine1 = new SlotMachine(element1, {
-        active: 0,
-        auto: false,
-        direction: 'up',
-        delay: 500,
-      });
-      // machine1.shuffle();
-
-      const element2 = document.querySelector('#machine2');
-      var machine2 = new SlotMachine(element2, {
-        active: 0,
-        auto: false,
-        direction: 'up',
-        delay: 500,
-      });
-      // machine2.shuffle();
-
-      const element3 = document.querySelector('#machine3');
-      var machine3 = new SlotMachine(element3, {
-        active: 0,
-        auto: false,
-        delay: 500,
-      });
-      // machine3.shuffle();
-
-      const element4 = document.querySelector('#machine4');
-      var machine4 = new SlotMachine(element4, {
-        active: 0,
-        auto: false,
-        delay: 500,
-      });
-      machine4.shuffle();
-
-      const element5 = document.querySelector('#machine5');
-      var machine5 = new SlotMachine(element5, {
         active: 2,
         auto: false,
+        direction: 'up',
+        delay: 300,
+      });
+
+      const element2 = document.querySelector('#machine2');
+      const machine2 = new SlotMachine(element2, {
+        active: 7,
+        auto: false,
+        direction: 'up',
         delay: 500,
       });
-      machine5.shuffle();
 
-      // btnShuffle.addEventListener('click', () => {
-      //   // for (var i=0; i<10; i++){
-      //   setTimeout(function(){
-      //     machine1.shuffle(10);
-      //     machine2.shuffle(15);
-      //     machine3.shuffle(20);
-      //     machine4.shuffle(25);
-      //     machine5.shuffle(30);
-      //   }, 10);
-      // })
-    });
 
-  }
-  getAnswer(){
-    return 1;
-  }
-  randomSpin() {
-    $('#casinoShuffle').text('white');
-    const element1 = document.querySelector('#machine1');
-    const machine1 = new SlotMachine(element1, {
-      randomize: this.getAnswer(),
-      delay: 300,
-    });
-    machine1.shuffle();
-    const element2 = document.querySelector('#machine2');
-    const machine2 = new SlotMachine(element2, {
-      active: 1,
-      delay: 500,
-    });
-    const element3 = document.querySelector('#machine3');
-    const machine3 = new SlotMachine(element3, {
-      active: 1,
-      delay: 800,
-    });
-    const element4 = document.querySelector('#machine4');
-    const machine4 = new SlotMachine(element4, {
-      active: 1,
-      delay: 900,
-    });
-    const element5 = document.querySelector('#machine5');
-    const machine5 = new SlotMachine(element5, {
-      active: 1,
-      delay: 1100,
-    });
+      const element3 = document.querySelector('#machine3');
+      const machine3 = new SlotMachine(element3, {
+        active: 3,
+        auto: false,
+        delay: 800,
+      });
 
-    machine1.shuffle();
-    machine2.shuffle();
-    machine3.shuffle();
-    machine4.shuffle();
-    machine5.shuffle();
-  }
+
+      const element4 = document.querySelector('#machine4');
+      const machine4 = new SlotMachine(element4, {
+        active: 3,
+        auto: false,
+        delay: 900,
+      });
+
+      const element5 = document.querySelector('#machine5');
+      const machine5 = new SlotMachine(element5, {
+        active: 1,
+        auto: false,
+        delay: 1100,
+      });
+
+
+      setTimeout(function () {
+        machine1.shuffle(10, onComplete);
+        machine2.shuffle(20, onComplete);
+        machine3.shuffle(30, onComplete);
+        machine4.shuffle(45, onComplete);
+        machine5.shuffle(50, onComplete);
+      }, 0);
+
+      function onComplete(active) {
+        console.log("Spin finish")
+      }
+    });
+    // btnShuffle.addEventListener('click', () => {
+    //   // for (var i=0; i<10; i++){
+    // setTimeout(function(){
+    //   machine1.shuffle(10);
+    //   machine2.shuffle(15);
+    //   machine3.shuffle(20);
+    //   machine4.shuffle(25);
+    //   machine5.shuffle(30);
+    // machine1.shuffle(10);
+    // machine2.shuffle(20);
+    // machine3.shuffle(30);
+    // machine4.shuffle(40);
+    // machine5.shuffle(50);
+    // }, 10);
+    // })
+  // this.randomSpin();
+}
+
+randomSpin() {
+  $('#casinoShuffle').text('white');
+  const element1 = document.querySelector('#machine1');
+  const machine1 = new SlotMachine(element1, {
+    active: 1,
+    delay: 300,
+  });
+  machine1.shuffle();
+  const element2 = document.querySelector('#machine2');
+  const machine2 = new SlotMachine(element2, {
+    active: 1,
+    delay: 500,
+  });
+  const element3 = document.querySelector('#machine3');
+  const machine3 = new SlotMachine(element3, {
+    active: 1,
+    delay: 800,
+  });
+  const element4 = document.querySelector('#machine4');
+  const machine4 = new SlotMachine(element4, {
+    active: 1,
+    delay: 900,
+  });
+  const element5 = document.querySelector('#machine5');
+  const machine5 = new SlotMachine(element5, {
+    active: 1,
+    delay: 1100,
+  });
+
+  machine1.shuffle(10);
+  machine2.shuffle(20);
+  machine3.shuffle(30);
+  machine4.shuffle(40);
+  machine5.shuffle(50);
+}
 }
