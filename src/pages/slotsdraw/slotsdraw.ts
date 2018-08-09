@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as $ from "jquery";
+import { getLocaleNumberFormat } from '../../../node_modules/@angular/common';
 
 declare var SlotMachine;
 // declare function shuffle();
@@ -33,59 +34,66 @@ export class SlotsdrawPage {
       const element1 = document.querySelector('#machine1');
       const machine1 = new SlotMachine(element1, {
         active: 0,
-        spins: 999999,
+        auto: false,
+        direction: 'up',
         delay: 500,
       });
-      machine1.shuffle();
+      // machine1.shuffle();
 
       const element2 = document.querySelector('#machine2');
       var machine2 = new SlotMachine(element2, {
-        // active: 7,
+        active: 0,
         auto: false,
-        direction: 'up'
+        direction: 'up',
+        delay: 500,
       });
-      machine2.shuffle();
+      // machine2.shuffle();
 
       const element3 = document.querySelector('#machine3');
       var machine3 = new SlotMachine(element3, {
-        // active: 2,
+        active: 0,
         auto: false,
+        delay: 500,
       });
-      machine3.shuffle();
+      // machine3.shuffle();
 
       const element4 = document.querySelector('#machine4');
       var machine4 = new SlotMachine(element4, {
-        // active: 3,
+        active: 0,
         auto: false,
+        delay: 500,
       });
       machine4.shuffle();
 
       const element5 = document.querySelector('#machine5');
       var machine5 = new SlotMachine(element5, {
-        active: 0,
+        active: 2,
         auto: false,
+        delay: 500,
       });
-      // machine5.shuffle();
+      machine5.shuffle();
 
-      btnShuffle.addEventListener('click', () => {
-        // for (var i=0; i<10; i++){
-        // setTimeout(function(){
-        //   // machine1.shuffle(9999999);
-        //   machine2.shuffle(15);
-        //   machine3.shuffle(20);
-        //   machine4.shuffle(25);
-        //   machine5.shuffle(30);
-        // }, 0);
-      })
+      // btnShuffle.addEventListener('click', () => {
+      //   // for (var i=0; i<10; i++){
+      //   setTimeout(function(){
+      //     machine1.shuffle(10);
+      //     machine2.shuffle(15);
+      //     machine3.shuffle(20);
+      //     machine4.shuffle(25);
+      //     machine5.shuffle(30);
+      //   }, 10);
+      // })
     });
 
   }
-
+  getAnswer(){
+    return 1;
+  }
   randomSpin() {
     $('#casinoShuffle').text('white');
     const element1 = document.querySelector('#machine1');
     const machine1 = new SlotMachine(element1, {
-      active: 0,
+      randomize: this.getAnswer(),
       delay: 300,
     });
     machine1.shuffle();
@@ -115,6 +123,5 @@ export class SlotsdrawPage {
     machine3.shuffle();
     machine4.shuffle();
     machine5.shuffle();
-    // machine2.shuffle();
   }
 }
