@@ -142,12 +142,14 @@ export class TrehuntPage {
     console.log("bought " + this.amountBTCtix + " BTC Tix");
     this.presentAlert(this.amountBTCtix, 'BTC');
     this.currOwnBTCtix += parseInt(this.amountBTCtix);
+    this.updateCurrBTCtix(this.amountBTCtix);
   }
 
   buyETHtix(){
     console.log("bought " + this.amountETHtix + " ETH Tix");
     this.presentAlert(this.amountETHtix, 'ETH');
     this.currOwnETHtix += parseInt(this.amountETHtix);
+    this.updateCurrETHtix(this.amountETHtix);
   }
 
   presentAlert(amountTix, type) {
