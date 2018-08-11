@@ -21,6 +21,7 @@ export class WalletPage {
   private resetGraph: boolean = false;
   countDown;
   count = 10.0;
+  walletType = 'investment';
 
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
@@ -33,6 +34,10 @@ export class WalletPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
-
+  }
+  
+  toggleSegment($event){
+    console.log("Chosen segment " + $event.value);
+    
   }
 }

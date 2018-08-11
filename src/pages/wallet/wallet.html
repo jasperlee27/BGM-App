@@ -12,17 +12,31 @@
 
 
 <ion-content padding>
-<!-- <canvas id="Game2Chart "#Game2Chart baseChart [chartType]="'line'" 
-[datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" [legend]="false">
-</canvas> -->
-<ion-toolbar color="app-bg">
-  <ion-segment [(ngModel)]="appType"color="primary">
-    <ion-segment-button outline value="Paid">
-      Investment
-    </ion-segment-button>
-    <ion-segment-button outline value="Free">
-      Game
-    </ion-segment-button>
-  </ion-segment>
-</ion-toolbar>
+<!--toolbar for navigating wallet-->
+  <ion-toolbar color="app-bg">
+    <ion-segment [(ngModel)]="walletType" color="primary" (ionChange)="toggleSegment($event)">
+      <ion-segment-button outline value="investment">
+        Investment
+      </ion-segment-button>
+      <ion-segment-button outline value="game">
+        Game
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-card>
+    <ion-card-header color="primary">
+      Amount
+    </ion-card-header>
+    <ion-card-content>
+      Amount:
+      
+      <!-- <ion-list style="margin: 0" inset>
+        <button ion-item *ngFor="let sItem of getSafariItems(safari)">
+          <ion-icon item-start [name]="sItem.icon" color="primary"></ion-icon>
+          {{ sItem.name }}
+        </button>
+      </ion-list> -->
+    </ion-card-content>
+  </ion-card>
 </ion-content>
