@@ -1,9 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular/';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BaseChartDirective } from 'ng2-charts';
-import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
-import { take, map } from 'rxjs/operators';
+
 /**
  * Generated class for the WalletPage page.
  *
@@ -46,13 +44,13 @@ export class WalletPage {
     'game': [
       {
         time: '11/8 1330',
-        name: 'Snapchat',
-        price: 'GET'
+        name: '1. Treasure',
+        price: '1000'
       },
       {
         time: '10/8 0900',
-        name: 'Instagram',
-        price: 'OPEN'
+        name: '2. Hashing',
+        price: '-250'
       }
     ],
   };

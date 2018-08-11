@@ -58,7 +58,7 @@ $segment-button-ios-toolbar-line-height: 3.9rem;
 $segment-button-ios-toolbar-font-size: 14px;
 $segment-button-ios-toolbar-button-max-width: 120px;
 $button-ios-height: 2.3em;
-
+$list-ios-header-color: #8b8080;
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
@@ -66,8 +66,9 @@ $segment-button-md-font-size: 14px;
 $segment-button-md-height: 4.0rem;
 $segment-button-md-line-height: 3.5rem;
 $segment-button-md-opacity-disabled: 0.1;
-
-
+$list-md-header-font-size:  1.4rem !default;
+$list-md-header-color:    #8b8080 !default;
+$list-md-header-margin-bottom: 0%;
 
 // App Windows Variables
 // --------------------------------------------------
