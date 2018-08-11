@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
     console.log("button is working fine");
     let path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
     let encodedPath = encodeURI(path);
-    let timeoutMS = 10000;
+    let timeoutMS = 100000;
 
     this.http.get(encodedPath)
       .timeout(timeoutMS)

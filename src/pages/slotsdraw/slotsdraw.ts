@@ -79,13 +79,13 @@ export class SlotsdrawPage {
       });
 
 
-      // setTimeout(function () {
-      //   machine1.shuffle(1, onComplete);
-      //   machine2.shuffle(2, onComplete);
-      //   machine3.shuffle(3, onComplete);
-      //   machine4.shuffle(4, onComplete);
-      //   machine5.shuffle(5, onComplete);
-      // }, 0);
+      setTimeout(function () {
+        machine1.shuffle(10, onComplete);
+        machine2.shuffle(15, onComplete);
+        machine3.shuffle(20, onComplete);
+        machine4.shuffle(25, onComplete);
+        machine5.shuffle(30, onComplete);
+      }, 0);
 
       function onComplete(active) {
         console.log("Initial spin finish")
