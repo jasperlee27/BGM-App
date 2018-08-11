@@ -23,7 +23,7 @@ export class WalletPage {
   refreshIcon = 'refresh';
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
-  apps: any = {
+  statements: any = {
     'investment': [
       {
         time: '11/8 1200',
@@ -71,8 +71,8 @@ export class WalletPage {
     console.log("Chosen segment " + $event.value);
   }
 
-  getItems(type: any) {
-    console.log("Call get items");
-    return this.apps[type];
+  getStatements(type: any) {
+    console.log("Call get statements");
+    return this.statements[type];
   }
 }
