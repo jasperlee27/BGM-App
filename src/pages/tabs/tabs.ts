@@ -21,9 +21,9 @@ export class TabsPage {
   tab2Root = TrehuntPage;
   tab3Root = HashingPage;
   // tab4Root = ContactPage;
-  tab4Root= WalletPage;
-  tab5Root= StreamPage;
-
+  tab4Root= StreamPage;
+  tab5Root= WalletPage;
+  
   constructor(public smartAudio: SmartAudioProvider) {
 
   }
