@@ -37,13 +37,15 @@
 }
 
 .toolbar-title.toolbar-title-md,
-.toolbar-title.toolbar-title-ios, 
 .toolbar-title.toolbar-title-wp {
     color: color($colors, dark);
     font-size: 20px;
     font-weight: 500;
  }
 
+ .toolbar-title.toolbar-title-ios {
+    color: color($colors, dark);
+ }
 
 
 //  .modal-wrapper {

@@ -1,3 +1,16 @@
 page-stream {
-
+    .bet-timer {
+        text-align:center;
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+        margin-top: -5%
+     }
+     .game-timer {
+        text-align:center;
+        font-size: 24px;
+        font-weight: 600;
+        color: color($colors, secondary);
+        margin-top: -5%
+     }
 }

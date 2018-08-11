@@ -7,14 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>stream</ion-title>
+    <ion-title>Game 3: Binary Options</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<div>
-<canvas baseChart [chartType]="'line'" [datasets]="datasets" [options]="options" width=100% height=100%></canvas>
-</div>
+  <ion-grid style="height:100%; width:100%">
+    <ion-row>
+      <ion-col col-12>
+        <div class="bet-timer" [style.visibility]="isGameTime ? 'hidden' : 'visible'">
+          Next game in {{countDownBet2 | async}} s
+        </div>
+        <div class="game-timer" [style.visibility]="isGameTime ? 'visible' : 'hidden'">
+          Game ending in {{countDownGame2 | async}} s
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="width:100%">
+      <canvas baseChart [chartType]="'line'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"
+        width=100% height=100%></canvas>
+    </ion-row>
+    <br>
+    <ion-row>
+      <button ion-button small (click)="buyDataset()">Buy</button>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
