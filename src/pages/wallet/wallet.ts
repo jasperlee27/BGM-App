@@ -28,38 +28,37 @@ export class WalletPage {
   apps: any = {
     'investment': [
       {
-        name: 'Monopoly',
-        price: '$0.99'
+        time: '11/8 1200',
+        name: 'Deposit',
+        price: '11340'
       },
       {
-        name: 'Angry Birds',
-        price: '$2.99'
-      }
+        time: '10/8 1200',
+        name: 'Withdraw',
+        price: '-1000'
+      },
+      {
+        time: '9/8 1200',
+        name: 'Deposit',
+        price: '2000'
+      },
     ],
     'game': [
       {
+        time: '11/8 1330',
         name: 'Snapchat',
         price: 'GET'
       },
       {
+        time: '10/8 0900',
         name: 'Instagram',
         price: 'OPEN'
       }
     ],
-    'Top': [
-      {
-        name: 'Spotify',
-        price: 'OPEN'
-      },
-      {
-        name: 'Pandora',
-        price: 'GET'
-      }
-    ]
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+
   }
 
   ngOnInit() {
@@ -69,8 +68,8 @@ export class WalletPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
   }
-  
-  toggleSegment($event){
+
+  toggleSegment($event) {
     console.log("Chosen segment " + $event.value);
   }
 

@@ -60,14 +60,11 @@
   <ion-card style="height:50%">
     <ion-card-content>
       <ion-row>
-        <ion-list>
+        <ion-list col-12 no-lines>
           <ion-item *ngFor="let item of getItems(walletType)">
-            <ion-col col-6>
-              {{ item.name }}
-            </ion-col>
-            <ion-col col-6>
-              <button ion-button outline item-end>{{ item.price }}</button>
-            </ion-col>
+            <span col-3 item-start>{{item.time}}</span>
+            <span col-5>{{item.name}}</span>
+            <span col-4 item-end [style.color]="item.price > 0 ? 'green' : 'red'"  style="font-weight:700">{{ item.price }}</span>
           </ion-item>
         </ion-list>
       </ion-row>
