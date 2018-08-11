@@ -22,7 +22,7 @@ export class WalletPage {
   countDown;
   count = 10.0;
   walletType = 'investment';
-
+  refreshIcon = 'refresh';
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {

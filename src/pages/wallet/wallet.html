@@ -12,7 +12,7 @@
 
 
 <ion-content padding>
-<!--toolbar for navigating wallet-->
+  <!--toolbar for navigating wallet-->
   <ion-toolbar color="app-bg">
     <ion-segment [(ngModel)]="walletType" color="primary" (ionChange)="toggleSegment($event)">
       <ion-segment-button outline value="investment">
@@ -24,19 +24,35 @@
     </ion-segment>
   </ion-toolbar>
 
-  <ion-card>
+  <ion-card style="height:20%">
     <ion-card-header color="primary">
-      Amount
+      You have:
     </ion-card-header>
     <ion-card-content>
-      Amount:
-      
-      <!-- <ion-list style="margin: 0" inset>
-        <button ion-item *ngFor="let sItem of getSafariItems(safari)">
-          <ion-icon item-start [name]="sItem.icon" color="primary"></ion-icon>
-          {{ sItem.name }}
-        </button>
-      </ion-list> -->
+      <ion-row>
+        <ion-col col-2>
+          <ion-img width="30" height="30" src="../assets/imgs/BGM_Logo.png" style="background:transparent; padding-top:-5%;"></ion-img>
+        </ion-col>
+        <ion-col col-8>
+          <span class="align-right">12340 BGM</span>
+        </ion-col>
+        <ion-col col-2>
+          <span class="refresh-button">
+            <button ion-button default clear icon-only>
+              <ion-icon name="refresh"></ion-icon>
+            </button>
+          </span>
+        </ion-col>
+      </ion-row>
+      <!-- top up and withdraw buttons-->
     </ion-card-content>
   </ion-card>
+  <ion-row>
+    <ion-col col-6 text-center>
+      <button ion-button color="secondary" small (click)="deposit()">DEPOSIT</button>
+    </ion-col>
+    <ion-col col-6 text-center>
+      <button ion-button color="secondary" small (click)="withdraw()">WITHDRAW</button>
+    </ion-col>
+  </ion-row>
 </ion-content>
