@@ -3,9 +3,13 @@ page-slotsdraw {
         height: 50px;
         max-height: 50px;
         font-size: 50px;
-        display: inline-block;
+        display: block;
+        
       }
-
+      .winner-button{
+          padding-bottom:-100%;
+          
+      }
       ion-button {
           text-align: center,
       }

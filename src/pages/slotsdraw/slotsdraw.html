@@ -14,8 +14,8 @@
 
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
+  <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
       <ion-col>
         <div id="machine1" class="machine">
           <div>0</div>
@@ -87,9 +87,10 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-col col-12 text-center>
-      <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Shuffle!</button>
-    </ion-col>
+    <ion-row>
+      <ion-col class="winner-button" col-12 text-center>
+        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
-
 </ion-content>
