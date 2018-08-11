@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform, ModalController } from 'ionic-angular/';
+import { Platform, ModalController, AlertController } from 'ionic-angular/';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { TabsPage } from '../tabs/tabs';
@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
 
   // socket: SocketIOClient.Socket;
 
-  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider, public nativeAudio: NativeAudio) {
+  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
     // this.socket = io.connect('http://178.128.50.224:3001');
     // console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
@@ -101,9 +101,24 @@ export class HomePage implements OnInit {
         });
 
   }
+  showAbout(){
+    let alert = this.alertCtrl.create({
+      title: 'About BGM',
+      subTitle: 'Blockchain Gaming Master v1.0.0',
+      buttons: ['OK']
+    });
 
-  doNothing(){
-    console.log("do nothing for now");
+    alert.present();
+  }
+
+  showContact(){
+    let alert = this.alertCtrl.create({
+      title: 'Contact us',
+      subTitle: 'www.bgm.com/help',
+      buttons: ['OK']
+    });
+
+    alert.present();
   }
 
   logout() {
