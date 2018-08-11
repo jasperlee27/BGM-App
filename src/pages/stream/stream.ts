@@ -24,6 +24,7 @@ export class StreamPage {
   countDownGame2;
   countDownBet2;
   count = 30.0;
+  boughtIntoGame2: boolean = false;
 
   yDataReceived = Math.random() * 20;
   chartLabels = [];
@@ -99,7 +100,7 @@ export class StreamPage {
               var value = Math.random() * 3000 + 4500;
             }
 
-            else if (count===2){
+            else if (count===3){
               var value = 5000;
             }
 
@@ -171,7 +172,7 @@ export class StreamPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad StreamPage');
-    this.startGame();
+    this.startGame(10);
   }
 
   startStreaming() {
@@ -189,10 +190,10 @@ export class StreamPage {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  async startGame(){
+  async startGame(countdown: number){
     this.isGameTime=true;
     console.log("Game 2 Started");
-    this.count = 30;
+    this.count = countdown;
     var noOfCounts = (this.count*10)
 
     this.countDownGame2 = timer(0, 100).pipe(
@@ -209,7 +210,15 @@ export class StreamPage {
   }
 
   async endGame(){
+    //to check if should pop w control variable else will pop all.
     this.isGameTime=false;
+    if (this.boughtIntoGame2){
+      this.datasets.pop();
+    }
+    //update after game end
+    this.boughtIntoGame2=false;
+
+    this.chart.refresh();
     console.log("Game 2 Ended");
     this.count = 30;
     var noOfCounts = (this.count*10)
@@ -221,11 +230,25 @@ export class StreamPage {
 
 
     await this.delay((this.count*1000));
-    this.startGame();
+  
+
+    this.startGame(30);
   }
 
   buyDataset(){
+    this.boughtIntoGame2 = true;
     console.log("Try to add new dataset");
+    var newDataset = {
+      label: 'Buy Price',
+      backgroundColor: 'red',
+      borderColor: 'red',
+      fill: false,
+      lineTension: 0,
+      data: [],
+      pointRadius: 0
+    };
+    this.datasets.push(newDataset);
+    this.chart.refresh();
   }
 
 }
