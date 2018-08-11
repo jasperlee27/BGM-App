@@ -1,4 +1,8 @@
 page-stream {
+
+    ion-input{
+        font-size:20px !important;
+    }
     .bet-timer {
         text-align:center;
         font-size: 24px;
@@ -12,5 +16,9 @@ page-stream {
         font-weight: 600;
         color: color($colors, secondary);
         margin-top: -5%
+     }
+
+     .ion-card-header{
+         font-size:4px !important;
      }
 }

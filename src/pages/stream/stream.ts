@@ -21,11 +21,13 @@ export class StreamPage {
   @ViewChild(BaseChartDirective) chart: any;
   
   isGameTime: boolean;
-  countDownGame2;
-  countDownBet2;
+  countDownGame3;
+  countDownBet3;
   count = 30.0;
-  boughtIntoGame2: boolean = false;
-
+  boughtIntoGame3: boolean = false;
+  roundBetType;
+  roundFinalPrice;
+  game3BetAmount;
   yDataReceived = Math.random() * 20;
   chartLabels = [];
   // private datamap: any;
@@ -114,7 +116,7 @@ export class StreamPage {
             count++;
           });
         },
-        delay: 2000,
+        delay: 1500,
         frameRate: 30,
       }
     },
@@ -192,11 +194,11 @@ export class StreamPage {
 
   async startGame(countdown: number){
     this.isGameTime=true;
-    console.log("Game 2 Started");
+    console.log("Game 3 Started");
     this.count = countdown;
     var noOfCounts = (this.count*10)
 
-    this.countDownGame2 = timer(0, 100).pipe(
+    this.countDownGame3 = timer(0, 100).pipe(
       take(noOfCounts),
       map(()=> (this.count -= 0.1).toFixed(1))
     );
@@ -212,18 +214,21 @@ export class StreamPage {
   async endGame(){
     //to check if should pop w control variable else will pop all.
     this.isGameTime=false;
-    if (this.boughtIntoGame2){
+    this.roundFinalPrice=Math.random() * 3000 + 4500;
+    this.calcRoundResult();
+
+    if (this.boughtIntoGame3){
       this.datasets.pop();
     }
     //update after game end
-    this.boughtIntoGame2=false;
+    this.boughtIntoGame3=false;
 
     this.chart.refresh();
     console.log("Game 2 Ended");
     this.count = 30;
     var noOfCounts = (this.count*10)
 
-    this.countDownBet2 = timer(0, 100).pipe(
+    this.countDownBet3 = timer(0, 100).pipe(
       take(noOfCounts),
       map(()=> (this.count -= 0.1).toFixed(1))
     );
@@ -236,7 +241,6 @@ export class StreamPage {
   }
 
   buyDataset(){
-    this.boughtIntoGame2 = true;
     console.log("Try to add new dataset");
     var newDataset = {
       label: 'Buy Price',
@@ -249,6 +253,24 @@ export class StreamPage {
     };
     this.datasets.push(newDataset);
     this.chart.refresh();
+  }
+
+  betHigher(){
+    this.boughtIntoGame3 = true;
+    console.log("bought " + this.game3BetAmount);
+    this.buyDataset();
+    this.roundBetType='higher';
+  }
+
+  betLower(){
+    this.boughtIntoGame3 = true;
+    console.log("bought " + this.game3BetAmount);
+    this.buyDataset();
+    this.roundBetType='lower';
+  }
+
+  calcRoundResult(){
+
   }
 
 }

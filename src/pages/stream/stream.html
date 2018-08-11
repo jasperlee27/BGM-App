@@ -13,27 +13,72 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding overflow-scroll="true">
   <ion-grid style="height:100%; width:100%">
     <ion-row>
       <ion-col col-12>
         <div class="bet-timer" [style.visibility]="isGameTime ? 'hidden' : 'visible'">
-          Next game in {{countDownBet2 | async}} s
+          Next game in {{countDownBet3 | async}} s
         </div>
         <div class="game-timer" [style.visibility]="isGameTime ? 'visible' : 'hidden'">
-          Game ending in {{countDownGame2 | async}} s
+          Game ending in {{countDownGame3 | async}} s
         </div>
       </ion-col>
     </ion-row>
 
-    <ion-row style="width:100%">
+    <ion-row style="height:50%; width:100%">
       <canvas baseChart [chartType]="'line'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"
-        width=100% height=100%></canvas>
+        width=100% height=80%></canvas>
     </ion-row>
     <br>
     <ion-row>
-      <button ion-button small (click)="buyDataset()">Buy</button>
+      <ion-col col-4>
+        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isGameTime"></ion-input>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button full [disabled]="isGameTime" (click)="betHigher()">Higher</button>
+      </ion-col>
+      <ion-col col-4>
+        <button ion-button full [disabled]="isGameTime" (click)="betLower()">Lower</button>
+      </ion-col>
     </ion-row>
+
+    <ion-card style="height:25%; font-size:4px;">
+      <ion-card-header color="primary">
+        Last Bet
+      </ion-card-header>
+      <ion-card-content>
+        <ion-row style="color:#f3ba2e">
+          <ion-col col-3>
+            Price
+          </ion-col>
+          <ion-col col-3>
+            Bet Type
+          </ion-col>
+          <ion-col col-3>
+            Close
+          </ion-col>
+          <ion-col text-align-right col-3>
+            Profit
+          </ion-col>
+        </ion-row>
+        <ion-row style="color:grey">
+            <ion-col col-3>
+              5800
+            </ion-col>
+            <ion-col col-3>
+              Hi
+            </ion-col>
+            <ion-col col-3>
+              6000
+            </ion-col>
+            <ion-col text-align-right col-3>
+              <span style="color:green">+300</span>
+            </ion-col>
+          </ion-row>
+        <!-- top up and withdraw buttons-->
+      </ion-card-content>
+    </ion-card>
   </ion-grid>
 
 </ion-content>
