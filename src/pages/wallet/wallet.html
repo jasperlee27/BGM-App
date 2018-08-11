@@ -35,11 +35,11 @@
           <ion-img width="30" height="30" src="../assets/imgs/BGM_Logo.png" style="background:transparent; padding-top:-5%;"></ion-img>
         </ion-col>
         <ion-col col-8>
-          <span class="align-right">12340 BGM</span>
+          <span class="align-right">{{walletBalance}} <span style="color:#f3ba2e">BGM</span></span>
         </ion-col>
         <ion-col col-2>
           <span class="refresh-button">
-            <button ion-button default clear icon-only>
+            <button ion-button default clear icon-only (click)=refreshWallet()>
               <ion-icon name="refresh"></ion-icon>
             </button>
           </span>

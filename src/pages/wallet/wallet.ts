@@ -16,12 +16,19 @@ import { BaseChartDirective } from 'ng2-charts';
   templateUrl: 'wallet.html',
 })
 export class WalletPage {
-  private resetGraph: boolean = false;
   countDown;
   count = 10.0;
   walletType = 'investment';
   refreshIcon = 'refresh';
+  walletBalance;
+  currentView;
+
   @ViewChild(BaseChartDirective) Game2Chart: any;
+
+  balances: any = {
+    'investment': 12340,
+    'game': 750,
+  };
 
   statements: any = {
     'investment': [
@@ -56,7 +63,8 @@ export class WalletPage {
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
+    this.currentView = 'investment';
+    this.walletBalance = this.balances[this.currentView];
   }
 
   ngOnInit() {
@@ -69,10 +77,45 @@ export class WalletPage {
 
   toggleSegment($event) {
     console.log("Chosen segment " + $event.value);
+    //update current view & wallet balance
+    this.currentView = $event.value;
+    this.walletBalance = this.balances[this.currentView];
   }
 
   getStatements(type: any) {
     console.log("Call get statements");
     return this.statements[type];
+  }
+
+  deposit() {
+    //check current view & present alert
+    if (this.currentView === 'investment') {
+
+    }
+    else if (this.currentView === 'game') {
+
+    }
+    else {
+      //do nothing
+      console.log("Entered exception for currentView on deposit");
+    }
+  }
+
+  withdraw() {
+    //check current view & present alert
+    if (this.currentView === 'investment') {
+
+    }
+    else if (this.currentView === 'game') {
+
+    }
+    else {
+      //do nothing
+      console.log("Entered exception for currentView on deposit");
+    }
+  }
+  refreshWallet() {
+    console.log("refreshing wallets");
+    //to present alert to refresh wallet
   }
 }
