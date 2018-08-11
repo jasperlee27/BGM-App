@@ -42,16 +42,21 @@ $colors: (
   secondary:  #f3ba2e,
   danger:     #4267b2,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  black:      #000000,
+  app-bg:     #191919,
 );
 
 
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
-
-
+$segment-button-ios-transition-hover: 300ms;
+$segment-button-ios-transition-activated: 400ms;
+$segment-button-ios-toolbar-button-height: 3.8rem;
+$segment-button-ios-toolbar-line-height: 3.9rem;
+$segment-button-ios-toolbar-font-size: 14px;
+$segment-button-ios-toolbar-button-max-width: 120px;
 
 // App Material Design Variables
 // --------------------------------------------------
