@@ -25,7 +25,41 @@ export class WalletPage {
   refreshIcon = 'refresh';
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
+  apps: any = {
+    'investment': [
+      {
+        name: 'Monopoly',
+        price: '$0.99'
+      },
+      {
+        name: 'Angry Birds',
+        price: '$2.99'
+      }
+    ],
+    'game': [
+      {
+        name: 'Snapchat',
+        price: 'GET'
+      },
+      {
+        name: 'Instagram',
+        price: 'OPEN'
+      }
+    ],
+    'Top': [
+      {
+        name: 'Spotify',
+        price: 'OPEN'
+      },
+      {
+        name: 'Pandora',
+        price: 'GET'
+      }
+    ]
+  };
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    
   }
 
   ngOnInit() {
@@ -38,6 +72,10 @@ export class WalletPage {
   
   toggleSegment($event){
     console.log("Chosen segment " + $event.value);
-    
+  }
+
+  getItems(type: any) {
+    console.log("Call get items");
+    return this.apps[type];
   }
 }
