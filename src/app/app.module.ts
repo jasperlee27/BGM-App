@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular/';
 import { MyApp } from './app.component';
 import { HTTP } from '@ionic-native/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
@@ -28,6 +29,7 @@ import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
+import { DataProvider } from '../providers/data/data';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
@@ -78,7 +81,8 @@ import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
     NativeAudio,
     SmartAudioProvider,
     GlobalAuthProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DataProvider
   ]
 })
 export class AppModule {}
