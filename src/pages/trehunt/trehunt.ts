@@ -33,8 +33,8 @@ export class TrehuntPage {
   receivedData: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider) {
-    this.currBTCprice = this.randomIntRange(8000, 10000);
-    this.currETHprice = this.randomIntRange(600, 800);
+    // this.currBTCprice = this.randomIntRange(8000, 10000);
+    // this.currETHprice = this.randomIntRange(600, 800);
     this.totalBTCtix = 8800;
     this.totalETHtix = 660;
     this.currBTCGameID = 'BTC027';
@@ -52,22 +52,8 @@ export class TrehuntPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TrehuntPage');
-    this.dataProvider.postTrehuntStatus().subscribe(data => {
-      this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
-      console.log("Game 1 HTTP Request status successful");
-      console.log("receivedData = "  + this.receivedData);
-      console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
-      + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
-      ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
-      
-      console.log("index 1 array Data = "  + this.receivedData.data[1]);
-
-    },
-    err => {
-      console.log("Error occured while retrieving game 1 status");
-      console.log(err);
-    });
+    //init gen same as update curr details
+    this.updateCurrGameDetails();
   }
 
   ngOnInit() {
@@ -80,9 +66,9 @@ export class TrehuntPage {
     var rangeBTCTixIncrease = this.totalBTCtix - this.currBTCtix;
     var rangeETHTixIncrease = this.totalETHtix - this.currETHtix;
 
-    this.updateBTCETHPrice();
-    this.updateCurrBTCtix(rangeBTCTixIncrease,'random');
-    this.updateCurrETHtix(rangeETHTixIncrease,'random');
+    // this.updateBTCETHPrice();
+    // this.updateCurrBTCtix(rangeBTCTixIncrease,'random');
+    // this.updateCurrETHtix(rangeETHTixIncrease,'random');
     this.updateCurrGameDetails();
     setTimeout(() => {
       console.log('Refresh operation has ended');
@@ -94,28 +80,27 @@ export class TrehuntPage {
     //Making post request here
     this.dataProvider.postTrehuntStatus().subscribe(data => {
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
-      console.log("Game 1 HTTP Request status successful");
-      console.log("receivedData = "  + this.receivedData);
-      console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
-      + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
-      ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
-      
-      console.log("index 1 array Data = "  + this.receivedData.data[1]);
+      console.log("Game 1 HTTP Request refresh status successful");
+     
+      // console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
+      // + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
+      // ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
+  
+      //BTC updates
+      this.currBTCGameID = this.receivedData.data[1].gameName;
+      this.totalBTCtix= this.receivedData.data[1].totalAmount;
+      this.currBTCtix = this.receivedData.data[1].currentAmount;
+      this.currOwnBTCtix = this.receivedData.data[1].orders[0].tickets.length;
+      //ETH updates
+      this.currETHGameID = this.receivedData.data[0].gameName;
+      this.totalETHtix= this.receivedData.data[0].totalAmount;
+      this.currETHtix = this.receivedData.data[0].currentAmount;
+      this.currOwnETHtix = this.receivedData.data[0].orders[0].tickets.length;
     },
     err => {
       console.log("Error occured while retrieving game 1 status");
       console.log(err);
     });
-    //BTC updates
-    this.currBTCGameID = this.receivedData.data[1].gameName;
-    this.totalBTCtix= this.receivedData.data[1].totalAmount;
-    this.currBTCtix = this.receivedData[1].currentAmount;
-    this.currOwnBTCtix = this.receivedData.data[1].orders[0].tickets.length;
-    //ETH updates
-    this.currETHGameID = this.receivedData.data[0].gameName;
-    this.totalETHtix= this.receivedData.data[0].totalAmount;
-    this.currETHtix = this.receivedData[0].currentAmount;
-    this.currOwnETHtix = this.receivedData.data[0].orders[0].tickets.length;
   }
   
   viewBTCResults() {
@@ -127,11 +112,11 @@ export class TrehuntPage {
     this.navCtrl.push(SlotsdrawPage);
     console.log("Going to ETH lucky draw");
   }
-
-  updateBTCETHPrice() {
-    this.currBTCprice = this.randomIntRange(8000, 10000);
-    this.currETHprice = this.randomIntRange(600, 800);
-  }
+  // not implementing btc eth live price
+  // updateBTCETHPrice() {
+  //   this.currBTCprice = this.randomIntRange(8000, 10000);
+  //   this.currETHprice = this.randomIntRange(600, 800);
+  // }
 
   updateCurrBTCtix(rangeBTCTixIncrease: number, type: string) {
 
