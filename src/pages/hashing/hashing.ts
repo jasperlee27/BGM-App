@@ -70,9 +70,9 @@ export class HashingPage {
       },
       scales: {
         xAxes: [{
-          //   type: 'time',
+            // type: 'realtime', 
           //   time: {
-          //     unit: 'month',
+          //     unit: 'seconds',
           //     format: 'timeFormat'
           // },
           offset: true,
