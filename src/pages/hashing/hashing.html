@@ -38,11 +38,11 @@
     </div>
 
     <div class="burst-text" [style.visibility]="isBurstTextHidden ? 'hidden' : 'visible'">
-     Busted @ {{finalValue.toFixed(2)}}x
+     Busted @ {{finalValue}}x
     </div>
     
     <div class="timer-text" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">
-        Next game in {{countDown | async}} s
+        Next game in {{timerValue}} s
     </div>
   </div>
 

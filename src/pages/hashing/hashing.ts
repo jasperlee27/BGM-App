@@ -33,13 +33,15 @@ export class HashingPage {
   countDown;
   count = 10.0;
   socket: SocketIOClient.Socket;
+  dataToPush: number;
+  timerValue: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.isArrowHidden = true;
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
     this.chartData = [
-      { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 6 },
+      { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 3 },
     ];
 
     this.chartColors = [{ // Actual Volume ETB
@@ -174,14 +176,14 @@ export class HashingPage {
 
   ngOnInit() {
     this.isChartHidden = false;
-    this.chartData[0].data = [1];
+    // this.chartData[0].data = [1];
     this.chartLabels = [0]
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
-    this.chartData[0].data = [1];
-    this.chartLabels = [0, 1];
+    // this.chartData[0].data = [1];
+    // this.chartLabels = [0, 1];
     //CODE FOR SOCKET//
     this.messages = new Array();
     this.socket.on('message-received', (msg: any) => {
@@ -197,19 +199,39 @@ export class HashingPage {
     this.socket.on('Game2', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
-      console.log("Received data type  " + receivedData.type);
-      this.chart.refresh();
+      // console.log("Received data type  " + receivedData.type);
+
       if (receivedData.type === 'game') {
-        this.multiplierDisplay= receivedData.number;
-        this.chartData[0].data.push(receivedData.number);
+        this.isTimerHidden = true;
+        this.isBurstTextHidden = true;
+        this.chartData[0].hidden = false;
+        this.isChartHidden = false;
+        this.multiplierDisplay = receivedData.number;
+        // this.dataToPush = receivedData.number;
         this.chartLabels.push(Date.now());
-        // let interval = setInterval(() => {
-          
-        // }, 100)
+        this.chartData[0].data.push(receivedData.number);
+        this.chart.refresh();
       }
 
-      if (receivedData.type != "busted") {
-        console.log("Received data type  " + receivedData.number);
+      else if (receivedData.type === "busted") {
+        console.log("Received data type  " + receivedData.type);
+        this.chartData[0].hidden = true;
+        this.isChartHidden = true;
+        this.isBurstTextHidden = false;
+        this.isTimerHidden = true;
+        //reset chart
+        this.chartLabels = [];
+        this.chartData[0].data = [];
+
+      }
+
+      else if (receivedData.type === "countdown") {
+        console.log("Received data type  " + receivedData.type);
+        this.chartData[0].hidden = true;
+        this.isChartHidden=true;
+        this.isBurstTextHidden = true;
+        this.isTimerHidden = false;
+        this.timerValue = parseFloat(receivedData.number).toFixed(1);
       }
       // this.socket.emit('event3', {
       //   msg: 'Yes, its working for me!!'
@@ -219,6 +241,12 @@ export class HashingPage {
     this.socket.on('Game3', (data: any) => {
       console.log(data.msg);
     });
+
+    // let interval = setInterval(() => {
+    //   this.chartLabels.push(Date.now());
+    //   this.chartData[0].data.push(this.dataToPush);
+    //   this.chart.refresh();
+    // }, 100)
     // this.generateChart(33.58);
   }
   ionViewDidLoad() {
