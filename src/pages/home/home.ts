@@ -32,45 +32,52 @@ export class HomePage implements OnInit {
   messages: Array<any>;
   isGuest: boolean;
 
-  // socket: SocketIOClient.Socket;
+  socket: SocketIOClient.Socket;
 
   constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
-    // this.socket = io.connect('http://178.128.50.224:3001');
-    // console.log("socket conencted");
+    this.socket = io.connect('http://178.128.50.224:3001');
+    console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
   }
 
   ngOnInit() {
     this.getNews();
-  //   this.messages = new Array();
-  //   console.log("INITIATED");
-  //   this.socket.on('message-received', (msg: any) => {
-  //     this.messages.push(msg);
-  //     console.log(msg);
-  //     console.log(this.messages);
-  //   });
-  //   this.socket.emit('chat message', {
-  //     msg: 'Client to server, can you hear me server?'
-  //   });
-  //   this.socket.on('Game2', (data: any) => {
-  //     console.log(JSON.parse(data));
+    this.messages = new Array();
+    console.log("INITIATED");
+    this.socket.on('message-received', (msg: any) => {
+      this.messages.push(msg);
+      console.log(msg);
+      console.log(this.messages);
+    });
+    //emit to server
+    this.socket.emit('chat message', {
+      msg: 'Client to server, can you hear me server?'
+    });
 
-  //     this.socket.emit('event3', {
-  //       msg: 'Yes, its working for me!!'
-  //     });
-  //   });
-  //   this.socket.on('event4', (data: any) => {
-  //     console.log(data.msg);
-  //   });
-  // }
+    this.socket.on('Game2', (data: any) => {
+      // console.log(JSON.parse(data));
+      var receivedData= JSON.parse(data);
+      // console.log("Received data type  "  + receivedData.type);
+      if (receivedData.type!="busted"){
+        // console.log("Received data type  "  + receivedData.number);
+      }
+      // this.socket.emit('event3', {
+      //   msg: 'Yes, its working for me!!'
+      // });
+    });
 
-  // sendMessage() {
-  //   const message = {
-  //     text: this.messageText
-  //   };
-  //   this.socket.emit('send-message', message);
-  //   // console.log(message.text);
-  //   this.messageText = '';
+    this.socket.on('Game3', (data: any) => {
+      console.log(data.msg);
+    });
+  }
+
+  sendMessage() {
+    const message = {
+      text: this.messageText
+    };
+    this.socket.emit('send-message', message);
+    // console.log(message.text);
+    this.messageText = '';
   }
 
   // uncomment for mobile load sound
@@ -101,7 +108,7 @@ export class HomePage implements OnInit {
         });
 
   }
-  showAbout(){
+  showAbout() {
     let alert = this.alertCtrl.create({
       title: 'About BGM',
       subTitle: 'Blockchain Gaming Master v1.0.0',
@@ -111,7 +118,7 @@ export class HomePage implements OnInit {
     alert.present();
   }
 
-  showContact(){
+  showContact() {
     let alert = this.alertCtrl.create({
       title: 'Contact us',
       subTitle: 'www.bgm.com/help',
@@ -125,6 +132,6 @@ export class HomePage implements OnInit {
     console.log("logout is working fine");
     // console.log("rootnav = " +this.appCtrl.getRootNav());
     this.appCtrl.getRootNav().setRoot(LoginPage);
-  
+
   }
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular/';
 import { BaseChartDirective } from 'ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
+import * as io from 'socket.io-client';
 /**
  * Generated class for the HashingPage page.
  *
@@ -17,7 +18,8 @@ import { take, map } from 'rxjs/operators';
 })
 export class HashingPage {
   @ViewChild(BaseChartDirective) chart: any;
-  
+  messageText: string;
+  messages: Array<any>;
   chartColors;
   chartData;
   chartLabels;
@@ -30,15 +32,17 @@ export class HashingPage {
   isTimerHidden: boolean;
   countDown;
   count = 10.0;
-  
+  socket: SocketIOClient.Socket;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.isArrowHidden= true;
-    this.chartData=[
-      { data: [], label: 'Hash Rate', pointRadius: 0,  hidden: true, borderWidth:6},
+    this.isArrowHidden = true;
+    this.socket = io.connect('http://178.128.50.224:3001');
+    console.log("socket for hashing conencted");
+    this.chartData = [
+      { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 6 },
     ];
-    
-    this.chartColors=[{ // Actual Volume ETB
+
+    this.chartColors = [{ // Actual Volume ETB
       backgroundColor: 'rgba(0, 0, 0, 0)',
       borderColor: "#f3ba2e",
       pointBackgroundColor: "#f3ba2e",
@@ -47,28 +51,28 @@ export class HashingPage {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
     }
     ];
-    this.chartLabels=[];
-    
-    this.chartOptions={
-      tooltips:{
-        display:false,
+    this.chartLabels = [];
+
+    this.chartOptions = {
+      tooltips: {
+        display: false,
       },
       maintainAspectRatio: true,
       animation: {
         duration: 0
       },
-      elements:{
+      elements: {
         line: {
-          tension:0
+          tension: 0
         }
       },
       scales: {
         xAxes: [{
-        //   type: 'time',
-        //   time: {
-        //     unit: 'month',
-        //     format: 'timeFormat'
-        // },
+          //   type: 'time',
+          //   time: {
+          //     unit: 'month',
+          //     format: 'timeFormat'
+          // },
           offset: true,
           display: true,
           gridLines: {
@@ -98,48 +102,48 @@ export class HashingPage {
             fontColor: "white",
             fontSize: 12,
             padding: -5,
-				    // mirror: true,
+            // mirror: true,
             display: true,
             // drawTicks: true,
             stepSize: 0.01,
             min: 1,
             maxTicksLimit: 5,
             suggestedMax: 2,
-            callback: function(value) {
-              if (value >=40){
-                if (value%20 === 0){
-                  return value.toFixed(0)+'x --  ';
+            callback: function (value) {
+              if (value >= 40) {
+                if (value % 20 === 0) {
+                  return value.toFixed(0) + 'x --  ';
                 }
-                else{
+                else {
                   return undefined;
                 }
               }
-              
-              else if (value >= 20){
-                if (value % 10 === 0){
-                  return value.toFixed(0)+'x --  ';
+
+              else if (value >= 20) {
+                if (value % 10 === 0) {
+                  return value.toFixed(0) + 'x --  ';
                 }
 
                 else {
                   return undefined;
                 }
               }
-              
-              else if (value >= 8){
-                if (value % 5 === 0){
-                  return value.toFixed(0)+'x --  ';
+
+              else if (value >= 8) {
+                if (value % 5 === 0) {
+                  return value.toFixed(0) + 'x --  ';
                 }
-                else{
+                else {
                   return undefined;
                 }
               }
               //value less than 10
-              else if (value % 2 === 0){
-                return value.toFixed(0)+'x --  ';
+              else if (value % 2 === 0) {
+                return value.toFixed(0) + 'x --  ';
               }
 
-              else if (value ===1 ){
-                return value+'x --  ';
+              else if (value === 1) {
+                return value + 'x --  ';
               }
 
               else {
@@ -168,32 +172,69 @@ export class HashingPage {
     };
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.isChartHidden = false;
-    this.chartData[0].data=[1];
-    this.chartLabels= [0]
+    this.chartData[0].data = [1];
+    this.chartLabels = [0]
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
-    this.chartData[0].data=[1];
-    this.chartLabels= [0,1];
-    this.generateChart(33.58);
+    this.chartData[0].data = [1];
+    this.chartLabels = [0, 1];
+    //CODE FOR SOCKET//
+    this.messages = new Array();
+    this.socket.on('message-received', (msg: any) => {
+      this.messages.push(msg);
+      console.log(msg);
+      console.log(this.messages);
+    });
+    //emit to server
+    this.socket.emit('chat message', {
+      msg: 'Client to server, can you hear me server?'
+    });
+
+    this.socket.on('Game2', (data: any) => {
+      // console.log(JSON.parse(data));
+      var receivedData = JSON.parse(data);
+      console.log("Received data type  " + receivedData.type);
+      this.chart.refresh();
+      if (receivedData.type === 'game') {
+        this.multiplierDisplay= receivedData.number;
+        this.chartData[0].data.push(receivedData.number);
+        this.chartLabels.push(Date.now());
+        // let interval = setInterval(() => {
+          
+        // }, 100)
+      }
+
+      if (receivedData.type != "busted") {
+        console.log("Received data type  " + receivedData.number);
+      }
+      // this.socket.emit('event3', {
+      //   msg: 'Yes, its working for me!!'
+      // });
+    });
+
+    this.socket.on('Game3', (data: any) => {
+      console.log(data.msg);
+    });
+    // this.generateChart(33.58);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HashingPage');
   }
-  
-  generateChart(targetValue: number){
+
+  generateChart(targetValue: number) {
     //init necess. control variables
     // this.chartLabels= [0,1,2,3,4,5]; //initial array
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
     this.isChartHidden = false;
     this.chartData[0].hidden = false;
-    this.chartData[0].data=[1];
+    this.chartData[0].data = [1];
     // this.chartLabels= [0,1];
-    this.chartLabels= [0,1];
+    this.chartLabels = [0, 1];
 
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
@@ -203,43 +244,42 @@ export class HashingPage {
     var increment = 0.012;
     var currValue = startValue + increment;
 
-    let interval = setInterval(()=>{
+    let interval = setInterval(() => {
       var targetNumber = targetValue; //store received target in local var
       this.chartData[0].data.push(currValue);
-      var currentTime= Date.now();
+      var currentTime = Date.now();
       //divide by milliseconds
       var secondsToPush = (currentTime - startTime) / 1000;
       this.chartLabels.push(secondsToPush.toFixed(2));
-      
+
       this.chart.refresh();
       currValue += increment;
-      this.multiplierDisplay=currValue;
-      console.log("Current value " +currValue);
-      console.log("target value " +targetNumber);
+      this.multiplierDisplay = currValue;
+      // console.log("Current value " +currValue);
+      // console.log("target value " +targetNumber);
 
-      increment= this.updateIncrement(currValue);
-      if (currValue >=1.99)
-      {
-        this.isArrowHidden=false;
+      increment = this.updateIncrement(currValue);
+      if (currValue >= 1.99) {
+        this.isArrowHidden = false;
       }
-      if(currValue + increment >= targetNumber){
-        currentTime= Date.now();
+      if (currValue + increment >= targetNumber) {
+        currentTime = Date.now();
         this.chartData[0].data.push(targetNumber);
         secondsToPush = (currentTime - startTime) / 1000;
         this.chartLabels.push(secondsToPush.toFixed(2));
         clearInterval(interval);
-        
+
         this.displayBurst(targetNumber);
         this.isChartHidden = true;
-        this.isArrowHidden= true;
+        this.isArrowHidden = true;
         this.chartData[0].hidden = this.isChartHidden;
         this.chart.refresh();
       }
-    },100)
+    }, 100)
 
   }
 
-  async displayBurst(targetNumber: number){
+  async displayBurst(targetNumber: number) {
     this.finalValue = targetNumber;
     this.isBurstTextHidden = false;
     await this.delay(3000);
@@ -247,18 +287,18 @@ export class HashingPage {
     this.startCountdownTimer(10);
   }
 
-  async startCountdownTimer(secondsToCount: number){
+  async startCountdownTimer(secondsToCount: number) {
     this.isBurstTextHidden = true;
     this.isTimerHidden = false;
     this.count = secondsToCount;
-    var noOfCounts = (this.count*10)
-    
-    this.countDown = timer(0,100).pipe(
+    var noOfCounts = (this.count * 10)
+
+    this.countDown = timer(0, 100).pipe(
       take(noOfCounts),
-      map(()=> (this.count -= 0.1).toFixed(1))
+      map(() => (this.count -= 0.1).toFixed(1))
     );
-    await this.delay((this.count*1000)+700);
-    this.generateChart(Math.max(1.01, Math.random()*10));
+    await this.delay((this.count * 1000) + 700);
+    // this.generateChart(Math.max(1.01, Math.random()*10));
 
   }
   // countDown;
@@ -267,77 +307,77 @@ export class HashingPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  updateIncrement(currValue: number){
-    if (currValue >= 10.0){
+  updateIncrement(currValue: number) {
+    if (currValue >= 10.0) {
       return 0.200;
     }
-    else if (currValue >= 9.5){
+    else if (currValue >= 9.5) {
       return 0.185;
     }
-    else if (currValue >= 9.0){
+    else if (currValue >= 9.0) {
       return 0.170;
     }
-    else if (currValue >= 8.5){
+    else if (currValue >= 8.5) {
       return 0.155;
     }
-    else if (currValue >= 8.0){
+    else if (currValue >= 8.0) {
       return 0.140;
     }
-    else if (currValue >= 7.5){
+    else if (currValue >= 7.5) {
       return 0.130;
     }
-    else if (currValue >= 7.0){
+    else if (currValue >= 7.0) {
       return 0.120;
     }
-    else if (currValue >= 6.5){
+    else if (currValue >= 6.5) {
       return 0.110;
     }
-    else if (currValue >= 6.0){
+    else if (currValue >= 6.0) {
       return 0.100;
     }
-    else if (currValue >= 5.5){
+    else if (currValue >= 5.5) {
       return 0.095;
     }
-    else if (currValue >= 5.0){
+    else if (currValue >= 5.0) {
       return 0.085;
     }
-    else if (currValue >= 4.5){
+    else if (currValue >= 4.5) {
       return 0.070;
     }
-    else if (currValue >=4.0){
+    else if (currValue >= 4.0) {
       return 0.060;
     }
-    else if (currValue >= 3.5){
+    else if (currValue >= 3.5) {
       return 0.054;
     }
-    else if (currValue >= 3.0){
+    else if (currValue >= 3.0) {
       return 0.045;
     }
-    else if (currValue >= 2.5){
+    else if (currValue >= 2.5) {
       return 0.0380;
     }
-    else if (currValue >= 2){
+    else if (currValue >= 2) {
       return 0.0360;
     }
-    else if (currValue >= 1.8){
+    else if (currValue >= 1.8) {
       return 0.0300;
     }
-    else if (currValue >= 1.5){
+    else if (currValue >= 1.5) {
       return 0.027;
     }
-    else if (currValue >= 1.3){
+    else if (currValue >= 1.3) {
       return 0.0235;
     }
     // else if (currValue >= 1.25){
     //   return 0.022;
     // }
-    else if (currValue >= 1.2){
+    else if (currValue >= 1.2) {
       return 0.02;
     }
     // else if (currValue >= 1.2){
     //   return 0.018;
     //}
-    else if (currValue >= 1.1){
+    else if (currValue >= 1.1) {
       return 0.015;
     }
 
