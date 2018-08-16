@@ -182,8 +182,7 @@ export class HashingPage {
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
-    // this.chartData[0].data = [1];
-    // this.chartLabels = [0, 1];
+   
     //CODE FOR SOCKET//
     this.messages = new Array();
     this.socket.on('message-received', (msg: any) => {
@@ -219,6 +218,7 @@ export class HashingPage {
         this.isChartHidden = true;
         this.isBurstTextHidden = false;
         this.isTimerHidden = true;
+        this.finalValue = parseFloat(receivedData.value).toFixed(2);
         //reset chart
         this.chartLabels = [];
         this.chartData[0].data = [];

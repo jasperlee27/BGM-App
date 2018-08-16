@@ -80,15 +80,32 @@ export class SlotsdrawPage {
 
 
       setTimeout(function () {
-        machine1.shuffle(10, onComplete);
-        machine2.shuffle(15, onComplete);
-        machine3.shuffle(20, onComplete);
-        machine4.shuffle(25, onComplete);
-        machine5.shuffle(30, onComplete);
+        machine1.shuffle(10, onComplete1);
+        machine2.shuffle(15);
+        machine3.shuffle(20);
+        machine4.shuffle(25);
+        machine5.shuffle(30);
       }, 0);
 
-      function onComplete(active) {
-        console.log("Initial spin finish")
+      function onComplete1(active) {
+        // if (machine1.next() != 5){
+          // console.log(active);
+          // if (active!=5){
+          //   console.log(machine1.next());
+          //   onComplete1(active);
+          // }
+          console.log("Active = "  + active);
+          // var chosen = 5;
+          // var spinDifference = Math.abs(active-chosen);
+          // console.log("spinDiff = "  + spinDifference);
+          // for (var i = 0; i < spinDifference; i++){
+            // console.log("Loop = "  + i);
+            machine1.setRandomize(5);
+          // }
+
+        // }
+        // onComplete1();
+        console.log("Initial spin finish");
       }
 
 

@@ -8,6 +8,7 @@ import { TabsPage } from '../tabs/tabs';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
+import { DataProvider } from '../../providers/data/data';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -71,8 +72,11 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
   loginState: any = "in";
+  usernameInput: string;
+  passwordInput: string;
+  receivedData;
 
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private nativeAudio: NativeAudio) {
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio) {
   }
 
   // ionViewDidLoad() {
@@ -85,11 +89,23 @@ export class LoginPage {
 
   login() {
     // this.smartAudio.play('startGame3');
-    this.smartAudio.play('tabSwitch');
-    this.smartAudio.loop('tabSwitch2');
-    // this.navCtrl.setRoot(TabsPage);
-    this.auth.setGuestLogin(false);
-    this.navCtrl.push(this.twoFApage);
+    this.smartAudio.play('tabSwitch'); // this.navCtrl.setRoot(TabsPage);
+
+    this.dataProvider.postLogin(this.usernameInput,this.passwordInput).subscribe(data => {
+      //receive successfully
+      this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
+      console.log("Login reponse");
+      //parse response from server
+      console.log("account info " + this.receivedData.accountValue)
+      this.auth.setGuestLogin(false);
+      this.navCtrl.push(this.twoFApage);
+  
+    },
+    err => {
+      console.log("Error occured while logging in or not authorized");
+      console.log(err);
+    });
+    
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
   }
