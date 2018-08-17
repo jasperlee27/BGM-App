@@ -1,4 +1,4 @@
-import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component, trigger, state, style, transition, animate, keyframes, Renderer2 } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular/';
 import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
@@ -75,8 +75,9 @@ export class LoginPage {
   usernameInput: string;
   passwordInput: string;
   receivedData;
-
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio) {
+  showInvalidLogin: boolean = false;
+  
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private renderer: Renderer2){
   }
 
   // ionViewDidLoad() {
@@ -93,6 +94,7 @@ export class LoginPage {
 
     this.dataProvider.postLogin(this.usernameInput,this.passwordInput).subscribe(data => {
       //receive successfully
+      this.showInvalidLogin= false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       console.log("Login reponse");
       //parse response from server
@@ -103,6 +105,8 @@ export class LoginPage {
     },
     err => {
       console.log("Error occured while logging in or not authorized");
+ 
+      this.showInvalidLogin= true;
       console.log(err);
     });
     

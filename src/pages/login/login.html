@@ -37,10 +37,16 @@
   </ion-grid>
   <br>
   <button ion-button (click)="login()" small color="secondary" [@loginFadeIn]="fadeState" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800">LOGIN</button>
+
+  <div class="invalid-login" *ngIf="showInvalidLogin" >
+     INVALID LOGIN/PASSWORD!
+  </div>
+  
   <ion-row>
       <ion-col col-12 text-center>
         <button ion-button small clear color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600" (click)="viewAsGuest()">View As Guest</button>
       </ion-col>
   </ion-row> 
+
   </div>
 </ion-content>

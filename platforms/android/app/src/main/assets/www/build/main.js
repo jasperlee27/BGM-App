@@ -2179,11 +2179,11 @@ var map = {
 		7
 	],
 	"../pages/roulette/roulette.module": [
-		657,
+		658,
 		6
 	],
 	"../pages/slotsdraw/slotsdraw.module": [
-		658,
+		657,
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
@@ -2395,8 +2395,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/bidding/bidding.module#BiddingPageModule', name: 'BiddingPage', segment: 'bidding', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },

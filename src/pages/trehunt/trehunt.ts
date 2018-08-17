@@ -90,12 +90,12 @@ export class TrehuntPage {
       this.currBTCGameID = this.receivedData.data[1].gameName;
       this.totalBTCtix= this.receivedData.data[1].totalAmount;
       this.currBTCtix = this.receivedData.data[1].currentAmount;
-      this.currOwnBTCtix = this.receivedData.data[1].orders[0].tickets.length;
+      this.currOwnBTCtix = this.receivedData.data[1].orders.length;
       //ETH updates
       this.currETHGameID = this.receivedData.data[0].gameName;
       this.totalETHtix= this.receivedData.data[0].totalAmount;
       this.currETHtix = this.receivedData.data[0].currentAmount;
-      this.currOwnETHtix = this.receivedData.data[0].orders[0].tickets.length;
+      this.currOwnETHtix = this.receivedData.data[0].orders.length;
     },
     err => {
       console.log("Error occured while retrieving game 1 status");
