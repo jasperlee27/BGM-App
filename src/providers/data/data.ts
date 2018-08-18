@@ -2,8 +2,9 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs/Observable';
 
-const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const loginUrl = 'http://178.128.50.224:3000/login/';
+const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
+const trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
 
 @Injectable()
 export class DataProvider {
@@ -20,9 +21,20 @@ export class DataProvider {
     return this.http.post(loginUrl, requestBody, httpHeader);
   }
 
-  // POST Request
+  // get game1 curr status
   postTrehuntStatus(): Observable<any> {
     return this.http.post(trehuntStatusURL, {
     });
   }
+
+  //buy game 1 tickets
+  postBuyGame1(accid, gameId, amount): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount",amount);
+    return this.http.post(trehuntBuyURL, requestBody, httpHeader);
+  }
+
+
 }
