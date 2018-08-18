@@ -91,8 +91,16 @@ export class LoginPage {
   login() {
     // this.smartAudio.play('startGame3');
     this.smartAudio.play('tabSwitch'); // this.navCtrl.setRoot(TabsPage);
+    var usernameToPost = this.usernameInput;
+    this.showInvalidLogin= false;
 
-    this.dataProvider.postLogin(this.usernameInput,this.passwordInput).subscribe(data => {
+    if (usernameToPost!=null){
+      console.log ("before lower case " + usernameToPost);
+      usernameToPost = usernameToPost.toLowerCase();
+      console.log ("after lower case " + usernameToPost);
+    }
+
+    this.dataProvider.postLogin(usernameToPost,this.passwordInput).subscribe(data => {
       //receive successfully
       this.showInvalidLogin= false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
