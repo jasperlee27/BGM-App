@@ -35,6 +35,7 @@ export class HashingPage {
   socket: SocketIOClient.Socket;
   dataToPush: number;
   timerValue: string;
+  timerInterval;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.isArrowHidden = true;
@@ -53,7 +54,7 @@ export class HashingPage {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
     }
     ];
-    this.chartLabels = [];
+    this.chartLabels = [0];
 
     this.chartOptions = {
       tooltips: {
@@ -70,7 +71,7 @@ export class HashingPage {
       },
       scales: {
         xAxes: [{
-            // type: 'realtime', 
+          // type: 'realtime', 
           //   time: {
           //     unit: 'seconds',
           //     format: 'timeFormat'
@@ -83,17 +84,25 @@ export class HashingPage {
             color: "white"
           },
           ticks: {
+            beginAtZero: true,
+            min: 0,
+            suggestedMax: 2,
             fontColor: "white",
-            display: false,
-            fontSize: 14,
-            // stepSize:0.01,
-            // callback: function(tick, index, array) {
-            //   return (index % 20) ? "" : parseFloat(tick).toFixed(0);
-            // },
-            // autoSkip: true,
-            // maxTicksLimit: 3,
+            display: true,
+            fontSize: 10,
+            stepSize: 0.01,
             maxRotation: 0,
             minRotation: 0,
+            autoSkip: false,
+            callback: function (value) {
+              if (Number.isInteger(value)) {
+                return value + 's';
+              }
+
+              else {
+                return undefined;
+              }
+            },
           },
 
 
@@ -182,7 +191,7 @@ export class HashingPage {
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
     this.isTimerHidden = true;
-   
+
     //CODE FOR SOCKET//
     this.messages = new Array();
     this.socket.on('message-received', (msg: any) => {
@@ -201,14 +210,22 @@ export class HashingPage {
       // console.log("Received data type  " + receivedData.type);
 
       if (receivedData.type === 'game') {
+
+        if (parseFloat(receivedData.number) === 1) {
+          console.log("START TIMER HERE");
+          this.timer("start");
+        }
+
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
         this.chartData[0].hidden = false;
         this.isChartHidden = false;
         this.multiplierDisplay = receivedData.number;
         // this.dataToPush = receivedData.number;
-        this.chartLabels.push(Date.now());
+
+        this.chartLabels.push(1.01);
         this.chartData[0].data.push(receivedData.number);
+
         this.chart.refresh();
       }
 
@@ -219,16 +236,17 @@ export class HashingPage {
         this.isBurstTextHidden = false;
         this.isTimerHidden = true;
         this.finalValue = parseFloat(receivedData.value).toFixed(2);
-        //reset chart
-        this.chartLabels = [];
+        //reset chart and stop timer
+        this.timer("stop");
+        this.chartLabels = [0];
         this.chartData[0].data = [];
 
       }
 
       else if (receivedData.type === "countdown") {
-        console.log("Received data type  " + receivedData.type);
+        // console.log("Received data type  " + receivedData.type);
         this.chartData[0].hidden = true;
-        this.isChartHidden=true;
+        this.isChartHidden = true;
         this.isBurstTextHidden = true;
         this.isTimerHidden = false;
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
@@ -239,7 +257,7 @@ export class HashingPage {
     });
 
     this.socket.on('Game3', (data: any) => {
-      console.log(data.msg);
+      console.log("Receiving game 3 event " + data.msg);
     });
 
     // let interval = setInterval(() => {
@@ -253,163 +271,217 @@ export class HashingPage {
     console.log('ionViewDidLoad HashingPage');
   }
 
-  generateChart(targetValue: number) {
-    //init necess. control variables
-    // this.chartLabels= [0,1,2,3,4,5]; //initial array
-    this.isBurstTextHidden = true;
-    this.isTimerHidden = true;
-    this.isChartHidden = false;
-    this.chartData[0].hidden = false;
-    this.chartData[0].data = [1];
-    // this.chartLabels= [0,1];
-    this.chartLabels = [0, 1];
+  timer(action: string) {
+    var time: number = 0;
 
-    this.multiplierDisplay = 1;
-    this.finalValue = 0; //init as 0 first, to update later.
 
-    var startTime = Date.now();
-    var startValue = 1;
-    var increment = 0.012;
-    var currValue = startValue + increment;
+    if (action === 'start') {
+      this.timerInterval = setInterval(() => {
+        time++;
+        
+        if (time > 20){
+          if (time % 20 === 0){
+            this.chartLabels.push(time);
+          }
+        }
 
-    let interval = setInterval(() => {
-      var targetNumber = targetValue; //store received target in local var
-      this.chartData[0].data.push(currValue);
-      var currentTime = Date.now();
-      //divide by milliseconds
-      var secondsToPush = (currentTime - startTime) / 1000;
-      this.chartLabels.push(secondsToPush.toFixed(2));
+        if (time > 10){
+          if (time % 10 === 0){
+            this.chartLabels.push(time);
+          }
+        }
 
-      this.chart.refresh();
-      currValue += increment;
-      this.multiplierDisplay = currValue;
-      // console.log("Current value " +currValue);
-      // console.log("target value " +targetNumber);
+        else if (time > 8){
+          if (time % 5 === 0){
+            this.chartLabels.push(time);
+          }
+        }
+        else if (time===7){
+          this.chartLabels.push(time);
+        }
 
-      increment = this.updateIncrement(currValue);
-      if (currValue >= 1.99) {
-        this.isArrowHidden = false;
-      }
-      if (currValue + increment >= targetNumber) {
-        currentTime = Date.now();
-        this.chartData[0].data.push(targetNumber);
-        secondsToPush = (currentTime - startTime) / 1000;
-        this.chartLabels.push(secondsToPush.toFixed(2));
-        clearInterval(interval);
+        else if (time===6){
+          //skip
+        }
 
-        this.displayBurst(targetNumber);
-        this.isChartHidden = true;
-        this.isArrowHidden = true;
-        this.chartData[0].hidden = this.isChartHidden;
-        this.chart.refresh();
-      }
-    }, 100)
+        else if (time > 2) {
+          if (time % 2 === 0) {
+            this.chartLabels.push(time);
+          }
+        }
 
-  }
+        else {
+          this.chartLabels.push(time);
+        }
+        
+        console.log("Successfully pushed " + time);
+      }, 1000)
+    }
 
-  async displayBurst(targetNumber: number) {
-    this.finalValue = targetNumber;
-    this.isBurstTextHidden = false;
-    await this.delay(3000);
-    //where to start countdown timer
-    this.startCountdownTimer(10);
-  }
-
-  async startCountdownTimer(secondsToCount: number) {
-    this.isBurstTextHidden = true;
-    this.isTimerHidden = false;
-    this.count = secondsToCount;
-    var noOfCounts = (this.count * 10)
-
-    this.countDown = timer(0, 100).pipe(
-      take(noOfCounts),
-      map(() => (this.count -= 0.1).toFixed(1))
-    );
-    await this.delay((this.count * 1000) + 700);
-    // this.generateChart(Math.max(1.01, Math.random()*10));
+    else {
+      console.log("Stopping real timer")
+      clearInterval(this.timerInterval);
+    }
 
   }
+
+  // generateChart(targetValue: number) {
+  //   //init necess. control variables
+  //   // this.chartLabels= [0,1,2,3,4,5]; //initial array
+  //   this.isBurstTextHidden = true;
+  //   this.isTimerHidden = true;
+  //   this.isChartHidden = false;
+  //   this.chartData[0].hidden = false;
+  //   this.chartData[0].data = [1];
+  //   // this.chartLabels= [0,1];
+  //   this.chartLabels = [0, 1];
+
+  //   this.multiplierDisplay = 1;
+  //   this.finalValue = 0; //init as 0 first, to update later.
+
+  //   var startTime = Date.now();
+  //   var startValue = 1;
+  //   var increment = 0.012;
+  //   var currValue = startValue + increment;
+
+  //   let interval = setInterval(() => {
+  //     var targetNumber = targetValue; //store received target in local var
+  //     this.chartData[0].data.push(currValue);
+  //     var currentTime = Date.now();
+  //     //divide by milliseconds
+  //     var secondsToPush = (currentTime - startTime) / 1000;
+  //     this.chartLabels.push(secondsToPush.toFixed(2));
+
+  //     this.chart.refresh();
+  //     currValue += increment;
+  //     this.multiplierDisplay = currValue;
+  //     // console.log("Current value " +currValue);
+  //     // console.log("target value " +targetNumber);
+
+  //     increment = this.updateIncrement(currValue);
+  //     if (currValue >= 1.99) {
+  //       this.isArrowHidden = false;
+  //     }
+  //     if (currValue + increment >= targetNumber) {
+  //       currentTime = Date.now();
+  //       this.chartData[0].data.push(targetNumber);
+  //       secondsToPush = (currentTime - startTime) / 1000;
+  //       this.chartLabels.push(secondsToPush.toFixed(2));
+  //       clearInterval(interval);
+
+  //       this.displayBurst(targetNumber);
+  //       this.isChartHidden = true;
+  //       this.isArrowHidden = true;
+  //       this.chartData[0].hidden = this.isChartHidden;
+  //       this.chart.refresh();
+  //     }
+  //   }, 100)
+
+  // }
+
+  // async displayBurst(targetNumber: number) {
+  //   this.finalValue = targetNumber;
+  //   this.isBurstTextHidden = false;
+  //   await this.delay(3000);
+  //   //where to start countdown timer
+  //   this.startCountdownTimer(10);
+  // }
+
+  // async startCountdownTimer(secondsToCount: number) {
+  //   this.isBurstTextHidden = true;
+  //   this.isTimerHidden = false;
+  //   this.count = secondsToCount;
+  //   var noOfCounts = (this.count * 10)
+
+  //   this.countDown = timer(0, 100).pipe(
+  //     take(noOfCounts),
+  //     map(() => (this.count -= 0.1).toFixed(1))
+  //   );
+  //   await this.delay((this.count * 1000) + 700);
+  //   // this.generateChart(Math.max(1.01, Math.random()*10));
+
+  // }
   // countDown;
   // count = 10.0;
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  updateIncrement(currValue: number) {
-    if (currValue >= 10.0) {
-      return 0.200;
-    }
-    else if (currValue >= 9.5) {
-      return 0.185;
-    }
-    else if (currValue >= 9.0) {
-      return 0.170;
-    }
-    else if (currValue >= 8.5) {
-      return 0.155;
-    }
-    else if (currValue >= 8.0) {
-      return 0.140;
-    }
-    else if (currValue >= 7.5) {
-      return 0.130;
-    }
-    else if (currValue >= 7.0) {
-      return 0.120;
-    }
-    else if (currValue >= 6.5) {
-      return 0.110;
-    }
-    else if (currValue >= 6.0) {
-      return 0.100;
-    }
-    else if (currValue >= 5.5) {
-      return 0.095;
-    }
-    else if (currValue >= 5.0) {
-      return 0.085;
-    }
-    else if (currValue >= 4.5) {
-      return 0.070;
-    }
-    else if (currValue >= 4.0) {
-      return 0.060;
-    }
-    else if (currValue >= 3.5) {
-      return 0.054;
-    }
-    else if (currValue >= 3.0) {
-      return 0.045;
-    }
-    else if (currValue >= 2.5) {
-      return 0.0380;
-    }
-    else if (currValue >= 2) {
-      return 0.0360;
-    }
-    else if (currValue >= 1.8) {
-      return 0.0300;
-    }
-    else if (currValue >= 1.5) {
-      return 0.027;
-    }
-    else if (currValue >= 1.3) {
-      return 0.0235;
-    }
-    // else if (currValue >= 1.25){
-    //   return 0.022;
-    // }
-    else if (currValue >= 1.2) {
-      return 0.02;
-    }
-    // else if (currValue >= 1.2){
-    //   return 0.018;
-    //}
-    else if (currValue >= 1.1) {
-      return 0.015;
-    }
+  // updateIncrement(currValue: number) {
+  //   if (currValue >= 10.0) {
+  //     return 0.200;
+  //   }
+  //   else if (currValue >= 9.5) {
+  //     return 0.185;
+  //   }
+  //   else if (currValue >= 9.0) {
+  //     return 0.170;
+  //   }
+  //   else if (currValue >= 8.5) {
+  //     return 0.155;
+  //   }
+  //   else if (currValue >= 8.0) {
+  //     return 0.140;
+  //   }
+  //   else if (currValue >= 7.5) {
+  //     return 0.130;
+  //   }
+  //   else if (currValue >= 7.0) {
+  //     return 0.120;
+  //   }
+  //   else if (currValue >= 6.5) {
+  //     return 0.110;
+  //   }
+  //   else if (currValue >= 6.0) {
+  //     return 0.100;
+  //   }
+  //   else if (currValue >= 5.5) {
+  //     return 0.095;
+  //   }
+  //   else if (currValue >= 5.0) {
+  //     return 0.085;
+  //   }
+  //   else if (currValue >= 4.5) {
+  //     return 0.070;
+  //   }
+  //   else if (currValue >= 4.0) {
+  //     return 0.060;
+  //   }
+  //   else if (currValue >= 3.5) {
+  //     return 0.054;
+  //   }
+  //   else if (currValue >= 3.0) {
+  //     return 0.045;
+  //   }
+  //   else if (currValue >= 2.5) {
+  //     return 0.0380;
+  //   }
+  //   else if (currValue >= 2) {
+  //     return 0.0360;
+  //   }
+  //   else if (currValue >= 1.8) {
+  //     return 0.0300;
+  //   }
+  //   else if (currValue >= 1.5) {
+  //     return 0.027;
+  //   }
+  //   else if (currValue >= 1.3) {
+  //     return 0.0235;
+  //   }
+  //   // else if (currValue >= 1.25){
+  //   //   return 0.022;
+  //   // }
+  //   else if (currValue >= 1.2) {
+  //     return 0.02;
+  //   }
+  //   // else if (currValue >= 1.2){
+  //   //   return 0.018;
+  //   //}
+  //   else if (currValue >= 1.1) {
+  //     return 0.015;
+  //   }
 
-    else return 0.012;
-  }
+  //   else return 0.012;
+  // }
 
 }
