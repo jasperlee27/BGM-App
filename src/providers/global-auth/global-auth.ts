@@ -11,9 +11,18 @@ import { Injectable } from '@angular/core';
 export class GlobalAuthProvider {
   public isGuest: boolean = true;
   public isAuthenticated: boolean = false;
+  private accId: string;
 
   constructor() {
     console.log('Hello GlobalAuthProvider Provider');
+  }
+
+  setAccId(accId: string){
+    this.accId=accId;
+  }
+
+  getAccId(){
+    return this.accId;
   }
 
   setGuestLogin(control: boolean){

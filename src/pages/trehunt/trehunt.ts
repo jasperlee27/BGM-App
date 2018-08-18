@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import { SlotsdrawPage } from '../slotsdraw/slotsdraw';
 import { DataProvider } from '../../providers/data/data';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 
 /**
  * Generated class for the TrehuntPage page.
@@ -32,7 +33,7 @@ export class TrehuntPage {
   currOwnETHtix: number;
   receivedData: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
     // this.currBTCprice = this.randomIntRange(8000, 10000);
     // this.currETHprice = this.randomIntRange(600, 800);
     this.totalBTCtix = 8800;
@@ -44,8 +45,10 @@ export class TrehuntPage {
     this.currOwnBTCtix = this.randomIntRange(0, this.currBTCtix-1);
     this.currOwnETHtix = this.randomIntRange(0, this.currETHtix-1);
     // this.currBTCtix=8700;
-  
     // this.currETHtix=650;
+
+    //can retrieve accId from auth
+    console.log("Trehunt successful in retrieving accID " + this.auth.getAccId());
 
     this.loadBTCProgress = ((this.currBTCtix / this.totalBTCtix) * 100).toFixed(2);
     this.loadETHProgress = ((this.currETHtix / this.totalETHtix) * 100).toFixed(2);

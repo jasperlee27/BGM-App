@@ -104,9 +104,12 @@ export class LoginPage {
       //receive successfully
       this.showInvalidLogin= false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
-      console.log("Login reponse");
       //parse response from server
+      console.log("Login reponse");
       console.log("account info " + this.receivedData.accountValue)
+      console.log("Setting account id as " + this.receivedData._id);
+      
+      this.auth.setAccId(this.receivedData._id);
       this.auth.setGuestLogin(false);
 
       if (parseInt(this.receivedData.require2FA)===0){
