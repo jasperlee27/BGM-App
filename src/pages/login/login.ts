@@ -108,7 +108,14 @@ export class LoginPage {
       //parse response from server
       console.log("account info " + this.receivedData.accountValue)
       this.auth.setGuestLogin(false);
-      this.navCtrl.push(this.twoFApage);
+
+      if (parseInt(this.receivedData.require2FA)===0){
+        this.navCtrl.setRoot(TabsPage);
+      }
+
+      else{
+        this.navCtrl.push(this.twoFApage);       
+      }
   
     },
     err => {
