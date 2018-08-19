@@ -30602,6 +30602,10 @@ page-bidding .row {
   text-align: center !important;
 }
 
+page-hashing .scroll-content {
+  overflow-y: visible;
+}
+
 page-hashing .hashingContent {
   color: #f3ba2e;
 }
