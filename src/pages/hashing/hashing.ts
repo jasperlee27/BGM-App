@@ -54,7 +54,7 @@ export class HashingPage {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
     }
     ];
-    this.chartLabels = [0];
+    this.chartLabels = [];
 
     this.chartOptions = {
       tooltips: {
@@ -86,6 +86,7 @@ export class HashingPage {
           ticks: {
             beginAtZero: true,
             min: 0,
+            maxTicksLimit: 3,
             suggestedMax: 2,
             fontColor: "white",
             display: true,
@@ -186,7 +187,7 @@ export class HashingPage {
   ngOnInit() {
     this.isChartHidden = false;
     // this.chartData[0].data = [1];
-    this.chartLabels = [0]
+    this.chartLabels = []
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
@@ -238,7 +239,7 @@ export class HashingPage {
         this.finalValue = parseFloat(receivedData.value).toFixed(2);
         //reset chart and stop timer
         this.timer("stop");
-        this.chartLabels = [0];
+        this.chartLabels = [];
         this.chartData[0].data = [];
 
       }
@@ -278,26 +279,31 @@ export class HashingPage {
     if (action === 'start') {
       this.timerInterval = setInterval(() => {
         time++;
-        
+        console.log("Counting timer " + time + "s");
+
         if (time > 20){
           if (time % 20 === 0){
             this.chartLabels.push(time);
+            console.log("Successfully pushed " + time);
           }
         }
 
-        if (time > 10){
+        if (time > 15){
           if (time % 10 === 0){
             this.chartLabels.push(time);
+            console.log("Successfully pushed " + time);
           }
         }
 
-        else if (time > 8){
+        else if (time >= 8){
           if (time % 5 === 0){
             this.chartLabels.push(time);
+            console.log("Successfully pushed " + time);
           }
         }
         else if (time===7){
           this.chartLabels.push(time);
+          console.log("Successfully pushed " + time);
         }
 
         else if (time===6){
@@ -307,14 +313,16 @@ export class HashingPage {
         else if (time > 2) {
           if (time % 2 === 0) {
             this.chartLabels.push(time);
+            console.log("Successfully pushed " + time);
           }
         }
 
         else {
           this.chartLabels.push(time);
+          console.log("Successfully pushed " + time);
         }
         
-        console.log("Successfully pushed " + time);
+       
       }, 1000)
     }
 

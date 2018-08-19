@@ -135,6 +135,7 @@ export class LoginPage {
   viewAsGuest() {
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
+    this.auth.setAccId("guest");
     this.auth.setGuestLogin(true);
     this.navCtrl.setRoot(TabsPage);
     console.log("view as guest only");
