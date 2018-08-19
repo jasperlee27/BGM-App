@@ -36,6 +36,8 @@ export class HashingPage {
   dataToPush: number;
   timerValue: string;
   timerInterval;
+  currentView: string = 'manual';
+  hashBetType: string = 'manual';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.isArrowHidden = true;
@@ -333,6 +335,12 @@ export class HashingPage {
 
   }
 
+  
+  toggleSegment($event) {
+    console.log("Chosen segment " + $event.value);
+    //update current view & wallet balance
+    this.currentView = $event.value;
+  }
   // generateChart(targetValue: number) {
   //   //init necess. control variables
   //   // this.chartLabels= [0,1,2,3,4,5]; //initial array

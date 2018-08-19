@@ -13,37 +13,73 @@
 </ion-header>
 
 
-<ion-content class="hashingContent" padding> 
- 
- <br>
-   <!-- Graph -->
-   <div class="graphCntr" style="display: block; width: 100%; height: 50%;">
+<ion-content class="hashingContent" padding>
+
+  <br>
+  <!-- Graph -->
+  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">
     <!-- <ion-col col-12 col-md-12> -->
-     <canvas id="ctx" baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="300"
-     [legend]="false">
-     <!-- (chartClick)="onChartClick($event) -->
+    <canvas id="ctx" baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"
+      width="400" height="300" [legend]="false">
+      <!-- (chartClick)="onChartClick($event) -->
     </canvas>
     <!-- </ion-col> -->
-    <div class= "arrow-head" [style.visibility]="isArrowHidden ? 'hidden' : 'visible'"> 
-      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style= background:transparent></ion-img>
+    <div class="arrow-head" [style.visibility]="isArrowHidden ? 'hidden' : 'visible'">
+      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>
     </div>
-    
-    <div class= "circle-cntr">
+
+    <div class="circle-cntr">
       <div class="outer-circle" [style.visibility]="isChartHidden ? 'hidden' : 'visible'">
         <svg xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>
+          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />
           <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>
         </svg>
       </div>
     </div>
 
     <div class="burst-text" [style.visibility]="isBurstTextHidden ? 'hidden' : 'visible'">
-     Busted @ {{finalValue}}x
+      Busted @ {{finalValue}}x
     </div>
-    
+
     <div class="timer-text" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">
-        Next game in {{timerValue}} s
+      Next game in {{timerValue}} s
     </div>
   </div>
+  <br>
+  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">
+    <ion-segment-button outline value="manual">
+      Manual
+    </ion-segment-button>
+    <ion-segment-button outline value="auto">
+      Auto
+    </ion-segment-button>
+  </ion-segment>
+  <ion-card style="height:auto">
+    <ion-card-content>
+      <ion-row>
+        <div [ngSwitch]="hashBetType">
+          <ion-list *ngSwitchCase="'manual'" ngSelected="selected">
+              <ion-label>I'm at manual</ion-label>
+              <button ion-button>TesstButton</button>
+          </ion-list>
+          <ion-list *ngSwitchCase="'auto'">
+              <ion-label>At Auto</ion-label>
+          </ion-list>
+        </div>
+        <!-- <ion-list col-12 no-lines>
+        <ion-list-header no-lines text-color="light">
+            <span col-2 item-start>Time</span>
+            <span col-5>Item</span>
+            <span col-5 item-end>Amount</span>
+        </ion-list-header>
+        <ion-item *ngFor="let item of getStatements(walletType)">
+          <span col-2 item-start style="font-size:12px">{{item.time}}</span>
+          <span col-5>{{item.name}}</span>
+          <span col-5 item-end [style.color]="item.price > 0 ? 'green' : 'red'"  style="font-weight:700">{{ item.price }}</span>
+        </ion-item>
+      </ion-list> -->
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
