@@ -1,20 +1,20 @@
 webpackJsonp([10],{
 
-/***/ 128:
+/***/ 120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(62);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(129);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -36,19 +36,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 // import { TabsPage } from '../tabs/tabs';
 var LoginPage = /** @class */ (function () {
-    function LoginPage(platform, navCtrl, smartAudio, auth, dataProvider, nativeAudio) {
+    function LoginPage(platform, navCtrl, smartAudio, auth, dataProvider, nativeAudio, renderer) {
         this.platform = platform;
         this.navCtrl = navCtrl;
         this.smartAudio = smartAudio;
         this.auth = auth;
         this.dataProvider = dataProvider;
         this.nativeAudio = nativeAudio;
+        this.renderer = renderer;
         this.biddingPage = __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__["a" /* BiddingPage */];
         this.roulettePage = __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__["a" /* RoulettePage */];
         this.twoFApage = __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__["a" /* TwoFacAuthPage */];
         this.passwordType = 'password';
         this.passwordIcon = 'eye';
         this.loginState = "in";
+        this.showInvalidLogin = false;
     }
     // ionViewDidLoad() {
     //   this.platform.ready().then(() => {
@@ -61,16 +63,32 @@ var LoginPage = /** @class */ (function () {
         var _this = this;
         // this.smartAudio.play('startGame3');
         this.smartAudio.play('tabSwitch'); // this.navCtrl.setRoot(TabsPage);
-        this.dataProvider.postLogin(this.usernameInput, this.passwordInput).subscribe(function (data) {
+        var usernameToPost = this.usernameInput;
+        this.showInvalidLogin = false;
+        if (usernameToPost != null) {
+            console.log("before lower case " + usernameToPost);
+            usernameToPost = usernameToPost.toLowerCase();
+            console.log("after lower case " + usernameToPost);
+        }
+        this.dataProvider.postLogin(usernameToPost, this.passwordInput).subscribe(function (data) {
             //receive successfully
+            _this.showInvalidLogin = false;
             _this.receivedData = data; // pass the response from HTTP Request into local variable receivedData
-            console.log("Login reponse");
             //parse response from server
+            console.log("Login reponse");
             console.log("account info " + _this.receivedData.accountValue);
+            console.log("Setting account id as " + _this.receivedData._id);
+            _this.auth.setAccId(_this.receivedData._id);
             _this.auth.setGuestLogin(false);
-            _this.navCtrl.push(_this.twoFApage);
+            if (parseInt(_this.receivedData.require2FA) === 0) {
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
+            }
+            else {
+                _this.navCtrl.push(_this.twoFApage);
+            }
         }, function (err) {
             console.log("Error occured while logging in or not authorized");
+            _this.showInvalidLogin = true;
             console.log(err);
         });
         // this.navCtrl.setRoot(TabsPage);
@@ -79,6 +97,7 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.viewAsGuest = function () {
         // this.navCtrl.setRoot(TabsPage);
         // this.navCtrl.push(this.twoFApage);
+        this.auth.setAccId("guest");
         this.auth.setGuestLogin(true);
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
         console.log("view as guest only");
@@ -89,7 +108,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/'<!-- <ion-header> -->\n\n  <!-- <ion-navbar> -->\n\n    <ion-title>User Log In</ion-title>\n\n  <!-- </ion-navbar> -->\n\n<!-- </ion-header> -->\n\n\n\n<ion-content class="loginContent" padding>\n\n  <div class= "image-center">\n\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" [@fadeIn]="fadeState" style= background:transparent></ion-img>\n\n  </div>\n\n  <div class="login-form">\n\n    <ion-grid>\n\n      <!-- username -->\n\n        <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState" >\n\n            <ion-label floating primary color="secondary">\n\n              <ion-icon name="person"></ion-icon>   Username\n\n            </ion-label>\n\n            <ion-input [(ngModel)]="usernameInput" type="text"></ion-input>\n\n                \n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- password-->\n\n      <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n            <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState">\n\n                <ion-label floating primary color="secondary">\n\n                <ion-icon name="lock"></ion-icon> Password\n\n                </ion-label>\n\n                <ion-input [(ngModel)]="passwordInput" [type]="passwordType" clearOnEdit="false"></ion-input>\n\n                <ion-icon item-end [name]="passwordIcon" class="passwordIcon" color="secondary" (click)=\'showHide()\'></ion-icon>\n\n            </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n  <br>\n\n  <button ion-button (click)="login()" small color="secondary" [@loginFadeIn]="fadeState" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800">LOGIN</button>\n\n  <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <button ion-button small clear color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600" (click)="viewAsGuest()">View As Guest</button>\n\n      </ion-col>\n\n  </ion-row> \n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/'<!-- <ion-header> -->\n\n<!-- <ion-navbar> -->\n\n<ion-title>User Log In</ion-title>\n\n<!-- </ion-navbar> -->\n\n<!-- </ion-header> -->\n\n\n\n<ion-content class="loginContent" padding>\n\n  <div class="image-center">\n\n    <ion-img width="200" height="200" src="../assets/imgs/BGM_Logo.png" [@fadeIn]="fadeState" style=background:transparent></ion-img>\n\n  </div>\n\n\n\n  <div [class.invalid-login]="showInvalidLogin">\n\n    <ion-grid>\n\n      <!-- username -->\n\n      <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState">\n\n            <ion-label floating primary color="secondary">\n\n              <ion-icon name="person"></ion-icon> Username\n\n            </ion-label>\n\n            <ion-input [(ngModel)]="usernameInput" type="text"></ion-input>\n\n          </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- password-->\n\n      <ion-row>\n\n        <ion-col col-12 col-md-8 offset-md-2>\n\n          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState">\n\n            <ion-label floating primary color="secondary">\n\n              <ion-icon name="lock"></ion-icon> Password\n\n            </ion-label>\n\n            <ion-input [(ngModel)]="passwordInput" [type]="passwordType" clearOnEdit="false"></ion-input>\n\n            <ion-icon item-end [name]="passwordIcon" class="passwordIcon" color="secondary" (click)=\'showHide()\'></ion-icon>\n\n          </ion-item>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-12 text-center>\n\n          <button ion-button (click)="login()" small color="secondary" [@loginFadeIn]="fadeState" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800">LOGIN</button>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <div class="invalid-login" *ngIf="showInvalidLogin">\n\n        INVALID LOGIN/PASSWORD!\n\n      </div>\n\n\n\n    </ion-grid>\n\n  </div>\n\n\n\n  <ion-row>\n\n    <ion-col col-12 text-center>\n\n      <button ion-button small clear color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600"\n\n        (click)="viewAsGuest()">View As Guest</button>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\login\login.html"*/,
             animations: [
                 //For login button
                 Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["trigger"])('fadeIn', [
@@ -135,7 +154,7 @@ var LoginPage = /** @class */ (function () {
                 ])
             ]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_9__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__["a" /* NativeAudio */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_9__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer2"]])
     ], LoginPage);
     return LoginPage;
 }());
@@ -144,17 +163,17 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 129:
+/***/ 121:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wallet_wallet__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream_stream__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(155);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__trehunt_trehunt__ = __webpack_require__(161);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wallet_wallet__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream_stream__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__trehunt_trehunt__ = __webpack_require__(160);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(80);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -198,7 +217,7 @@ var TabsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 130:
+/***/ 129:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -216,8 +235,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-var trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 var loginUrl = 'http://178.128.50.224:3000/login/';
+var trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
+var trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
 var DataProvider = /** @class */ (function () {
     function DataProvider(http) {
         this.http = http;
@@ -231,9 +251,21 @@ var DataProvider = /** @class */ (function () {
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("username", username).set("password", password);
         return this.http.post(loginUrl, requestBody, httpHeader);
     };
-    // POST Request
-    DataProvider.prototype.postTrehuntStatus = function () {
-        return this.http.post(trehuntStatusURL, {});
+    // get game1 curr status
+    DataProvider.prototype.postTrehuntStatus = function (accid) {
+        var httpHeader = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid);
+        return this.http.post(trehuntStatusURL, requestBody, httpHeader);
+    };
+    //buy game 1 tickets
+    DataProvider.prototype.postBuyGame1 = function (accid, gameId, amount) {
+        var httpHeader = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId).set("amount", amount);
+        return this.http.post(trehuntBuyURL, requestBody, httpHeader);
     };
     DataProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
@@ -246,7 +278,7 @@ var DataProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 154:
+/***/ 153:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -344,21 +376,17 @@ var BiddingPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 155:
+/***/ 154:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__ = __webpack_require__(73);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(363);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -368,45 +396,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 
 
-
- // (for rxjs < 6) use 'rxjs/observable/timer'
 
 
 /**
@@ -420,8 +411,10 @@ var HashingPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.count = 10.0;
+        this.currentView = 'manual';
+        this.hashBetType = 'manual';
         this.isArrowHidden = true;
-        this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client__["connect"]('http://178.128.50.224:3001');
+        this.socket = __WEBPACK_IMPORTED_MODULE_3_socket_io_client__["connect"]('http://178.128.50.224:3001');
         console.log("socket for hashing conencted");
         this.chartData = [
             { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 3 },
@@ -464,17 +457,25 @@ var HashingPage = /** @class */ (function () {
                             color: "white"
                         },
                         ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            maxTicksLimit: 3,
+                            suggestedMax: 2,
                             fontColor: "white",
-                            display: false,
-                            fontSize: 14,
-                            // stepSize:0.01,
-                            // callback: function(tick, index, array) {
-                            //   return (index % 20) ? "" : parseFloat(tick).toFixed(0);
-                            // },
-                            // autoSkip: true,
-                            // maxTicksLimit: 3,
+                            display: true,
+                            fontSize: 10,
+                            stepSize: 0.01,
                             maxRotation: 0,
                             minRotation: 0,
+                            autoSkip: false,
+                            callback: function (value) {
+                                if (Number.isInteger(value)) {
+                                    return value + 's';
+                                }
+                                else {
+                                    return undefined;
+                                }
+                            },
                         },
                     }],
                 yAxes: [{
@@ -550,7 +551,7 @@ var HashingPage = /** @class */ (function () {
         var _this = this;
         this.isChartHidden = false;
         // this.chartData[0].data = [1];
-        this.chartLabels = [0];
+        this.chartLabels = [];
         this.multiplierDisplay = 1;
         this.finalValue = 0; //init as 0 first, to update later.
         this.isBurstTextHidden = true;
@@ -571,13 +572,17 @@ var HashingPage = /** @class */ (function () {
             var receivedData = JSON.parse(data);
             // console.log("Received data type  " + receivedData.type);
             if (receivedData.type === 'game') {
+                if (parseFloat(receivedData.number) === 1) {
+                    console.log("START TIMER HERE");
+                    _this.timer("start");
+                }
                 _this.isTimerHidden = true;
                 _this.isBurstTextHidden = true;
                 _this.chartData[0].hidden = false;
                 _this.isChartHidden = false;
                 _this.multiplierDisplay = receivedData.number;
                 // this.dataToPush = receivedData.number;
-                _this.chartLabels.push(Date.now());
+                _this.chartLabels.push(1.01);
                 _this.chartData[0].data.push(receivedData.number);
                 _this.chart.refresh();
             }
@@ -588,12 +593,13 @@ var HashingPage = /** @class */ (function () {
                 _this.isBurstTextHidden = false;
                 _this.isTimerHidden = true;
                 _this.finalValue = parseFloat(receivedData.value).toFixed(2);
-                //reset chart
+                //reset chart and stop timer
+                _this.timer("stop");
                 _this.chartLabels = [];
                 _this.chartData[0].data = [];
             }
             else if (receivedData.type === "countdown") {
-                console.log("Received data type  " + receivedData.type);
+                // console.log("Received data type  " + receivedData.type);
                 _this.chartData[0].hidden = true;
                 _this.isChartHidden = true;
                 _this.isBurstTextHidden = true;
@@ -605,7 +611,7 @@ var HashingPage = /** @class */ (function () {
             // });
         });
         this.socket.on('Game3', function (data) {
-            console.log(data.msg);
+            console.log("Receiving game 3 event " + data.msg);
         });
         // let interval = setInterval(() => {
         //   this.chartLabels.push(Date.now());
@@ -617,164 +623,129 @@ var HashingPage = /** @class */ (function () {
     HashingPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad HashingPage');
     };
-    HashingPage.prototype.generateChart = function (targetValue) {
+    HashingPage.prototype.timer = function (action) {
         var _this = this;
-        //init necess. control variables
-        // this.chartLabels= [0,1,2,3,4,5]; //initial array
-        this.isBurstTextHidden = true;
-        this.isTimerHidden = true;
-        this.isChartHidden = false;
-        this.chartData[0].hidden = false;
-        this.chartData[0].data = [1];
-        // this.chartLabels= [0,1];
-        this.chartLabels = [0, 1];
-        this.multiplierDisplay = 1;
-        this.finalValue = 0; //init as 0 first, to update later.
-        var startTime = Date.now();
-        var startValue = 1;
-        var increment = 0.012;
-        var currValue = startValue + increment;
-        var interval = setInterval(function () {
-            var targetNumber = targetValue; //store received target in local var
-            _this.chartData[0].data.push(currValue);
-            var currentTime = Date.now();
-            //divide by milliseconds
-            var secondsToPush = (currentTime - startTime) / 1000;
-            _this.chartLabels.push(secondsToPush.toFixed(2));
-            _this.chart.refresh();
-            currValue += increment;
-            _this.multiplierDisplay = currValue;
-            // console.log("Current value " +currValue);
-            // console.log("target value " +targetNumber);
-            increment = _this.updateIncrement(currValue);
-            if (currValue >= 1.99) {
-                _this.isArrowHidden = false;
-            }
-            if (currValue + increment >= targetNumber) {
-                currentTime = Date.now();
-                _this.chartData[0].data.push(targetNumber);
-                secondsToPush = (currentTime - startTime) / 1000;
-                _this.chartLabels.push(secondsToPush.toFixed(2));
-                clearInterval(interval);
-                _this.displayBurst(targetNumber);
-                _this.isChartHidden = true;
-                _this.isArrowHidden = true;
-                _this.chartData[0].hidden = _this.isChartHidden;
-                _this.chart.refresh();
-            }
-        }, 100);
-    };
-    HashingPage.prototype.displayBurst = function (targetNumber) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.finalValue = targetNumber;
-                        this.isBurstTextHidden = false;
-                        return [4 /*yield*/, this.delay(3000)];
-                    case 1:
-                        _a.sent();
-                        //where to start countdown timer
-                        this.startCountdownTimer(10);
-                        return [2 /*return*/];
+        var time = 0;
+        if (action === 'start') {
+            this.timerInterval = setInterval(function () {
+                time++;
+                console.log("Counting timer " + time + "s");
+                if (time > 20) {
+                    if (time % 20 === 0) {
+                        _this.chartLabels.push(time);
+                        console.log("Successfully pushed " + time);
+                    }
                 }
-            });
-        });
-    };
-    HashingPage.prototype.startCountdownTimer = function (secondsToCount) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var noOfCounts;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.isBurstTextHidden = true;
-                        this.isTimerHidden = false;
-                        this.count = secondsToCount;
-                        noOfCounts = (this.count * 10);
-                        this.countDown = Object(__WEBPACK_IMPORTED_MODULE_3_rxjs_observable_timer__["timer"])(0, 100).pipe(Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["take"])(noOfCounts), Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__["map"])(function () { return (_this.count -= 0.1).toFixed(1); }));
-                        return [4 /*yield*/, this.delay((this.count * 1000) + 700)];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
+                if (time > 15) {
+                    if (time % 10 === 0) {
+                        _this.chartLabels.push(time);
+                        console.log("Successfully pushed " + time);
+                    }
                 }
-            });
-        });
+                else if (time >= 8) {
+                    if (time % 5 === 0) {
+                        _this.chartLabels.push(time);
+                        console.log("Successfully pushed " + time);
+                    }
+                }
+                else if (time === 7) {
+                    _this.chartLabels.push(time);
+                    console.log("Successfully pushed " + time);
+                }
+                else if (time === 6) {
+                    //skip
+                }
+                else if (time > 2) {
+                    if (time % 2 === 0) {
+                        _this.chartLabels.push(time);
+                        console.log("Successfully pushed " + time);
+                    }
+                }
+                else {
+                    _this.chartLabels.push(time);
+                    console.log("Successfully pushed " + time);
+                }
+            }, 1000);
+        }
+        else {
+            console.log("Stopping real timer");
+            clearInterval(this.timerInterval);
+        }
     };
+    HashingPage.prototype.toggleSegment = function ($event) {
+        console.log("Chosen segment " + $event.value);
+        //update current view & wallet balance
+        this.currentView = $event.value;
+    };
+    // generateChart(targetValue: number) {
+    //   //init necess. control variables
+    //   // this.chartLabels= [0,1,2,3,4,5]; //initial array
+    //   this.isBurstTextHidden = true;
+    //   this.isTimerHidden = true;
+    //   this.isChartHidden = false;
+    //   this.chartData[0].hidden = false;
+    //   this.chartData[0].data = [1];
+    //   // this.chartLabels= [0,1];
+    //   this.chartLabels = [0, 1];
+    //   this.multiplierDisplay = 1;
+    //   this.finalValue = 0; //init as 0 first, to update later.
+    //   var startTime = Date.now();
+    //   var startValue = 1;
+    //   var increment = 0.012;
+    //   var currValue = startValue + increment;
+    //   let interval = setInterval(() => {
+    //     var targetNumber = targetValue; //store received target in local var
+    //     this.chartData[0].data.push(currValue);
+    //     var currentTime = Date.now();
+    //     //divide by milliseconds
+    //     var secondsToPush = (currentTime - startTime) / 1000;
+    //     this.chartLabels.push(secondsToPush.toFixed(2));
+    //     this.chart.refresh();
+    //     currValue += increment;
+    //     this.multiplierDisplay = currValue;
+    //     // console.log("Current value " +currValue);
+    //     // console.log("target value " +targetNumber);
+    //     increment = this.updateIncrement(currValue);
+    //     if (currValue >= 1.99) {
+    //       this.isArrowHidden = false;
+    //     }
+    //     if (currValue + increment >= targetNumber) {
+    //       currentTime = Date.now();
+    //       this.chartData[0].data.push(targetNumber);
+    //       secondsToPush = (currentTime - startTime) / 1000;
+    //       this.chartLabels.push(secondsToPush.toFixed(2));
+    //       clearInterval(interval);
+    //       this.displayBurst(targetNumber);
+    //       this.isChartHidden = true;
+    //       this.isArrowHidden = true;
+    //       this.chartData[0].hidden = this.isChartHidden;
+    //       this.chart.refresh();
+    //     }
+    //   }, 100)
+    // }
+    // async displayBurst(targetNumber: number) {
+    //   this.finalValue = targetNumber;
+    //   this.isBurstTextHidden = false;
+    //   await this.delay(3000);
+    //   //where to start countdown timer
+    //   this.startCountdownTimer(10);
+    // }
+    // async startCountdownTimer(secondsToCount: number) {
+    //   this.isBurstTextHidden = true;
+    //   this.isTimerHidden = false;
+    //   this.count = secondsToCount;
+    //   var noOfCounts = (this.count * 10)
+    //   this.countDown = timer(0, 100).pipe(
+    //     take(noOfCounts),
+    //     map(() => (this.count -= 0.1).toFixed(1))
+    //   );
+    //   await this.delay((this.count * 1000) + 700);
+    //   // this.generateChart(Math.max(1.01, Math.random()*10));
+    // }
     // countDown;
     // count = 10.0;
     HashingPage.prototype.delay = function (ms) {
         return new Promise(function (resolve) { return setTimeout(resolve, ms); });
-    };
-    HashingPage.prototype.updateIncrement = function (currValue) {
-        if (currValue >= 10.0) {
-            return 0.200;
-        }
-        else if (currValue >= 9.5) {
-            return 0.185;
-        }
-        else if (currValue >= 9.0) {
-            return 0.170;
-        }
-        else if (currValue >= 8.5) {
-            return 0.155;
-        }
-        else if (currValue >= 8.0) {
-            return 0.140;
-        }
-        else if (currValue >= 7.5) {
-            return 0.130;
-        }
-        else if (currValue >= 7.0) {
-            return 0.120;
-        }
-        else if (currValue >= 6.5) {
-            return 0.110;
-        }
-        else if (currValue >= 6.0) {
-            return 0.100;
-        }
-        else if (currValue >= 5.5) {
-            return 0.095;
-        }
-        else if (currValue >= 5.0) {
-            return 0.085;
-        }
-        else if (currValue >= 4.5) {
-            return 0.070;
-        }
-        else if (currValue >= 4.0) {
-            return 0.060;
-        }
-        else if (currValue >= 3.5) {
-            return 0.054;
-        }
-        else if (currValue >= 3.0) {
-            return 0.045;
-        }
-        else if (currValue >= 2.5) {
-            return 0.0380;
-        }
-        else if (currValue >= 2) {
-            return 0.0360;
-        }
-        else if (currValue >= 1.8) {
-            return 0.0300;
-        }
-        else if (currValue >= 1.5) {
-            return 0.027;
-        }
-        else if (currValue >= 1.3) {
-            return 0.0235;
-        }
-        else if (currValue >= 1.2) {
-            return 0.02;
-        }
-        else if (currValue >= 1.1) {
-            return 0.015;
-        }
-        else
-            return 0.012;
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__["BaseChartDirective"]),
@@ -782,7 +753,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding> \n\n \n\n <br>\n\n   <!-- Graph -->\n\n   <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n     <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors" width="400" height="300"\n\n     [legend]="false">\n\n     <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class= "arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'"> \n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style= background:transparent></ion-img>\n\n    </div>\n\n    \n\n    <div class= "circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1"/>\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n     Busted @ {{finalValue}}x\n\n    </div>\n\n    \n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n        Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <br>\n\n  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment>\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">BET</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n          </ion-col>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n          </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */]])
     ], HashingPage);
@@ -793,7 +764,7 @@ var HashingPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 156:
+/***/ 155:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -801,16 +772,16 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(627);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(629);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_socket_io_client__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_socket_io_client__ = __webpack_require__(344);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_global_auth_global_auth__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__node_modules_ionic_native_native_audio__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_global_auth_global_auth__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__node_modules_ionic_native_native_audio__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -888,7 +859,7 @@ var HomePage = /** @class */ (function () {
         // console.log(message.text);
         this.messageText = '';
     };
-    //uncomment for mobile load sound
+    // uncomment for mobile load sound
     HomePage.prototype.ionViewDidLoad = function () {
         var _this = this;
         this.platform.ready().then(function () {
@@ -948,7 +919,7 @@ var HomePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 157:
+/***/ 156:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1078,19 +1049,19 @@ var RoulettePage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 158:
+/***/ 157:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TwoFacAuthPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(121);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(62);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1214,14 +1185,14 @@ var TwoFacAuthPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 159:
+/***/ 158:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WalletPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1494,20 +1465,20 @@ var WalletPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 160:
+/***/ 159:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StreamPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(615);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(520);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__ = __webpack_require__(122);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1812,15 +1783,16 @@ var StreamPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 161:
+/***/ 160:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TrehuntPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(62);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1834,6 +1806,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the TrehuntPage page.
  *
@@ -1841,25 +1814,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var TrehuntPage = /** @class */ (function () {
-    function TrehuntPage(navCtrl, navParams, alertCtrl, dataProvider) {
+    function TrehuntPage(navCtrl, navParams, alertCtrl, dataProvider, auth) {
+        // this.currBTCprice = this.randomIntRange(8000, 10000);
+        // this.currETHprice = this.randomIntRange(600, 800);
+        // this.totalBTCtix = 8800;
+        // this.totalETHtix = 660;
+        // this.currBTCGameID = 'BTC027';
+        // this.currETHGameID = 'ETH005';
+        // this.currBTCtix = this.randomIntRange(1, this.totalBTCtix - 1);
+        // this.currETHtix = this.randomIntRange(1, this.totalETHtix - 1);
+        // this.currOwnBTCtix = this.randomIntRange(0, this.currBTCtix - 1);
+        // this.currOwnETHtix = this.randomIntRange(0, this.currETHtix - 1);
+        // // this.currBTCtix=8700;
+        // this.currETHtix=650;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.alertCtrl = alertCtrl;
         this.dataProvider = dataProvider;
-        // this.currBTCprice = this.randomIntRange(8000, 10000);
-        // this.currETHprice = this.randomIntRange(600, 800);
-        this.totalBTCtix = 8800;
-        this.totalETHtix = 660;
-        this.currBTCGameID = 'BTC027';
-        this.currETHGameID = 'ETH005';
-        this.currBTCtix = this.randomIntRange(1, this.totalBTCtix - 1);
-        this.currETHtix = this.randomIntRange(1, this.totalETHtix - 1);
-        this.currOwnBTCtix = this.randomIntRange(0, this.currBTCtix - 1);
-        this.currOwnETHtix = this.randomIntRange(0, this.currETHtix - 1);
-        // this.currBTCtix=8700;
-        // this.currETHtix=650;
-        this.loadBTCProgress = ((this.currBTCtix / this.totalBTCtix) * 100).toFixed(2);
-        this.loadETHProgress = ((this.currETHtix / this.totalETHtix) * 100).toFixed(2);
+        this.auth = auth;
+        //can retrieve accId from auth
+        console.log("Trehunt successful in retrieving accID " + this.auth.getAccId());
     }
     TrehuntPage.prototype.ionViewDidLoad = function () {
         //init gen same as update curr details
@@ -1869,12 +1843,6 @@ var TrehuntPage = /** @class */ (function () {
     };
     TrehuntPage.prototype.doRefresh = function (refresher) {
         console.log('Caling refresh successfully here', refresher);
-        //to update curr BTC/ETH price & curr BTC/ETH tickets sold
-        var rangeBTCTixIncrease = this.totalBTCtix - this.currBTCtix;
-        var rangeETHTixIncrease = this.totalETHtix - this.currETHtix;
-        // this.updateBTCETHPrice();
-        // this.updateCurrBTCtix(rangeBTCTixIncrease,'random');
-        // this.updateCurrETHtix(rangeETHTixIncrease,'random');
         this.updateCurrGameDetails();
         setTimeout(function () {
             console.log('Refresh operation has ended');
@@ -1884,7 +1852,8 @@ var TrehuntPage = /** @class */ (function () {
     TrehuntPage.prototype.updateCurrGameDetails = function () {
         var _this = this;
         //Making post request here
-        this.dataProvider.postTrehuntStatus().subscribe(function (data) {
+        console.log("Updating game status with accId= " + this.auth.getAccId());
+        this.dataProvider.postTrehuntStatus(this.auth.getAccId()).subscribe(function (data) {
             _this.receivedData = data; // pass the response from HTTP Request into local variable receivedData
             console.log("Game 1 HTTP Request refresh status successful");
             // console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
@@ -1892,14 +1861,18 @@ var TrehuntPage = /** @class */ (function () {
             // ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
             //BTC updates
             _this.currBTCGameID = _this.receivedData.data[1].gameName;
+            _this.purchaseBTCGameID = _this.receivedData.data[1]._id;
             _this.totalBTCtix = _this.receivedData.data[1].totalAmount;
             _this.currBTCtix = _this.receivedData.data[1].currentAmount;
-            _this.currOwnBTCtix = _this.receivedData.data[1].orders[0].tickets.length;
+            _this.currOwnBTCtix = _this.receivedData.data[1].orders.length;
             //ETH updates
             _this.currETHGameID = _this.receivedData.data[0].gameName;
+            _this.purchaseETHGameID = _this.receivedData.data[0]._id;
             _this.totalETHtix = _this.receivedData.data[0].totalAmount;
             _this.currETHtix = _this.receivedData.data[0].currentAmount;
-            _this.currOwnETHtix = _this.receivedData.data[0].orders[0].tickets.length;
+            _this.currOwnETHtix = _this.receivedData.data[0].orders.length;
+            _this.loadBTCProgress = ((_this.currBTCtix / _this.totalBTCtix) * 100).toFixed(2);
+            _this.loadETHProgress = ((_this.currETHtix / _this.totalETHtix) * 100).toFixed(2);
         }, function (err) {
             console.log("Error occured while retrieving game 1 status");
             console.log(err);
@@ -1918,6 +1891,55 @@ var TrehuntPage = /** @class */ (function () {
     //   this.currBTCprice = this.randomIntRange(8000, 10000);
     //   this.currETHprice = this.randomIntRange(600, 800);
     // }
+    TrehuntPage.prototype.buyBTCtix = function () {
+        var _this = this;
+        console.log("bought " + this.amountBTCtix + " BTC Tix");
+        //passing in params & buying tickets
+        console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currBTCGameID + " amount to buy= " + this.amountBTCtix);
+        this.dataProvider.postBuyGame1(this.auth.getAccId(), this.purchaseBTCGameID, this.amountBTCtix).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable receivedData
+            if (parseInt(data.status) === 200) {
+                console.log("Game 1 buying btc okay");
+                console.log("actual bought tix= " + data.amount);
+                _this.presentAlert(_this.amountBTCtix, 'BTC', data.tickets);
+            }
+        }, function (err) {
+            console.log("Error occured while buying BTC tickets");
+            console.log(err);
+        });
+        // this.currOwnBTCtix += parseInt(this.amountBTCtix);
+        this.updateCurrGameDetails();
+        // this.updateCurrBTCtix(this.amountBTCtix, "bought");
+    };
+    TrehuntPage.prototype.buyETHtix = function () {
+        console.log("bought " + this.amountETHtix + " ETH Tix");
+        // this.presentAlert(this.amountETHtix, 'ETH');
+        this.currOwnETHtix += parseInt(this.amountETHtix);
+        this.updateCurrETHtix(this.amountETHtix, "bought");
+    };
+    TrehuntPage.prototype.presentAlert = function (amountTix, type, ticketList) {
+        var alert = this.alertCtrl.create({
+            title: 'SUCCESS',
+            subTitle: 'You have bought ' + amountTix + ' ' + type + ' tickets',
+            message: 'Your tickets: <br>' + this.getListOfTickets(ticketList, type),
+            buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(function () {
+        });
+    };
+    TrehuntPage.prototype.getListOfTickets = function (ticketList, type) {
+        var stringToReturn = '<ul>';
+        for (var i = 0; i < ticketList.length; i++) {
+            stringToReturn += '<li>' + type.toString() + ticketList[i].toString() + '</li>';
+        }
+        stringToReturn += '</ul>';
+        return stringToReturn;
+    };
+    TrehuntPage.prototype.randomIntRange = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    //to be deprecated methods
     TrehuntPage.prototype.updateCurrBTCtix = function (rangeBTCTixIncrease, type) {
         var _this = this;
         if (this.currBTCtix >= this.totalBTCtix) {
@@ -1972,45 +1994,11 @@ var TrehuntPage = /** @class */ (function () {
             }, 100);
         }
     };
-    TrehuntPage.prototype.buyBTCtix = function () {
-        console.log("bought " + this.amountBTCtix + " BTC Tix");
-        this.presentAlert(this.amountBTCtix, 'BTC');
-        this.currOwnBTCtix += parseInt(this.amountBTCtix);
-        this.updateCurrBTCtix(this.amountBTCtix, "bought");
-    };
-    TrehuntPage.prototype.buyETHtix = function () {
-        console.log("bought " + this.amountETHtix + " ETH Tix");
-        this.presentAlert(this.amountETHtix, 'ETH');
-        this.currOwnETHtix += parseInt(this.amountETHtix);
-        this.updateCurrETHtix(this.amountETHtix, "bought");
-    };
-    TrehuntPage.prototype.presentAlert = function (amountTix, type) {
-        var alert = this.alertCtrl.create({
-            title: 'SUCCESS',
-            subTitle: 'You have bought ' + amountTix + ' ' + type + ' tickets',
-            message: 'Your tickets: <br>' + this.getListOfTickets(amountTix, type),
-            buttons: ['OK']
-        });
-        alert.present();
-        alert.onDidDismiss(function () {
-        });
-    };
-    TrehuntPage.prototype.getListOfTickets = function (amountTix, type) {
-        var stringToReturn = '<ul>';
-        for (var i = 0; i < amountTix; i++) {
-            stringToReturn += '<li>' + type.toString() + i.toString() + '</li>';
-        }
-        stringToReturn += '</ul>';
-        return stringToReturn;
-    };
-    TrehuntPage.prototype.randomIntRange = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    };
     TrehuntPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-trehunt',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/'<!--\n\n  Generated template for the TrehuntPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 1: Treasure!</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n<ion-grid>\n\n  <!--for curr game id-->\n\n  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->\n\n  <ion-row>\n\n      <ion-col>\n\n        <div class="style-game-id">\n\n          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>\n\n        </div>\n\n      </ion-col>\n\n      <ion-col>\n\n          <div class="style-game-id">\n\n              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>\n\n            </div>\n\n      </ion-col>\n\n  </ion-row>\n\n  <!-- for view game results -->\n\n  <ion-row>\n\n    <ion-col>\n\n        <button ion-button small color="secondary" style="text-transform: none;" [disabled]="BTCTixDisabled" (click)="viewBTCResults()">View BTC Results</button>\n\n    </ion-col>\n\n    <ion-col>\n\n        <button ion-button color="secondary"  style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>\n\n    </ion-col>\n\n</ion-row>\n\n  <!-- for current tix own -->\n\n  <ion-row>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">{{currOwnBTCtix | number}}</span> tix\n\n      </div>\n\n    </ion-col>\n\n    <ion-col>\n\n      <div class="style-current-tix">\n\n        You own: <span style="color:#f3ba2e">{{currOwnETHtix | number}}</span> tix\n\n      </div>\n\n    </ion-col>\n\n</ion-row>\n\n  <!-- for coin images row-->\n\n  <ion-row>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n    <ion-col>\n\n      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>\n\n    </ion-col>\n\n  </ion-row>\n\n\n\n  <!--for current tickets sold-->\n\n  <h6 style="text-align: center">Total Tickets Sold</h6>\n\n  <ion-row>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>\n\n      </ion-col>\n\n      <ion-col>\n\n        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>\n\n      </ion-col>\n\n  </ion-row>\n\n\n\n\n\n  <!--for current progress bar-->\n\n  <ion-row>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadBTCProgress"></progress-bar>\n\n      </ion-col>\n\n      <ion-col>\n\n          <progress-bar [progress]="loadETHProgress"></progress-bar>\n\n      </ion-col>\n\n  </ion-row>\n\n  \n\n  \n\n  <!--for buying tix header-->\n\n  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>\n\n  <ion-row>\n\n      <ion-col>\n\n          No. BTC Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>\n\n          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>\n\n      </ion-col>\n\n      <ion-col>\n\n          No. ETH Ticket:\n\n          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>\n\n          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>\n\n      </ion-col>\n\n  </ion-row>\n\n</ion-grid>\n\n\n\n<ion-refresher (ionRefresh)="doRefresh($event)">\n\n  <ion-refresher-content  \n\n    pullingIcon="arrow-dropdown"\n\n    pullingText="Pull to refresh"\n\n    refreshingSpinner="circles"\n\n    refreshingText="Refreshing...">\n\n  </ion-refresher-content>\n\n</ion-refresher>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\trehunt\trehunt.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_data_data__["a" /* DataProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */]])
     ], TrehuntPage);
     return TrehuntPage;
 }());
@@ -2019,7 +2007,7 @@ var TrehuntPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 162:
+/***/ 161:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2145,7 +2133,7 @@ var SlotsdrawPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 172:
+/***/ 171:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -2158,11 +2146,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 172;
+webpackEmptyAsyncContext.id = 171;
 
 /***/ }),
 
-/***/ 215:
+/***/ 214:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -2179,11 +2167,11 @@ var map = {
 		7
 	],
 	"../pages/roulette/roulette.module": [
-		658,
+		657,
 		6
 	],
 	"../pages/slotsdraw/slotsdraw.module": [
-		657,
+		658,
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
@@ -2218,7 +2206,7 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 215;
+webpackAsyncContext.id = 214;
 module.exports = webpackAsyncContext;
 
 /***/ }),
@@ -2230,7 +2218,7 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SplashLogoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(131);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2305,28 +2293,28 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(375);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser_animations__ = __webpack_require__(649);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_roulette_roulette__ = __webpack_require__(157);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_bidding_bidding__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_roulette_roulette__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_bidding_bidding__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_contact_contact__ = __webpack_require__(651);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_wallet_wallet__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_stream_stream__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_tabs_tabs__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(120);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_wallet_wallet__ = __webpack_require__(158);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_stream_stream__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_tabs_tabs__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_splash_logo_splash_logo__ = __webpack_require__(419);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts__ = __webpack_require__(652);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(417);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(132);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_hashing_hashing__ = __webpack_require__(155);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_trehunt_trehunt__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(131);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_hashing_hashing__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_trehunt_trehunt__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_progress_bar_progress_bar__ = __webpack_require__(653);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_home_home__ = __webpack_require__(156);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_global_auth_global_auth__ = __webpack_require__(82);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_native_audio__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_home_home__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_global_auth_global_auth__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_native_audio__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_smart_audio_smart_audio__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_slotsdraw_slotsdraw__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_data_data__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_slotsdraw_slotsdraw__ = __webpack_require__(161);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_data_data__ = __webpack_require__(129);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2395,8 +2383,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/bidding/bidding.module#BiddingPageModule', name: 'BiddingPage', segment: 'bidding', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
@@ -2445,252 +2433,252 @@ var AppModule = /** @class */ (function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 222,
-	"./af.js": 222,
-	"./ar": 223,
-	"./ar-dz": 224,
-	"./ar-dz.js": 224,
-	"./ar-kw": 225,
-	"./ar-kw.js": 225,
-	"./ar-ly": 226,
-	"./ar-ly.js": 226,
-	"./ar-ma": 227,
-	"./ar-ma.js": 227,
-	"./ar-sa": 228,
-	"./ar-sa.js": 228,
-	"./ar-tn": 229,
-	"./ar-tn.js": 229,
-	"./ar.js": 223,
-	"./az": 230,
-	"./az.js": 230,
-	"./be": 231,
-	"./be.js": 231,
-	"./bg": 232,
-	"./bg.js": 232,
-	"./bm": 233,
-	"./bm.js": 233,
-	"./bn": 234,
-	"./bn.js": 234,
-	"./bo": 235,
-	"./bo.js": 235,
-	"./br": 236,
-	"./br.js": 236,
-	"./bs": 237,
-	"./bs.js": 237,
-	"./ca": 238,
-	"./ca.js": 238,
-	"./cs": 239,
-	"./cs.js": 239,
-	"./cv": 240,
-	"./cv.js": 240,
-	"./cy": 241,
-	"./cy.js": 241,
-	"./da": 242,
-	"./da.js": 242,
-	"./de": 243,
-	"./de-at": 244,
-	"./de-at.js": 244,
-	"./de-ch": 245,
-	"./de-ch.js": 245,
-	"./de.js": 243,
-	"./dv": 246,
-	"./dv.js": 246,
-	"./el": 247,
-	"./el.js": 247,
-	"./en-au": 248,
-	"./en-au.js": 248,
-	"./en-ca": 249,
-	"./en-ca.js": 249,
-	"./en-gb": 250,
-	"./en-gb.js": 250,
-	"./en-ie": 251,
-	"./en-ie.js": 251,
-	"./en-il": 252,
-	"./en-il.js": 252,
-	"./en-nz": 253,
-	"./en-nz.js": 253,
-	"./eo": 254,
-	"./eo.js": 254,
-	"./es": 255,
-	"./es-do": 256,
-	"./es-do.js": 256,
-	"./es-us": 257,
-	"./es-us.js": 257,
-	"./es.js": 255,
-	"./et": 258,
-	"./et.js": 258,
-	"./eu": 259,
-	"./eu.js": 259,
-	"./fa": 260,
-	"./fa.js": 260,
-	"./fi": 261,
-	"./fi.js": 261,
-	"./fo": 262,
-	"./fo.js": 262,
-	"./fr": 263,
-	"./fr-ca": 264,
-	"./fr-ca.js": 264,
-	"./fr-ch": 265,
-	"./fr-ch.js": 265,
-	"./fr.js": 263,
-	"./fy": 266,
-	"./fy.js": 266,
-	"./gd": 267,
-	"./gd.js": 267,
-	"./gl": 268,
-	"./gl.js": 268,
-	"./gom-latn": 269,
-	"./gom-latn.js": 269,
-	"./gu": 270,
-	"./gu.js": 270,
-	"./he": 271,
-	"./he.js": 271,
-	"./hi": 272,
-	"./hi.js": 272,
-	"./hr": 273,
-	"./hr.js": 273,
-	"./hu": 274,
-	"./hu.js": 274,
-	"./hy-am": 275,
-	"./hy-am.js": 275,
-	"./id": 276,
-	"./id.js": 276,
-	"./is": 277,
-	"./is.js": 277,
-	"./it": 278,
-	"./it.js": 278,
-	"./ja": 279,
-	"./ja.js": 279,
-	"./jv": 280,
-	"./jv.js": 280,
-	"./ka": 281,
-	"./ka.js": 281,
-	"./kk": 282,
-	"./kk.js": 282,
-	"./km": 283,
-	"./km.js": 283,
-	"./kn": 284,
-	"./kn.js": 284,
-	"./ko": 285,
-	"./ko.js": 285,
-	"./ky": 286,
-	"./ky.js": 286,
-	"./lb": 287,
-	"./lb.js": 287,
-	"./lo": 288,
-	"./lo.js": 288,
-	"./lt": 289,
-	"./lt.js": 289,
-	"./lv": 290,
-	"./lv.js": 290,
-	"./me": 291,
-	"./me.js": 291,
-	"./mi": 292,
-	"./mi.js": 292,
-	"./mk": 293,
-	"./mk.js": 293,
-	"./ml": 294,
-	"./ml.js": 294,
-	"./mn": 295,
-	"./mn.js": 295,
-	"./mr": 296,
-	"./mr.js": 296,
-	"./ms": 297,
-	"./ms-my": 298,
-	"./ms-my.js": 298,
-	"./ms.js": 297,
-	"./mt": 299,
-	"./mt.js": 299,
-	"./my": 300,
-	"./my.js": 300,
-	"./nb": 301,
-	"./nb.js": 301,
-	"./ne": 302,
-	"./ne.js": 302,
-	"./nl": 303,
-	"./nl-be": 304,
-	"./nl-be.js": 304,
-	"./nl.js": 303,
-	"./nn": 305,
-	"./nn.js": 305,
-	"./pa-in": 306,
-	"./pa-in.js": 306,
-	"./pl": 307,
-	"./pl.js": 307,
-	"./pt": 308,
-	"./pt-br": 309,
-	"./pt-br.js": 309,
-	"./pt.js": 308,
-	"./ro": 310,
-	"./ro.js": 310,
-	"./ru": 311,
-	"./ru.js": 311,
-	"./sd": 312,
-	"./sd.js": 312,
-	"./se": 313,
-	"./se.js": 313,
-	"./si": 314,
-	"./si.js": 314,
-	"./sk": 315,
-	"./sk.js": 315,
-	"./sl": 316,
-	"./sl.js": 316,
-	"./sq": 317,
-	"./sq.js": 317,
-	"./sr": 318,
-	"./sr-cyrl": 319,
-	"./sr-cyrl.js": 319,
-	"./sr.js": 318,
-	"./ss": 320,
-	"./ss.js": 320,
-	"./sv": 321,
-	"./sv.js": 321,
-	"./sw": 322,
-	"./sw.js": 322,
-	"./ta": 323,
-	"./ta.js": 323,
-	"./te": 324,
-	"./te.js": 324,
-	"./tet": 325,
-	"./tet.js": 325,
-	"./tg": 326,
-	"./tg.js": 326,
-	"./th": 327,
-	"./th.js": 327,
-	"./tl-ph": 328,
-	"./tl-ph.js": 328,
-	"./tlh": 329,
-	"./tlh.js": 329,
-	"./tr": 330,
-	"./tr.js": 330,
-	"./tzl": 331,
-	"./tzl.js": 331,
-	"./tzm": 332,
-	"./tzm-latn": 333,
-	"./tzm-latn.js": 333,
-	"./tzm.js": 332,
-	"./ug-cn": 334,
-	"./ug-cn.js": 334,
-	"./uk": 335,
-	"./uk.js": 335,
-	"./ur": 336,
-	"./ur.js": 336,
-	"./uz": 337,
-	"./uz-latn": 338,
-	"./uz-latn.js": 338,
-	"./uz.js": 337,
-	"./vi": 339,
-	"./vi.js": 339,
-	"./x-pseudo": 340,
-	"./x-pseudo.js": 340,
-	"./yo": 341,
-	"./yo.js": 341,
-	"./zh-cn": 342,
-	"./zh-cn.js": 342,
-	"./zh-hk": 343,
-	"./zh-hk.js": 343,
-	"./zh-tw": 344,
-	"./zh-tw.js": 344
+	"./af": 221,
+	"./af.js": 221,
+	"./ar": 222,
+	"./ar-dz": 223,
+	"./ar-dz.js": 223,
+	"./ar-kw": 224,
+	"./ar-kw.js": 224,
+	"./ar-ly": 225,
+	"./ar-ly.js": 225,
+	"./ar-ma": 226,
+	"./ar-ma.js": 226,
+	"./ar-sa": 227,
+	"./ar-sa.js": 227,
+	"./ar-tn": 228,
+	"./ar-tn.js": 228,
+	"./ar.js": 222,
+	"./az": 229,
+	"./az.js": 229,
+	"./be": 230,
+	"./be.js": 230,
+	"./bg": 231,
+	"./bg.js": 231,
+	"./bm": 232,
+	"./bm.js": 232,
+	"./bn": 233,
+	"./bn.js": 233,
+	"./bo": 234,
+	"./bo.js": 234,
+	"./br": 235,
+	"./br.js": 235,
+	"./bs": 236,
+	"./bs.js": 236,
+	"./ca": 237,
+	"./ca.js": 237,
+	"./cs": 238,
+	"./cs.js": 238,
+	"./cv": 239,
+	"./cv.js": 239,
+	"./cy": 240,
+	"./cy.js": 240,
+	"./da": 241,
+	"./da.js": 241,
+	"./de": 242,
+	"./de-at": 243,
+	"./de-at.js": 243,
+	"./de-ch": 244,
+	"./de-ch.js": 244,
+	"./de.js": 242,
+	"./dv": 245,
+	"./dv.js": 245,
+	"./el": 246,
+	"./el.js": 246,
+	"./en-au": 247,
+	"./en-au.js": 247,
+	"./en-ca": 248,
+	"./en-ca.js": 248,
+	"./en-gb": 249,
+	"./en-gb.js": 249,
+	"./en-ie": 250,
+	"./en-ie.js": 250,
+	"./en-il": 251,
+	"./en-il.js": 251,
+	"./en-nz": 252,
+	"./en-nz.js": 252,
+	"./eo": 253,
+	"./eo.js": 253,
+	"./es": 254,
+	"./es-do": 255,
+	"./es-do.js": 255,
+	"./es-us": 256,
+	"./es-us.js": 256,
+	"./es.js": 254,
+	"./et": 257,
+	"./et.js": 257,
+	"./eu": 258,
+	"./eu.js": 258,
+	"./fa": 259,
+	"./fa.js": 259,
+	"./fi": 260,
+	"./fi.js": 260,
+	"./fo": 261,
+	"./fo.js": 261,
+	"./fr": 262,
+	"./fr-ca": 263,
+	"./fr-ca.js": 263,
+	"./fr-ch": 264,
+	"./fr-ch.js": 264,
+	"./fr.js": 262,
+	"./fy": 265,
+	"./fy.js": 265,
+	"./gd": 266,
+	"./gd.js": 266,
+	"./gl": 267,
+	"./gl.js": 267,
+	"./gom-latn": 268,
+	"./gom-latn.js": 268,
+	"./gu": 269,
+	"./gu.js": 269,
+	"./he": 270,
+	"./he.js": 270,
+	"./hi": 271,
+	"./hi.js": 271,
+	"./hr": 272,
+	"./hr.js": 272,
+	"./hu": 273,
+	"./hu.js": 273,
+	"./hy-am": 274,
+	"./hy-am.js": 274,
+	"./id": 275,
+	"./id.js": 275,
+	"./is": 276,
+	"./is.js": 276,
+	"./it": 277,
+	"./it.js": 277,
+	"./ja": 278,
+	"./ja.js": 278,
+	"./jv": 279,
+	"./jv.js": 279,
+	"./ka": 280,
+	"./ka.js": 280,
+	"./kk": 281,
+	"./kk.js": 281,
+	"./km": 282,
+	"./km.js": 282,
+	"./kn": 283,
+	"./kn.js": 283,
+	"./ko": 284,
+	"./ko.js": 284,
+	"./ky": 285,
+	"./ky.js": 285,
+	"./lb": 286,
+	"./lb.js": 286,
+	"./lo": 287,
+	"./lo.js": 287,
+	"./lt": 288,
+	"./lt.js": 288,
+	"./lv": 289,
+	"./lv.js": 289,
+	"./me": 290,
+	"./me.js": 290,
+	"./mi": 291,
+	"./mi.js": 291,
+	"./mk": 292,
+	"./mk.js": 292,
+	"./ml": 293,
+	"./ml.js": 293,
+	"./mn": 294,
+	"./mn.js": 294,
+	"./mr": 295,
+	"./mr.js": 295,
+	"./ms": 296,
+	"./ms-my": 297,
+	"./ms-my.js": 297,
+	"./ms.js": 296,
+	"./mt": 298,
+	"./mt.js": 298,
+	"./my": 299,
+	"./my.js": 299,
+	"./nb": 300,
+	"./nb.js": 300,
+	"./ne": 301,
+	"./ne.js": 301,
+	"./nl": 302,
+	"./nl-be": 303,
+	"./nl-be.js": 303,
+	"./nl.js": 302,
+	"./nn": 304,
+	"./nn.js": 304,
+	"./pa-in": 305,
+	"./pa-in.js": 305,
+	"./pl": 306,
+	"./pl.js": 306,
+	"./pt": 307,
+	"./pt-br": 308,
+	"./pt-br.js": 308,
+	"./pt.js": 307,
+	"./ro": 309,
+	"./ro.js": 309,
+	"./ru": 310,
+	"./ru.js": 310,
+	"./sd": 311,
+	"./sd.js": 311,
+	"./se": 312,
+	"./se.js": 312,
+	"./si": 313,
+	"./si.js": 313,
+	"./sk": 314,
+	"./sk.js": 314,
+	"./sl": 315,
+	"./sl.js": 315,
+	"./sq": 316,
+	"./sq.js": 316,
+	"./sr": 317,
+	"./sr-cyrl": 318,
+	"./sr-cyrl.js": 318,
+	"./sr.js": 317,
+	"./ss": 319,
+	"./ss.js": 319,
+	"./sv": 320,
+	"./sv.js": 320,
+	"./sw": 321,
+	"./sw.js": 321,
+	"./ta": 322,
+	"./ta.js": 322,
+	"./te": 323,
+	"./te.js": 323,
+	"./tet": 324,
+	"./tet.js": 324,
+	"./tg": 325,
+	"./tg.js": 325,
+	"./th": 326,
+	"./th.js": 326,
+	"./tl-ph": 327,
+	"./tl-ph.js": 327,
+	"./tlh": 328,
+	"./tlh.js": 328,
+	"./tr": 329,
+	"./tr.js": 329,
+	"./tzl": 330,
+	"./tzl.js": 330,
+	"./tzm": 331,
+	"./tzm-latn": 332,
+	"./tzm-latn.js": 332,
+	"./tzm.js": 331,
+	"./ug-cn": 333,
+	"./ug-cn.js": 333,
+	"./uk": 334,
+	"./uk.js": 334,
+	"./ur": 335,
+	"./ur.js": 335,
+	"./uz": 336,
+	"./uz-latn": 337,
+	"./uz-latn.js": 337,
+	"./uz.js": 336,
+	"./vi": 338,
+	"./vi.js": 338,
+	"./x-pseudo": 339,
+	"./x-pseudo.js": 339,
+	"./yo": 340,
+	"./yo.js": 340,
+	"./zh-cn": 341,
+	"./zh-cn.js": 341,
+	"./zh-hk": 342,
+	"./zh-hk.js": 342,
+	"./zh-tw": 343,
+	"./zh-tw.js": 343
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2710,10 +2698,67 @@ webpackContext.id = 478;
 
 /***/ }),
 
-/***/ 612:
+/***/ 517:
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ 62:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GlobalAuthProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+/*
+  Generated class for the GlobalAuthProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var GlobalAuthProvider = /** @class */ (function () {
+    function GlobalAuthProvider() {
+        this.isGuest = true;
+        this.isAuthenticated = false;
+        console.log('Hello GlobalAuthProvider Provider');
+    }
+    GlobalAuthProvider.prototype.setAccId = function (accId) {
+        this.accId = accId;
+    };
+    GlobalAuthProvider.prototype.getAccId = function () {
+        return this.accId;
+    };
+    GlobalAuthProvider.prototype.setGuestLogin = function (control) {
+        this.isGuest = control;
+    };
+    GlobalAuthProvider.prototype.getGuestLogin = function () {
+        return this.isGuest;
+    };
+    GlobalAuthProvider.prototype.setIsAuth = function (control) {
+        this.isAuthenticated = control;
+    };
+    GlobalAuthProvider.prototype.getIsAuth = function () {
+        return this.isAuthenticated;
+    };
+    GlobalAuthProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [])
+    ], GlobalAuthProvider);
+    return GlobalAuthProvider;
+}());
+
+//# sourceMappingURL=global-auth.js.map
 
 /***/ }),
 
@@ -2724,12 +2769,12 @@ webpackContext.id = 478;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(132);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(120);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2868,7 +2913,7 @@ var ProgressBarComponent = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmartAudioProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__ = __webpack_require__(5);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2977,57 +3022,6 @@ var SmartAudioProvider = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=smart-audio.js.map
-
-/***/ }),
-
-/***/ 82:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GlobalAuthProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-/*
-  Generated class for the GlobalAuthProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var GlobalAuthProvider = /** @class */ (function () {
-    function GlobalAuthProvider() {
-        this.isGuest = true;
-        this.isAuthenticated = false;
-        console.log('Hello GlobalAuthProvider Provider');
-    }
-    GlobalAuthProvider.prototype.setGuestLogin = function (control) {
-        this.isGuest = control;
-    };
-    GlobalAuthProvider.prototype.getGuestLogin = function () {
-        return this.isGuest;
-    };
-    GlobalAuthProvider.prototype.setIsAuth = function (control) {
-        this.isAuthenticated = control;
-    };
-    GlobalAuthProvider.prototype.getIsAuth = function () {
-        return this.isAuthenticated;
-    };
-    GlobalAuthProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [])
-    ], GlobalAuthProvider);
-    return GlobalAuthProvider;
-}());
-
-//# sourceMappingURL=global-auth.js.map
 
 /***/ })
 
