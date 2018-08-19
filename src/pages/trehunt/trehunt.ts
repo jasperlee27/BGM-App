@@ -75,7 +75,8 @@ export class TrehuntPage {
 
   updateCurrGameDetails() {
     //Making post request here
-    this.dataProvider.postTrehuntStatus().subscribe(data => {
+    console.log("Updating game status with accId= " +this.auth.getAccId());
+    this.dataProvider.postTrehuntStatus(this.auth.getAccId()).subscribe(data => {
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       console.log("Game 1 HTTP Request refresh status successful");
 

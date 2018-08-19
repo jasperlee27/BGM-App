@@ -22,9 +22,12 @@ export class DataProvider {
   }
 
   // get game1 curr status
-  postTrehuntStatus(): Observable<any> {
-    return this.http.post(trehuntStatusURL, {
-    });
+  postTrehuntStatus(accid): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid);
+    return this.http.post(trehuntStatusURL, requestBody, httpHeader);
   }
 
   //buy game 1 tickets
