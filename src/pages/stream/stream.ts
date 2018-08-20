@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import * as Chart from "chart.js";
 import 'chartjs-plugin-streaming';
 import { getQueryValue } from '@angular/core/src/view/query';
 import { BaseChartDirective } from '../../../node_modules/ng2-charts';
@@ -19,7 +20,6 @@ import { take, map } from 'rxjs/operators';
 })
 export class StreamPage {
   @ViewChild(BaseChartDirective) chart: any;
-  
   isGameTime: boolean;
   countDownGame3;
   countDownBet3;
@@ -29,6 +29,7 @@ export class StreamPage {
   roundFinalPrice;
   game3BetAmount;
   yDataReceived = Math.random() * 20;
+
   chartLabels = [];
   // private datamap: any;
   chartColors: any[] =
@@ -79,42 +80,43 @@ export class StreamPage {
     },
     plugins: {
       streaming: {
-        refresh: 1000, 
+        refresh: 1000,
+        duration: 30000,
+        //can create function to copy here from received data above?
+        randomIntRange: function (min,max) {
+          console.log("managed to call function");
+          return Math.floor(Math.random() * (max - min + 1) + min);
+        },
+
         onRefresh: function (chart: any) {
           var count = 0;
-
-          //     for (var i = 0; i < 2; i++) {
-          //       var value = Math.random() * 3000 + 5000;
-          //       var currDate = Date.now();
-          //       chart.datasets[i].data.push({
-          //         x: currDate,
-          //         y: value,
-          //       });
-
-          //     }
-          //   },
-          //   delay: 2000,
-          //   frameRate: 30,
-          // }
-
-          chart.data.datasets.forEach(function (dataset: any) {
-            if (count == 0) {
-              var value = Math.random() * 3000 + 4500;
-            }
-
-            else if (count===3){
-              var value = 5000;
-            }
-
-            else {
-            }
-            var currDate = Date.now();
-            dataset.data.push({
-              x: currDate,
-              y: value,
-            });
-            count++;
+          var value = 5000;
+          chart.data.datasets[0].data.push({
+            x: Date.now(),
+            y: this.randomIntRange(3000, 8000),
           });
+
+          // chart.data.datasets.forEach(function (dataset: any) {
+          //   if (count == 0) {
+          //     // var value = Math.random() * 3000 + 4500;
+          //     var value = 100;
+          //     value = this.randomIntRange();
+          //   }
+
+          //   else if (count === 3) {
+          //     var value = 5000;
+          //   }
+
+          //   else {
+          //   }
+          //   var currDate = Date.now();
+
+          //   dataset.data.push({
+          //     x: currDate,
+          //     y: value,
+          //   });
+          //   count++;
+          // });
         },
         delay: 1500,
         frameRate: 30,
@@ -169,7 +171,7 @@ export class StreamPage {
 
   };
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.isGameTime=true;
+    this.isGameTime = true;
   }
 
   ionViewDidLoad() {
@@ -177,70 +179,66 @@ export class StreamPage {
     this.startGame(10);
   }
 
-  startStreaming() {
-    let interval = setInterval(() => {
-      var btcPrice = this.randomIntRange(4000, 8000);
-      this.datasets[0].data.push(btcPrice);
-      var currentTime = Date.now();
-      this.chartLabels.push(currentTime);
-      this.chart.labels.shift();
-      this.chart.refresh();
-    }, 300)
-  }
+  // startStreaming() {
+  //   let interval = setInterval(() => {
+  //     var btcPrice = this.randomIntRange(4000, 8000);
+  //     this.datasets[0].data.push(btcPrice);
+  //     var currentTime = Date.now();
+  //     this.chartLabels.push(currentTime);
+  //     this.chart.labels.shift();
+  //     this.chart.refresh();
+  //   }, 300)
+  // }
 
-  randomIntRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
-  async startGame(countdown: number){
-    this.isGameTime=true;
+  async startGame(countdown: number) {
+    this.isGameTime = true;
     console.log("Game 3 Started");
     this.count = countdown;
-    var noOfCounts = (this.count*10)
+    var noOfCounts = (this.count * 10)
 
     this.countDownGame3 = timer(0, 100).pipe(
       take(noOfCounts),
-      map(()=> (this.count -= 0.1).toFixed(1))
+      map(() => (this.count -= 0.1).toFixed(1))
     );
 
-    await this.delay((this.count*1000));
+    await this.delay((this.count * 1000));
     this.endGame();
   }
-  
+
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async endGame(){
+  async endGame() {
     //to check if should pop w control variable else will pop all.
-    this.isGameTime=false;
-    this.roundFinalPrice=Math.random() * 3000 + 4500;
+    this.isGameTime = false;
+    this.roundFinalPrice = Math.random() * 3000 + 4500;
     this.calcRoundResult();
 
-    if (this.boughtIntoGame3){
+    if (this.boughtIntoGame3) {
       this.datasets.pop();
     }
     //update after game end
-    this.boughtIntoGame3=false;
+    this.boughtIntoGame3 = false;
 
     this.chart.refresh();
     console.log("Game 2 Ended");
     this.count = 30;
-    var noOfCounts = (this.count*10)
+    var noOfCounts = (this.count * 10)
 
     this.countDownBet3 = timer(0, 100).pipe(
       take(noOfCounts),
-      map(()=> (this.count -= 0.1).toFixed(1))
+      map(() => (this.count -= 0.1).toFixed(1))
     );
 
 
-    await this.delay((this.count*1000));
-  
+    await this.delay((this.count * 1000));
+
 
     this.startGame(30);
   }
 
-  buyDataset(){
+  buyDataset() {
     console.log("Try to add new dataset");
     var newDataset = {
       label: 'Buy Price',
@@ -255,21 +253,25 @@ export class StreamPage {
     this.chart.refresh();
   }
 
-  betHigher(){
+  betHigher() {
     this.boughtIntoGame3 = true;
     console.log("bought " + this.game3BetAmount);
     this.buyDataset();
-    this.roundBetType='higher';
+    this.roundBetType = 'higher';
   }
 
-  betLower(){
+  betLower() {
     this.boughtIntoGame3 = true;
     console.log("bought " + this.game3BetAmount);
     this.buyDataset();
-    this.roundBetType='lower';
+    this.roundBetType = 'lower';
   }
+  // randomIntRange() {
+  //   console.log("managed to call function defined outside");
+  //   return Math.floor(Math.random() * (4500 - 3000 + 1) + 3000);
+  // }
 
-  calcRoundResult(){
+  calcRoundResult() {
 
   }
 
