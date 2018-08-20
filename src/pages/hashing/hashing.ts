@@ -355,6 +355,7 @@ export class HashingPage {
   }
   hashManualBet(){
     console.log("manual betting");
+    this.isManualBetDisabled=true;
     //make place bet call
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
     this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(data => {
@@ -377,6 +378,11 @@ export class HashingPage {
         console.log("Error occured while buying placing manual hash bet");
         console.log(err);
       });
+  }
+
+  hashManualCout(){
+    this.isManualBetDisabled=false;
+    //to do post to cashout
   }
 
   toggleSegment($event) {
