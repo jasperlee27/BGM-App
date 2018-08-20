@@ -30,8 +30,9 @@ export class StreamPage {
   game3BetAmount;
   yDataReceived = Math.random() * 20;
   testGlobalVar = 6000;
-
+  buffer =  [[], []];
   chartLabels = [];
+
   // private datamap: any;
   chartColors: any[] =
     [
@@ -82,6 +83,7 @@ export class StreamPage {
   ngOnInit() {
     console.log('ionViewDidLoad StreamPage');
     console.log("variable initalized here is " +this.testGlobalVar);
+    // buffer=[[7000],[Date.now()]];
     this.startGame(10);
     this.options= {
       legend: {

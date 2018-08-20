@@ -30,6 +30,7 @@ export class HashingPage {
   isArrowHidden: boolean;
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
+  isLocGameTimerStarted: boolean = false;
   countDown;
   count = 10.0;
   socket: SocketIOClient.Socket;
@@ -212,13 +213,20 @@ export class HashingPage {
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
 
-      if (receivedData.type === 'game') {
-
-        if (parseFloat(receivedData.number) === 1) {
+      if (receivedData.type === 'GameStart'){
+        //one instance
+        if (!this.isLocGameTimerStarted) {
+          this.isLocGameTimerStarted = true;
           console.log("START TIMER HERE");
           this.timer("start");
         }
 
+        else{
+          //do nth
+        }
+      }
+
+      else if (receivedData.type === 'game') {
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
         this.chartData[0].hidden = false;
@@ -241,6 +249,7 @@ export class HashingPage {
         this.finalValue = parseFloat(receivedData.value).toFixed(2);
         //reset chart and stop timer
         this.timer("stop");
+        this.isLocGameTimerStarted = false;
         this.chartLabels = [];
         this.chartData[0].data = [];
 
@@ -253,6 +262,10 @@ export class HashingPage {
         this.isBurstTextHidden = true;
         this.isTimerHidden = false;
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
+      }
+
+      else{
+        //do nth
       }
       // this.socket.emit('event3', {
       //   msg: 'Yes, its working for me!!'
