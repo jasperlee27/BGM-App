@@ -29,6 +29,7 @@ export class StreamPage {
   roundFinalPrice;
   game3BetAmount;
   yDataReceived = Math.random() * 20;
+  testGlobalVar = 6000;
 
   chartLabels = [];
   // private datamap: any;
@@ -71,112 +72,124 @@ export class StreamPage {
 
     ];
 
-  options: any = {
-    legend: {
-      display: false
-    },
-    animation: {
-      duration: 0
-    },
-    plugins: {
-      streaming: {
-        refresh: 1000,
-        duration: 30000,
-        //can create function to copy here from received data above?
-        randomIntRange: function (min,max) {
-          console.log("managed to call function");
-          return Math.floor(Math.random() * (max - min + 1) + min);
-        },
+  options: any;
 
-        onRefresh: function (chart: any) {
-          var count = 0;
-          var value = 5000;
-          chart.data.datasets[0].data.push({
-            x: Date.now(),
-            y: this.randomIntRange(3000, 8000),
-          });
-
-          // chart.data.datasets.forEach(function (dataset: any) {
-          //   if (count == 0) {
-          //     // var value = Math.random() * 3000 + 4500;
-          //     var value = 100;
-          //     value = this.randomIntRange();
-          //   }
-
-          //   else if (count === 3) {
-          //     var value = 5000;
-          //   }
-
-          //   else {
-          //   }
-          //   var currDate = Date.now();
-
-          //   dataset.data.push({
-          //     x: currDate,
-          //     y: value,
-          //   });
-          //   count++;
-          // });
-        },
-        delay: 1500,
-        frameRate: 30,
-      }
-    },
-    scales: {
-      xAxes: [{
-        type: 'realtime',
-        offset: true,
-        ticks: {
-          fontColor: "#f4f4f4",
-          fontSize: 12,
-          padding: 5,
-          display: true,
-          stepSize: 1000,
-          min: 0,
-          suggestedMax: 8000,
-          // mirror: true,
-          // drawTicks: true,
-        },
-        gridLines: {
-          lineWidth: 0.5,
-          display: false,
-          drawTicks: true,
-          color: "white",
-        },
-
-      }],
-
-      yAxes: [{
-        offset: true,
-        ticks: {
-          fontColor: "#f4f4f4",
-          fontSize: 12,
-          padding: 5,
-          display: true,
-          stepSize: 1000,
-          min: 0,
-          suggestedMax: 8000,
-          // mirror: true,
-          // drawTicks: true,
-        },
-        gridLines: {
-          lineWidth: 0.5,
-          display: false,
-          drawTicks: true,
-          color: "white",
-        },
-      }],
-
-    }
-
-  };
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.isGameTime = true;
+    this.testGlobalVar=7000;
   }
 
-  ionViewDidLoad() {
+  ngOnInit() {
     console.log('ionViewDidLoad StreamPage');
+    console.log("variable initalized here is " +this.testGlobalVar);
     this.startGame(10);
+    this.options= {
+      legend: {
+        display: false
+      },
+      animation: {
+        duration: 0
+      },
+      plugins: {
+        streaming: {
+          refresh: 1000,
+          duration: 30000,
+          //can create function to copy here from received data above?
+          //or create socket here and update value here;
+          getClassValue: function (){
+            console.log("is calling get class value but returning " +this.testGlobalVar);
+            return this.testGlobalVar;
+          },
+          randomIntRange: function (min,max) {
+            console.log("managed to call function");
+            return Math.floor(Math.random() * (max - min + 1) + min);
+          },
+  
+          onRefresh: function (chart: any) {
+            var count = 0;
+            // var value = this.randomIntRange(3000,8000);
+            console.log("pushing " + this.testGlobalVar);
+            chart.data.datasets[0].data.push({
+              x: Date.now(),
+              y: this.testGlobalVar,
+            });
+  
+            // chart.data.datasets.forEach(function (dataset: any) {
+            //   if (count == 0) {
+            //     // var value = Math.random() * 3000 + 4500;
+            //     var value = 100;
+            //     value = this.randomIntRange();
+            //   }
+  
+            //   else if (count === 3) {
+            //     var value = 5000;
+            //   }
+  
+            //   else {
+            //   }
+            //   var currDate = Date.now();
+  
+            //   dataset.data.push({
+            //     x: currDate,
+            //     y: value,
+            //   });
+            //   count++;
+            // });
+          },
+          delay: 1500,
+          frameRate: 30,
+        }
+      },
+      scales: {
+        xAxes: [{
+          type: 'realtime',
+          offset: true,
+          ticks: {
+            fontColor: "#f4f4f4",
+            fontSize: 12,
+            padding: 5,
+            display: true,
+            stepSize: 1000,
+            min: 0,
+            suggestedMax: 8000,
+            // mirror: true,
+            // drawTicks: true,
+          },
+          gridLines: {
+            lineWidth: 0.5,
+            display: false,
+            drawTicks: true,
+            color: "white",
+          },
+  
+        }],
+  
+        yAxes: [{
+          offset: true,
+          ticks: {
+            fontColor: "#f4f4f4",
+            fontSize: 12,
+            padding: 5,
+            display: true,
+            stepSize: 1000,
+            min: 0,
+            suggestedMax: 8000,
+            // mirror: true,
+            // drawTicks: true,
+          },
+          gridLines: {
+            lineWidth: 0.5,
+            display: false,
+            drawTicks: true,
+            color: "white",
+          },
+        }],
+  
+      }
+  
+    };
+
+
   }
 
   // startStreaming() {
