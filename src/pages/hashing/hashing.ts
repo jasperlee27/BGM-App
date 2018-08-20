@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import { BaseChartDirective } from 'ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
 import * as io from 'socket.io-client';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { DataProvider } from '../../providers/data/data';
 /**
  * Generated class for the HashingPage page.
  *
@@ -30,6 +32,8 @@ export class HashingPage {
   isArrowHidden: boolean;
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
+  isManualBetDisabled: boolean;
+  hashManualBetAmount; 
   isLocGameTimerStarted: boolean = false;
   countDown;
   count = 10.0;
@@ -39,8 +43,9 @@ export class HashingPage {
   timerInterval;
   currentView: string = 'manual';
   hashBetType: string = 'manual';
+  currentGameID: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
     this.isArrowHidden = true;
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
@@ -213,7 +218,7 @@ export class HashingPage {
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
 
-      if (receivedData.type === 'GameStart'){
+      if (receivedData.type === 'GameStart') {
         //one instance
         if (!this.isLocGameTimerStarted) {
           this.isLocGameTimerStarted = true;
@@ -221,11 +226,10 @@ export class HashingPage {
           this.timer("start");
         }
 
-        else{
+        else {
           //do nth
         }
       }
-
       else if (receivedData.type === 'game') {
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
@@ -256,7 +260,9 @@ export class HashingPage {
       }
 
       else if (receivedData.type === "countdown") {
-        // console.log("Received data type  " + receivedData.type);
+        //log currentGameID here
+        this.currentGameID = receivedData.gameId;
+        console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
         this.isBurstTextHidden = true;
@@ -264,7 +270,7 @@ export class HashingPage {
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
       }
 
-      else{
+      else {
         //do nth
       }
       // this.socket.emit('event3', {
@@ -296,32 +302,32 @@ export class HashingPage {
         time++;
         console.log("Counting timer " + time + "s");
 
-        if (time > 20){
-          if (time % 20 === 0){
+        if (time > 20) {
+          if (time % 20 === 0) {
             this.chartLabels.push(time);
             console.log("Successfully pushed " + time);
           }
         }
 
-        if (time > 15){
-          if (time % 10 === 0){
+        if (time > 15) {
+          if (time % 10 === 0) {
             this.chartLabels.push(time);
             console.log("Successfully pushed " + time);
           }
         }
 
-        else if (time >= 8){
-          if (time % 5 === 0){
+        else if (time >= 8) {
+          if (time % 5 === 0) {
             this.chartLabels.push(time);
             console.log("Successfully pushed " + time);
           }
         }
-        else if (time===7){
+        else if (time === 7) {
           this.chartLabels.push(time);
           console.log("Successfully pushed " + time);
         }
 
-        else if (time===6){
+        else if (time === 6) {
           //skip
         }
 
@@ -336,8 +342,8 @@ export class HashingPage {
           this.chartLabels.push(time);
           console.log("Successfully pushed " + time);
         }
-        
-       
+
+
       }, 1000)
     }
 
@@ -347,8 +353,32 @@ export class HashingPage {
     }
 
   }
+  hashManualBet(){
+    console.log("manual betting");
+    //make place bet call
+    console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
+    this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(data => {
+      // pass the response from HTTP Request into local variable receivedData
+      console.log("Received returned data " + data);
+      if (parseInt(data.status) === 200) {
+        // console.log("Game 1 buying btc okay");
+        // console.log("actual bought tix= " + data.amount);
+        let alert = this.alertCtrl.create({
+          title: 'SUCCESS',
+          subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
+          buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(() => {
+        })
+      }
+    },
+      err => {
+        console.log("Error occured while buying placing manual hash bet");
+        console.log(err);
+      });
+  }
 
-  
   toggleSegment($event) {
     console.log("Chosen segment " + $event.value);
     //update current view & wallet balance

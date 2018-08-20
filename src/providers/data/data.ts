@@ -5,6 +5,8 @@ import { Observable } from '../../../node_modules/rxjs/Observable';
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
+const hashManualBetURL = 'http://178.128.50.224:3000/game2/placeBets';
+const hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
 
 @Injectable()
 export class DataProvider {
@@ -40,4 +42,19 @@ export class DataProvider {
   }
 
 
+  postBetGame2(accid, gameId, amount): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount",amount);
+    return this.http.post(hashManualBetURL, requestBody, httpHeader);
+  }
+
+  postCoutGame2(accid, gameId): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId);
+    return this.http.post(hashManualCoutURL, requestBody, httpHeader);
+  }
 }
