@@ -33,7 +33,7 @@ export class HashingPage {
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
   isManualBetDisabled: boolean;
-  hashManualBetAmount; 
+  hashManualBetAmount;
   isLocGameTimerStarted: boolean = false;
   countDown;
   count = 10.0;
@@ -353,14 +353,14 @@ export class HashingPage {
     }
 
   }
-  hashManualBet(){
+  hashManualBet() {
     console.log("manual betting");
-    this.isManualBetDisabled=true;
+    this.isManualBetDisabled = true;
     //make place bet call
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
     this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
-      console.log("Received returned data " + data);
+      console.log("Received returned data " + (data.msg));
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
         // console.log("actual bought tix= " + data.amount);
@@ -380,9 +380,31 @@ export class HashingPage {
       });
   }
 
-  hashManualCout(){
-    this.isManualBetDisabled=false;
+  hashManualCout() {
+    this.isManualBetDisabled = false;
     //to do post to cashout
+    //make manual cashout call
+    console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID);
+    this.dataProvider.postCoutGame2(this.auth.getAccId(), this.currentGameID).subscribe(data => {
+      // pass the response from HTTP Request into local variable receivedData
+      console.log("Received returned data " + (data.msg));
+      if (parseInt(data.status) === 200) {
+        // console.log("Game 1 buying btc okay");
+        // console.log("actual bought tix= " + data.amount);
+        let alert = this.alertCtrl.create({
+          title: 'SUCCESS',
+          subTitle: 'You have cashed out ' + this.currentGameID + ' for this game',
+          buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(() => {
+        })
+      }
+    },
+      err => {
+        console.log("Error occured while buying placing manual hash bet");
+        console.log(err);
+      });
   }
 
   toggleSegment($event) {
