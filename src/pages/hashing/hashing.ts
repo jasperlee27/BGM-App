@@ -44,9 +44,12 @@ export class HashingPage {
   currentView: string = 'manual';
   hashBetType: string = 'manual';
   currentGameID: string;
+  walletAmount: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
     this.isArrowHidden = true;
+    // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
+    this.walletAmount = 500;
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
     this.chartData = [

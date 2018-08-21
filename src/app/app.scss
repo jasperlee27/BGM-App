@@ -27,6 +27,15 @@
     text-align: center;
 }
 
+.title.title-ios {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+}
+
 // ion-header ion-icon.back-button-icon.icon {
 //     color: map-get($colors, dark);
 // }
@@ -45,6 +54,9 @@
 
  .toolbar-title.toolbar-title-ios {
     color: color($colors, dark);
+    width: 100%;
+    text-align: center;
+    padding-left: 0%;
  }
 
 
