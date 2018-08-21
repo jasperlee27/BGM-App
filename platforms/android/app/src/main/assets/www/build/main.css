@@ -30543,6 +30543,15 @@ ion-navbar.toolbar {
   text-align: center;
 }
 
+.title.title-ios {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  text-align: left;
+}
+
 .back-button {
   color: #222;
   z-index: 100;
@@ -30557,6 +30566,9 @@ ion-navbar.toolbar {
 
 .toolbar-title.toolbar-title-ios {
   color: #222;
+  width: 100%;
+  text-align: center;
+  padding-left: 0%;
 }
 
 progress-bar .progress-outer {
@@ -30600,6 +30612,18 @@ page-bidding .row {
   -ms-flex-align: center !important;
   align-items: center !important;
   text-align: center !important;
+}
+
+page-hashing .walletDisplay {
+  width: 20%;
+  text-align: right;
+  height: 50%;
+  color: white;
+  border-color: white !important;
+  border-radius: 10px;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  background-color: #191919;
 }
 
 page-hashing .scroll-content {

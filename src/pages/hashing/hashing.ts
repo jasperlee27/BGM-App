@@ -208,8 +208,8 @@ export class HashingPage {
     this.messages = new Array();
     this.socket.on('message-received', (msg: any) => {
       this.messages.push(msg);
-      console.log(msg);
-      console.log(this.messages);
+      // console.log(msg);
+      // console.log(this.messages);
     });
     //emit to server
     this.socket.emit('chat message', {
@@ -248,7 +248,7 @@ export class HashingPage {
       }
 
       else if (receivedData.type === "busted") {
-        console.log("Received data type  " + receivedData.type);
+        // console.log("Received data type  " + receivedData.type);
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
         this.isBurstTextHidden = false;
@@ -265,7 +265,7 @@ export class HashingPage {
       else if (receivedData.type === "countdown") {
         //log currentGameID here
         this.currentGameID = receivedData.gameId;
-        console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
+        // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
         this.isBurstTextHidden = true;
@@ -303,31 +303,31 @@ export class HashingPage {
     if (action === 'start') {
       this.timerInterval = setInterval(() => {
         time++;
-        console.log("Counting timer " + time + "s");
+        // console.log("Counting timer " + time + "s");
 
         if (time > 20) {
           if (time % 20 === 0) {
             this.chartLabels.push(time);
-            console.log("Successfully pushed " + time);
+            // console.log("Successfully pushed " + time);
           }
         }
 
         if (time > 15) {
           if (time % 10 === 0) {
             this.chartLabels.push(time);
-            console.log("Successfully pushed " + time);
+            // console.log("Successfully pushed " + time);
           }
         }
 
         else if (time >= 8) {
           if (time % 5 === 0) {
             this.chartLabels.push(time);
-            console.log("Successfully pushed " + time);
+            // console.log("Successfully pushed " + time);
           }
         }
         else if (time === 7) {
           this.chartLabels.push(time);
-          console.log("Successfully pushed " + time);
+          // console.log("Successfully pushed " + time);
         }
 
         else if (time === 6) {
@@ -337,13 +337,13 @@ export class HashingPage {
         else if (time > 2) {
           if (time % 2 === 0) {
             this.chartLabels.push(time);
-            console.log("Successfully pushed " + time);
+            // console.log("Successfully pushed " + time);
           }
         }
 
         else {
           this.chartLabels.push(time);
-          console.log("Successfully pushed " + time);
+          // console.log("Successfully pushed " + time);
         }
 
 
@@ -363,7 +363,9 @@ export class HashingPage {
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
     this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
-      console.log("Received returned data " + (data.msg));
+      // var receivedData= JSON.parse(data);
+      console.log("DATA HERE " + data.message);
+     
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
         // console.log("actual bought tix= " + data.amount);
@@ -390,13 +392,15 @@ export class HashingPage {
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID);
     this.dataProvider.postCoutGame2(this.auth.getAccId(), this.currentGameID).subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
-      console.log("Received returned data " + (data.msg));
+      console.log("Received returned message " + data.message);
+      console.log("Received returned multiplier " + data.multiplier);
+      console.log("Received returned winning " + data.winning);
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
         // console.log("actual bought tix= " + data.amount);
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
-          subTitle: 'You have cashed out ' + this.currentGameID + ' for this game',
+          subTitle: 'You have cashed out ' + parseFloat(data.winning.toFixed(2)) + ' for this game',
           buttons: ['OK']
         });
         alert.present();
