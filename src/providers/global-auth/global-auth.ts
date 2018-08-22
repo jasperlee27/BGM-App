@@ -12,6 +12,7 @@ export class GlobalAuthProvider {
   public isGuest: boolean = true;
   public isAuthenticated: boolean = false;
   private accId: string;
+  private accValue: number;
 
   constructor() {
     console.log('Hello GlobalAuthProvider Provider');
@@ -23,6 +24,14 @@ export class GlobalAuthProvider {
 
   getAccId(){
     return this.accId;
+  }
+
+  setAccValue(currValue){
+    this.accValue = parseInt(currValue);
+  }
+
+  getAccValue(){
+    return this.accValue;
   }
 
   setGuestLogin(control: boolean){

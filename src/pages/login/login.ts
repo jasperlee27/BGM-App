@@ -108,8 +108,9 @@ export class LoginPage {
       console.log("Login reponse");
       console.log("account info " + this.receivedData.accountValue)
       console.log("Setting account id as " + this.receivedData._id);
-      
+      console.log("Setting acc balance as  " + this.receivedData.accountValue);
       this.auth.setAccId(this.receivedData._id);
+      this.auth.setAccValue(this.receivedData.accountValue);
       this.auth.setGuestLogin(false);
 
       if (parseInt(this.receivedData.require2FA)===0){

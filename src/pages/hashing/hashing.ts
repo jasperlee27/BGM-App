@@ -400,7 +400,7 @@ export class HashingPage {
         // console.log("actual bought tix= " + data.amount);
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
-          subTitle: 'You have cashed out ' + parseFloat(data.winning.toFixed(2)) + ' for this game',
+          subTitle: 'You have cashed out ' + parseFloat(data.winning).toFixed(2) + ' for this game',
           buttons: ['OK']
         });
         alert.present();

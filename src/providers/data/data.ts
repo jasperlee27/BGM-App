@@ -32,7 +32,6 @@ export class DataProvider {
     return this.http.post(walletAmountURL, requestBody, httpHeader);
   }
 
-
   // get game1 curr status
   postTrehuntStatus(accid): Observable<any> {
     const httpHeader = {

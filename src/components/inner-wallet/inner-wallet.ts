@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DataProvider } from '../../providers/data/data';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 
 /**
  * Generated class for the InnerWalletComponent component.
@@ -15,17 +17,30 @@ export class InnerWalletComponent {
   // text: string;
   walletAmount;
 
-  constructor() {
+  constructor(private dataProvider: DataProvider, private auth: GlobalAuthProvider) {
     // console.log('Hello InnerWalletComponent Component');
     // this.text = 'Hello World';
   }
 
   ngOnInit(){
-    this.walletAmount = 10000;
+    this.walletAmount = this.auth.getAccValue();
   }
 
   getLatestAmount(){
-    console.log("can register click?");
-    this.walletAmount = 200000;
+
+    this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(data => {
+
+      //parse response from server
+      console.log("Update wallet reponse");
+      console.log("Received acc balance as  " + data.accountValue);
+      this.walletAmount = parseInt(data.accountValue);
+    },
+    err => {
+      console.log("Error occured while getting account balance");
+      console.log(err);
+    });
+    // this.navCtrl.setRoot(TabsPage);
+    console.log("End getting amount");
   }
+  
 }
