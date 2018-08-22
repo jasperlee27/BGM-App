@@ -23,6 +23,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HashingPage } from '../pages/hashing/hashing';
 import { TrehuntPage } from '../pages/trehunt/trehunt';
 import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
+import { InnerWalletComponent } from '../components/inner-wallet/inner-wallet';
 import { TwoFacAuthPage } from '../pages/two-fac-auth/two-fac-auth';
 import { HomePage } from '../pages/home/home';
 import { GlobalAuthProvider } from '../providers/global-auth/global-auth';
@@ -35,6 +36,7 @@ import { DataProvider } from '../providers/data/data';
   declarations: [
     MyApp,
     ProgressBarComponent,
+    InnerWalletComponent,
     RoulettePage,
     TrehuntPage,
     SlotsdrawPage,
