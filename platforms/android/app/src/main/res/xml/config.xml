@@ -46,6 +46,9 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.1.137:8100" />
     <allow-navigation href="http://192.168.56.1:8100" />
+    <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+        <activity windowSoftInputMode="adjustPan" />
+    </edit-config>
     <allow-intent href="market:*" />
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -67,6 +70,7 @@
     <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="webView" value="com.ionicframework.cordova.webview.IonicWebViewEngine" />
+    <preference name="KeyboardResize" value="false" />
     <preference name="ScrollEnabled" value="true" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />

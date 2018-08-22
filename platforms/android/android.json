@@ -5,6 +5,47 @@
   },
   "config_munge": {
     "files": {
+      "AndroidManifest.xml": {
+        "parents": {
+          "/manifest/application/activity": [
+            {
+              "xml": "<activity windowSoftInputMode=\"adjustPan\" />",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml",
+              "oldAttrib": {
+                "android:configChanges": "orientation|keyboardHidden|keyboard|screenSize|locale",
+                "android:label": "@string/activity_name",
+                "android:launchMode": "singleTop",
+                "android:name": "MainActivity",
+                "android:theme": "@android:style/Theme.DeviceDefault.NoActionBar",
+                "android:windowSoftInputMode": "adjustResize",
+                "windowSoftInputMode": "adjustPan"
+              }
+            }
+          ],
+          "/*": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+              "count": 2
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
+              "count": 1
+            }
+          ],
+          "/manifest": [
+            {
+              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+              "count": 1
+            }
+          ]
+        }
+      },
       "res/xml/config.xml": {
         "parents": {
           "/*": [
@@ -38,30 +79,6 @@
             },
             {
               "xml": "<feature name=\"Whitelist\"><param name=\"android-package\" value=\"org.apache.cordova.whitelist.WhitelistPlugin\" /><param name=\"onload\" value=\"true\" /></feature>",
-              "count": 1
-            }
-          ]
-        }
-      },
-      "AndroidManifest.xml": {
-        "parents": {
-          "/*": [
-            {
-              "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 2
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
-              "count": 1
-            },
-            {
-              "xml": "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\" />",
-              "count": 1
-            }
-          ],
-          "/manifest": [
-            {
-              "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
               "count": 1
             }
           ]
