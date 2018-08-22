@@ -7,13 +7,15 @@
 <ion-header>
 
   <ion-navbar>
+  
     <ion-title>Game 2: Hashing</ion-title>
     <ion-buttons end class="walletDisplay">
-      {{walletAmount}}
-    </ion-buttons >
+        <img class="bgmlogo" alt="logo" height="60%" src="../assets/imgs/BGM_Logo.png">
+        {{walletAmount}}
+    </ion-buttons>
     <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->
   </ion-navbar>
-  
+
 </ion-header>
 
 
@@ -75,10 +77,12 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <button ion-button full color="secondary"  [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled" (click)="hashManualBet()">BET</button>
+        <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled"
+          (click)="hashManualBet()">BET</button>
       </ion-row>
       <ion-row *ngIf="isManualBetDisabled">
-        <button ion-button full color="secondary"  [color]="isManualBetDisabled ? 'secondary' : 'dark'" [disabled]="!isManualBetDisabled" (click)="hashManualCout()">CASH OUT</button>
+        <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'secondary' : 'dark'" [disabled]="!isManualBetDisabled"
+          (click)="hashManualCout()">CASH OUT</button>
       </ion-row>
     </ion-list>
 
@@ -120,13 +124,13 @@
       </ion-card>
       <!--2 buttons start stop-->
       <ion-row>
-          <ion-col col-6 text-center>
-            <button ion-button color="secondary" full (click)="deposit()">RUN</button>
-          </ion-col>
-          <ion-col col-6 text-center>
-            <button ion-button color="secondary" full (click)="withdraw()">STOP</button>
-          </ion-col>
-        </ion-row>
+        <ion-col col-6 text-center>
+          <button ion-button color="secondary" full (click)="deposit()">RUN</button>
+        </ion-col>
+        <ion-col col-6 text-center>
+          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>
+        </ion-col>
+      </ion-row>
     </ion-list>
   </div>
 
