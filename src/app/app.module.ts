@@ -55,7 +55,18 @@ import { DataProvider } from '../providers/data/data';
     HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+			platforms: {
+				ios: {
+					scrollPadding: false,
+					scrollAssist: false
+        },
+        android:{
+          scrollPadding: false,
+					scrollAssist: false
+        }
+      }
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

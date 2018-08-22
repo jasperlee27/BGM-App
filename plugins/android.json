@@ -16,9 +16,6 @@
     "cordova-plugin-device": {
       "PACKAGE_NAME": "io.com.bgm"
     },
-    "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "io.com.bgm"
-    },
     "cordova-plugin-ionic-webview": {
       "PACKAGE_NAME": "io.com.bgm"
     },
@@ -32,6 +29,9 @@
       "PACKAGE_NAME": "io.com.bgm"
     },
     "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.com.bgm"
+    },
+    "ionic-plugin-keyboard": {
       "PACKAGE_NAME": "io.com.bgm"
     }
   },

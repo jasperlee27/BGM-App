@@ -30635,28 +30635,21 @@ page-hashing .hashingContent {
 }
 
 page-hashing .outer-circle {
+  display: inline-block;
   text-align: center;
   text-decoration: none !important;
-  margin-top: 10% !important;
-  margin-left: 40%;
-  font-size: 24px;
+  margin-top: -150% !important;
+  margin-left: 35%;
+  font-size: 24px !important;
   z-index: 200;
   position: relative;
 }
 
-page-hashing .arrow-head {
-  text-align: end;
-  margin-right: -10%;
-  margin-top: -85%;
-  z-index: 1000;
-  position: relative;
-}
-
 page-hashing .burst-text {
-  text-align: center;
-  margin-top: -40%;
-  margin-left: 7%;
-  font-size: 30px;
+  display: inline-block;
+  margin-top: 0px !important;
+  margin-left: -12%;
+  font-size: 24px;
   font-weight: 600;
   color: red;
   z-index: 1000;
@@ -30667,7 +30660,7 @@ page-hashing .timer-text {
   text-align: center;
   margin-top: -10%;
   margin-left: 7%;
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
   color: #f3ba2e;
   z-index: 1000;

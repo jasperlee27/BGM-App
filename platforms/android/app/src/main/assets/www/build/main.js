@@ -50,6 +50,8 @@ var LoginPage = /** @class */ (function () {
         this.passwordType = 'password';
         this.passwordIcon = 'eye';
         this.loginState = "in";
+        this.usernameInput = 'test1';
+        this.passwordInput = 'test1';
         this.showInvalidLogin = false;
     }
     // ionViewDidLoad() {
@@ -509,8 +511,8 @@ var HashingPage = /** @class */ (function () {
         this.messages = new Array();
         this.socket.on('message-received', function (msg) {
             _this.messages.push(msg);
-            console.log(msg);
-            console.log(_this.messages);
+            // console.log(msg);
+            // console.log(this.messages);
         });
         //emit to server
         this.socket.emit('chat message', {
@@ -543,7 +545,7 @@ var HashingPage = /** @class */ (function () {
                 _this.chart.refresh();
             }
             else if (receivedData.type === "busted") {
-                console.log("Received data type  " + receivedData.type);
+                // console.log("Received data type  " + receivedData.type);
                 _this.chartData[0].hidden = true;
                 _this.isChartHidden = true;
                 _this.isBurstTextHidden = false;
@@ -558,7 +560,7 @@ var HashingPage = /** @class */ (function () {
             else if (receivedData.type === "countdown") {
                 //log currentGameID here
                 _this.currentGameID = receivedData.gameId;
-                console.log("Received type " + receivedData.type + " and stored current game id as " + _this.currentGameID);
+                // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
                 _this.chartData[0].hidden = true;
                 _this.isChartHidden = true;
                 _this.isBurstTextHidden = true;
@@ -591,28 +593,28 @@ var HashingPage = /** @class */ (function () {
         if (action === 'start') {
             this.timerInterval = setInterval(function () {
                 time++;
-                console.log("Counting timer " + time + "s");
+                // console.log("Counting timer " + time + "s");
                 if (time > 20) {
                     if (time % 20 === 0) {
                         _this.chartLabels.push(time);
-                        console.log("Successfully pushed " + time);
+                        // console.log("Successfully pushed " + time);
                     }
                 }
                 if (time > 15) {
                     if (time % 10 === 0) {
                         _this.chartLabels.push(time);
-                        console.log("Successfully pushed " + time);
+                        // console.log("Successfully pushed " + time);
                     }
                 }
                 else if (time >= 8) {
                     if (time % 5 === 0) {
                         _this.chartLabels.push(time);
-                        console.log("Successfully pushed " + time);
+                        // console.log("Successfully pushed " + time);
                     }
                 }
                 else if (time === 7) {
                     _this.chartLabels.push(time);
-                    console.log("Successfully pushed " + time);
+                    // console.log("Successfully pushed " + time);
                 }
                 else if (time === 6) {
                     //skip
@@ -620,12 +622,12 @@ var HashingPage = /** @class */ (function () {
                 else if (time > 2) {
                     if (time % 2 === 0) {
                         _this.chartLabels.push(time);
-                        console.log("Successfully pushed " + time);
+                        // console.log("Successfully pushed " + time);
                     }
                 }
                 else {
                     _this.chartLabels.push(time);
-                    console.log("Successfully pushed " + time);
+                    // console.log("Successfully pushed " + time);
                 }
             }, 1000);
         }
@@ -642,7 +644,8 @@ var HashingPage = /** @class */ (function () {
         console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
         this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(function (data) {
             // pass the response from HTTP Request into local variable receivedData
-            console.log("Received returned data " + (data.msg));
+            // var receivedData= JSON.parse(data);
+            console.log("DATA HERE " + data.message);
             if (parseInt(data.status) === 200) {
                 // console.log("Game 1 buying btc okay");
                 // console.log("actual bought tix= " + data.amount);
@@ -668,13 +671,15 @@ var HashingPage = /** @class */ (function () {
         console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID);
         this.dataProvider.postCoutGame2(this.auth.getAccId(), this.currentGameID).subscribe(function (data) {
             // pass the response from HTTP Request into local variable receivedData
-            console.log("Received returned data " + (data.msg));
+            console.log("Received returned message " + data.message);
+            console.log("Received returned multiplier " + data.multiplier);
+            console.log("Received returned winning " + data.winning);
             if (parseInt(data.status) === 200) {
                 // console.log("Game 1 buying btc okay");
                 // console.log("actual bought tix= " + data.amount);
                 var alert_2 = _this.alertCtrl.create({
                     title: 'SUCCESS',
-                    subTitle: 'You have cashed out ' + _this.currentGameID + ' for this game',
+                    subTitle: 'You have cashed out ' + parseFloat(data.winning.toFixed(2)) + ' for this game',
                     buttons: ['OK']
                 });
                 alert_2.present();
@@ -767,7 +772,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <ion-buttons end class="walletDisplay">\n\n      {{walletAmount}}\n\n    </ion-buttons >\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n  \n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <br>\n\n  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment>\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary"  [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled" (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row *ngIf="isManualBetDisabled">\n\n        <button ion-button full color="secondary"  [color]="isManualBetDisabled ? \'secondary\' : \'dark\'" [disabled]="!isManualBetDisabled" (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n          </ion-col>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n          </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <ion-buttons end class="walletDisplay">\n\n      {{walletAmount}}\n\n    </ion-buttons>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <ion-grid style="height:100%">\n\n\n\n    <!-- <ion-card style="height:60%">\n\n        <ion-card-content> -->\n\n    <!-- for graph cntr -->\n\n    <div class="chart-container" style="position: relative; height:40vh; width:80vw">\n\n      <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n        width="440" height="380" [legend]="false"></canvas>\n\n\n\n      <div id="outer-circle" style="position:relative; top:-70%; left:35%;" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" font-size=24px fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n      <div class="burst-text" style="position:absolute; top:40%; left: 36%" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n        Busted @ {{finalValue}}x\n\n      </div>\n\n      <div class="timer-text" style="position:absolute; top:50%; left: 12%" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n        Next game in {{timerValue}} s\n\n        </div>\n\n    </div>\n\n    <br>\n\n\n\n\n\n    <!-- </ion-card-content>\n\n      </ion-card> -->\n\n    <ion-row>\n\n      <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n        <ion-segment-button outline value="manual">\n\n          Manual\n\n        </ion-segment-button>\n\n        <ion-segment-button outline value="auto">\n\n          Auto\n\n        </ion-segment-button>\n\n      </ion-segment>\n\n    </ion-row>\n\n    <div [ngSwitch]="hashBetType">\n\n      <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n        <br>\n\n        <!-- for manual -->\n\n        <ion-row>\n\n          <ion-col col-4>\n\n            <ion-label color="primary">AMOUNT: </ion-label>\n\n          </ion-col>\n\n          <ion-col col-6>\n\n            <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <ion-label item-end color="primary">BGM</ion-label>\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row>\n\n          <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n            (click)="hashManualBet()">BET</button>\n\n        </ion-row>\n\n        <ion-row *ngIf="isManualBetDisabled">\n\n          <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'secondary\' : \'dark\'" [disabled]="!isManualBetDisabled"\n\n            (click)="hashManualCout()">CASH OUT</button>\n\n        </ion-row>\n\n      </ion-list>\n\n\n\n      <ion-list *ngSwitchCase="\'auto\'">\n\n        <!-- for auto -->\n\n        <ion-card style="height:auto">\n\n          <ion-card-content>\n\n            <!-- base bet-->\n\n            <ion-row>\n\n              <ion-col col-4>\n\n                <ion-label color="primary">Base Bet: </ion-label>\n\n              </ion-col>\n\n              <ion-col col-8>\n\n                <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n              </ion-col>\n\n            </ion-row>\n\n\n\n            <!-- Auto cashout at-->\n\n            <ion-row>\n\n              <ion-col col-4>\n\n                <ion-label color="primary">Cashout: </ion-label>\n\n              </ion-col>\n\n              <ion-col col-8>\n\n                <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n              </ion-col>\n\n            </ion-row>\n\n\n\n            <!-- Stop if-->\n\n            <ion-row>\n\n              <ion-col col-4>\n\n                <ion-label color="primary">Stop if: </ion-label>\n\n              </ion-col>\n\n              <ion-col col-8>\n\n                <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n              </ion-col>\n\n            </ion-row>\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n        <!--2 buttons start stop-->\n\n        <ion-row>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n          </ion-col>\n\n          <ion-col col-6 text-center>\n\n            <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-list>\n\n    </div>\n\n\n\n\n\n\n\n\n\n  </ion-grid>\n\n\n\n  <!-- </ion-col> -->\n\n  <!-- comment out arrow head for now-->\n\n  <!-- <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div> -->\n\n\n\n\n\n\n\n  <br>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], HashingPage);
@@ -871,14 +876,13 @@ var HomePage = /** @class */ (function () {
     //   this.messageText = '';
     // }
     // uncomment for mobile load sound
-    HomePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.loop('bgmLoopHome');
-            });
-        });
-    };
+    // ionViewDidLoad() {
+    //   this.platform.ready().then(() => {
+    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+    //       this.nativeAudio.loop('bgmLoopHome');
+    //     });
+    //   });
+    // }
     HomePage.prototype.getNews = function () {
         var _this = this;
         console.log("button is working fine");
