@@ -6,6 +6,7 @@ import { getQueryValue } from '@angular/core/src/view/query';
 import { BaseChartDirective } from '../../../node_modules/ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 /**
  * Generated class for the StreamPage page.
  *
@@ -32,6 +33,7 @@ export class StreamPage {
   testGlobalVar = 6000;
   buffer =  [[], []];
   chartLabels = [];
+  walletAmount;
 
   // private datamap: any;
   chartColors: any[] =
@@ -75,7 +77,7 @@ export class StreamPage {
 
   options: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider) {
     this.isGameTime = true;
     this.testGlobalVar=7000;
   }
@@ -192,6 +194,10 @@ export class StreamPage {
     };
 
 
+  }
+
+  ionViewWillEnter(){
+    this.walletAmount = this.auth.getAccValue();
   }
 
   // startStreaming() {

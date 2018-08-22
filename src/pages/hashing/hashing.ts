@@ -49,7 +49,6 @@ export class HashingPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
     this.isArrowHidden = true;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
-    this.walletAmount = 500;
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
     this.chartData = [
@@ -294,6 +293,10 @@ export class HashingPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HashingPage');
+  }
+
+  ionViewWillEnter(){
+    this.walletAmount = this.auth.getAccValue();
   }
 
   timer(action: string) {

@@ -10,6 +10,7 @@ import { HashingPage } from '../hashing/hashing';
 import { TrehuntPage } from '../trehunt/trehunt';
 import { HomePage } from '../home/home';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
+import { InnerWalletComponent } from '../../components/inner-wallet/inner-wallet';
 
 @Component({
   templateUrl: 'tabs.html'

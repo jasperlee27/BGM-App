@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { SlotsdrawPage } from '../slotsdraw/slotsdraw';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { InnerWalletComponent } from '../../components/inner-wallet/inner-wallet';
 
 /**
  * Generated class for the TrehuntPage page.
@@ -34,6 +35,7 @@ export class TrehuntPage {
   receivedData: any;
   purchaseBTCGameID: string;
   purchaseETHGameID: string
+  walletAmount;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
     // this.currBTCprice = this.randomIntRange(8000, 10000);
@@ -59,6 +61,11 @@ export class TrehuntPage {
     this.updateCurrGameDetails();
   }
 
+  ionViewWillEnter(){
+    console.log("Fired event ionViewWillEnter");
+    this.walletAmount = this.auth.getAccValue();
+  }
+  
   ngOnInit() {
 
   }

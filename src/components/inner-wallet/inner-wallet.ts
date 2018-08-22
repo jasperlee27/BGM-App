@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 
@@ -13,9 +13,9 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
   templateUrl: 'inner-wallet.html'
 })
 export class InnerWalletComponent {
-
+  @Input('walletAmount') walletAmount;
   // text: string;
-  walletAmount;
+  // walletAmount;
 
   constructor(private dataProvider: DataProvider, private auth: GlobalAuthProvider) {
     // console.log('Hello InnerWalletComponent Component');
@@ -33,7 +33,9 @@ export class InnerWalletComponent {
       //parse response from server
       console.log("Update wallet reponse");
       console.log("Received acc balance as  " + data.accountValue);
-      this.walletAmount = parseInt(data.accountValue);
+      this.auth.setAccValue(parseInt(data.accountValue));
+      console.log("Global provider value of acc " +this.auth.getAccValue());
+      this.walletAmount = this.auth.getAccValue();
     },
     err => {
       console.log("Error occured while getting account balance");
