@@ -21,7 +21,11 @@ export class InnerWalletComponent {
   }
 
   ngOnInit(){
-    this.walletAmount = 500;
+    this.walletAmount = 10000;
   }
 
+  getLatestAmount(){
+    console.log("can register click?");
+    this.walletAmount = 200000;
+  }
 }

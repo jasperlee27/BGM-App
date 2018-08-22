@@ -2,12 +2,15 @@ inner-wallet {
     img  {
         float: left;
         vertical-align: baseline;
-        margin-top: 10%
+        margin-top: 0%;
+        margin-left: -5%;
     }
     .walletDisplay{
+        padding-left:10%;
         width:15%;
         text-align: center;
-        line-height: 25px; 
+        line-height: 25px;
+        font-size:12px;
         height: 24px;
         color: white;
         border-color:white !important;
