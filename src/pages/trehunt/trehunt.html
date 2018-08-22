@@ -8,105 +8,112 @@
 
   <ion-navbar>
     <ion-title>Game 1: Treasure!</ion-title>
+    <div class="walletDisplay">
+      <inner-wallet></inner-wallet>
+    </div>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<ion-grid>
-  <!--for curr game id-->
-  <!-- <h2 style="text-align: center">Current Est. Price</h2> -->
-  <ion-row>
+  <ion-grid>
+    <!--for curr game id-->
+    <!-- <h2 style="text-align: center">Current Est. Price</h2> -->
+    <ion-row>
       <ion-col>
         <div class="style-game-id">
-          GameID: <span style="color:#f3ba2e">{{currBTCGameID}}</span>
+          GameID:
+          <span style="color:#f3ba2e">{{currBTCGameID}}</span>
         </div>
       </ion-col>
       <ion-col>
-          <div class="style-game-id">
-              GameID: <span style="color:#f3ba2e">{{currETHGameID}}</span>
-            </div>
+        <div class="style-game-id">
+          GameID:
+          <span style="color:#f3ba2e">{{currETHGameID}}</span>
+        </div>
       </ion-col>
-  </ion-row>
-  <!-- for view game results -->
-  <ion-row>
-    <ion-col>
+    </ion-row>
+    <!-- for view game results -->
+    <ion-row>
+      <ion-col>
         <button ion-button small color="secondary" style="text-transform: none;" [disabled]="BTCTixDisabled" (click)="viewBTCResults()">View BTC Results</button>
-    </ion-col>
-    <ion-col>
-        <button ion-button color="secondary"  style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>
-    </ion-col>
-</ion-row>
-  <!-- for current tix own -->
-  <ion-row>
-    <ion-col>
-      <div class="style-current-tix">
-        You own: <span style="color:#f3ba2e">{{currOwnBTCtix | number}}</span> tix
-      </div>
-    </ion-col>
-    <ion-col>
-      <div class="style-current-tix">
-        You own: <span style="color:#f3ba2e">{{currOwnETHtix | number}}</span> tix
-      </div>
-    </ion-col>
-</ion-row>
-  <!-- for coin images row-->
-  <ion-row>
-    <ion-col>
-      <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style= background:transparent></ion-img>
-    </ion-col>
-    <ion-col>
-      <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style= background:transparent></ion-img>
-    </ion-col>
-  </ion-row>
+      </ion-col>
+      <ion-col>
+        <button ion-button color="secondary" style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>
+      </ion-col>
+    </ion-row>
+    <!-- for current tix own -->
+    <ion-row>
+      <ion-col>
+        <div class="style-current-tix">
+          You own:
+          <span style="color:#f3ba2e">{{currOwnBTCtix | number}}</span> tix
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="style-current-tix">
+          You own:
+          <span style="color:#f3ba2e">{{currOwnETHtix | number}}</span> tix
+        </div>
+      </ion-col>
+    </ion-row>
+    <!-- for coin images row-->
+    <ion-row>
+      <ion-col>
+        <ion-img width="100" height="100" src="../assets/imgs/Bitcoin.png" style=background:transparent></ion-img>
+      </ion-col>
+      <ion-col>
+        <ion-img width="100" height="100" src="../assets/imgs/ethereum.png" style=background:transparent></ion-img>
+      </ion-col>
+    </ion-row>
 
-  <!--for current tickets sold-->
-  <h6 style="text-align: center">Total Tickets Sold</h6>
-  <ion-row>
+    <!--for current tickets sold-->
+    <h6 style="text-align: center">Total Tickets Sold</h6>
+    <ion-row>
       <ion-col>
-        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>
+        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currBTCtix}}</span>
+        <span style="color:whitesmoke; font-size:12px;">/ {{totalBTCtix}}</span>
       </ion-col>
       <ion-col>
-        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span><span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>
+        <span style="color:rgb(17, 204, 17); font-size:28px;">{{currETHtix}}</span>
+        <span style="color:whitesmoke; font-size:12px;">/ {{totalETHtix}}</span>
       </ion-col>
-  </ion-row>
+    </ion-row>
 
 
-  <!--for current progress bar-->
-  <ion-row>
+    <!--for current progress bar-->
+    <ion-row>
       <ion-col>
-          <progress-bar [progress]="loadBTCProgress"></progress-bar>
+        <progress-bar [progress]="loadBTCProgress"></progress-bar>
       </ion-col>
       <ion-col>
-          <progress-bar [progress]="loadETHProgress"></progress-bar>
+        <progress-bar [progress]="loadETHProgress"></progress-bar>
       </ion-col>
-  </ion-row>
-  
-  
-  <!--for buying tix header-->
-  <h6 style="text-align: center">Buy <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span></h6>
-  <ion-row>
-      <ion-col>
-          No. BTC Ticket:
-          <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>
-          <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>
-      </ion-col>
-      <ion-col>
-          No. ETH Ticket:
-          <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>
-          <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>
-      </ion-col>
-  </ion-row>
-</ion-grid>
+    </ion-row>
 
-<ion-refresher (ionRefresh)="doRefresh($event)">
-  <ion-refresher-content  
-    pullingIcon="arrow-dropdown"
-    pullingText="Pull to refresh"
-    refreshingSpinner="circles"
-    refreshingText="Refreshing...">
-  </ion-refresher-content>
-</ion-refresher>
+
+    <!--for buying tix header-->
+    <h6 style="text-align: center">Buy
+      <span style="color:#f3ba2e; font-size:12px;">(1 Ticket = $1 USD)</span>
+    </h6>
+    <ion-row>
+      <ion-col>
+        No. BTC Ticket:
+        <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>
+        <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>
+      </ion-col>
+      <ion-col>
+        No. ETH Ticket:
+        <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>
+        <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
 </ion-content>
