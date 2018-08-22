@@ -17,7 +17,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-
+import { Keyboard } from '@ionic-native/keyboard';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HashingPage } from '../pages/hashing/hashing';
@@ -93,7 +93,8 @@ import { DataProvider } from '../providers/data/data';
     SmartAudioProvider,
     GlobalAuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    DataProvider
+    DataProvider,
+    Keyboard
   ]
 })
 export class AppModule {}

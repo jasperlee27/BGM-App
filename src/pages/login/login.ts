@@ -9,6 +9,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { DataProvider } from '../../providers/data/data';
+import { Keyboard } from '../../../node_modules/@ionic-native/keyboard';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -77,7 +78,7 @@ export class LoginPage {
   receivedData;
   showInvalidLogin: boolean = false;
   
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private renderer: Renderer2){
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private keyboard: Keyboard){
   }
 
   // ionViewDidLoad() {
@@ -87,6 +88,10 @@ export class LoginPage {
   //     });
   //   });
   // }
+
+  ionViewDidEnter(){
+    this.keyboard.disableScroll(true);
+  }
 
   login() {
     // this.smartAudio.play('startGame3');
