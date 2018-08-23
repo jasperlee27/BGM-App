@@ -10,9 +10,6 @@
     "cordova-custom-config": {
       "PACKAGE_NAME": "io.com.bgm"
     },
-    "cordova-plugin-advanced-http": {
-      "PACKAGE_NAME": "io.com.bgm"
-    },
     "cordova-plugin-device": {
       "PACKAGE_NAME": "io.com.bgm"
     },
@@ -22,16 +19,19 @@
     "cordova-plugin-ionic-webview": {
       "PACKAGE_NAME": "io.com.bgm"
     },
-    "cordova-plugin-nativeaudio": {
+    "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "io.com.bgm"
     },
-    "cordova-plugin-splashscreen": {
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "io.com.bgm"
+    },
+    "cordova-plugin-advanced-http": {
       "PACKAGE_NAME": "io.com.bgm"
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "io.com.bgm"
     },
-    "cordova-plugin-whitelist": {
+    "cordova-plugin-nativeaudio": {
       "PACKAGE_NAME": "io.com.bgm"
     }
   },

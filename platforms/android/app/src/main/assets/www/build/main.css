@@ -30571,6 +30571,28 @@ ion-navbar.toolbar {
   padding-left: 0%;
 }
 
+inner-wallet img {
+  float: left;
+  vertical-align: baseline;
+  margin-top: 0%;
+  margin-left: -5%;
+}
+
+inner-wallet .walletDisplay {
+  padding-left: 10%;
+  width: 15%;
+  text-align: center;
+  line-height: 25px;
+  font-size: 12px;
+  height: 24px;
+  color: white;
+  border-color: white !important;
+  border-radius: 5px;
+  margin-bottom: 0%;
+  margin-top: 0%;
+  background-color: #191919;
+}
+
 progress-bar .progress-outer {
   width: 100%;
   margin: 10px 2%;
@@ -30583,7 +30605,7 @@ progress-bar .progress-outer {
 }
 
 progress-bar .progress-inner {
-  min-width: 15%;
+  min-width: 10%;
   white-space: nowrap;
   overflow: hidden;
   padding: 5px;
@@ -30615,15 +30637,8 @@ page-bidding .row {
 }
 
 page-hashing .walletDisplay {
-  width: 20%;
-  text-align: right;
-  height: 50%;
-  color: white;
-  border-color: white !important;
-  border-radius: 10px;
-  margin-bottom: 0%;
-  margin-top: 0%;
-  background-color: #191919;
+  float: right;
+  width: 40%;
 }
 
 page-hashing .scroll-content {
@@ -30930,8 +30945,18 @@ page-stream .ion-card-header {
   font-size: 4px !important;
 }
 
+page-stream .walletDisplay {
+  float: right;
+  width: 40%;
+}
+
 page-trehunt ion-row {
   text-align: center;
+}
+
+page-trehunt .walletDisplay {
+  float: right;
+  width: 40%;
 }
 
 page-trehunt h2, page-trehunt h6 {

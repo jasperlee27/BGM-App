@@ -368,7 +368,9 @@ export class HashingPage {
       // pass the response from HTTP Request into local variable receivedData
       // var receivedData= JSON.parse(data);
       console.log("DATA HERE " + data.message);
-     
+      console.log("Received return acc Value " + data.accountValue);
+      this.auth.setAccValue(data.accountValue);
+      this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
         // console.log("actual bought tix= " + data.amount);

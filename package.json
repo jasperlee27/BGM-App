@@ -72,7 +72,8 @@
       "cordova-plugin-nativeaudio": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   },
   "description": "An Ionic project for BGM"
