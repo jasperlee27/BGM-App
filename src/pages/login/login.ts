@@ -95,7 +95,8 @@ export class LoginPage {
     this.showInvalidLogin= false;
 
     if (usernameToPost!=null){
-      console.log ("before lower case " + usernameToPost);
+      this.auth.setUsername(usernameToPost.toLowerCase());
+      console.log ("before lower  case " + usernameToPost);
       usernameToPost = usernameToPost.toLowerCase();
       console.log ("after lower case " + usernameToPost);
     }
