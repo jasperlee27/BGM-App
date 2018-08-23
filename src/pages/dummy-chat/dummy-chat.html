@@ -7,29 +7,43 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>dummyChat</ion-title>
+    <ion-title>Chatroom</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-Create dummy chat page
-<ion-grid>
-  <ion-row *ngFor="let msg of messages">
-    
-    <ion-col col-9>
-      <span class="user_name"></span><br>
-      <span>{{ msg.msg }}</span>
-      <!-- <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div> -->
-    </ion-col>
+<ion-content #content padding>
+  <ion-grid>
+    <ion-row *ngFor="let msg of messages">
+      <ion-col col-12>
+        <span class="displayMsg">{{msg.username}}:</span><span [style.color]="username === msg.username ? '#f3ba2e' : 'white'" style="font-size:16px;"> {{msg.msg}}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-    <ion-col offset-3 col-9 >
-      <span class="user_name"></span><br>
-      <span>{{ msg.msg }}</span>
-      <!-- <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div> -->
-    </ion-col>
 
-  </ion-row>
-</ion-grid>
+  <!-- <ion-col offset-3 col-9 >
+      <span class="user_name"></span><br>
+      <span>{{ msg.msg }}</span> -->
+  <!-- <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div> -->
+  <!-- </ion-col> -->
+
 </ion-content>
+
+<ion-footer no-shadow no-border>
+  <ion-toolbar [color]="toolbarFooterColor">
+    <ion-row class="message_row">
+      <ion-col col-9>
+        <ion-item no-lines>
+          <ion-input no-lines type="text" placeholder="Message" [(ngModel)]="message"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-button color="primary" (click)="sendMessage()" [disabled]="message === ''">
+          SEND
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

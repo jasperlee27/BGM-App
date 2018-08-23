@@ -1,7 +1,21 @@
 page-dummy-chat {
+    // .scroll-content {
+    //     overflow-y: visible;
+    // }
+
     .user_name {
         color: #ffffff;
         font-size: 24px;
+    }
+    
+    .message_row {
+        background-color: color($colors, dark);
+
+    }
+
+    .displayMsg{
+        color: color($colors, secondary);
+        font-size: 16px;
     }
     .message {
         padding: 10px !important;
@@ -17,12 +31,21 @@ page-dummy-chat {
         background: #dcdcdc !important;
         color: #000 !important;
     }
-    .time {
-        color: #afafaf;
-        float: right;
-        font-size: small;
+
+    .item-md.item-block .item-inner,
+    .item-md.item-input.input-has-focus .item-inner,
+    .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+    .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+    .list-md .item-input.input-has-focus:last-child,
+    .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+    .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+        border-bottom: none;
+        box-shadow: none;
     }
-    .message_row {
-        background-color: #fff;
+    .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+    .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+        border-bottom: none;
+        box-shadow: none;
     }
+
 }
