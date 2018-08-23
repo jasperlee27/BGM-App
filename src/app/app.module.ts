@@ -31,6 +31,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
 import { DataProvider } from '../providers/data/data';
+import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { DataProvider } from '../providers/data/data';
     TwoFacAuthPage,
     TabsPage,
     WalletPage,
-    StreamPage
+    StreamPage,
+    DummyChatPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { DataProvider } from '../providers/data/data';
     TwoFacAuthPage,
     WalletPage,
     TabsPage,
-    StreamPage
+    StreamPage,
+    DummyChatPage
   ],
   providers: [
     StatusBar,

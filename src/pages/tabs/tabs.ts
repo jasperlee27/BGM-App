@@ -11,6 +11,7 @@ import { TrehuntPage } from '../trehunt/trehunt';
 import { HomePage } from '../home/home';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { InnerWalletComponent } from '../../components/inner-wallet/inner-wallet';
+import { DummyChatPage } from '../dummy-chat/dummy-chat';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -23,7 +24,7 @@ export class TabsPage {
   tab3Root = HashingPage;
   // tab4Root = ContactPage;
   tab4Root= StreamPage;
-  tab5Root= WalletPage;
+  tab5Root= DummyChatPage;
   
   constructor(public smartAudio: SmartAudioProvider) {
 

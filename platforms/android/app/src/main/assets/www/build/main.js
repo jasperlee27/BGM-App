@@ -650,6 +650,9 @@ var HashingPage = /** @class */ (function () {
             // pass the response from HTTP Request into local variable receivedData
             // var receivedData= JSON.parse(data);
             console.log("DATA HERE " + data.message);
+            console.log("Received return acc Value " + data.accountValue);
+            _this.auth.setAccValue(data.accountValue);
+            _this.walletAmount = _this.auth.getAccValue();
             if (parseInt(data.status) === 200) {
                 // console.log("Game 1 buying btc okay");
                 // console.log("actual bought tix= " + data.amount);
