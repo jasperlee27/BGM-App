@@ -25,6 +25,7 @@ export class TabsPage {
   // tab4Root = ContactPage;
   tab4Root= StreamPage;
   tab5Root= DummyChatPage;
+  tab6Root= WalletPage;
   
   constructor(public smartAudio: SmartAudioProvider) {
 
