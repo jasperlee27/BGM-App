@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Game 2: Hashing</ion-title>
     <div class="walletDisplay">
-      <inner-wallet [walletAmount]="walletAmount"></inner-wallet>
+      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>
     </div>
     <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->
   </ion-navbar>

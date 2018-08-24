@@ -34,6 +34,7 @@ export class StreamPage {
   buffer =  [[], []];
   chartLabels = [];
   walletAmount;
+  isGuestLogin;
 
   // private datamap: any;
   chartColors: any[] =
@@ -78,6 +79,7 @@ export class StreamPage {
   options: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider) {
+    this.isGuestLogin = this.auth.getGuestLogin();
     this.isGameTime = true;
     this.testGlobalVar=7000;
   }

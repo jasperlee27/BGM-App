@@ -11,7 +11,7 @@ webpackJsonp([11],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(63);
@@ -179,11 +179,11 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wallet_wallet__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream_stream__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__trehunt_trehunt__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dummy_chat_dummy_chat__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dummy_chat_dummy_chat__ = __webpack_require__(155);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -330,123 +330,14 @@ var BiddingPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DummyChatPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(33);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-// import { Content } from ‘@ionic-angular’;
-/**
- * Generated class for the DummyChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var DummyChatPage = /** @class */ (function () {
-    function DummyChatPage(navCtrl, navParams, auth) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.auth = auth;
-        this.username = this.auth.getUsername();
-        this.toolbarFooterColor = 'dark';
-        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__["connect"]('http://178.128.50.224:3006');
-        console.log("socket for hashing conencted");
-        // this.getMessages().subscribe(message => {
-        //   // var msgToPush= JSON.parse(message);
-        //   // this.messages.push(message);
-        //   console.log("subscribed and after pushing into msgs  " + this.messages);
-        // });
-        this.messages = new Array();
-    }
-    DummyChatPage.prototype.ionViewWillEnter = function () {
-        this.scrollToBottom();
-    };
-    DummyChatPage.prototype.scrollToBottom = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.content.scrollToBottom();
-        });
-    };
-    DummyChatPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad DummyChatPage');
-    };
-    DummyChatPage.prototype.ngOnInit = function () {
-        // var username = this.auth.getUsername();
-        //CODE FOR SOCKET//
-        var _this = this;
-        this.socket.on('chat message', function (msg) {
-            var msgToPush = JSON.parse(msg);
-            _this.messages.push(msgToPush);
-            _this.scrollToBottom();
-            console.log("Original msg: " + msg);
-            console.log("parsed msg username: " + msgToPush.username);
-            console.log("parsed msg msg: " + msgToPush.msg);
-            console.log(_this.messages);
-        });
-        //emit to server
-        var objToSend = { username: this.username, msg: "test json msg message Input" };
-        var jsonToSend = JSON.stringify(objToSend);
-        this.socket.emit('chat message', jsonToSend);
-        this.socket.on('chat message', function (data) {
-            // console.log("Parsing JSON sent: " + JSON.parse(data));
-            var receivedData = JSON.parse(data);
-            console.log("JSON Username " + receivedData.username);
-            console.log("JSON message " + receivedData.msg);
-            console.log("Received chat message here " + data);
-        });
-        setTimeout(function () {
-            _this.content.scrollToBottom(300); //300ms animation speed
-        });
-    };
-    DummyChatPage.prototype.sendMessage = function () {
-        var objToSend = { username: this.username, msg: this.message };
-        var jsonToSend = JSON.stringify(objToSend);
-        this.socket.emit('chat message', jsonToSend);
-        this.message = '';
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('content'),
-        __metadata("design:type", Object)
-    ], DummyChatPage.prototype, "content", void 0);
-    DummyChatPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-dummy-chat',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\dummy-chat\dummy-chat.html"*/'<!--\n  Generated template for the DummyChatPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Chatroom</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content #content padding>\n  <ion-grid>\n    <ion-row *ngFor="let msg of messages">\n      <ion-col col-12>\n        <span class="displayMsg">{{msg.username}}:</span><span [style.color]="username === msg.username ? \'#f3ba2e\' : \'white\'" style="font-size:16px;"> {{msg.msg}}</span>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n  <!-- <ion-col offset-3 col-9 >\n      <span class="user_name"></span><br>\n      <span>{{ msg.msg }}</span> -->\n  <!-- <div class="time">{{message.created | date:\'dd.MM hh:MM\'}}</div> -->\n  <!-- </ion-col> -->\n\n</ion-content>\n\n<ion-footer no-shadow no-border>\n  <ion-toolbar [color]="toolbarFooterColor">\n    <ion-row class="message_row">\n      <ion-col col-9>\n        <ion-item no-lines>\n          <ion-input no-lines type="text" placeholder="Message" [(ngModel)]="message"></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3>\n        <button ion-button color="primary" (click)="sendMessage()" [disabled]="message === \'\'">\n          SEND\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\dummy-chat\dummy-chat.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */]])
-    ], DummyChatPage);
-    return DummyChatPage;
-}());
-
-//# sourceMappingURL=dummy-chat.js.map
-
-/***/ }),
-
-/***/ 155:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(345);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_data_data__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -476,6 +367,9 @@ var HashingPage = /** @class */ (function () {
         this.auth = auth;
         this.dataProvider = dataProvider;
         this.alertCtrl = alertCtrl;
+        this.isManualBetDisabled = true;
+        this.isManualCoutDisabled = true;
+        this.hasActiveManualBet = false;
         this.isLocGameTimerStarted = false;
         this.count = 10.0;
         this.currentView = 'manual';
@@ -641,6 +535,7 @@ var HashingPage = /** @class */ (function () {
             // console.log("Received data type  " + receivedData.type);
             if (receivedData.type === 'GameStart') {
                 //one instance
+                _this.isManualBetDisabled = true;
                 if (!_this.isLocGameTimerStarted) {
                     _this.isLocGameTimerStarted = true;
                     console.log("START TIMER HERE");
@@ -651,6 +546,10 @@ var HashingPage = /** @class */ (function () {
                 }
             }
             else if (receivedData.type === 'game') {
+                _this.isManualBetDisabled = true;
+                if (_this.hasActiveManualBet) {
+                    _this.isManualCoutDisabled = false;
+                }
                 _this.isTimerHidden = true;
                 _this.isBurstTextHidden = true;
                 _this.chartData[0].hidden = false;
@@ -663,6 +562,9 @@ var HashingPage = /** @class */ (function () {
             }
             else if (receivedData.type === "busted") {
                 // console.log("Received data type  " + receivedData.type);
+                _this.isManualCoutDisabled = true;
+                _this.isManualBetDisabled = true;
+                _this.hasActiveManualBet = false;
                 _this.chartData[0].hidden = true;
                 _this.isChartHidden = true;
                 _this.isBurstTextHidden = false;
@@ -676,6 +578,10 @@ var HashingPage = /** @class */ (function () {
             }
             else if (receivedData.type === "countdown") {
                 //log currentGameID here
+                _this.isManualCoutDisabled = true;
+                if (!_this.hasActiveManualBet) {
+                    _this.isManualBetDisabled = false;
+                }
                 _this.currentGameID = receivedData.gameId;
                 // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
                 _this.chartData[0].hidden = true;
@@ -759,7 +665,6 @@ var HashingPage = /** @class */ (function () {
     HashingPage.prototype.hashManualBet = function () {
         var _this = this;
         console.log("manual betting");
-        this.isManualBetDisabled = true;
         //make place bet call
         console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
         this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(function (data) {
@@ -770,8 +675,9 @@ var HashingPage = /** @class */ (function () {
             _this.auth.setAccValue(data.accountValue);
             _this.walletAmount = _this.auth.getAccValue();
             if (parseInt(data.status) === 200) {
-                // console.log("Game 1 buying btc okay");
-                // console.log("actual bought tix= " + data.amount);
+                _this.hasActiveManualBet = true;
+                _this.isManualBetDisabled = true;
+                _this.isManualCoutDisabled = false;
                 var alert_1 = _this.alertCtrl.create({
                     title: 'SUCCESS',
                     subTitle: 'You have staked ' + _this.hashManualBetAmount + ' for this game',
@@ -783,12 +689,21 @@ var HashingPage = /** @class */ (function () {
             }
         }, function (err) {
             console.log("Error occured while buying placing manual hash bet");
-            console.log(err);
+            // console.log(err);
+            // console.log(err.error.message);
+            // console.log(err.message);
+            var alert = _this.alertCtrl.create({
+                title: 'Error',
+                subTitle: err.error.message,
+                buttons: ['OK']
+            });
+            alert.present();
+            alert.onDidDismiss(function () {
+            });
         });
     };
     HashingPage.prototype.hashManualCout = function () {
         var _this = this;
-        this.isManualBetDisabled = false;
         //to do post to cashout
         //make manual cashout call
         console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID);
@@ -797,6 +712,10 @@ var HashingPage = /** @class */ (function () {
             console.log("Received returned message " + data.message);
             console.log("Received returned multiplier " + data.multiplier);
             console.log("Received returned winning " + data.winning);
+            _this.auth.addAccValue(parseFloat(data.winning).toFixed(2));
+            _this.isManualCoutDisabled = true;
+            _this.hasActiveManualBet = false;
+            _this.walletAmount = _this.auth.getAccValue();
             if (parseInt(data.status) === 200) {
                 // console.log("Game 1 buying btc okay");
                 // console.log("actual bought tix= " + data.amount);
@@ -895,7 +814,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <br>\n\n  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment>\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row *ngIf="isManualBetDisabled">\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'secondary\' : \'dark\'" [disabled]="!isManualBetDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <br>\n\n  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment>\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualCoutDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], HashingPage);
@@ -903,6 +822,117 @@ var HashingPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=hashing.js.map
+
+/***/ }),
+
+/***/ 155:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DummyChatPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(345);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(34);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// import { Content } from ‘@ionic-angular’;
+/**
+ * Generated class for the DummyChatPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var DummyChatPage = /** @class */ (function () {
+    function DummyChatPage(navCtrl, navParams, auth) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.auth = auth;
+        this.username = this.auth.getUsername();
+        this.toolbarFooterColor = 'dark';
+        this.socket = __WEBPACK_IMPORTED_MODULE_2_socket_io_client__["connect"]('http://178.128.50.224:3006');
+        console.log("socket for hashing conencted");
+        // this.getMessages().subscribe(message => {
+        //   // var msgToPush= JSON.parse(message);
+        //   // this.messages.push(message);
+        //   console.log("subscribed and after pushing into msgs  " + this.messages);
+        // });
+        this.messages = new Array();
+    }
+    DummyChatPage.prototype.ionViewWillEnter = function () {
+        this.scrollToBottom();
+    };
+    DummyChatPage.prototype.scrollToBottom = function () {
+        var _this = this;
+        setTimeout(function () {
+            _this.content.scrollToBottom();
+        });
+    };
+    DummyChatPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad DummyChatPage');
+    };
+    DummyChatPage.prototype.ngOnInit = function () {
+        // var username = this.auth.getUsername();
+        //CODE FOR SOCKET//
+        var _this = this;
+        this.socket.on('chat message', function (msg) {
+            var msgToPush = JSON.parse(msg);
+            _this.messages.push(msgToPush);
+            _this.scrollToBottom();
+            console.log("Original msg: " + msg);
+            console.log("parsed msg username: " + msgToPush.username);
+            console.log("parsed msg msg: " + msgToPush.msg);
+            console.log(_this.messages);
+        });
+        //emit to server
+        if (this.username !== "guest") {
+            var objToSend = { username: this.username, msg: "connected#123" };
+            var jsonToSend = JSON.stringify(objToSend);
+            this.socket.emit('chat message', jsonToSend);
+        }
+        // this.socket.on('chat message', (data: any) => {
+        //   // console.log("Parsing JSON sent: " + JSON.parse(data));
+        //   var receivedData = JSON.parse(data);
+        //   console.log("JSON Username " + receivedData.username);
+        //   console.log("JSON message " + receivedData.msg);
+        //   console.log("Received chat message here " + data);
+        // });
+        setTimeout(function () {
+            _this.content.scrollToBottom(300); //300ms animation speed
+        });
+    };
+    DummyChatPage.prototype.sendMessage = function () {
+        var objToSend = { username: this.username, msg: this.message };
+        var jsonToSend = JSON.stringify(objToSend);
+        this.socket.emit('chat message', jsonToSend);
+        this.message = '';
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('content'),
+        __metadata("design:type", Object)
+    ], DummyChatPage.prototype, "content", void 0);
+    DummyChatPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-dummy-chat',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\dummy-chat\dummy-chat.html"*/'<!--  \n  Generated template for the DummyChatPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Chatroom</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content #content padding>\n  <ion-grid>\n    <ion-row *ngFor="let msg of messages">\n      <ion-col *ngIf="msg.msg === \'connected#123\'" col-12>\n        <span [style.color]="\'#00B44E\'" class="displayMsg">{{msg.username}} has joined the chat</span>\n      </ion-col>\n      <ion-col *ngIf="msg.msg !== \'connected#123\'" col-12>\n        <span class="displayMsg">{{msg.username}}:</span>\n        <span [style.color]="username === msg.username ? \'#f3ba2e\' : \'white\'" style="font-size:16px;">\n        {{msg.msg}}</span>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n  <!-- <ion-col offset-3 col-9 >\n      <span class="user_name"></span><br>\n      <span>{{ msg.msg }}</span> -->\n  <!-- <div class="time">{{message.created | date:\'dd.MM hh:MM\'}}</div> -->\n  <!-- </ion-col> -->\n\n</ion-content>\n\n<ion-footer no-shadow no-border>\n  <ion-toolbar [color]="toolbarFooterColor">\n    <ion-row class="message_row">\n      <ion-col col-9>\n        <ion-item no-lines>\n          <ion-input no-lines type="text" placeholder="Message" [(ngModel)]="message" [disabled]="username===\'guest\'"></ion-input>\n        </ion-item>\n      </ion-col>\n      <ion-col col-3>\n        <button ion-button color="primary" (click)="sendMessage()" [disabled]="message === \'\' || username===\'guest\'">\n          SEND\n        </button>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-footer>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\dummy-chat\dummy-chat.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */]])
+    ], DummyChatPage);
+    return DummyChatPage;
+}());
+
+//# sourceMappingURL=dummy-chat.js.map
 
 /***/ }),
 
@@ -920,7 +950,7 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(630);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(64);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -956,6 +986,7 @@ var HomePage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.appCtrl = appCtrl;
+        this.auth = auth;
         this.nativeAudio = nativeAudio;
         this.alertCtrl = alertCtrl;
         // this.socket = io.connect('http://178.128.50.224:3001');
@@ -964,49 +995,9 @@ var HomePage = /** @class */ (function () {
     }
     HomePage.prototype.ngOnInit = function () {
         this.getNews();
-        // this.messages = new Array();
-        // console.log("INITIATED");
-        // this.socket.on('message-received', (msg: any) => {
-        //   this.messages.push(msg);
-        //   console.log(msg);
-        //   console.log(this.messages);
-        // });
-        //emit to server
-        // this.socket.emit('chat message', {
-        //   msg: 'Client to server, can you hear me server?'
-        // });
-        // this.socket.on('Game2', (data: any) => {
-        // console.log(JSON.parse(data));
-        // var receivedData= JSON.parse(data);
-        // console.log("Received data type  "  + receivedData.type);
-        // if (receivedData.type!="busted"){
-        // console.log("Received data type  "  + receivedData.number);
     };
-    // this.socket.emit('event3', {
-    //   msg: 'Yes, its working for me!!'
-    // });
-    //   });
-    //   this.socket.on('Game3', (data: any) => {
-    //     console.log(data.msg);
-    //   });
-    // }
-    // sendMessage() {
-    //   const message = {
-    //     text: this.messageText
-    //   };
-    //   this.socket.emit('send-message', message);
-    // console.log(message.text);
-    //   this.messageText = '';
-    // }
-    // uncomment for mobile load sound
-    // ionViewDidLoad() {
-    //   this.platform.ready().then(() => {
-    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-    //       this.nativeAudio.loop('bgmLoopHome');
-    //     });
-    //   });
-    // }
-    HomePage.prototype.getNews = function () {
+    //NEWS API
+    HomePage.prototype.getNews_Old = function () {
         var _this = this;
         console.log("button is working fine");
         var path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
@@ -1019,6 +1010,35 @@ var HomePage = /** @class */ (function () {
             console.log(responseData);
             _this.displayStory = responseData.articles[0].description;
             _this.storyImage = responseData.articles[0].urlToImage;
+        }, function (err) {
+            console.log('error in getting news');
+        });
+    };
+    HomePage.prototype.getNews = function () {
+        var _this = this;
+        console.log("button is working fine");
+        // let imgPath = 'http://178.128.50.224:3000/getNews';
+        // let encodedImgPath = encodeURI(imgPath);
+        var timeoutMS = 100000;
+        this.storyImage = 'http://178.128.50.224:3000/getNews';
+        // this.http.get(encodedImgPath)
+        //   .timeout(timeoutMS)
+        //   .map(res => res.json()).subscribe(data => {
+        //     let responseData = data;
+        //     console.log(responseData);
+        //     this.storyImage = responseData;
+        //   },
+        //     err => {
+        //       console.log('error in getting news');
+        //     });
+        var textPath = 'http://178.128.50.224:3000/getNewsText';
+        var encodedTextPath = encodeURI(textPath);
+        this.http.get(encodedTextPath)
+            .timeout(timeoutMS)
+            .map(function (res) { return res.json(); }).subscribe(function (data) {
+            var responseData = data;
+            console.log(responseData.message);
+            _this.displayStory = responseData.message;
         }, function (err) {
             console.log('error in getting news');
         });
@@ -1041,12 +1061,14 @@ var HomePage = /** @class */ (function () {
     };
     HomePage.prototype.logout = function () {
         console.log("logout is working fine");
+        this.auth.setSessionToken("");
+        console.log("Destroy session token " + this.auth.getSessionToken());
         // console.log("rootnav = " +this.appCtrl.getRootNav());
         this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>\n\n      <ion-icon name="home"></ion-icon>\n\n      Home\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 90%">\n\n\n\n    <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <ion-img width="100%" height="200" src={{this.storyImage}} style=background:transparent></ion-img>\n\n      </ion-col>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      {{this.displayStory}}\n\n    </ion-row>\n\n    <br>\n\n    <!-- About button -->\n\n    <!--contact button-->\n\n    <ion-row>\n\n        <ion-col col-12>\n\n          <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">\n\n            <span item-left style="color:#f3ba2e; font-size:16px;">\n\n              <span style="padding-right:8px">\n\n              <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>\n\n              </span>\n\n              About\n\n            </span>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showContact()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="call"></ion-icon>\n\n            </span>\n\n            Contact Support\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--logout button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" [style.visibility]="isGuest ? \'hidden\' : \'visible\'" (click)="logout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="log-out"></ion-icon>\n\n            </span>\n\n            Logout\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/,
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>\n\n      <ion-icon name="home"></ion-icon>\n\n      Home\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%">\n\n\n\n    <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <img width=100% height=100% src={{this.storyImage}} style="background:transparent">\n\n      </ion-col>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      {{this.displayStory}}\n\n    </ion-row>\n\n    <br>\n\n    <!-- About button -->\n\n    <!--contact button-->\n\n    <ion-row>\n\n        <ion-col col-12>\n\n          <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">\n\n            <span item-left style="color:#f3ba2e; font-size:16px;">\n\n              <span style="padding-right:8px">\n\n              <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>\n\n              </span>\n\n              About\n\n            </span>\n\n          </button>\n\n        </ion-col>\n\n      </ion-row>\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showContact()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="call"></ion-icon>\n\n            </span>\n\n            Contact Support\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--logout button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" [style.visibility]="isGuest ? \'hidden\' : \'visible\'" (click)="logout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="log-out"></ion-icon>\n\n            </span>\n\n            Logout\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], HomePage);
@@ -1199,7 +1221,7 @@ var RoulettePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1330,7 +1352,7 @@ var TwoFacAuthPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WalletPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1612,13 +1634,13 @@ var WalletPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(523);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(73);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1948,7 +1970,7 @@ var StreamPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2062,6 +2084,8 @@ var TrehuntPage = /** @class */ (function () {
                 console.log("Game 1 buying btc okay");
                 console.log("actual bought tix= " + data.amount);
                 console.log("accountValue after posting " + data.accountValue);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
                 _this.presentAlert(_this.amountBTCtix, 'BTC', data.tickets);
             }
         }, function (err) {
@@ -2320,11 +2344,11 @@ var map = {
 		10
 	],
 	"../pages/dummy-chat/dummy-chat.module": [
-		657,
+		658,
 		9
 	],
 	"../pages/hashing/hashing.module": [
-		658,
+		657,
 		8
 	],
 	"../pages/home/home.module": [
@@ -2376,7 +2400,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2423,10 +2447,13 @@ var GlobalAuthProvider = /** @class */ (function () {
         return this.sessionToken;
     };
     GlobalAuthProvider.prototype.setAccValue = function (currValue) {
-        this.accValue = parseInt(currValue);
+        this.accValue = currValue;
     };
     GlobalAuthProvider.prototype.getAccValue = function () {
-        return this.accValue;
+        return this.accValue.toFixed(0);
+    };
+    GlobalAuthProvider.prototype.addAccValue = function (amount) {
+        this.accValue += parseFloat(amount);
     };
     GlobalAuthProvider.prototype.setGuestLogin = function (control) {
         this.isGuest = control;
@@ -2545,18 +2572,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(418);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(131);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_hashing_hashing__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_hashing_hashing__ = __webpack_require__(154);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_trehunt_trehunt__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__components_progress_bar_progress_bar__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inner_wallet_inner_wallet__ = __webpack_require__(655);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_home_home__ = __webpack_require__(156);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_global_auth_global_auth__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_native_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_smart_audio_smart_audio__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_slotsdraw_slotsdraw__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_data_data__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_dummy_chat_dummy_chat__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_dummy_chat_dummy_chat__ = __webpack_require__(155);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2627,8 +2654,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular___["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/bidding/bidding.module#BiddingPageModule', name: 'BiddingPage', segment: 'bidding', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/dummy-chat/dummy-chat.module#DummyChatPageModule', name: 'DummyChatPage', segment: 'dummy-chat', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/dummy-chat/dummy-chat.module#DummyChatPageModule', name: 'DummyChatPage', segment: 'dummy-chat', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
@@ -2677,263 +2704,256 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 471:
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
-
-/***/ 502:
+/***/ 479:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 234,
-	"./af.js": 234,
-	"./ar": 235,
-	"./ar-dz": 236,
-	"./ar-dz.js": 236,
-	"./ar-kw": 237,
-	"./ar-kw.js": 237,
-	"./ar-ly": 238,
-	"./ar-ly.js": 238,
-	"./ar-ma": 239,
-	"./ar-ma.js": 239,
-	"./ar-sa": 240,
-	"./ar-sa.js": 240,
-	"./ar-tn": 241,
-	"./ar-tn.js": 241,
-	"./ar.js": 235,
-	"./az": 242,
-	"./az.js": 242,
-	"./be": 243,
-	"./be.js": 243,
-	"./bg": 244,
-	"./bg.js": 244,
-	"./bm": 245,
-	"./bm.js": 245,
-	"./bn": 246,
-	"./bn.js": 246,
-	"./bo": 247,
-	"./bo.js": 247,
-	"./br": 248,
-	"./br.js": 248,
-	"./bs": 249,
-	"./bs.js": 249,
-	"./ca": 250,
-	"./ca.js": 250,
-	"./cs": 251,
-	"./cs.js": 251,
-	"./cv": 252,
-	"./cv.js": 252,
-	"./cy": 253,
-	"./cy.js": 253,
-	"./da": 254,
-	"./da.js": 254,
-	"./de": 255,
-	"./de-at": 256,
-	"./de-at.js": 256,
-	"./de-ch": 257,
-	"./de-ch.js": 257,
-	"./de.js": 255,
-	"./dv": 258,
-	"./dv.js": 258,
-	"./el": 259,
-	"./el.js": 259,
-	"./en-au": 260,
-	"./en-au.js": 260,
-	"./en-ca": 261,
-	"./en-ca.js": 261,
-	"./en-gb": 262,
-	"./en-gb.js": 262,
-	"./en-ie": 263,
-	"./en-ie.js": 263,
-	"./en-il": 264,
-	"./en-il.js": 264,
-	"./en-nz": 265,
-	"./en-nz.js": 265,
-	"./eo": 266,
-	"./eo.js": 266,
-	"./es": 267,
-	"./es-do": 268,
-	"./es-do.js": 268,
-	"./es-us": 269,
-	"./es-us.js": 269,
-	"./es.js": 267,
-	"./et": 270,
-	"./et.js": 270,
-	"./eu": 271,
-	"./eu.js": 271,
-	"./fa": 272,
-	"./fa.js": 272,
-	"./fi": 273,
-	"./fi.js": 273,
-	"./fo": 274,
-	"./fo.js": 274,
-	"./fr": 275,
-	"./fr-ca": 276,
-	"./fr-ca.js": 276,
-	"./fr-ch": 277,
-	"./fr-ch.js": 277,
-	"./fr.js": 275,
-	"./fy": 278,
-	"./fy.js": 278,
-	"./gd": 279,
-	"./gd.js": 279,
-	"./gl": 280,
-	"./gl.js": 280,
-	"./gom-latn": 281,
-	"./gom-latn.js": 281,
-	"./gu": 282,
-	"./gu.js": 282,
-	"./he": 283,
-	"./he.js": 283,
-	"./hi": 284,
-	"./hi.js": 284,
-	"./hr": 285,
-	"./hr.js": 285,
-	"./hu": 286,
-	"./hu.js": 286,
-	"./hy-am": 287,
-	"./hy-am.js": 287,
-	"./id": 288,
-	"./id.js": 288,
-	"./is": 289,
-	"./is.js": 289,
-	"./it": 290,
-	"./it.js": 290,
-	"./ja": 291,
-	"./ja.js": 291,
-	"./jv": 292,
-	"./jv.js": 292,
-	"./ka": 293,
-	"./ka.js": 293,
-	"./kk": 294,
-	"./kk.js": 294,
-	"./km": 295,
-	"./km.js": 295,
-	"./kn": 296,
-	"./kn.js": 296,
-	"./ko": 297,
-	"./ko.js": 297,
-	"./ky": 298,
-	"./ky.js": 298,
-	"./lb": 299,
-	"./lb.js": 299,
-	"./lo": 300,
-	"./lo.js": 300,
-	"./lt": 301,
-	"./lt.js": 301,
-	"./lv": 302,
-	"./lv.js": 302,
-	"./me": 303,
-	"./me.js": 303,
-	"./mi": 304,
-	"./mi.js": 304,
-	"./mk": 305,
-	"./mk.js": 305,
-	"./ml": 306,
-	"./ml.js": 306,
-	"./mn": 307,
-	"./mn.js": 307,
-	"./mr": 308,
-	"./mr.js": 308,
-	"./ms": 309,
-	"./ms-my": 310,
-	"./ms-my.js": 310,
-	"./ms.js": 309,
-	"./mt": 311,
-	"./mt.js": 311,
-	"./my": 312,
-	"./my.js": 312,
-	"./nb": 313,
-	"./nb.js": 313,
-	"./ne": 314,
-	"./ne.js": 314,
-	"./nl": 315,
-	"./nl-be": 316,
-	"./nl-be.js": 316,
-	"./nl.js": 315,
-	"./nn": 317,
-	"./nn.js": 317,
-	"./pa-in": 318,
-	"./pa-in.js": 318,
-	"./pl": 319,
-	"./pl.js": 319,
-	"./pt": 320,
-	"./pt-br": 321,
-	"./pt-br.js": 321,
-	"./pt.js": 320,
-	"./ro": 322,
-	"./ro.js": 322,
-	"./ru": 323,
-	"./ru.js": 323,
-	"./sd": 324,
-	"./sd.js": 324,
-	"./se": 325,
-	"./se.js": 325,
-	"./si": 326,
-	"./si.js": 326,
-	"./sk": 327,
-	"./sk.js": 327,
-	"./sl": 328,
-	"./sl.js": 328,
-	"./sq": 329,
-	"./sq.js": 329,
-	"./sr": 330,
-	"./sr-cyrl": 331,
-	"./sr-cyrl.js": 331,
-	"./sr.js": 330,
-	"./ss": 332,
-	"./ss.js": 332,
-	"./sv": 333,
-	"./sv.js": 333,
-	"./sw": 334,
-	"./sw.js": 334,
-	"./ta": 335,
-	"./ta.js": 335,
-	"./te": 336,
-	"./te.js": 336,
-	"./tet": 337,
-	"./tet.js": 337,
-	"./tg": 338,
-	"./tg.js": 338,
-	"./th": 339,
-	"./th.js": 339,
-	"./tl-ph": 340,
-	"./tl-ph.js": 340,
-	"./tlh": 341,
-	"./tlh.js": 341,
-	"./tr": 342,
-	"./tr.js": 342,
-	"./tzl": 343,
-	"./tzl.js": 343,
-	"./tzm": 344,
-	"./tzm-latn": 345,
-	"./tzm-latn.js": 345,
-	"./tzm.js": 344,
-	"./ug-cn": 346,
-	"./ug-cn.js": 346,
-	"./uk": 347,
-	"./uk.js": 347,
-	"./ur": 348,
-	"./ur.js": 348,
-	"./uz": 349,
-	"./uz-latn": 350,
-	"./uz-latn.js": 350,
-	"./uz.js": 349,
-	"./vi": 351,
-	"./vi.js": 351,
-	"./x-pseudo": 352,
-	"./x-pseudo.js": 352,
-	"./yo": 353,
-	"./yo.js": 353,
-	"./zh-cn": 354,
-	"./zh-cn.js": 354,
-	"./zh-hk": 355,
-	"./zh-hk.js": 355,
-	"./zh-tw": 356,
-	"./zh-tw.js": 356
+	"./af": 222,
+	"./af.js": 222,
+	"./ar": 223,
+	"./ar-dz": 224,
+	"./ar-dz.js": 224,
+	"./ar-kw": 225,
+	"./ar-kw.js": 225,
+	"./ar-ly": 226,
+	"./ar-ly.js": 226,
+	"./ar-ma": 227,
+	"./ar-ma.js": 227,
+	"./ar-sa": 228,
+	"./ar-sa.js": 228,
+	"./ar-tn": 229,
+	"./ar-tn.js": 229,
+	"./ar.js": 223,
+	"./az": 230,
+	"./az.js": 230,
+	"./be": 231,
+	"./be.js": 231,
+	"./bg": 232,
+	"./bg.js": 232,
+	"./bm": 233,
+	"./bm.js": 233,
+	"./bn": 234,
+	"./bn.js": 234,
+	"./bo": 235,
+	"./bo.js": 235,
+	"./br": 236,
+	"./br.js": 236,
+	"./bs": 237,
+	"./bs.js": 237,
+	"./ca": 238,
+	"./ca.js": 238,
+	"./cs": 239,
+	"./cs.js": 239,
+	"./cv": 240,
+	"./cv.js": 240,
+	"./cy": 241,
+	"./cy.js": 241,
+	"./da": 242,
+	"./da.js": 242,
+	"./de": 243,
+	"./de-at": 244,
+	"./de-at.js": 244,
+	"./de-ch": 245,
+	"./de-ch.js": 245,
+	"./de.js": 243,
+	"./dv": 246,
+	"./dv.js": 246,
+	"./el": 247,
+	"./el.js": 247,
+	"./en-au": 248,
+	"./en-au.js": 248,
+	"./en-ca": 249,
+	"./en-ca.js": 249,
+	"./en-gb": 250,
+	"./en-gb.js": 250,
+	"./en-ie": 251,
+	"./en-ie.js": 251,
+	"./en-il": 252,
+	"./en-il.js": 252,
+	"./en-nz": 253,
+	"./en-nz.js": 253,
+	"./eo": 254,
+	"./eo.js": 254,
+	"./es": 255,
+	"./es-do": 256,
+	"./es-do.js": 256,
+	"./es-us": 257,
+	"./es-us.js": 257,
+	"./es.js": 255,
+	"./et": 258,
+	"./et.js": 258,
+	"./eu": 259,
+	"./eu.js": 259,
+	"./fa": 260,
+	"./fa.js": 260,
+	"./fi": 261,
+	"./fi.js": 261,
+	"./fo": 262,
+	"./fo.js": 262,
+	"./fr": 263,
+	"./fr-ca": 264,
+	"./fr-ca.js": 264,
+	"./fr-ch": 265,
+	"./fr-ch.js": 265,
+	"./fr.js": 263,
+	"./fy": 266,
+	"./fy.js": 266,
+	"./gd": 267,
+	"./gd.js": 267,
+	"./gl": 268,
+	"./gl.js": 268,
+	"./gom-latn": 269,
+	"./gom-latn.js": 269,
+	"./gu": 270,
+	"./gu.js": 270,
+	"./he": 271,
+	"./he.js": 271,
+	"./hi": 272,
+	"./hi.js": 272,
+	"./hr": 273,
+	"./hr.js": 273,
+	"./hu": 274,
+	"./hu.js": 274,
+	"./hy-am": 275,
+	"./hy-am.js": 275,
+	"./id": 276,
+	"./id.js": 276,
+	"./is": 277,
+	"./is.js": 277,
+	"./it": 278,
+	"./it.js": 278,
+	"./ja": 279,
+	"./ja.js": 279,
+	"./jv": 280,
+	"./jv.js": 280,
+	"./ka": 281,
+	"./ka.js": 281,
+	"./kk": 282,
+	"./kk.js": 282,
+	"./km": 283,
+	"./km.js": 283,
+	"./kn": 284,
+	"./kn.js": 284,
+	"./ko": 285,
+	"./ko.js": 285,
+	"./ky": 286,
+	"./ky.js": 286,
+	"./lb": 287,
+	"./lb.js": 287,
+	"./lo": 288,
+	"./lo.js": 288,
+	"./lt": 289,
+	"./lt.js": 289,
+	"./lv": 290,
+	"./lv.js": 290,
+	"./me": 291,
+	"./me.js": 291,
+	"./mi": 292,
+	"./mi.js": 292,
+	"./mk": 293,
+	"./mk.js": 293,
+	"./ml": 294,
+	"./ml.js": 294,
+	"./mn": 295,
+	"./mn.js": 295,
+	"./mr": 296,
+	"./mr.js": 296,
+	"./ms": 297,
+	"./ms-my": 298,
+	"./ms-my.js": 298,
+	"./ms.js": 297,
+	"./mt": 299,
+	"./mt.js": 299,
+	"./my": 300,
+	"./my.js": 300,
+	"./nb": 301,
+	"./nb.js": 301,
+	"./ne": 302,
+	"./ne.js": 302,
+	"./nl": 303,
+	"./nl-be": 304,
+	"./nl-be.js": 304,
+	"./nl.js": 303,
+	"./nn": 305,
+	"./nn.js": 305,
+	"./pa-in": 306,
+	"./pa-in.js": 306,
+	"./pl": 307,
+	"./pl.js": 307,
+	"./pt": 308,
+	"./pt-br": 309,
+	"./pt-br.js": 309,
+	"./pt.js": 308,
+	"./ro": 310,
+	"./ro.js": 310,
+	"./ru": 311,
+	"./ru.js": 311,
+	"./sd": 312,
+	"./sd.js": 312,
+	"./se": 313,
+	"./se.js": 313,
+	"./si": 314,
+	"./si.js": 314,
+	"./sk": 315,
+	"./sk.js": 315,
+	"./sl": 316,
+	"./sl.js": 316,
+	"./sq": 317,
+	"./sq.js": 317,
+	"./sr": 318,
+	"./sr-cyrl": 319,
+	"./sr-cyrl.js": 319,
+	"./sr.js": 318,
+	"./ss": 320,
+	"./ss.js": 320,
+	"./sv": 321,
+	"./sv.js": 321,
+	"./sw": 322,
+	"./sw.js": 322,
+	"./ta": 323,
+	"./ta.js": 323,
+	"./te": 324,
+	"./te.js": 324,
+	"./tet": 325,
+	"./tet.js": 325,
+	"./tg": 326,
+	"./tg.js": 326,
+	"./th": 327,
+	"./th.js": 327,
+	"./tl-ph": 328,
+	"./tl-ph.js": 328,
+	"./tlh": 329,
+	"./tlh.js": 329,
+	"./tr": 330,
+	"./tr.js": 330,
+	"./tzl": 331,
+	"./tzl.js": 331,
+	"./tzm": 332,
+	"./tzm-latn": 333,
+	"./tzm-latn.js": 333,
+	"./tzm.js": 332,
+	"./ug-cn": 334,
+	"./ug-cn.js": 334,
+	"./uk": 335,
+	"./uk.js": 335,
+	"./ur": 336,
+	"./ur.js": 336,
+	"./uz": 337,
+	"./uz-latn": 338,
+	"./uz-latn.js": 338,
+	"./uz.js": 337,
+	"./vi": 339,
+	"./vi.js": 339,
+	"./x-pseudo": 340,
+	"./x-pseudo.js": 340,
+	"./yo": 341,
+	"./yo.js": 341,
+	"./zh-cn": 342,
+	"./zh-cn.js": 342,
+	"./zh-hk": 343,
+	"./zh-hk.js": 343,
+	"./zh-tw": 344,
+	"./zh-tw.js": 344
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2949,7 +2969,14 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 502;
+webpackContext.id = 479;
+
+/***/ }),
+
+/***/ 518:
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ }),
 
@@ -2960,7 +2987,7 @@ webpackContext.id = 502;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3002,13 +3029,6 @@ var DataProvider = /** @class */ (function () {
     };
     // get game1 curr status
     DataProvider.prototype.postTrehuntStatus = function (accid) {
-        // const httpHeader = {
-        //   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'x-session-token':this.auth.getSessionToken()})
-        // };
-        // let headers = new Headers();
-        // headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        // headers.append('x-session-token', sessionToken);
-        // let options = new RequestOptions({ headers: headers });
         var sessionToken = this.auth.getSessionToken();
         console.log("session token posted " + sessionToken);
         var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
@@ -3017,23 +3037,20 @@ var DataProvider = /** @class */ (function () {
     };
     //buy game 1 tickets
     DataProvider.prototype.postBuyGame1 = function (accid, gameId, amount) {
-        var httpHeader = {
-            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
-        };
+        var sessionToken = this.auth.getSessionToken();
+        var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId).set("amount", amount);
         return this.http.post(trehuntBuyURL, requestBody, httpHeader);
     };
     DataProvider.prototype.postBetGame2 = function (accid, gameId, amount) {
-        var httpHeader = {
-            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
-        };
+        var sessionToken = this.auth.getSessionToken();
+        var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId).set("amount", amount);
         return this.http.post(hashManualBetURL, requestBody, httpHeader);
     };
     DataProvider.prototype.postCoutGame2 = function (accid, gameId) {
-        var httpHeader = {
-            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
-        };
+        var sessionToken = this.auth.getSessionToken();
+        var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId);
         return this.http.post(hashManualCoutURL, requestBody, httpHeader);
     };
@@ -3200,7 +3217,7 @@ var ProgressBarComponent = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InnerWalletComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_data_data__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_auth_global_auth__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_auth_global_auth__ = __webpack_require__(34);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

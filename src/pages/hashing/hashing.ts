@@ -47,9 +47,10 @@ export class HashingPage {
   hashBetType: string = 'manual';
   currentGameID: string;
   walletAmount: any;
- 
+  isGuestLogin;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
+    this.isGuestLogin = this.auth.getGuestLogin();
     this.isArrowHidden = true;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
     this.socket = io.connect('http://178.128.50.224:3001');

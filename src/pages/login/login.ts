@@ -144,6 +144,8 @@ export class LoginPage {
     this.auth.setGuestLogin(true);
     this.navCtrl.setRoot(TabsPage);
     console.log("view as guest only");
+    this.auth.setSessionToken("");
+    this.auth.setAccValue(0);
   }
 
   showHide(): any {

@@ -36,7 +36,7 @@ export class TrehuntPage {
   purchaseBTCGameID: string;
   purchaseETHGameID: string
   walletAmount;
-
+  isGuestLogin; 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
     // this.currBTCprice = this.randomIntRange(8000, 10000);
     // this.currETHprice = this.randomIntRange(600, 800);
@@ -50,7 +50,7 @@ export class TrehuntPage {
     // this.currOwnETHtix = this.randomIntRange(0, this.currETHtix - 1);
     // // this.currBTCtix=8700;
     // this.currETHtix=650;
-
+    this.isGuestLogin = this.auth.getGuestLogin();
     //can retrieve accId from auth
     console.log("Trehunt successful in retrieving accID " + this.auth.getAccId());
 
