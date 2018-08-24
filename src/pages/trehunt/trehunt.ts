@@ -142,6 +142,7 @@ export class TrehuntPage {
       if (parseInt(data.status) === 200) {
         console.log("Game 1 buying btc okay");
         console.log("actual bought tix= " + data.amount);
+        console.log("accountValue after posting " + data.accountValue);
         this.presentAlert(this.amountBTCtix, 'BTC', data.tickets);
       }
     },

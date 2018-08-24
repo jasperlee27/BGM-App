@@ -14,10 +14,12 @@ export class GlobalAuthProvider {
   private username: string;
   private accId: string;
   private accValue: number;
+  private sessionToken: string;
 
   constructor() {
     console.log('Hello GlobalAuthProvider Provider');
   }
+  
   setUsername(username: string){
     this.username=username;
   }
@@ -25,12 +27,21 @@ export class GlobalAuthProvider {
   getUsername(){
     return this.username;
   }
+
   setAccId(accId: string){
     this.accId=accId;
   }
 
   getAccId(){
     return this.accId;
+  }
+
+  setSessionToken(sessionToken: string){
+    this.sessionToken=sessionToken;
+  }
+
+  getSessionToken(){
+    return this.sessionToken;
   }
 
   setAccValue(currValue){

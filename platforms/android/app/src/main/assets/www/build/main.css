@@ -30636,6 +30636,10 @@ page-bidding .row {
   text-align: center !important;
 }
 
+page-dummy-chat .scroll-content {
+  overflow-y: visible;
+}
+
 page-dummy-chat .user_name {
   color: #ffffff;
   font-size: 24px;

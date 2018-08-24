@@ -113,7 +113,9 @@ export class LoginPage {
       this.auth.setAccId(this.receivedData._id);
       this.auth.setAccValue(this.receivedData.accountValue);
       this.auth.setGuestLogin(false);
-
+      
+      this.auth.setSessionToken(this.receivedData.token);
+      console.log("session Token set as " + this.auth.getSessionToken());
       if (parseInt(this.receivedData.require2FA)===0){
         this.navCtrl.setRoot(TabsPage);
       }
@@ -138,6 +140,7 @@ export class LoginPage {
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
     this.auth.setAccId("guest");
+    this.auth.setUsername("guest");
     this.auth.setGuestLogin(true);
     this.navCtrl.setRoot(TabsPage);
     console.log("view as guest only");

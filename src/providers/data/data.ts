@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs/Observable';
+import { GlobalAuthProvider } from '../global-auth/global-auth';
+import { RequestOptions } from '../../../node_modules/@angular/http';
 
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
@@ -12,7 +14,7 @@ const walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 @Injectable()
 export class DataProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private auth: GlobalAuthProvider) {
     console.log('Hello DataProvider Provider');
   }
   //login
@@ -34,9 +36,18 @@ export class DataProvider {
 
   // get game1 curr status
   postTrehuntStatus(accid): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    // const httpHeader = {
+    //   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'x-session-token':this.auth.getSessionToken()})
+    // };
+
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    // headers.append('x-session-token', sessionToken);
+    // let options = new RequestOptions({ headers: headers });
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid);
     return this.http.post(trehuntStatusURL, requestBody, httpHeader);
   }
@@ -46,7 +57,7 @@ export class DataProvider {
     const httpHeader = {
       headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
     };
-    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount",amount);
+    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount", amount);
     return this.http.post(trehuntBuyURL, requestBody, httpHeader);
   }
 
@@ -55,7 +66,7 @@ export class DataProvider {
     const httpHeader = {
       headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
     };
-    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount",amount);
+    var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount", amount);
     return this.http.post(hashManualBetURL, requestBody, httpHeader);
   }
 
