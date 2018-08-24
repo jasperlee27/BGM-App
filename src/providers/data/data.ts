@@ -36,14 +36,6 @@ export class DataProvider {
 
   // get game1 curr status
   postTrehuntStatus(accid): Observable<any> {
-    // const httpHeader = {
-    //   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'x-session-token':this.auth.getSessionToken()})
-    // };
-
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    // headers.append('x-session-token', sessionToken);
-    // let options = new RequestOptions({ headers: headers });
     var sessionToken = this.auth.getSessionToken();
     console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};

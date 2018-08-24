@@ -78,8 +78,8 @@
         <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled"
           (click)="hashManualBet()">BET</button>
       </ion-row>
-      <ion-row *ngIf="isManualBetDisabled">
-        <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'secondary' : 'dark'" [disabled]="!isManualBetDisabled"
+      <ion-row>
+        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? 'dark' : 'secondary'" [disabled]="isManualCoutDisabled"
           (click)="hashManualCout()">CASH OUT</button>
       </ion-row>
     </ion-list>

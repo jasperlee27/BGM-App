@@ -32,7 +32,9 @@ export class HashingPage {
   isArrowHidden: boolean;
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
-  isManualBetDisabled: boolean;
+  isManualBetDisabled: boolean = true;
+  isManualCoutDisabled: boolean = true;
+  hasActiveManualBet: boolean = false;
   hashManualBetAmount;
   isLocGameTimerStarted: boolean = false;
   countDown;
@@ -45,6 +47,7 @@ export class HashingPage {
   hashBetType: string = 'manual';
   currentGameID: string;
   walletAmount: any;
+ 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
     this.isArrowHidden = true;
@@ -222,17 +225,26 @@ export class HashingPage {
 
       if (receivedData.type === 'GameStart') {
         //one instance
+        
+        this.isManualBetDisabled=true;
+
         if (!this.isLocGameTimerStarted) {
           this.isLocGameTimerStarted = true;
           console.log("START TIMER HERE");
           this.timer("start");
         }
-
+        
         else {
           //do nth
         }
+
+
       }
       else if (receivedData.type === 'game') {
+        this.isManualBetDisabled = true;
+        if (this.hasActiveManualBet){
+          this.isManualCoutDisabled=false;
+        }
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
         this.chartData[0].hidden = false;
@@ -248,6 +260,9 @@ export class HashingPage {
 
       else if (receivedData.type === "busted") {
         // console.log("Received data type  " + receivedData.type);
+        this.isManualCoutDisabled=true;
+        this.isManualBetDisabled=true;
+        this.hasActiveManualBet=false;
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
         this.isBurstTextHidden = false;
@@ -263,6 +278,10 @@ export class HashingPage {
 
       else if (receivedData.type === "countdown") {
         //log currentGameID here
+        this.isManualCoutDisabled=true;
+        if (!this.hasActiveManualBet){
+          this.isManualBetDisabled=false;
+        }
         this.currentGameID = receivedData.gameId;
         // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
         this.chartData[0].hidden = true;
@@ -295,7 +314,7 @@ export class HashingPage {
     console.log('ionViewDidLoad HashingPage');
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.walletAmount = this.auth.getAccValue();
   }
 
@@ -361,9 +380,10 @@ export class HashingPage {
   }
   hashManualBet() {
     console.log("manual betting");
-    this.isManualBetDisabled = true;
     //make place bet call
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID + " amount to buy= " + this.hashManualBetAmount);
+
+
     this.dataProvider.postBetGame2(this.auth.getAccId(), this.currentGameID, this.hashManualBetAmount).subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
       // var receivedData= JSON.parse(data);
@@ -372,8 +392,9 @@ export class HashingPage {
       this.auth.setAccValue(data.accountValue);
       this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
-        // console.log("Game 1 buying btc okay");
-        // console.log("actual bought tix= " + data.amount);
+        this.hasActiveManualBet = true;
+        this.isManualBetDisabled = true;
+        this.isManualCoutDisabled= false;
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
@@ -386,12 +407,21 @@ export class HashingPage {
     },
       err => {
         console.log("Error occured while buying placing manual hash bet");
-        console.log(err);
+        // console.log(err);
+        // console.log(err.error.message);
+        // console.log(err.message);
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: err.error.message,
+          buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(() => {
+        })
       });
   }
 
   hashManualCout() {
-    this.isManualBetDisabled = false;
     //to do post to cashout
     //make manual cashout call
     console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currentGameID);
@@ -400,6 +430,9 @@ export class HashingPage {
       console.log("Received returned message " + data.message);
       console.log("Received returned multiplier " + data.multiplier);
       console.log("Received returned winning " + data.winning);
+      this.isManualCoutDisabled=true;
+      this.hasActiveManualBet=false;
+
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
         // console.log("actual bought tix= " + data.amount);
