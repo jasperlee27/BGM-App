@@ -36,7 +36,7 @@ export class TrehuntPage {
   purchaseBTCGameID: string;
   purchaseETHGameID: string
   walletAmount;
-  isGuestLogin; 
+  isGuestLogin;
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
     // this.currBTCprice = this.randomIntRange(8000, 10000);
     // this.currETHprice = this.randomIntRange(600, 800);
@@ -61,11 +61,11 @@ export class TrehuntPage {
     this.updateCurrGameDetails();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     console.log("Fired event ionViewWillEnter");
     this.walletAmount = this.auth.getAccValue();
   }
-  
+
   ngOnInit() {
 
   }
@@ -73,7 +73,7 @@ export class TrehuntPage {
   doRefresh(refresher) {
     console.log('Caling refresh successfully here', refresher);
     this.updateCurrGameDetails();
-    
+
     setTimeout(() => {
       console.log('Refresh operation has ended');
       refresher.complete();
@@ -82,7 +82,7 @@ export class TrehuntPage {
 
   updateCurrGameDetails() {
     //Making post request here
-    console.log("Updating game status with accId= " +this.auth.getAccId());
+    console.log("Updating game status with accId= " + this.auth.getAccId());
     this.dataProvider.postTrehuntStatus(this.auth.getAccId()).subscribe(data => {
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       console.log("Game 1 HTTP Request refresh status successful");
@@ -131,7 +131,7 @@ export class TrehuntPage {
   // }
 
   buyBTCtix() {
-    console.log("bought " + this.amountBTCtix + " BTC Tix");
+    console.log("buying " + this.amountBTCtix + " BTC Tix");
 
 
     //passing in params & buying tickets
@@ -146,22 +146,60 @@ export class TrehuntPage {
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         this.presentAlert(this.amountBTCtix, 'BTC', data.tickets);
+        this.updateCurrGameDetails();
       }
     },
       err => {
         console.log("Error occured while buying BTC tickets");
         console.log(err);
+        this.presentErrorAlert();
       });
     // this.currOwnBTCtix += parseInt(this.amountBTCtix);
-    this.updateCurrGameDetails();
+
     // this.updateCurrBTCtix(this.amountBTCtix, "bought");
   }
 
   buyETHtix() {
-    console.log("bought " + this.amountETHtix + " ETH Tix");
-    // this.presentAlert(this.amountETHtix, 'ETH');
-    this.currOwnETHtix += parseInt(this.amountETHtix);
-    this.updateCurrETHtix(this.amountETHtix, "bought");
+    console.log("buying " + this.amountETHtix + " ETH Tix");
+
+
+    //passing in params & buying tickets
+    console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.purchaseETHGameID + " amount to buy= " + this.amountETHtix);
+    this.dataProvider.postBuyGame1(this.auth.getAccId(), this.purchaseETHGameID, this.amountETHtix).subscribe(data => {
+      // pass the response from HTTP Request into local variable receivedData
+
+      if (parseInt(data.status) === 200) {
+        console.log("Game 1 buying eth okay");
+        console.log("actual bought tix= " + data.amount);
+        console.log("accountValue after posting " + data.accountValue);
+        this.auth.setAccValue(data.accountValue);
+        this.walletAmount = this.auth.getAccValue();
+        this.presentAlert(this.amountETHtix, 'ETH', data.tickets);
+        this.updateCurrGameDetails();
+      }
+    },
+      err => {
+        console.log("Error occured while buying ETH tickets");
+        console.log(err);
+        this.presentErrorAlert();
+      });
+    // console.log("bought " + this.amountETHtix + " ETH Tix");
+    // // this.presentAlert(this.amountETHtix, 'ETH');
+    // this.currOwnETHtix += parseInt(this.amountETHtix);
+    // this.updateCurrETHtix(this.amountETHtix, "bought");
+  }
+
+
+  presentErrorAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'ERROR',
+      subTitle: 'Something went wrong',
+      message: 'Please try again',
+      buttons: ['OK']
+    });
+    alert.present();
+    alert.onDidDismiss(() => {
+    })
   }
 
   presentAlert(amountTix, type, ticketList: String[]) {
@@ -175,6 +213,7 @@ export class TrehuntPage {
     alert.onDidDismiss(() => {
     })
   }
+
 
 
   getListOfTickets(ticketList, type) {
@@ -193,7 +232,7 @@ export class TrehuntPage {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  
+
   //to be deprecated methods
   updateCurrBTCtix(rangeBTCTixIncrease: number, type: string) {
 

@@ -49,7 +49,7 @@ export class GlobalAuthProvider {
   }
 
   getAccValue(){
-    return this.accValue.toFixed(0);
+    return parseInt(this.accValue.toFixed(2));
   }
 
   addAccValue(amount){

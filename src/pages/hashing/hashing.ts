@@ -56,7 +56,7 @@ export class HashingPage {
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
     this.chartData = [
-      { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 3 },
+      { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 5 },
     ];
 
     this.chartColors = [{ // Actual Volume ETB
