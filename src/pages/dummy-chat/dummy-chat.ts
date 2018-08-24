@@ -67,17 +67,17 @@ export class DummyChatPage {
     });
 
     //emit to server
-    var objToSend = { username: this.username, msg: "test json msg message Input" };
+    var objToSend = { username: this.username, msg: "connected#123" };
     var jsonToSend = JSON.stringify(objToSend);
     this.socket.emit('chat message', jsonToSend);
 
-    this.socket.on('chat message', (data: any) => {
-      // console.log("Parsing JSON sent: " + JSON.parse(data));
-      var receivedData = JSON.parse(data);
-      console.log("JSON Username " + receivedData.username);
-      console.log("JSON message " + receivedData.msg);
-      console.log("Received chat message here " + data);
-    });
+    // this.socket.on('chat message', (data: any) => {
+    //   // console.log("Parsing JSON sent: " + JSON.parse(data));
+    //   var receivedData = JSON.parse(data);
+    //   console.log("JSON Username " + receivedData.username);
+    //   console.log("JSON message " + receivedData.msg);
+    //   console.log("Received chat message here " + data);
+    // });
 
     setTimeout(() => {
       this.content.scrollToBottom(300);//300ms animation speed

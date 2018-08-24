@@ -11,7 +11,7 @@ webpackJsonp([11],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(63);
@@ -85,6 +85,8 @@ var LoginPage = /** @class */ (function () {
             _this.auth.setAccId(_this.receivedData._id);
             _this.auth.setAccValue(_this.receivedData.accountValue);
             _this.auth.setGuestLogin(false);
+            _this.auth.setSessionToken(_this.receivedData.token);
+            console.log("session Token set as " + _this.auth.getSessionToken());
             if (parseInt(_this.receivedData.require2FA) === 0) {
                 _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
             }
@@ -103,6 +105,7 @@ var LoginPage = /** @class */ (function () {
         // this.navCtrl.setRoot(TabsPage);
         // this.navCtrl.push(this.twoFApage);
         this.auth.setAccId("guest");
+        this.auth.setUsername("guest");
         this.auth.setGuestLogin(true);
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
         console.log("view as guest only");
@@ -332,7 +335,7 @@ var BiddingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -443,7 +446,7 @@ var DummyChatPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(216);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_data_data__ = __webpack_require__(63);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -917,7 +920,7 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(630);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(64);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -996,14 +999,13 @@ var HomePage = /** @class */ (function () {
     //   this.messageText = '';
     // }
     // uncomment for mobile load sound
-    HomePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.loop('bgmLoopHome');
-            });
-        });
-    };
+    // ionViewDidLoad() {
+    //   this.platform.ready().then(() => {
+    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+    //       this.nativeAudio.loop('bgmLoopHome');
+    //     });
+    //   });
+    // }
     HomePage.prototype.getNews = function () {
         var _this = this;
         console.log("button is working fine");
@@ -1197,7 +1199,7 @@ var RoulettePage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1616,7 +1618,7 @@ var WalletPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__(362);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1946,7 +1948,7 @@ var StreamPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2059,6 +2061,7 @@ var TrehuntPage = /** @class */ (function () {
             if (parseInt(data.status) === 200) {
                 console.log("Game 1 buying btc okay");
                 console.log("actual bought tix= " + data.amount);
+                console.log("accountValue after posting " + data.accountValue);
                 _this.presentAlert(_this.amountBTCtix, 'BTC', data.tickets);
             }
         }, function (err) {
@@ -2337,11 +2340,11 @@ var map = {
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
-		663,
+		662,
 		4
 	],
 	"../pages/stream/stream.module": [
-		662,
+		663,
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
@@ -2349,11 +2352,11 @@ var map = {
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		666,
+		665,
 		1
 	],
 	"../pages/wallet/wallet.module": [
-		665,
+		666,
 		0
 	]
 };
@@ -2373,7 +2376,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 38:
+/***/ 33:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2412,6 +2415,12 @@ var GlobalAuthProvider = /** @class */ (function () {
     };
     GlobalAuthProvider.prototype.getAccId = function () {
         return this.accId;
+    };
+    GlobalAuthProvider.prototype.setSessionToken = function (sessionToken) {
+        this.sessionToken = sessionToken;
+    };
+    GlobalAuthProvider.prototype.getSessionToken = function () {
+        return this.sessionToken;
     };
     GlobalAuthProvider.prototype.setAccValue = function (currValue) {
         this.accValue = parseInt(currValue);
@@ -2542,7 +2551,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__components_inner_wallet_inner_wallet__ = __webpack_require__(655);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_home_home__ = __webpack_require__(156);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_global_auth_global_auth__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_native_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_smart_audio_smart_audio__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_slotsdraw_slotsdraw__ = __webpack_require__(162);
@@ -2623,11 +2632,11 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 }),
             ],
@@ -2951,6 +2960,7 @@ webpackContext.id = 502;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2962,6 +2972,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var loginUrl = 'http://178.128.50.224:3000/login/';
 var trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 var trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
@@ -2969,8 +2980,9 @@ var hashManualBetURL = 'http://178.128.50.224:3000/game2/placeBets';
 var hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
 var walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 var DataProvider = /** @class */ (function () {
-    function DataProvider(http) {
+    function DataProvider(http, auth) {
         this.http = http;
+        this.auth = auth;
         console.log('Hello DataProvider Provider');
     }
     //login
@@ -2990,9 +3002,16 @@ var DataProvider = /** @class */ (function () {
     };
     // get game1 curr status
     DataProvider.prototype.postTrehuntStatus = function (accid) {
-        var httpHeader = {
-            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
-        };
+        // const httpHeader = {
+        //   headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'x-session-token':this.auth.getSessionToken()})
+        // };
+        // let headers = new Headers();
+        // headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        // headers.append('x-session-token', sessionToken);
+        // let options = new RequestOptions({ headers: headers });
+        var sessionToken = this.auth.getSessionToken();
+        console.log("session token posted " + sessionToken);
+        var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid);
         return this.http.post(trehuntStatusURL, requestBody, httpHeader);
     };
@@ -3020,7 +3039,7 @@ var DataProvider = /** @class */ (function () {
     };
     DataProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__["a" /* GlobalAuthProvider */]])
     ], DataProvider);
     return DataProvider;
 }());
@@ -3181,7 +3200,7 @@ var ProgressBarComponent = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InnerWalletComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_data_data__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_auth_global_auth__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_auth_global_auth__ = __webpack_require__(33);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

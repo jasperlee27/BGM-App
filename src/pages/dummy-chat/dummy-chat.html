@@ -1,4 +1,4 @@
-<!--
+<!--  
   Generated template for the DummyChatPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
@@ -16,8 +16,13 @@
 <ion-content #content padding>
   <ion-grid>
     <ion-row *ngFor="let msg of messages">
-      <ion-col col-12>
-        <span class="displayMsg">{{msg.username}}:</span><span [style.color]="username === msg.username ? '#f3ba2e' : 'white'" style="font-size:16px;"> {{msg.msg}}</span>
+      <ion-col *ngIf="msg.msg === 'connected#123'" col-12>
+        <span [style.color]="'#00B44E'" class="displayMsg">{{msg.username}} has joined the chat</span>
+      </ion-col>
+      <ion-col *ngIf="msg.msg !== 'connected#123'" col-12>
+        <span class="displayMsg">{{msg.username}}:</span>
+        <span [style.color]="username === msg.username ? '#f3ba2e' : 'white'" style="font-size:16px;">
+        {{msg.msg}}</span>
       </ion-col>
     </ion-row>
   </ion-grid>
