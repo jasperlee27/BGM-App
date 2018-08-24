@@ -45,8 +45,8 @@ export class HomePage implements OnInit {
 
   }
 
-
-  getNews() {
+  //NEWS API
+  getNews_Old() {
     console.log("button is working fine");
     let path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
     let encodedPath = encodeURI(path);
@@ -65,6 +65,38 @@ export class HomePage implements OnInit {
         });
 
   }
+
+  getNews() {
+    console.log("button is working fine");
+    // let imgPath = 'http://178.128.50.224:3000/getNews';
+    // let encodedImgPath = encodeURI(imgPath);
+    let timeoutMS = 100000;
+    this.storyImage = 'http://178.128.50.224:3000/getNews'
+    // this.http.get(encodedImgPath)
+    //   .timeout(timeoutMS)
+    //   .map(res => res.json()).subscribe(data => {
+    //     let responseData = data;
+    //     console.log(responseData);
+    //     this.storyImage = responseData;
+    //   },
+    //     err => {
+    //       console.log('error in getting news');
+    //     });
+
+    let textPath = 'http://178.128.50.224:3000/getNewsText';
+    let encodedTextPath = encodeURI(textPath);
+    this.http.get(encodedTextPath)
+      .timeout(timeoutMS)
+      .map(res => res.json()).subscribe(data => {
+        let responseData = data;
+        console.log(responseData.message);
+        this.displayStory = responseData.message;
+      },
+        err => {
+          console.log('error in getting news');
+        });
+  }
+
   showAbout() {
     let alert = this.alertCtrl.create({
       title: 'About BGM',
