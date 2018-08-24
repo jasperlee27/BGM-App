@@ -49,7 +49,11 @@ export class GlobalAuthProvider {
   }
 
   getAccValue(){
-    return this.accValue;
+    return this.accValue.toFixed(0);
+  }
+
+  addAccValue(amount){
+    this.accValue += parseFloat(amount);
   }
 
   setGuestLogin(control: boolean){

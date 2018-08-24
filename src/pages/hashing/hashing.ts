@@ -430,8 +430,10 @@ export class HashingPage {
       console.log("Received returned message " + data.message);
       console.log("Received returned multiplier " + data.multiplier);
       console.log("Received returned winning " + data.winning);
+      this.auth.addAccValue(parseFloat(data.winning).toFixed(2));
       this.isManualCoutDisabled=true;
       this.hasActiveManualBet=false;
+      this.walletAmount = this.auth.getAccValue();
 
       if (parseInt(data.status) === 200) {
         // console.log("Game 1 buying btc okay");
