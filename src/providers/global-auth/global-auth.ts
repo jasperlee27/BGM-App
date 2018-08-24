@@ -45,7 +45,7 @@ export class GlobalAuthProvider {
   }
 
   setAccValue(currValue){
-    this.accValue = parseInt(currValue);
+    this.accValue = currValue;
   }
 
   getAccValue(){

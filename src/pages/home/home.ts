@@ -34,7 +34,7 @@ export class HomePage implements OnInit {
 
   // socket: SocketIOClient.Socket;
 
-  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
+  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
     // this.socket = io.connect('http://178.128.50.224:3001');
     // console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
@@ -42,52 +42,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getNews();
-    // this.messages = new Array();
-    // console.log("INITIATED");
-    // this.socket.on('message-received', (msg: any) => {
-    //   this.messages.push(msg);
-    //   console.log(msg);
-    //   console.log(this.messages);
-    // });
-    //emit to server
-    // this.socket.emit('chat message', {
-    //   msg: 'Client to server, can you hear me server?'
-    // });
 
-    // this.socket.on('Game2', (data: any) => {
-      // console.log(JSON.parse(data));
-      // var receivedData= JSON.parse(data);
-      // console.log("Received data type  "  + receivedData.type);
-      // if (receivedData.type!="busted"){
-        // console.log("Received data type  "  + receivedData.number);
-      }
-      // this.socket.emit('event3', {
-      //   msg: 'Yes, its working for me!!'
-      // });
-  //   });
+  }
 
-  //   this.socket.on('Game3', (data: any) => {
-  //     console.log(data.msg);
-  //   });
-  // }
-
-  // sendMessage() {
-  //   const message = {
-  //     text: this.messageText
-  //   };
-  //   this.socket.emit('send-message', message);
-    // console.log(message.text);
-  //   this.messageText = '';
-  // }
-
-  // uncomment for mobile load sound
-  // ionViewDidLoad() {
-  //   this.platform.ready().then(() => {
-  //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-  //       this.nativeAudio.loop('bgmLoopHome');
-  //     });
-  //   });
-  // }
 
   getNews() {
     console.log("button is working fine");
@@ -130,6 +87,8 @@ export class HomePage implements OnInit {
 
   logout() {
     console.log("logout is working fine");
+    this.auth.setSessionToken("");
+    console.log("Destroy session token " + this.auth.getSessionToken());
     // console.log("rootnav = " +this.appCtrl.getRootNav());
     this.appCtrl.getRootNav().setRoot(LoginPage);
 

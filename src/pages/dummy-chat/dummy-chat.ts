@@ -67,9 +67,11 @@ export class DummyChatPage {
     });
 
     //emit to server
-    var objToSend = { username: this.username, msg: "connected#123" };
-    var jsonToSend = JSON.stringify(objToSend);
-    this.socket.emit('chat message', jsonToSend);
+    if (this.username !== "guest") {
+      var objToSend = { username: this.username, msg: "connected#123" };
+      var jsonToSend = JSON.stringify(objToSend);
+      this.socket.emit('chat message', jsonToSend);
+    }
 
     // this.socket.on('chat message', (data: any) => {
     //   // console.log("Parsing JSON sent: " + JSON.parse(data));

@@ -46,26 +46,24 @@ export class DataProvider {
 
   //buy game 1 tickets
   postBuyGame1(accid, gameId, amount): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount", amount);
     return this.http.post(trehuntBuyURL, requestBody, httpHeader);
   }
 
 
   postBetGame2(accid, gameId, amount): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
     var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId).set("amount", amount);
     return this.http.post(hashManualBetURL, requestBody, httpHeader);
   }
 
   postCoutGame2(accid, gameId): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
     var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId);
     return this.http.post(hashManualCoutURL, requestBody, httpHeader);
   }
