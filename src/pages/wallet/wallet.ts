@@ -117,6 +117,8 @@ export class WalletPage {
   }
 
   ionViewWillEnter() {
+    this.walletBalance=this.auth.getAccValue();
+    this.updateStatementHistory();
   }
 
   // toggleSegment($event) {
