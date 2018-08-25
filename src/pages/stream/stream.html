@@ -21,10 +21,10 @@
     <ion-row>
       <ion-col col-12>
         <div class="bet-timer" [style.visibility]="isGameTime ? 'hidden' : 'visible'">
-          Next game in {{countDownBet3 | async}} s
+          Next game in {{timerValue}} s
         </div>
         <div class="game-timer" [style.visibility]="isGameTime ? 'visible' : 'hidden'">
-          Game ending in {{countDownGame3 | async}} s
+          Game ending in {{gameTimer}} s
         </div>
       </ion-col>
     </ion-row>

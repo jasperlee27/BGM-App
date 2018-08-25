@@ -2,11 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular/';
 import * as Chart from "chart.js";
 import 'chartjs-plugin-streaming';
-import { getQueryValue } from '@angular/core/src/view/query';
+// import { getQueryValue } from '@angular/core/src/view/query';
 import { BaseChartDirective } from '../../../node_modules/ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import * as io from 'socket.io-client';
 /**
  * Generated class for the StreamPage page.
  *
@@ -35,7 +36,10 @@ export class StreamPage {
   chartLabels = [];
   walletAmount;
   isGuestLogin;
-
+  socket: SocketIOClient.Socket;
+  currGameState;
+  timerValue;
+  gameTimer;
   // private datamap: any;
   chartColors: any[] =
     [
@@ -79,6 +83,9 @@ export class StreamPage {
   options: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider) {
+    //do socket connection
+    this.socket = io.connect('http://178.128.50.224:3002');
+    console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
     this.isGameTime = true;
     this.testGlobalVar=7000;
@@ -87,8 +94,54 @@ export class StreamPage {
   ngOnInit() {
     console.log('ionViewDidLoad StreamPage');
     console.log("variable initalized here is " +this.testGlobalVar);
+    //variable currentPrice,
+    //on game, countdown, gamestart. NO game end yet
+    this.socket.on('Game3', (data: any) => {
+      // console.log(JSON.parse(data));
+      var receivedData = JSON.parse(data);
+      // console.log("Received data type  " + receivedData.type);
+
+      if (receivedData.type === 'gameStart') {
+        console.log("received gameStart");
+  
+        if (this.currGameState!== 'gameStart'){
+          this.isGameTime = true;
+          this.currGameState='gameStart';
+          console.log("Toggled state " + this.currGameState);
+          //TODO: Sound 
+        }
+        //one instance
+      }
+      else if (receivedData.type === 'countdown'){
+        this.timerValue = receivedData.number;  
+        console.log("Counting down: " + receivedData.number);
+        if (this.currGameState!== 'countdown'){
+          this.isGameTime =false;
+          this.currGameState='countdown';
+          console.log("Toggled state " + this.currGameState);
+        }
+      }
+
+      else if (receivedData.type === 'game'){
+        this.gameTimer= receivedData.number;
+        console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+        if (this.currGameState!== 'game'){
+          this.currGameState='game';
+          console.log("Toggled state " + this.currGameState);
+        }
+      }
+
+      else if (receivedData.type=== 'gameEnd'){
+        //game ended;
+      }
+      else {
+        //do nth, error state.
+        this.currGameState= '';
+      }
+    });
+
     // buffer=[[7000],[Date.now()]];
-    this.startGame(10);
+    // this.startGame(10);
     var test = this.testGlobalVar;
 
 
@@ -114,7 +167,7 @@ export class StreamPage {
             test=this.randomIntRange(5000,8000);
           },
           randomIntRange: function (min,max) {
-            console.log("managed to call function");
+            // console.log("managed to call function");
             return Math.floor(Math.random() * (max - min + 1) + min);
           },
   
@@ -122,7 +175,7 @@ export class StreamPage {
             this.updateVar();
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
-            console.log("pushing " + test);
+            // console.log("pushing " + test);
             chart.data.datasets[0].data.push({
               x: Date.now(),
               y: test,
@@ -221,53 +274,53 @@ export class StreamPage {
   //   }, 300)
   // }
 
-  async startGame(countdown: number) {
-    this.isGameTime = true;
-    console.log("Game 3 Started");
-    this.count = countdown;
-    var noOfCounts = (this.count * 10)
+  // async startGame(countdown: number) {
+  //   this.isGameTime = true;
+  //   console.log("Game 3 Started");
+  //   this.count = countdown;
+  //   var noOfCounts = (this.count * 10)
 
-    this.countDownGame3 = timer(0, 100).pipe(
-      take(noOfCounts),
-      map(() => (this.count -= 0.1).toFixed(1))
-    );
+  //   this.countDownGame3 = timer(0, 100).pipe(
+  //     take(noOfCounts),
+  //     map(() => (this.count -= 0.1).toFixed(1))
+  //   );
 
-    await this.delay((this.count * 1000));
-    this.endGame();
-  }
+  //   await this.delay((this.count * 1000));
+  //   this.endGame();
+  // }
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async endGame() {
-    //to check if should pop w control variable else will pop all.
-    this.isGameTime = false;
-    this.roundFinalPrice = Math.random() * 3000 + 4500;
-    this.calcRoundResult();
+  // async endGame() {
+  //   //to check if should pop w control variable else will pop all.
+  //   this.isGameTime = false;
+  //   this.roundFinalPrice = Math.random() * 3000 + 4500;
+  //   this.calcRoundResult();
 
-    if (this.boughtIntoGame3) {
-      this.datasets.pop();
-    }
-    //update after game end
-    this.boughtIntoGame3 = false;
+  //   if (this.boughtIntoGame3) {
+  //     this.datasets.pop();
+  //   }
+  //   //update after game end
+  //   this.boughtIntoGame3 = false;
 
-    this.chart.refresh();
-    console.log("Game 2 Ended");
-    this.count = 30;
-    var noOfCounts = (this.count * 10)
+  //   this.chart.refresh();
+  //   console.log("Game 2 Ended");
+  //   this.count = 30;
+  //   var noOfCounts = (this.count * 10)
 
-    this.countDownBet3 = timer(0, 100).pipe(
-      take(noOfCounts),
-      map(() => (this.count -= 0.1).toFixed(1))
-    );
-
-
-    await this.delay((this.count * 1000));
+  //   this.countDownBet3 = timer(0, 100).pipe(
+  //     take(noOfCounts),
+  //     map(() => (this.count -= 0.1).toFixed(1))
+  //   );
 
 
-    this.startGame(30);
-  }
+  //   await this.delay((this.count * 1000));
+
+
+  //   this.startGame(30);
+  // }
 
   buyDataset() {
     console.log("Try to add new dataset");
