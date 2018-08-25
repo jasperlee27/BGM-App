@@ -72,53 +72,45 @@ export class WalletPage {
   }
 
   ngOnInit() {
+    this.updateStatementHistory();
+    // this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
+    //   //receive successfully
 
-    this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
-      //receive successfully
-
-      console.log("Received data here  " + data);
-      console.log("Login reponse");
+    //   console.log("Received data here  " + data);
+    //   console.log("Login reponse");
 
 
-      for (var i = 0; i < data.orders.length; i++) {
-        //FOR loop iterate all and form objects//
-        //--STORE TIME--
-        // console.log("timestamp of first order " + data.orders[i].updated);
-        //convert time stamp
-        var myDate = new Date(data.orders[i].updated);
-        var localeDate = myDate.toLocaleString('en-GB');
-        console.log("locale date = " + localeDate);
-        var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
-        console.log("Formatted date: " + formattedDate);
+    //   for (var i = 0; i < data.orders.length; i++) {
+    //     //FOR loop iterate all and form objects//
+    //     //--STORE TIME--
+    //     // console.log("timestamp of first order " + data.orders[i].updated);
+    //     //convert time stamp
+    //     var myDate = new Date(data.orders[i].updated);
+    //     var localeDate = myDate.toLocaleString('en-GB');
+    //     console.log("locale date = " + localeDate);
+    //     var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
+    //     console.log("Formatted date: " + formattedDate);
 
-        //--STORE GAME NAME--
-        // console.log("" + data.orders[i].gameName);
-        //--STORE PROFIT--
-        // console.log("profit of first order " + data.orders[i].profit)
-        var singleGame = {
-          "time": formattedDate,
-          "gameID": data.orders[i].gameName,
-          "gameNo": data.orders[i].gameNo,
-          "profit": parseInt(data.orders[i].profit)
-        }
-        //push array
-        this.historicalGames.push(singleGame);
-        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
-        // console.log("historical game name size "  + this.historicalGames.length);
-      }
-      //display array
-      // this.auth.setAccId(this.receivedData._id);
-      // this.auth.setAccValue(this.receivedData.accountValue);
-      // this.auth.setGuestLogin(false);
-
-      // this.auth.setSessionToken(this.receivedData.token);
-      // console.log("session Token set as " + this.auth.getSessionToken());
-
-    },
-      err => {
-        console.log("Error occured while getting past transactions");
-        console.log(err);
-      });
+    //     //--STORE GAME NAME--
+    //     // console.log("" + data.orders[i].gameName);
+    //     //--STORE PROFIT--
+    //     // console.log("profit of first order " + data.orders[i].profit)
+    //     var singleGame = {
+    //       "time": formattedDate,
+    //       "gameID": data.orders[i].gameName,
+    //       "gameNo": data.orders[i].gameNo,
+    //       "profit": parseInt(data.orders[i].profit)
+    //     }
+    //     //push array
+    //     this.historicalGames.push(singleGame);
+    //     // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+    //     // console.log("historical game name size "  + this.historicalGames.length);
+    //   }
+    // },
+    //   err => {
+    //     console.log("Error occured while getting past transactions");
+    //     console.log(err);
+    //   });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
@@ -169,71 +161,111 @@ export class WalletPage {
     }
   }
 
-  investmentDeposit() {
-    let alert = this.alertCtrl.create({
-      title: 'Proceed to deposit?',
-      message: 'You will be redirected to the page for deposit',
-      buttons: [
-        {
-          text: 'Yes',
-          handler: () => {
-            console.log('Yes click to redirect');
-          }
-        },
-        {
-          text: 'No',
-          handler: () => {
-            console.log('Not opening page');
-          }
+  // investmentDeposit() {
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Proceed to deposit?',
+  //     message: 'You will be redirected to the page for deposit',
+  //     buttons: [
+  //       {
+  //         text: 'Yes',
+  //         handler: () => {
+  //           console.log('Yes click to redirect');
+  //         }
+  //       },
+  //       {
+  //         text: 'No',
+  //         handler: () => {
+  //           console.log('Not opening page');
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present();
+  // }
+
+  // investmentWithdraw() {
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Withdraw to bank',
+  //     message: 'Enter amount to withdraw',
+  //     inputs: [
+  //       {
+  //         name: 'Amount',
+  //         placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: (data) => {
+  //           console.log('Cancelled withdraw intended ' + data.Amount + ' to bank');
+  //         }
+  //       },
+  //       {
+  //         text: 'Withdraw',
+  //         handler: (data) => {
+  //           console.log('Processing withdraw ' + data.Amount + ' to bank');
+  //           console.log(JSON.stringify(data)); //to see the object
+  //           console.log("Amount input was " + data.Amount);
+  //           this.processInvWithdrawal(data.Amount);
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   alert.present();
+  // }
+
+  // processInvWithdrawal(amount: any) {
+  //   //to insert post call for withdrwal return then
+  //   let alert = this.alertCtrl.create({
+  //     title: 'SUCCESS',
+  //     subTitle: 'Your withdrawal of ' + amount + ' BGM was successful and will be reflected in your bank in 2 days',
+  //     buttons: ['OK']
+  //   });
+
+  //   alert.present();
+  // }
+  updateStatementHistory(){
+    this.historicalGames = new Array();
+    this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
+      //receive successfully
+
+      console.log("Received data here  " + data);
+      console.log("Login reponse");
+
+
+      for (var i = 0; i < data.orders.length; i++) {
+        //FOR loop iterate all and form objects//
+        //--STORE TIME--
+        // console.log("timestamp of first order " + data.orders[i].updated);
+        //convert time stamp
+        var myDate = new Date(data.orders[i].updated);
+        var localeDate = myDate.toLocaleString('en-GB');
+        console.log("locale date = " + localeDate);
+        var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
+        console.log("Formatted date: " + formattedDate);
+
+        //--STORE GAME NAME--
+        // console.log("" + data.orders[i].gameName);
+        //--STORE PROFIT--
+        // console.log("profit of first order " + data.orders[i].profit)
+        var singleGame = {
+          "time": formattedDate,
+          "gameID": data.orders[i].gameName,
+          "gameNo": data.orders[i].gameNo,
+          "profit": parseInt(data.orders[i].profit)
         }
-      ]
-    });
-    alert.present();
+        //push array
+        this.historicalGames.push(singleGame);
+        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+        // console.log("historical game name size "  + this.historicalGames.length);
+      }
+    },
+      err => {
+        console.log("Error occured while getting past transactions");
+        console.log(err);
+      });
   }
-
-  investmentWithdraw() {
-    let alert = this.alertCtrl.create({
-      title: 'Withdraw to bank',
-      message: 'Enter amount to withdraw',
-      inputs: [
-        {
-          name: 'Amount',
-          placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: (data) => {
-            console.log('Cancelled withdraw intended ' + data.Amount + ' to bank');
-          }
-        },
-        {
-          text: 'Withdraw',
-          handler: (data) => {
-            console.log('Processing withdraw ' + data.Amount + ' to bank');
-            console.log(JSON.stringify(data)); //to see the object
-            console.log("Amount input was " + data.Amount);
-            this.processInvWithdrawal(data.Amount);
-          }
-        }
-      ]
-    });
-
-    alert.present();
-  }
-
-  processInvWithdrawal(amount: any) {
-    //to insert post call for withdrwal return then
-    let alert = this.alertCtrl.create({
-      title: 'SUCCESS',
-      subTitle: 'Your withdrawal of ' + amount + ' BGM was successful and will be reflected in your bank in 2 days',
-      buttons: ['OK']
-    });
-
-    alert.present();
-  }
-
   gameDeposit() {
     let alert = this.alertCtrl.create({
       title: 'Deposit Game Wallet',
@@ -255,9 +287,21 @@ export class WalletPage {
           text: 'Transfer',
           handler: (data) => {
             console.log('Processing transfer ' + data.Amount + ' to game wallet');
+            this.dataProvider.postDepositWallet(this.auth.getAccId(),data.Amount).subscribe(resReceived => {
+              //receive successfully
+              console.log("account info " + resReceived.accountValue)
+              this.auth.setAccValue(resReceived.accountValue);
+              this.walletBalance=this.auth.getAccValue();
+              this.updateStatementHistory(); 
+              this.processGameDeposit(resReceived.order.profit);
+            },
+            err => {
+              console.log("Error occured while depositing");
+              console.log(err);
+            });
+            
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
-            this.processGameDeposit(data.Amount);
           }
         }
       ]
@@ -298,10 +342,23 @@ export class WalletPage {
         {
           text: 'Transfer',
           handler: (data) => {
-            console.log('Processing transfer ' + data.Amount + ' to investment wallet');
+
+            console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
+            this.dataProvider.postWithdrawWallet(this.auth.getAccId(),data.Amount).subscribe(resReceived => {
+              //receive successfully
+              console.log("account info " + resReceived.accountValue)
+              this.auth.setAccValue(resReceived.accountValue);
+              this.walletBalance=this.auth.getAccValue();     
+              this.updateStatementHistory();
+              this.processGameWithdrawal(Math.abs(resReceived.order.profit));
+            },
+            err => {
+              console.log("Error occured while withdrawing");
+              console.log(err);
+            });
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
-            this.processGameWithdrawal(data.Amount);
+            
           }
         }
       ]

@@ -11,6 +11,8 @@ const trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
 const hashManualBetURL = 'http://178.128.50.224:3000/game2/placeBets';
 const hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
 const walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
+const depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
+const withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
 
 @Injectable()
 export class DataProvider {
@@ -26,7 +28,7 @@ export class DataProvider {
     var requestBody = new HttpParams().set("username", username).set("password", password);
     return this.http.post(loginUrl, requestBody, httpHeader);
   }
-
+  //current wallet amount
   postWalletAmount(accid): Observable<any> {
     const httpHeader = {
       headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -35,6 +37,25 @@ export class DataProvider {
     return this.http.post(walletAmountURL, requestBody, httpHeader);
   }
 
+  //deposit into game wallet
+  postDepositWallet(accid,amount): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
+    return this.http.post(depositWalletURL, requestBody, httpHeader);
+  }
+
+  //withdraw from game wallet
+  postWithdrawWallet(accid,amount): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
+    return this.http.post(withdrawWalletURL, requestBody, httpHeader);
+  }
+
+  //get past transactions
   postPastTransactions(accid): Observable<any> {
     const httpHeader = {
       headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -62,7 +83,7 @@ export class DataProvider {
     return this.http.post(trehuntBuyURL, requestBody, httpHeader);
   }
 
-
+  //manual bet for game 2
   postBetGame2(accid, gameId, amount): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
@@ -70,6 +91,7 @@ export class DataProvider {
     return this.http.post(hashManualBetURL, requestBody, httpHeader);
   }
 
+  //manual cashout for game 2
   postCoutGame2(accid, gameId): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
