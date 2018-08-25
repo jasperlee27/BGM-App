@@ -5,6 +5,7 @@ import { GlobalAuthProvider } from '../global-auth/global-auth';
 import { RequestOptions } from '../../../node_modules/@angular/http';
 
 const loginUrl = 'http://178.128.50.224:3000/login/';
+const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
 const hashManualBetURL = 'http://178.128.50.224:3000/game2/placeBets';
@@ -32,6 +33,14 @@ export class DataProvider {
     };
     var requestBody = new HttpParams().set("accid", accid);
     return this.http.post(walletAmountURL, requestBody, httpHeader);
+  }
+
+  postPastTransactions(accid): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid);
+    return this.http.post(pastTransactionsURL, requestBody, httpHeader);
   }
 
   // get game1 curr status

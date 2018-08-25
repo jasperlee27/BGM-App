@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import { BaseChartDirective } from 'ng2-charts';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the WalletPage page.
@@ -16,19 +18,20 @@ import { BaseChartDirective } from 'ng2-charts';
   templateUrl: 'wallet.html',
 })
 export class WalletPage {
-  countDown;
-  count = 10.0;
+  historicalGames: Array<any>;
+
+
   walletType = 'investment';
   refreshIcon = 'refresh';
   walletBalance;
-  currentView;
+  currentView = 'game';
 
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
-  balances: any = {
-    'investment': 12340,
-    'game': 750,
-  };
+  // balances: any = {
+  //   'investment': 12340,
+  //   'game': 750,
+  // };
 
   statements: any = {
     'investment': [
@@ -62,25 +65,74 @@ export class WalletPage {
     ],
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController) {
-    this.currentView = 'investment';
-    this.walletBalance = this.balances[this.currentView];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private auth: GlobalAuthProvider, private dataProvider: DataProvider) {
+    this.currentView = 'game';
+    this.walletBalance = this.auth.getAccValue();
+    this.historicalGames = new Array();
   }
 
   ngOnInit() {
-    // Let's navigate from TabsPage to Page1
-    // reset();
+
+    this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
+      //receive successfully
+
+      console.log("Received data here  " + data);
+      console.log("Login reponse");
+
+
+      for (var i = 0; i < data.orders.length; i++) {
+        //FOR loop iterate all and form objects//
+        //--STORE TIME--
+        // console.log("timestamp of first order " + data.orders[i].updated);
+        //convert time stamp
+        var myDate = new Date(data.orders[i].updated);
+        var localeDate = myDate.toLocaleString()
+        console.log("locale date = " + localeDate);
+        var formattedDate = myDate.getDate() + '/' + (myDate.getMonth() + 1) + localeDate.substring(11, 16);
+        console.log("Formatted date: " + formattedDate);
+
+        //--STORE GAME NAME--
+        // console.log("" + data.orders[i].gameName);
+        //--STORE PROFIT--
+        // console.log("profit of first order " + data.orders[i].profit)
+        var singleGame = {
+          "time": formattedDate,
+          "gameID": data.orders[i].gameName,
+          "gameNo": data.orders[i].gameNo,
+          "profit": parseInt(data.orders[i].profit)
+        }
+        //push array
+        this.historicalGames.push(singleGame);
+        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+        // console.log("historical game name size "  + this.historicalGames.length);
+      }
+      //display array
+      // this.auth.setAccId(this.receivedData._id);
+      // this.auth.setAccValue(this.receivedData.accountValue);
+      // this.auth.setGuestLogin(false);
+
+      // this.auth.setSessionToken(this.receivedData.token);
+      // console.log("session Token set as " + this.auth.getSessionToken());
+
+    },
+      err => {
+        console.log("Error occured while getting past transactions");
+        console.log(err);
+      });
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
   }
 
-  toggleSegment($event) {
-    console.log("Chosen segment " + $event.value);
-    //update current view & wallet balance
-    this.currentView = $event.value;
-    this.walletBalance = this.balances[this.currentView];
+  ionViewWillEnter() {
   }
+
+  // toggleSegment($event) {
+  //   console.log("Chosen segment " + $event.value);
+  //   //update current view & wallet balance
+  //   this.currentView = $event.value;
+  //   this.walletBalance = this.balances[this.currentView];
+  // }
 
   getStatements(type: any) {
     // console.log("Call get statements");
@@ -91,10 +143,10 @@ export class WalletPage {
   //driver functions, deposit withdraw
   deposit() {
     //check current view & present alert
-    if (this.currentView === 'investment') {
-      this.investmentDeposit();
-    }
-    else if (this.currentView === 'game') {
+    // if (this.currentView === 'investment') {
+    //   this.investmentDeposit();
+    // }
+    if (this.currentView === 'game') {
       this.gameDeposit();
     }
     else {
@@ -105,10 +157,10 @@ export class WalletPage {
 
   withdraw() {
     //check current view & present alert
-    if (this.currentView === 'investment') {
-      this.investmentWithdraw();
-    }
-    else if (this.currentView === 'game') {
+    // if (this.currentView === 'investment') {
+    //   this.investmentWithdraw();
+    // }
+    if (this.currentView === 'game') {
       this.gameWithdraw();
     }
     else {
@@ -159,7 +211,7 @@ export class WalletPage {
         {
           text: 'Withdraw',
           handler: (data) => {
-            console.log('Processing withdraw ' +data.Amount+ ' to bank');
+            console.log('Processing withdraw ' + data.Amount + ' to bank');
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
             this.processInvWithdrawal(data.Amount);
@@ -171,7 +223,7 @@ export class WalletPage {
     alert.present();
   }
 
-  processInvWithdrawal(amount: any){
+  processInvWithdrawal(amount: any) {
     //to insert post call for withdrwal return then
     let alert = this.alertCtrl.create({
       title: 'SUCCESS',
@@ -202,7 +254,7 @@ export class WalletPage {
         {
           text: 'Transfer',
           handler: (data) => {
-            console.log('Processing transfer ' +data.Amount+ ' to game wallet');
+            console.log('Processing transfer ' + data.Amount + ' to game wallet');
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
             this.processGameDeposit(data.Amount);
@@ -214,7 +266,7 @@ export class WalletPage {
     alert.present();
   }
 
-  processGameDeposit(amount: any){
+  processGameDeposit(amount: any) {
     //to insert post call for withdrwal return then
     let alert = this.alertCtrl.create({
       title: 'SUCCESS',
@@ -246,7 +298,7 @@ export class WalletPage {
         {
           text: 'Transfer',
           handler: (data) => {
-            console.log('Processing transfer ' +data.Amount+ ' to investment wallet');
+            console.log('Processing transfer ' + data.Amount + ' to investment wallet');
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
             this.processGameWithdrawal(data.Amount);
@@ -258,7 +310,7 @@ export class WalletPage {
     alert.present();
   }
 
-  processGameWithdrawal(amount: any){
+  processGameWithdrawal(amount: any) {
     //to insert post call for withdrwal return then
     let alert = this.alertCtrl.create({
       title: 'SUCCESS',

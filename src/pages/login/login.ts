@@ -72,8 +72,8 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
   loginState: any = "in";
-  usernameInput: string = 'test1';
-  passwordInput: string = 'test1';
+  usernameInput: string = 'jasper';
+  passwordInput: string = 'jasper';
   receivedData;
   showInvalidLogin: boolean = false;
   
