@@ -21,7 +21,13 @@ page-stream {
      .ion-card-header{
          font-size:4px !important;
      }
-     
+     .end-text{
+        margin-top: -5%;
+        text-align:center;
+        font-size: 24px;
+        font-weight: 600;
+        color: #24BF2E;
+     }
      .walletDisplay{
         float:right;
         width:40%

@@ -22,7 +22,10 @@ import * as io from 'socket.io-client';
 })
 export class StreamPage {
   @ViewChild(BaseChartDirective) chart: any;
-  isGameTime: boolean;
+  showGameTime: boolean;
+  showGameEnded: boolean;
+  showCountdown: boolean;
+  isBetDisabled: boolean = true;
   countDownGame3;
   countDownBet3;
   count = 30.0;
@@ -40,6 +43,8 @@ export class StreamPage {
   currGameState;
   timerValue;
   gameTimer;
+  finalRoundValue;
+  
   // private datamap: any;
   chartColors: any[] =
     [
@@ -87,7 +92,7 @@ export class StreamPage {
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
-    this.isGameTime = true;
+    // this.isGameTime = true;
     this.testGlobalVar=7000;
   }
 
@@ -103,9 +108,11 @@ export class StreamPage {
 
       if (receivedData.type === 'gameStart') {
         console.log("received gameStart");
-  
+        this.isBetDisabled=true;
         if (this.currGameState!== 'gameStart'){
-          this.isGameTime = true;
+          this.showGameTime = true;
+          this.showCountdown= false;
+          this.showGameEnded= false;
           this.currGameState='gameStart';
           console.log("Toggled state " + this.currGameState);
           //TODO: Sound 
@@ -113,26 +120,43 @@ export class StreamPage {
         //one instance
       }
       else if (receivedData.type === 'countdown'){
-        this.timerValue = receivedData.number;  
+        this.timerValue = parseFloat(receivedData.number).toFixed(1);
         console.log("Counting down: " + receivedData.number);
         if (this.currGameState!== 'countdown'){
-          this.isGameTime =false;
+          this.isBetDisabled=false;
+          this.showGameTime = false;
+          this.showCountdown= true;
+          this.showGameEnded= false;
           this.currGameState='countdown';
           console.log("Toggled state " + this.currGameState);
         }
       }
 
       else if (receivedData.type === 'game'){
-        this.gameTimer= receivedData.number;
+        this.isBetDisabled=true;
+        this.gameTimer= parseInt(receivedData.number);
         console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if (this.currGameState!== 'game'){
+          this.showGameTime = true;
+          this.showCountdown= false;
+          this.showGameEnded= false;
           this.currGameState='game';
           console.log("Toggled state " + this.currGameState);
         }
       }
 
       else if (receivedData.type=== 'gameEnd'){
+        this.showGameTime=false;
         //game ended;
+        if (this.currGameState!== 'gameEnded'){
+          this.showCountdown= false;
+          this.showGameEnded= true;
+          this.currGameState='gameEnded';
+          this.finalRoundValue= parseFloat(receivedData.endValue).toFixed(2);
+          //restart gameTimer
+          this.gameTimer= 15;
+          console.log("Toggled state " + this.currGameState);
+        }
       }
       else {
         //do nth, error state.

@@ -20,11 +20,14 @@
   <ion-grid style="height:100%; width:100%">
     <ion-row>
       <ion-col col-12>
-        <div class="bet-timer" [style.visibility]="isGameTime ? 'hidden' : 'visible'">
+        <div class="bet-timer" *ngIf = "showCountdown">
           Next game in {{timerValue}} s
         </div>
-        <div class="game-timer" [style.visibility]="isGameTime ? 'visible' : 'hidden'">
+        <div class="game-timer" *ngIf="showGameTime">
           Game ending in {{gameTimer}} s
+        </div>
+        <div class="end-text" *ngIf="showGameEnded">
+          Round ended @ {{finalRoundValue}}
         </div>
       </ion-col>
     </ion-row>
@@ -36,13 +39,13 @@
     <br>
     <ion-row>
       <ion-col col-4>
-        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isGameTime"></ion-input>
+        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>
       </ion-col>
       <ion-col col-4>
-        <button ion-button full [disabled]="isGameTime" (click)="betHigher()">Higher</button>
+        <button ion-button full [disabled]="isBetDisabled" (click)="betHigher()">Higher</button>
       </ion-col>
       <ion-col col-4>
-        <button ion-button full [disabled]="isGameTime" (click)="betLower()">Lower</button>
+        <button ion-button full [disabled]="isBetDisabled" (click)="betLower()">Lower</button>
       </ion-col>
     </ion-row>
 
