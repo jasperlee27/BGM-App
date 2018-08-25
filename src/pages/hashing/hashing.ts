@@ -226,15 +226,15 @@ export class HashingPage {
 
       if (receivedData.type === 'GameStart') {
         //one instance
-        
-        this.isManualBetDisabled=true;
+
+        this.isManualBetDisabled = true;
 
         if (!this.isLocGameTimerStarted) {
           this.isLocGameTimerStarted = true;
           console.log("START TIMER HERE");
           this.timer("start");
         }
-        
+
         else {
           //do nth
         }
@@ -243,8 +243,8 @@ export class HashingPage {
       }
       else if (receivedData.type === 'game') {
         this.isManualBetDisabled = true;
-        if (this.hasActiveManualBet){
-          this.isManualCoutDisabled=false;
+        if (this.hasActiveManualBet) {
+          this.isManualCoutDisabled = false;
         }
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
@@ -261,9 +261,9 @@ export class HashingPage {
 
       else if (receivedData.type === "busted") {
         // console.log("Received data type  " + receivedData.type);
-        this.isManualCoutDisabled=true;
-        this.isManualBetDisabled=true;
-        this.hasActiveManualBet=false;
+        this.isManualCoutDisabled = true;
+        this.isManualBetDisabled = true;
+        this.hasActiveManualBet = false;
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
         this.isBurstTextHidden = false;
@@ -279,9 +279,9 @@ export class HashingPage {
 
       else if (receivedData.type === "countdown") {
         //log currentGameID here
-        this.isManualCoutDisabled=true;
-        if (!this.hasActiveManualBet){
-          this.isManualBetDisabled=false;
+        this.isManualCoutDisabled = true;
+        if (!this.hasActiveManualBet) {
+          this.isManualBetDisabled = false;
         }
         this.currentGameID = receivedData.gameId;
         // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
@@ -395,7 +395,7 @@ export class HashingPage {
       if (parseInt(data.status) === 200) {
         this.hasActiveManualBet = true;
         this.isManualBetDisabled = true;
-        this.isManualCoutDisabled= false;
+        this.isManualCoutDisabled = false;
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
@@ -411,15 +411,29 @@ export class HashingPage {
         // console.log(err);
         // console.log(err.error.message);
         // console.log(err.message);
-        let alert = this.alertCtrl.create({
-          title: 'Error',
-          subTitle: err.error.message,
-          buttons: ['OK']
-        });
-        alert.present();
-        alert.onDidDismiss(() => {
-        })
-      });
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
+
+          alert.present();
+          console.log("Hit Error 0");
+        }
+        else {
+
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: err.error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          alert.onDidDismiss(() => {
+          })
+        }
+      }
+    );
   }
 
   hashManualCout() {
@@ -432,8 +446,8 @@ export class HashingPage {
       console.log("Received returned multiplier " + data.multiplier);
       console.log("Received returned winning " + data.winning);
       this.auth.addAccValue(parseFloat(data.winning).toFixed(2));
-      this.isManualCoutDisabled=true;
-      this.hasActiveManualBet=false;
+      this.isManualCoutDisabled = true;
+      this.hasActiveManualBet = false;
       this.walletAmount = this.auth.getAccValue();
 
       if (parseInt(data.status) === 200) {

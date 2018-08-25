@@ -1,5 +1,5 @@
 import { Component, trigger, state, style, transition, animate, keyframes, Renderer2 } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular/';
+import { NavController, Platform, AlertController } from 'ionic-angular/';
 import { BiddingPage } from '../bidding/bidding';
 import { RoulettePage } from '../roulette/roulette';
 import { MyApp } from '../../app/app.component';
@@ -77,7 +77,7 @@ export class LoginPage {
   receivedData;
   showInvalidLogin: boolean = false;
   
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private renderer: Renderer2){
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController){
   }
 
   // ionViewDidLoad() {
@@ -126,9 +126,22 @@ export class LoginPage {
   
     },
     err => {
-      console.log("Error occured while logging in or not authorized");
- 
-      this.showInvalidLogin= true;
+      if (err.status===0){
+        let alert = this.alertCtrl.create({
+          title: 'ERROR',
+          subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+          buttons: ['OK']
+        });
+    
+        alert.present();
+        console.log("Hit Error 0");
+      }
+
+      else{
+        console.log("Error occured while logging in or not authorized");
+        this.showInvalidLogin= true;
+      }
+
       console.log(err);
     });
     

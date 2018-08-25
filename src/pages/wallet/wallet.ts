@@ -117,7 +117,7 @@ export class WalletPage {
   }
 
   ionViewWillEnter() {
-    this.walletBalance=this.auth.getAccValue();
+    this.walletBalance = this.auth.getAccValue();
     this.updateStatementHistory();
   }
 
@@ -227,13 +227,13 @@ export class WalletPage {
 
   //   alert.present();
   // }
-  updateStatementHistory(){
+  updateStatementHistory() {
     this.historicalGames = new Array();
     this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
       //receive successfully
 
-      console.log("Received data here  " + data);
-      console.log("Login reponse");
+      // console.log("Received data here  " + data);
+      // console.log("Login reponse");
 
 
       for (var i = 0; i < data.orders.length; i++) {
@@ -243,9 +243,9 @@ export class WalletPage {
         //convert time stamp
         var myDate = new Date(data.orders[i].updated);
         var localeDate = myDate.toLocaleString('en-GB');
-        console.log("locale date = " + localeDate);
-        var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
-        console.log("Formatted date: " + formattedDate);
+        // console.log("locale date = " + localeDate);
+        var formattedDate = localeDate.substring(0, 5) + ' ' + localeDate.substring(12, 17);
+        // console.log("Formatted date: " + formattedDate);
 
         //--STORE GAME NAME--
         // console.log("" + data.orders[i].gameName);
@@ -289,19 +289,19 @@ export class WalletPage {
           text: 'Transfer',
           handler: (data) => {
             console.log('Processing transfer ' + data.Amount + ' to game wallet');
-            this.dataProvider.postDepositWallet(this.auth.getAccId(),data.Amount).subscribe(resReceived => {
+            this.dataProvider.postDepositWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
               //receive successfully
               console.log("account info " + resReceived.accountValue)
               this.auth.setAccValue(resReceived.accountValue);
-              this.walletBalance=this.auth.getAccValue();
-              this.updateStatementHistory(); 
+              this.walletBalance = this.auth.getAccValue();
+              this.updateStatementHistory();
               this.processGameDeposit(resReceived.order.profit);
             },
-            err => {
-              console.log("Error occured while depositing");
-              console.log(err);
-            });
-            
+              err => {
+                console.log("Error occured while depositing");
+                console.log(err);
+              });
+
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
           }
@@ -346,21 +346,21 @@ export class WalletPage {
           handler: (data) => {
 
             console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
-            this.dataProvider.postWithdrawWallet(this.auth.getAccId(),data.Amount).subscribe(resReceived => {
+            this.dataProvider.postWithdrawWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
               //receive successfully
               console.log("account info " + resReceived.accountValue)
               this.auth.setAccValue(resReceived.accountValue);
-              this.walletBalance=this.auth.getAccValue();     
+              this.walletBalance = this.auth.getAccValue();
               this.updateStatementHistory();
               this.processGameWithdrawal(Math.abs(resReceived.order.profit));
             },
-            err => {
-              console.log("Error occured while withdrawing");
-              console.log(err);
-            });
+              err => {
+                console.log("Error occured while withdrawing");
+                console.log(err);
+              });
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
-            
+
           }
         }
       ]
@@ -382,6 +382,41 @@ export class WalletPage {
 
   refreshWallet() {
     console.log("refreshing wallets");
-    //to present alert to refresh wallet
+    this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(data => {
+
+      //parse response from server
+      console.log("Update wallet reponse");
+      console.log("Received acc balance as  " + data.accountValue);
+      this.auth.setAccValue(parseInt(data.accountValue));
+      console.log("Global provider value of acc " + this.auth.getAccValue());
+      this.walletBalance = this.auth.getAccValue();
+      //to present alert to refresh wallet
+
+      let alert = this.alertCtrl.create({
+        title: 'SUCCESS',
+        subTitle: 'Wallet Refreshed',
+        buttons: ['OK']
+      });
+
+      alert.present();
+
+
+    },
+      err => {
+        console.log("Error occured while getting account balance");
+        let alert = this.alertCtrl.create({
+          title: 'ERROR',
+          subTitle: 'Wallet cannot be refreshed at this time. Please try again.',
+          buttons: ['OK']
+        });
+  
+        alert.present();
+  
+        console.log(err);
+      });
+    // this.navCtrl.setRoot(TabsPage);
+    console.log("End getting amount");
+
   }
+
 }

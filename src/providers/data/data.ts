@@ -30,36 +30,40 @@ export class DataProvider {
   }
   //current wallet amount
   postWalletAmount(accid): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+    
     var requestBody = new HttpParams().set("accid", accid);
     return this.http.post(walletAmountURL, requestBody, httpHeader);
   }
 
   //deposit into game wallet
   postDepositWallet(accid,amount): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
     return this.http.post(depositWalletURL, requestBody, httpHeader);
   }
 
   //withdraw from game wallet
   postWithdrawWallet(accid,amount): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
     return this.http.post(withdrawWalletURL, requestBody, httpHeader);
   }
 
   //get past transactions
   postPastTransactions(accid): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid);
     return this.http.post(pastTransactionsURL, requestBody, httpHeader);
   }
