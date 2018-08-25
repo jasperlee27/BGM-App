@@ -44,7 +44,7 @@ export class StreamPage {
   timerValue;
   gameTimer;
   finalRoundValue;
-  
+  priceFromGame;
   // private datamap: any;
   chartColors: any[] =
     [
@@ -101,6 +101,8 @@ export class StreamPage {
     console.log("variable initalized here is " +this.testGlobalVar);
     //variable currentPrice,
     //on game, countdown, gamestart. NO game end yet
+    var gameValuesToPush;
+
     this.socket.on('Game3', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
@@ -134,6 +136,7 @@ export class StreamPage {
 
       else if (receivedData.type === 'game'){
         this.isBetDisabled=true;
+        gameValuesToPush = receivedData.currentPrice;
         this.gameTimer= parseInt(receivedData.number);
         console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if (this.currGameState!== 'game'){
@@ -167,7 +170,7 @@ export class StreamPage {
     // buffer=[[7000],[Date.now()]];
     // this.startGame(10);
     var test = this.testGlobalVar;
-
+   
 
     this.options= {
       legend: {
@@ -199,10 +202,10 @@ export class StreamPage {
             this.updateVar();
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
-            // console.log("pushing " + test);
+            console.log("pushing " + gameValuesToPush);
             chart.data.datasets[0].data.push({
               x: Date.now(),
-              y: test,
+              y: gameValuesToPush,
             });
   
             // chart.data.datasets.forEach(function (dataset: any) {
@@ -242,7 +245,7 @@ export class StreamPage {
             display: true,
             stepSize: 1000,
             min: 0,
-            suggestedMax: 8000,
+            // suggestedMax: 8000,
             // mirror: true,
             // drawTicks: true,
           },
@@ -263,8 +266,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 0,
-            suggestedMax: 8000,
+            min: 6637.9,
+            max: 6638.1,
             // mirror: true,
             // drawTicks: true,
           },
