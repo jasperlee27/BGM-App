@@ -13,6 +13,7 @@ const hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
 const walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 const depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
 const withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
+const binaryOptionBetURL = 'http://178.128.50.224:3000/game3/placeBets';
 
 @Injectable()
 export class DataProvider {
@@ -102,4 +103,14 @@ export class DataProvider {
     var requestBody = new HttpParams().set("accid", accid).set("gameId", gameId);
     return this.http.post(hashManualCoutURL, requestBody, httpHeader);
   }
+
+  postBetGame3(amount, orderType, accid): Observable<any> {
+    // var sessionToken = this.auth.getSessionToken();
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("amount", amount).set("orderType", orderType).set("accid", accid);
+    return this.http.post(binaryOptionBetURL, requestBody, httpHeader);
+  }
+
 }

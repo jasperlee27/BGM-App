@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular/';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import * as Chart from "chart.js";
 import 'chartjs-plugin-streaming';
 // import { getQueryValue } from '@angular/core/src/view/query';
@@ -8,6 +8,7 @@ import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/obser
 import { take, map } from 'rxjs/operators';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import * as io from 'socket.io-client';
+import { DataProvider } from '../../providers/data/data';
 /**
  * Generated class for the StreamPage page.
  *
@@ -87,7 +88,7 @@ export class StreamPage {
 
   options: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController) {
     //do socket connection
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
@@ -98,7 +99,6 @@ export class StreamPage {
 
   ngOnInit() {
     console.log('ionViewDidLoad StreamPage');
-    console.log("variable initalized here is " +this.testGlobalVar);
     //variable currentPrice,
     //on game, countdown, gamestart. NO game end yet
     var gameValuesToPush;
@@ -107,9 +107,9 @@ export class StreamPage {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
-
+      
       if (receivedData.type === 'gameStart') {
-        console.log("received gameStart");
+        // console.log("received gameStart");
         this.isBetDisabled=true;
         if (this.currGameState!== 'gameStart'){
           this.showGameTime = true;
@@ -123,7 +123,9 @@ export class StreamPage {
       }
       else if (receivedData.type === 'countdown'){
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
-        console.log("Counting down: " + receivedData.number);
+        gameValuesToPush = receivedData.currentPrice;
+        // console.log("Updating current price in countdown " + gameValuesToPush);
+        // console.log("Counting down: " + receivedData.number);
         if (this.currGameState!== 'countdown'){
           this.isBetDisabled=false;
           this.showGameTime = false;
@@ -138,7 +140,8 @@ export class StreamPage {
         this.isBetDisabled=true;
         gameValuesToPush = receivedData.currentPrice;
         this.gameTimer= parseInt(receivedData.number);
-        console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+        // console.log("Updating current price in game " + gameValuesToPush);
+        // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if (this.currGameState!== 'game'){
           this.showGameTime = true;
           this.showCountdown= false;
@@ -149,8 +152,10 @@ export class StreamPage {
       }
 
       else if (receivedData.type=== 'gameEnd'){
-        this.showGameTime=false;
         //game ended;
+        this.showGameTime=false;
+        gameValuesToPush = receivedData.currentPrice;
+
         if (this.currGameState!== 'gameEnded'){
           this.showCountdown= false;
           this.showGameEnded= true;
@@ -266,8 +271,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6637.9,
-            max: 6638.1,
+            min: 6600,
+            suggestedMax: 6900,
             // mirror: true,
             // drawTicks: true,
           },
@@ -349,7 +354,7 @@ export class StreamPage {
   //   this.startGame(30);
   // }
 
-  buyDataset() {
+  buyDataset(orderType) {
     console.log("Try to add new dataset");
     var newDataset = {
       label: 'Buy Price',
@@ -366,21 +371,121 @@ export class StreamPage {
 
   betHigher() {
     this.boughtIntoGame3 = true;
-    console.log("bought " + this.game3BetAmount);
-    this.buyDataset();
-    this.roundBetType = 'higher';
+    this.roundBetType = 'long';
+    // this.buyDataset();
+    
+
+    this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(data => {
+      // pass the response from HTTP Request into local variable1 receivedData
+      // var receivedData= JSON.parse(data);
+      console.log("bought " + this.game3BetAmount);
+      console.log("Received entry price " + data.entryPrice);
+      // this.auth.setAccValue(data.accountValue);
+      // this.walletAmount = this.auth.getAccValue();
+      if (parseInt(data.status) === 200) {
+        // this.hasActiveManualBet = true;
+        // this.isManualBetDisabled = true;
+        // this.isManualCoutDisabled = false;
+        this.game3BetAmount='';
+        let alert = this.alertCtrl.create({
+          title: 'SUCCESS',
+          subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
+          buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(() => {
+        })
+      }
+    },
+      err => {
+        console.log("Error occured while placing long bet");
+        // console.log(err);
+        // console.log(err.error.message);
+        // console.log(err.message);
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
+
+          alert.present();
+          console.log("Hit Error 0");
+        }
+        else {
+
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: err.error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          alert.onDidDismiss(() => {
+          })
+        }
+      }
+    );
+
+
   }
 
   betLower() {
     this.boughtIntoGame3 = true;
-    console.log("bought " + this.game3BetAmount);
-    this.buyDataset();
-    this.roundBetType = 'lower';
+    this.roundBetType = 'short';
+    // this.buyDataset();
+    
+
+    this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(data => {
+      // pass the response from HTTP Request into local variable1 receivedData
+      // var receivedData= JSON.parse(data);
+      console.log("bought " + this.game3BetAmount);
+      console.log("Received entry price " + data.entryPrice);
+      // this.auth.setAccValue(data.accountValue);
+      // this.walletAmount = this.auth.getAccValue();
+      if (parseInt(data.status) === 200) {
+        // this.hasActiveManualBet = true;
+        // this.isManualBetDisabled = true;
+        // this.isManualCoutDisabled = false;
+        this.game3BetAmount='';
+        let alert = this.alertCtrl.create({
+          title: 'SUCCESS',
+          subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
+          buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(() => {
+        })
+      }
+    },
+      err => {
+        console.log("Error occured while placing short bet");
+        // console.log(err);
+        // console.log(err.error.message);
+        // console.log(err.message);
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
+
+          alert.present();
+          console.log("Hit Error 0");
+        }
+        else {
+
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: err.error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          alert.onDidDismiss(() => {
+          })
+        }
+      }
+    );
   }
-  // randomIntRange() {
-  //   console.log("managed to call function defined outside");
-  //   return Math.floor(Math.random() * (4500 - 3000 + 1) + 3000);
-  // }
 
   calcRoundResult() {
 
