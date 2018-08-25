@@ -27,6 +27,7 @@ export class StreamPage {
   showGameEnded: boolean;
   showCountdown: boolean;
   isBetDisabled: boolean = true;
+  hasActiveBet: boolean;
   countDownGame3;
   countDownBet3;
   count = 30.0;
@@ -36,7 +37,7 @@ export class StreamPage {
   game3BetAmount;
   yDataReceived = Math.random() * 20;
   testGlobalVar = 6000;
-  buffer =  [[], []];
+  buffer = [[], []];
   chartLabels = [];
   walletAmount;
   isGuestLogin;
@@ -81,20 +82,20 @@ export class StreamPage {
   datasets: any[] =
     [
       { data: [], fill: false, label: 'BitCoin', },
-      { data: [], showLine: false, pointRadius: 5, label: 'Short' },
-      { data: [], pointRadius: 0, label: 'Long' }
+      // { data: [], showLine: false, pointRadius: 5, label: 'Short' },
+      // { data: [], pointRadius: 0, label: 'Long' }
 
     ];
 
   options: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth:GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController) {
     //do socket connection
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
     // this.isGameTime = true;
-    this.testGlobalVar=7000;
+    this.testGlobalVar = 7000;
   }
 
   ngOnInit() {
@@ -102,82 +103,84 @@ export class StreamPage {
     //variable currentPrice,
     //on game, countdown, gamestart. NO game end yet
     var gameValuesToPush;
+    var localActiveBet;
 
     this.socket.on('Game3', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
-      
+      localActiveBet = this.hasActiveBet;
+
       if (receivedData.type === 'gameStart') {
         // console.log("received gameStart");
-        this.isBetDisabled=true;
-        if (this.currGameState!== 'gameStart'){
+        this.isBetDisabled = true;
+        if (this.currGameState !== 'gameStart') {
           this.showGameTime = true;
-          this.showCountdown= false;
-          this.showGameEnded= false;
-          this.currGameState='gameStart';
+          this.showCountdown = false;
+          this.showGameEnded = false;
+          this.currGameState = 'gameStart';
           console.log("Toggled state " + this.currGameState);
           //TODO: Sound 
         }
         //one instance
       }
-      else if (receivedData.type === 'countdown'){
+      else if (receivedData.type === 'countdown') {
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
         gameValuesToPush = receivedData.currentPrice;
         // console.log("Updating current price in countdown " + gameValuesToPush);
         // console.log("Counting down: " + receivedData.number);
-        if (this.currGameState!== 'countdown'){
-          this.isBetDisabled=false;
+        if (this.currGameState !== 'countdown') {
+          this.isBetDisabled = false;
           this.showGameTime = false;
-          this.showCountdown= true;
-          this.showGameEnded= false;
-          this.currGameState='countdown';
+          this.showCountdown = true;
+          this.showGameEnded = false;
+          this.currGameState = 'countdown';
           console.log("Toggled state " + this.currGameState);
         }
       }
 
-      else if (receivedData.type === 'game'){
-        this.isBetDisabled=true;
+      else if (receivedData.type === 'game') {
+        this.isBetDisabled = true;
         gameValuesToPush = receivedData.currentPrice;
-        this.gameTimer= parseInt(receivedData.number);
+        this.gameTimer = parseInt(receivedData.number);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
-        if (this.currGameState!== 'game'){
+        if (this.currGameState !== 'game') {
           this.showGameTime = true;
-          this.showCountdown= false;
-          this.showGameEnded= false;
-          this.currGameState='game';
+          this.showCountdown = false;
+          this.showGameEnded = false;
+          this.currGameState = 'game';
           console.log("Toggled state " + this.currGameState);
         }
       }
 
-      else if (receivedData.type=== 'gameEnd'){
+      else if (receivedData.type === 'gameEnd') {
         //game ended;
-        this.showGameTime=false;
+        this.showGameTime = false;
         gameValuesToPush = receivedData.currentPrice;
 
-        if (this.currGameState!== 'gameEnded'){
-          this.showCountdown= false;
-          this.showGameEnded= true;
-          this.currGameState='gameEnded';
-          this.finalRoundValue= parseFloat(receivedData.endValue).toFixed(2);
+        if (this.currGameState !== 'gameEnd') {
+          this.hasActiveBet = false;
+          this.showCountdown = false;
+          this.showGameEnded = true;
+          this.currGameState = 'gameEnd';
+          this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
           //restart gameTimer
-          this.gameTimer= 15;
+          this.gameTimer = 15;
           console.log("Toggled state " + this.currGameState);
         }
       }
       else {
         //do nth, error state.
-        this.currGameState= '';
+        this.currGameState = '';
       }
     });
 
     // buffer=[[7000],[Date.now()]];
     // this.startGame(10);
     var test = this.testGlobalVar;
-   
 
-    this.options= {
+    this.options = {
       legend: {
         display: false
       },
@@ -190,19 +193,19 @@ export class StreamPage {
           duration: 30000,
           //can create function to copy here from received data above?
           //or create socket here and update value here;
-          getClassValue: function (){
-            console.log("is calling get class value but returning " +this.testGlobalVar);
+          getClassValue: function () {
+            console.log("is calling get class value but returning " + this.testGlobalVar);
             return this.testGlobalVar;
           },
 
-          updateVar:function(){
-            test=this.randomIntRange(5000,8000);
+          updateVar: function () {
+            test = this.randomIntRange(5000, 8000);
           },
-          randomIntRange: function (min,max) {
+          randomIntRange: function (min, max) {
             // console.log("managed to call function");
             return Math.floor(Math.random() * (max - min + 1) + min);
           },
-  
+
           onRefresh: function (chart: any) {
             this.updateVar();
             var count = 0;
@@ -212,22 +215,30 @@ export class StreamPage {
               x: Date.now(),
               y: gameValuesToPush,
             });
-  
+
+            console.log('check active bet here ' + localActiveBet);
+            if (localActiveBet) {
+              console.log("Entered if condition");
+              chart.data.datasets[1].data.push({
+                x: Date.now(),
+                y: chart.data.datasets[1].data[0],
+              })
+            };
             // chart.data.datasets.forEach(function (dataset: any) {
             //   if (count == 0) {
             //     // var value = Math.random() * 3000 + 4500;
             //     var value = 100;
             //     value = this.randomIntRange();
             //   }
-  
+
             //   else if (count === 3) {
             //     var value = 5000;
             //   }
-  
+
             //   else {
             //   }
             //   var currDate = Date.now();
-  
+
             //   dataset.data.push({
             //     x: currDate,
             //     y: value,
@@ -260,9 +271,9 @@ export class StreamPage {
             drawTicks: true,
             color: "white",
           },
-  
+
         }],
-  
+
         yAxes: [{
           offset: true,
           ticks: {
@@ -283,15 +294,15 @@ export class StreamPage {
             color: "white",
           },
         }],
-  
+
       }
-  
+
     };
 
 
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.walletAmount = this.auth.getAccValue();
   }
 
@@ -325,45 +336,27 @@ export class StreamPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // async endGame() {
-  //   //to check if should pop w control variable else will pop all.
-  //   this.isGameTime = false;
-  //   this.roundFinalPrice = Math.random() * 3000 + 4500;
-  //   this.calcRoundResult();
-
-  //   if (this.boughtIntoGame3) {
-  //     this.datasets.pop();
-  //   }
-  //   //update after game end
-  //   this.boughtIntoGame3 = false;
-
-  //   this.chart.refresh();
-  //   console.log("Game 2 Ended");
-  //   this.count = 30;
-  //   var noOfCounts = (this.count * 10)
-
-  //   this.countDownBet3 = timer(0, 100).pipe(
-  //     take(noOfCounts),
-  //     map(() => (this.count -= 0.1).toFixed(1))
-  //   );
-
-
-  //   await this.delay((this.count * 1000));
-
-
-  //   this.startGame(30);
-  // }
-
-  buyDataset(orderType) {
+  buyDataset(orderType, entryPrice) {
     console.log("Try to add new dataset");
+    var color;
+
+    if (orderType === "long") {
+      color = 'red';
+    }
+
+    else {
+      color = 'green';
+    }
+
     var newDataset = {
       label: 'Buy Price',
       backgroundColor: 'red',
       borderColor: 'red',
-      fill: false,
+      borderWidth: 5,
+      // fill: false,
       lineTension: 0,
-      data: [],
-      pointRadius: 0
+      data: [entryPrice],
+      pointRadius: 5,
     };
     this.datasets.push(newDataset);
     this.chart.refresh();
@@ -372,21 +365,22 @@ export class StreamPage {
   betHigher() {
     this.boughtIntoGame3 = true;
     this.roundBetType = 'long';
-    // this.buyDataset();
-    
+
+
 
     this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
       console.log("Received entry price " + data.entryPrice);
+      // this.buyDataset(this.roundBetType, data.entryPrice);
       // this.auth.setAccValue(data.accountValue);
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
-        // this.hasActiveManualBet = true;
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false;
-        this.game3BetAmount='';
+        this.hasActiveBet = true;
+        this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
@@ -433,7 +427,7 @@ export class StreamPage {
     this.boughtIntoGame3 = true;
     this.roundBetType = 'short';
     // this.buyDataset();
-    
+
 
     this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
@@ -445,8 +439,9 @@ export class StreamPage {
       if (parseInt(data.status) === 200) {
         // this.hasActiveManualBet = true;
         // this.isManualBetDisabled = true;
-        // this.isManualCoutDisabled = false;
-        this.game3BetAmount='';
+        // this.isManualCoutDisabled = false
+        this.hasActiveBet = true;
+        this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
