@@ -145,7 +145,7 @@ export class TrehuntPage {
         console.log("accountValue after posting " + data.accountValue);
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
-        this.presentAlert(this.amountBTCtix, 'BTC', data.tickets);
+        this.presentAlert(data.tickets.length, 'BTC', data.tickets);
         this.updateCurrGameDetails();
       }
     },
@@ -174,7 +174,7 @@ export class TrehuntPage {
         console.log("accountValue after posting " + data.accountValue);
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
-        this.presentAlert(this.amountETHtix, 'ETH', data.tickets);
+        this.presentAlert(data.tickets.length, 'ETH', data.tickets);
         this.updateCurrGameDetails();
       }
     },

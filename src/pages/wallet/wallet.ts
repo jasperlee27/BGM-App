@@ -86,9 +86,9 @@ export class WalletPage {
         // console.log("timestamp of first order " + data.orders[i].updated);
         //convert time stamp
         var myDate = new Date(data.orders[i].updated);
-        var localeDate = myDate.toLocaleString()
+        var localeDate = myDate.toLocaleString('en-GB');
         console.log("locale date = " + localeDate);
-        var formattedDate = myDate.getDate() + '/' + (myDate.getMonth() + 1) + localeDate.substring(11, 16);
+        var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
         console.log("Formatted date: " + formattedDate);
 
         //--STORE GAME NAME--
