@@ -89,6 +89,9 @@ export class StreamPage {
     console.log("variable initalized here is " +this.testGlobalVar);
     // buffer=[[7000],[Date.now()]];
     this.startGame(10);
+    var test = this.testGlobalVar;
+
+
     this.options= {
       legend: {
         display: false
@@ -106,18 +109,23 @@ export class StreamPage {
             console.log("is calling get class value but returning " +this.testGlobalVar);
             return this.testGlobalVar;
           },
+
+          updateVar:function(){
+            test=this.randomIntRange(5000,8000);
+          },
           randomIntRange: function (min,max) {
             console.log("managed to call function");
             return Math.floor(Math.random() * (max - min + 1) + min);
           },
   
           onRefresh: function (chart: any) {
+            this.updateVar();
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
-            console.log("pushing " + this.testGlobalVar);
+            console.log("pushing " + test);
             chart.data.datasets[0].data.push({
               x: Date.now(),
-              y: this.testGlobalVar,
+              y: test,
             });
   
             // chart.data.datasets.forEach(function (dataset: any) {
