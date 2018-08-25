@@ -6,6 +6,7 @@ import { take, map } from 'rxjs/operators';
 import * as io from 'socket.io-client';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { DataProvider } from '../../providers/data/data';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 /**
  * Generated class for the HashingPage page.
  *
@@ -20,6 +21,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class HashingPage {
   @ViewChild(BaseChartDirective) chart: any;
+  currGameState: string;
   messageText: string;
   messages: Array<any>;
   chartColors;
@@ -49,7 +51,7 @@ export class HashingPage {
   walletAmount: any;
   isGuestLogin;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private smartAudio: SmartAudioProvider, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
     this.isGuestLogin = this.auth.getGuestLogin();
     this.isArrowHidden = true;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
@@ -225,6 +227,10 @@ export class HashingPage {
       // console.log("Received data type  " + receivedData.type);
 
       if (receivedData.type === 'GameStart') {
+        if (this.currGameState!== 'GameStart'){
+          this.currGameState='GameStart';
+          //TODO: Sound 
+        }
         //one instance
 
         this.isManualBetDisabled = true;
@@ -242,6 +248,13 @@ export class HashingPage {
 
       }
       else if (receivedData.type === 'game') {
+
+        if (this.currGameState!== 'game'){
+          this.currGameState='game';
+          //TODO: Sound 
+        }
+
+
         this.isManualBetDisabled = true;
         if (this.hasActiveManualBet) {
           this.isManualCoutDisabled = false;
@@ -260,6 +273,11 @@ export class HashingPage {
       }
 
       else if (receivedData.type === "busted") {
+        if (this.currGameState!== 'busted'){
+          this.smartAudio.play('game2explode');
+          this.currGameState='busted';
+          //TODO: Sound on bust
+        }
         // console.log("Received data type  " + receivedData.type);
         this.isManualCoutDisabled = true;
         this.isManualBetDisabled = true;
@@ -278,6 +296,10 @@ export class HashingPage {
       }
 
       else if (receivedData.type === "countdown") {
+        if (this.currGameState!== 'countdown'){
+          this.currGameState='countdown';
+          //TODO: Sound on bust
+        }
         //log currentGameID here
         this.isManualCoutDisabled = true;
         if (!this.hasActiveManualBet) {
@@ -294,6 +316,7 @@ export class HashingPage {
 
       else {
         //do nth
+        this.currGameState='';
       }
       // this.socket.emit('event3', {
       //   msg: 'Yes, its working for me!!'

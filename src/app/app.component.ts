@@ -44,6 +44,7 @@ export class MyApp {
       smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3', 'simple');
       // smartAudio.play('tabSwitch');
       smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3', 'complex');
+      smartAudio.preload('game2explode', 'assets/audio/game2xploded.mp3', 'simple');
       // smartAudio.loop('tabSwitch2');
       //   platform.registerBackButtonAction(() => {
       //     this.navCtrl.pop();
