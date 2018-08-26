@@ -47,6 +47,7 @@ export class StreamPage {
   gameTimer;
   finalRoundValue;
   priceFromGame;
+  entryPrice;
   // private datamap: any;
   chartColors: any[] =
     [
@@ -104,12 +105,15 @@ export class StreamPage {
     //on game, countdown, gamestart. NO game end yet
     var gameValuesToPush;
     var localActiveBet;
+    var localEntryPrice;
 
     this.socket.on('Game3', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
       localActiveBet = this.hasActiveBet;
+      localEntryPrice = this.entryPrice;
+      console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
 
       if (receivedData.type === 'gameStart') {
         // console.log("received gameStart");
@@ -223,13 +227,12 @@ export class StreamPage {
             console.log('check active bet here ' + localActiveBet);
             if (localActiveBet) {
               console.log("Entered if condition");
-              console.log("buychart value is " + chart.data.datasets[1].data[0]);
-              var entryValue=chart.data.datasets[1].data[0];
+              // console.log("buychart value is " + chart.data.datasets[1].data[0]);
               chart.data.datasets[1].data.push({
                 x: Date.now(),
-                y: entryValue,
+                y: localEntryPrice,
               })
-              console.log("After push entry value" + entryValue);
+              console.log("After push entry value" + localEntryPrice);
             };
             // chart.data.datasets.forEach(function (dataset: any) {
             //   if (count == 0) {
@@ -289,8 +292,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6676.5,
-            max: 6676.6,
+            min: 6675.6,
+            max: 6675.8,
             // mirror: true,
             // drawTicks: true,
           },
@@ -360,16 +363,15 @@ export class StreamPage {
     else {
       color = 'green';
     }
-
     var newDataset = {
       label: 'Buy Price',
-      backgroundColor: 'red',
-      borderColor: 'red',
-      borderWidth: 10,
+      backgroundColor: color,
+      borderColor: color,
+      borderWidth: 5,
       fill: false,
       lineTension: 0,
-      data: [entryPrice],
-      pointRadius: 5,
+      data: [],
+      pointRadius: 0,
     };
     this.datasets.push(newDataset);
     this.chart.refresh();
@@ -391,6 +393,7 @@ export class StreamPage {
         this.buyDataset(this.roundBetType, data.entryPrice);
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
+        this.entryPrice = data.entryPrice;
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false;
         this.hasActiveBet = true;
@@ -452,6 +455,7 @@ export class StreamPage {
       if (parseInt(data.status) === 200) {
         this.boughtIntoGame3 = true;
         this.roundBetType = 'short';
+        this.entryPrice = data.entryPrice;
         this.buyDataset(this.roundBetType, data.entryPrice);
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
