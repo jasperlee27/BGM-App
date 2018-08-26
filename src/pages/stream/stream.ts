@@ -27,7 +27,7 @@ export class StreamPage {
   showGameEnded: boolean;
   showCountdown: boolean;
   isBetDisabled: boolean = true;
-  hasActiveBet: boolean;
+  hasActiveBet: boolean = false;
   countDownGame3;
   countDownBet3;
   count = 30.0;
@@ -160,7 +160,9 @@ export class StreamPage {
         gameValuesToPush = receivedData.currentPrice;
 
         if (this.currGameState !== 'gameEnd') {
-          this.destroyBetInstance();
+          if (this.hasActiveBet){
+            this.destroyBetInstance();
+          }
           this.hasActiveBet = false;
           this.showCountdown = false;
           this.showGameEnded = true;
@@ -211,7 +213,8 @@ export class StreamPage {
             this.updateVar();
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
-            // console.log("pushing " + gameValuesToPush);
+            console.log("how many datasets i have " + chart.data.datasets.length);
+            console.log("pushing " + gameValuesToPush);
             chart.data.datasets[0].data.push({
               x: Date.now(),
               y: gameValuesToPush,
@@ -284,8 +287,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6697.5,
-            max: 6698,
+            min: 6677.2,
+            max: 6677.3,
             // mirror: true,
             // drawTicks: true,
           },
