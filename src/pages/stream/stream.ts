@@ -59,24 +59,24 @@ export class StreamPage {
         pointHoverBackgroundColor: '#3AA57D', //changing inside hover box legend
         pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
       },
-      { // Short
-        backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: '#3F719E',
-        pointBackgroundColor: '#3F719E',
-        pointBorderColor: '#3F719E',
-        pointRadius: 0,
-        pointHoverBackgroundColor: '#3F719E',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      },
-      { // Long
-        backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: 'red',
-        pointBackgroundColor: '#9575CD',
-        pointBorderColor: '#9575CD',
-        pointRadius: 0,
-        pointHoverBackgroundColor: '#9575CD',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      }
+      // { // Short
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: '#3F719E',
+      //   pointBackgroundColor: '#3F719E',
+      //   pointBorderColor: '#3F719E',
+      //   pointRadius: 0,
+      //   pointHoverBackgroundColor: '#3F719E',
+      //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      // },
+      // { // Long
+      //   backgroundColor: 'rgba(0,0,0,0)',
+      //   borderColor: 'red',
+      //   pointBackgroundColor: '#9575CD',
+      //   pointBorderColor: '#9575CD',
+      //   pointRadius: 0,
+      //   pointHoverBackgroundColor: '#9575CD',
+      //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      // }
     ];
 
   datasets: any[] =
@@ -224,10 +224,12 @@ export class StreamPage {
             if (localActiveBet) {
               console.log("Entered if condition");
               console.log("buychart value is " + chart.data.datasets[1].data[0]);
+              var entryValue=chart.data.datasets[1].data[0];
               chart.data.datasets[1].data.push({
                 x: Date.now(),
-                y: chart.data.datasets[1].data[0],
+                y: entryValue,
               })
+              console.log("After push entry value" + entryValue);
             };
             // chart.data.datasets.forEach(function (dataset: any) {
             //   if (count == 0) {
@@ -287,8 +289,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6677.2,
-            max: 6677.3,
+            min: 6676.5,
+            max: 6676.6,
             // mirror: true,
             // drawTicks: true,
           },
@@ -343,6 +345,7 @@ export class StreamPage {
 
   destroyBetInstance(){
     console.log("pop buyline chart")
+    console.log("POP DATASET HERE");
     this.datasets.pop();
   }
 
@@ -363,7 +366,7 @@ export class StreamPage {
       backgroundColor: 'red',
       borderColor: 'red',
       borderWidth: 10,
-      fill: true,
+      fill: false,
       lineTension: 0,
       data: [entryPrice],
       pointRadius: 5,
