@@ -160,7 +160,7 @@ export class StreamPage {
         gameValuesToPush = receivedData.currentPrice;
 
         if (this.currGameState !== 'gameEnd') {
-          // this.destroyBetInstance();
+          this.destroyBetInstance();
           this.hasActiveBet = false;
           this.showCountdown = false;
           this.showGameEnded = true;
@@ -284,8 +284,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6600,
-            suggestedMax: 6900,
+            min: 6697.5,
+            max: 6698,
             // mirror: true,
             // drawTicks: true,
           },
@@ -338,10 +338,10 @@ export class StreamPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  // destroyBetInstance(){
-  //   console.log("pop buyline chart")
-  //   this.chart.data.datasets.pop();
-  // }
+  destroyBetInstance(){
+    console.log("pop buyline chart")
+    this.datasets.pop();
+  }
 
   buyDataset(orderType, entryPrice) {
     console.log("Try to add new dataset");
