@@ -160,6 +160,7 @@ export class StreamPage {
         gameValuesToPush = receivedData.currentPrice;
 
         if (this.currGameState !== 'gameEnd') {
+          // this.destroyBetInstance();
           this.hasActiveBet = false;
           this.showCountdown = false;
           this.showGameEnded = true;
@@ -210,7 +211,7 @@ export class StreamPage {
             this.updateVar();
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
-            console.log("pushing " + gameValuesToPush);
+            // console.log("pushing " + gameValuesToPush);
             chart.data.datasets[0].data.push({
               x: Date.now(),
               y: gameValuesToPush,
@@ -219,6 +220,7 @@ export class StreamPage {
             console.log('check active bet here ' + localActiveBet);
             if (localActiveBet) {
               console.log("Entered if condition");
+              console.log("buychart value is " + chart.data.datasets[1].data[0]);
               chart.data.datasets[1].data.push({
                 x: Date.now(),
                 y: chart.data.datasets[1].data[0],
@@ -295,7 +297,7 @@ export class StreamPage {
           },
         }],
 
-      }
+        }
 
     };
 
@@ -336,6 +338,11 @@ export class StreamPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  // destroyBetInstance(){
+  //   console.log("pop buyline chart")
+  //   this.chart.data.datasets.pop();
+  // }
+
   buyDataset(orderType, entryPrice) {
     console.log("Try to add new dataset");
     var color;
@@ -352,8 +359,8 @@ export class StreamPage {
       label: 'Buy Price',
       backgroundColor: 'red',
       borderColor: 'red',
-      borderWidth: 5,
-      // fill: false,
+      borderWidth: 10,
+      fill: true,
       lineTension: 0,
       data: [entryPrice],
       pointRadius: 5,
@@ -363,8 +370,7 @@ export class StreamPage {
   }
 
   betHigher() {
-    this.boughtIntoGame3 = true;
-    this.roundBetType = 'long';
+
 
 
 
@@ -373,10 +379,12 @@ export class StreamPage {
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
       console.log("Received entry price " + data.entryPrice);
-      // this.buyDataset(this.roundBetType, data.entryPrice);
-      // this.auth.setAccValue(data.accountValue);
-      // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
+        this.boughtIntoGame3 = true;
+        this.roundBetType = 'long';
+        this.buyDataset(this.roundBetType, data.entryPrice);
+        this.auth.setAccValue(data.accountValue);
+        this.walletAmount = this.auth.getAccValue();
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false;
         this.hasActiveBet = true;
@@ -424,8 +432,7 @@ export class StreamPage {
   }
 
   betLower() {
-    this.boughtIntoGame3 = true;
-    this.roundBetType = 'short';
+
     // this.buyDataset();
 
 
@@ -437,6 +444,11 @@ export class StreamPage {
       // this.auth.setAccValue(data.accountValue);
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
+        this.boughtIntoGame3 = true;
+        this.roundBetType = 'short';
+        this.buyDataset(this.roundBetType, data.entryPrice);
+        this.auth.setAccValue(data.accountValue);
+        this.walletAmount = this.auth.getAccValue();
         // this.hasActiveManualBet = true;
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false

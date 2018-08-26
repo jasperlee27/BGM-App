@@ -1,6 +1,6 @@
 webpackJsonp([11],{
 
-/***/ 124:
+/***/ 125:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -10,11 +10,11 @@ webpackJsonp([11],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(158);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -184,7 +184,7 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 125:
+/***/ 126:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -346,7 +346,7 @@ var BiddingPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DummyChatPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -459,10 +459,10 @@ var DummyChatPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_data_data__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(64);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -697,8 +697,8 @@ var HashingPage = /** @class */ (function () {
                 _this.chart.refresh();
             }
             else if (receivedData.type === "busted") {
-                _this.smartAudio.play('game2explode');
                 if (_this.currGameState !== 'busted') {
+                    _this.smartAudio.play('game2explode');
                     _this.currGameState = 'busted';
                     //TODO: Sound on bust
                 }
@@ -990,8 +990,8 @@ var HashingPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(628);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(630);
@@ -1262,10 +1262,10 @@ var RoulettePage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TwoFacAuthPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(359);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(363);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(535);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_operators__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_global_auth_global_auth__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1401,7 +1401,7 @@ var TwoFacAuthPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_data_data__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1804,15 +1804,14 @@ var WalletPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StreamPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(531);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(530);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators__ = __webpack_require__(363);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_operators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_data_data__ = __webpack_require__(50);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1822,46 +1821,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 
 
 
+// import { getQueryValue } from '@angular/core/src/view/query';
 
- // (for rxjs < 6) use 'rxjs/observable/timer'
+
 
 
 /**
@@ -1871,10 +1836,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
  * Ionic pages and navigation.
  */
 var StreamPage = /** @class */ (function () {
-    function StreamPage(navCtrl, navParams, auth) {
+    function StreamPage(navCtrl, navParams, auth, dataProvider, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.auth = auth;
+        this.dataProvider = dataProvider;
+        this.alertCtrl = alertCtrl;
+        this.isBetDisabled = true;
         this.count = 30.0;
         this.boughtIntoGame3 = false;
         this.yDataReceived = Math.random() * 20;
@@ -1913,18 +1881,90 @@ var StreamPage = /** @class */ (function () {
         ];
         this.datasets = [
             { data: [], fill: false, label: 'BitCoin', },
-            { data: [], showLine: false, pointRadius: 5, label: 'Short' },
-            { data: [], pointRadius: 0, label: 'Long' }
         ];
+        //do socket connection
+        this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client__["connect"]('http://178.128.50.224:3002');
+        console.log("socket for BinaryOptions conencted");
         this.isGuestLogin = this.auth.getGuestLogin();
-        this.isGameTime = true;
+        // this.isGameTime = true;
         this.testGlobalVar = 7000;
     }
     StreamPage.prototype.ngOnInit = function () {
+        var _this = this;
         console.log('ionViewDidLoad StreamPage');
-        console.log("variable initalized here is " + this.testGlobalVar);
+        //variable currentPrice,
+        //on game, countdown, gamestart. NO game end yet
+        var gameValuesToPush;
+        var localActiveBet;
+        this.socket.on('Game3', function (data) {
+            // console.log(JSON.parse(data));
+            var receivedData = JSON.parse(data);
+            // console.log("Received data type  " + receivedData.type);
+            localActiveBet = _this.hasActiveBet;
+            if (receivedData.type === 'gameStart') {
+                // console.log("received gameStart");
+                _this.isBetDisabled = true;
+                if (_this.currGameState !== 'gameStart') {
+                    _this.showGameTime = true;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'gameStart';
+                    console.log("Toggled state " + _this.currGameState);
+                    //TODO: Sound 
+                }
+                //one instance
+            }
+            else if (receivedData.type === 'countdown') {
+                _this.timerValue = parseFloat(receivedData.number).toFixed(1);
+                gameValuesToPush = receivedData.currentPrice;
+                // console.log("Updating current price in countdown " + gameValuesToPush);
+                // console.log("Counting down: " + receivedData.number);
+                if (_this.currGameState !== 'countdown') {
+                    _this.isBetDisabled = false;
+                    _this.showGameTime = false;
+                    _this.showCountdown = true;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'countdown';
+                    console.log("Toggled state " + _this.currGameState);
+                }
+            }
+            else if (receivedData.type === 'game') {
+                _this.isBetDisabled = true;
+                gameValuesToPush = receivedData.currentPrice;
+                _this.gameTimer = parseInt(receivedData.number);
+                // console.log("Updating current price in game " + gameValuesToPush);
+                // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+                if (_this.currGameState !== 'game') {
+                    _this.showGameTime = true;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'game';
+                    console.log("Toggled state " + _this.currGameState);
+                }
+            }
+            else if (receivedData.type === 'gameEnd') {
+                //game ended;
+                _this.showGameTime = false;
+                gameValuesToPush = receivedData.currentPrice;
+                if (_this.currGameState !== 'gameEnd') {
+                    _this.hasActiveBet = false;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = true;
+                    _this.currGameState = 'gameEnd';
+                    _this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
+                    //restart gameTimer
+                    _this.gameTimer = 15;
+                    console.log("Toggled state " + _this.currGameState);
+                }
+            }
+            else {
+                //do nth, error state.
+                _this.currGameState = '';
+            }
+        });
         // buffer=[[7000],[Date.now()]];
-        this.startGame(10);
+        // this.startGame(10);
+        var test = this.testGlobalVar;
         this.options = {
             legend: {
                 display: false
@@ -1942,18 +1982,31 @@ var StreamPage = /** @class */ (function () {
                         console.log("is calling get class value but returning " + this.testGlobalVar);
                         return this.testGlobalVar;
                     },
+                    updateVar: function () {
+                        test = this.randomIntRange(5000, 8000);
+                    },
                     randomIntRange: function (min, max) {
-                        console.log("managed to call function");
+                        // console.log("managed to call function");
                         return Math.floor(Math.random() * (max - min + 1) + min);
                     },
                     onRefresh: function (chart) {
+                        this.updateVar();
                         var count = 0;
                         // var value = this.randomIntRange(3000,8000);
-                        console.log("pushing " + this.testGlobalVar);
+                        console.log("pushing " + gameValuesToPush);
                         chart.data.datasets[0].data.push({
                             x: Date.now(),
-                            y: this.testGlobalVar,
+                            y: gameValuesToPush,
                         });
+                        console.log('check active bet here ' + localActiveBet);
+                        if (localActiveBet) {
+                            console.log("Entered if condition");
+                            chart.data.datasets[1].data.push({
+                                x: Date.now(),
+                                y: chart.data.datasets[1].data[0],
+                            });
+                        }
+                        ;
                         // chart.data.datasets.forEach(function (dataset: any) {
                         //   if (count == 0) {
                         //     // var value = Math.random() * 3000 + 4500;
@@ -1988,7 +2041,6 @@ var StreamPage = /** @class */ (function () {
                             display: true,
                             stepSize: 1000,
                             min: 0,
-                            suggestedMax: 8000,
                         },
                         gridLines: {
                             lineWidth: 0.5,
@@ -2005,8 +2057,8 @@ var StreamPage = /** @class */ (function () {
                             padding: 5,
                             display: true,
                             stepSize: 1000,
-                            min: 0,
-                            suggestedMax: 8000,
+                            min: 6600,
+                            suggestedMax: 6900,
                         },
                         gridLines: {
                             lineWidth: 0.5,
@@ -2031,90 +2083,148 @@ var StreamPage = /** @class */ (function () {
     //     this.chart.refresh();
     //   }, 300)
     // }
-    StreamPage.prototype.startGame = function (countdown) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var noOfCounts;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.isGameTime = true;
-                        console.log("Game 3 Started");
-                        this.count = countdown;
-                        noOfCounts = (this.count * 10);
-                        this.countDownGame3 = Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__["timer"])(0, 100).pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["take"])(noOfCounts), Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["map"])(function () { return (_this.count -= 0.1).toFixed(1); }));
-                        return [4 /*yield*/, this.delay((this.count * 1000))];
-                    case 1:
-                        _a.sent();
-                        this.endGame();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
+    // async startGame(countdown: number) {
+    //   this.isGameTime = true;
+    //   console.log("Game 3 Started");
+    //   this.count = countdown;
+    //   var noOfCounts = (this.count * 10)
+    //   this.countDownGame3 = timer(0, 100).pipe(
+    //     take(noOfCounts),
+    //     map(() => (this.count -= 0.1).toFixed(1))
+    //   );
+    //   await this.delay((this.count * 1000));
+    //   this.endGame();
+    // }
     StreamPage.prototype.delay = function (ms) {
         return new Promise(function (resolve) { return setTimeout(resolve, ms); });
     };
-    StreamPage.prototype.endGame = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
-            var noOfCounts;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        //to check if should pop w control variable else will pop all.
-                        this.isGameTime = false;
-                        this.roundFinalPrice = Math.random() * 3000 + 4500;
-                        this.calcRoundResult();
-                        if (this.boughtIntoGame3) {
-                            this.datasets.pop();
-                        }
-                        //update after game end
-                        this.boughtIntoGame3 = false;
-                        this.chart.refresh();
-                        console.log("Game 2 Ended");
-                        this.count = 30;
-                        noOfCounts = (this.count * 10);
-                        this.countDownBet3 = Object(__WEBPACK_IMPORTED_MODULE_4_rxjs_observable_timer__["timer"])(0, 100).pipe(Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["take"])(noOfCounts), Object(__WEBPACK_IMPORTED_MODULE_5_rxjs_operators__["map"])(function () { return (_this.count -= 0.1).toFixed(1); }));
-                        return [4 /*yield*/, this.delay((this.count * 1000))];
-                    case 1:
-                        _a.sent();
-                        this.startGame(30);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    StreamPage.prototype.buyDataset = function () {
+    StreamPage.prototype.buyDataset = function (orderType, entryPrice) {
         console.log("Try to add new dataset");
+        var color;
+        if (orderType === "long") {
+            color = 'red';
+        }
+        else {
+            color = 'green';
+        }
         var newDataset = {
             label: 'Buy Price',
             backgroundColor: 'red',
             borderColor: 'red',
-            fill: false,
+            borderWidth: 5,
+            // fill: false,
             lineTension: 0,
-            data: [],
-            pointRadius: 0
+            data: [entryPrice],
+            pointRadius: 5,
         };
         this.datasets.push(newDataset);
         this.chart.refresh();
     };
     StreamPage.prototype.betHigher = function () {
+        var _this = this;
         this.boughtIntoGame3 = true;
-        console.log("bought " + this.game3BetAmount);
-        this.buyDataset();
-        this.roundBetType = 'higher';
+        this.roundBetType = 'long';
+        this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            console.log("bought " + _this.game3BetAmount);
+            console.log("Received entry price " + data.entryPrice);
+            // this.buyDataset(this.roundBetType, data.entryPrice);
+            // this.auth.setAccValue(data.accountValue);
+            // this.walletAmount = this.auth.getAccValue();
+            if (parseInt(data.status) === 200) {
+                // this.isManualBetDisabled = true;
+                // this.isManualCoutDisabled = false;
+                _this.hasActiveBet = true;
+                _this.game3BetAmount = '';
+                var alert_1 = _this.alertCtrl.create({
+                    title: 'SUCCESS',
+                    subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
+                    buttons: ['OK']
+                });
+                alert_1.present();
+                alert_1.onDidDismiss(function () {
+                });
+            }
+        }, function (err) {
+            console.log("Error occured while placing long bet");
+            // console.log(err);
+            // console.log(err.error.message);
+            // console.log(err.message);
+            if (err.status === 0) {
+                var alert_2 = _this.alertCtrl.create({
+                    title: 'ERROR',
+                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+                    buttons: ['OK']
+                });
+                alert_2.present();
+                console.log("Hit Error 0");
+            }
+            else {
+                var alert_3 = _this.alertCtrl.create({
+                    title: 'Error',
+                    subTitle: err.error.message,
+                    buttons: ['OK']
+                });
+                alert_3.present();
+                alert_3.onDidDismiss(function () {
+                });
+            }
+        });
     };
     StreamPage.prototype.betLower = function () {
+        var _this = this;
         this.boughtIntoGame3 = true;
-        console.log("bought " + this.game3BetAmount);
-        this.buyDataset();
-        this.roundBetType = 'lower';
+        this.roundBetType = 'short';
+        // this.buyDataset();
+        this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            console.log("bought " + _this.game3BetAmount);
+            console.log("Received entry price " + data.entryPrice);
+            // this.auth.setAccValue(data.accountValue);
+            // this.walletAmount = this.auth.getAccValue();
+            if (parseInt(data.status) === 200) {
+                // this.hasActiveManualBet = true;
+                // this.isManualBetDisabled = true;
+                // this.isManualCoutDisabled = false
+                _this.hasActiveBet = true;
+                _this.game3BetAmount = '';
+                var alert_4 = _this.alertCtrl.create({
+                    title: 'SUCCESS',
+                    subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
+                    buttons: ['OK']
+                });
+                alert_4.present();
+                alert_4.onDidDismiss(function () {
+                });
+            }
+        }, function (err) {
+            console.log("Error occured while placing short bet");
+            // console.log(err);
+            // console.log(err.error.message);
+            // console.log(err.message);
+            if (err.status === 0) {
+                var alert_5 = _this.alertCtrl.create({
+                    title: 'ERROR',
+                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+                    buttons: ['OK']
+                });
+                alert_5.present();
+                console.log("Hit Error 0");
+            }
+            else {
+                var alert_6 = _this.alertCtrl.create({
+                    title: 'Error',
+                    subTitle: err.error.message,
+                    buttons: ['OK']
+                });
+                alert_6.present();
+                alert_6.onDidDismiss(function () {
+                });
+            }
+        });
     };
-    // randomIntRange() {
-    //   console.log("managed to call function defined outside");
-    //   return Math.floor(Math.random() * (4500 - 3000 + 1) + 3000);
-    // }
     StreamPage.prototype.calcRoundResult = function () {
     };
     __decorate([
@@ -2123,9 +2233,9 @@ var StreamPage = /** @class */ (function () {
     ], StreamPage.prototype, "chart", void 0);
     StreamPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" [style.visibility]="isGameTime ? \'hidden\' : \'visible\'">\n\n          Next game in {{countDownBet3 | async}} s\n\n        </div>\n\n        <div class="game-timer" [style.visibility]="isGameTime ? \'visible\' : \'hidden\'">\n\n          Game ending in {{countDownGame3 | async}} s\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isGameTime"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isGameTime" (click)="betHigher()">Higher</button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isGameTime" (click)="betLower()">Lower</button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n        <!-- top up and withdraw buttons-->\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
+            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf = "showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isBetDisabled" (click)="betHigher()">Higher</button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isBetDisabled" (click)="betLower()">Lower</button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n        <!-- top up and withdraw buttons-->\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], StreamPage);
     return StreamPage;
 }());
@@ -2142,7 +2252,7 @@ var StreamPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__slotsdraw_slotsdraw__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_data_data__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2405,7 +2515,7 @@ var TrehuntPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SlotsdrawPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(627);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__(531);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2578,11 +2688,11 @@ var map = {
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
-		665,
+		664,
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		664,
+		665,
 		1
 	],
 	"../pages/wallet/wallet.module": [
@@ -2684,7 +2794,7 @@ var GlobalAuthProvider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 420:
+/***/ 419:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2739,13 +2849,13 @@ var SplashLogoPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 421:
+/***/ 420:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(428);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -2753,7 +2863,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 429:
+/***/ 428:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2763,20 +2873,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(648);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_http__ = __webpack_require__(649);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(357);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(378);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__(356);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser_animations__ = __webpack_require__(650);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_roulette_roulette__ = __webpack_require__(157);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_bidding_bidding__ = __webpack_require__(153);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_contact_contact__ = __webpack_require__(652);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(124);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_wallet_wallet__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_stream_stream__ = __webpack_require__(160);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_tabs_tabs__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_splash_logo_splash_logo__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_tabs_tabs__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_splash_logo_splash_logo__ = __webpack_require__(419);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts__ = __webpack_require__(653);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__ionic_native_status_bar__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__ionic_native_splash_screen__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_hashing_hashing__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_trehunt_trehunt__ = __webpack_require__(161);
@@ -2788,7 +2898,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_native_audio__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_smart_audio_smart_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_slotsdraw_slotsdraw__ = __webpack_require__(162);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_data_data__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_dummy_chat_dummy_chat__ = __webpack_require__(154);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2867,8 +2977,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -2910,288 +3020,19 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 471:
+/***/ 470:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 502:
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./af": 234,
-	"./af.js": 234,
-	"./ar": 235,
-	"./ar-dz": 236,
-	"./ar-dz.js": 236,
-	"./ar-kw": 237,
-	"./ar-kw.js": 237,
-	"./ar-ly": 238,
-	"./ar-ly.js": 238,
-	"./ar-ma": 239,
-	"./ar-ma.js": 239,
-	"./ar-sa": 240,
-	"./ar-sa.js": 240,
-	"./ar-tn": 241,
-	"./ar-tn.js": 241,
-	"./ar.js": 235,
-	"./az": 242,
-	"./az.js": 242,
-	"./be": 243,
-	"./be.js": 243,
-	"./bg": 244,
-	"./bg.js": 244,
-	"./bm": 245,
-	"./bm.js": 245,
-	"./bn": 246,
-	"./bn.js": 246,
-	"./bo": 247,
-	"./bo.js": 247,
-	"./br": 248,
-	"./br.js": 248,
-	"./bs": 249,
-	"./bs.js": 249,
-	"./ca": 250,
-	"./ca.js": 250,
-	"./cs": 251,
-	"./cs.js": 251,
-	"./cv": 252,
-	"./cv.js": 252,
-	"./cy": 253,
-	"./cy.js": 253,
-	"./da": 254,
-	"./da.js": 254,
-	"./de": 255,
-	"./de-at": 256,
-	"./de-at.js": 256,
-	"./de-ch": 257,
-	"./de-ch.js": 257,
-	"./de.js": 255,
-	"./dv": 258,
-	"./dv.js": 258,
-	"./el": 259,
-	"./el.js": 259,
-	"./en-au": 260,
-	"./en-au.js": 260,
-	"./en-ca": 261,
-	"./en-ca.js": 261,
-	"./en-gb": 262,
-	"./en-gb.js": 262,
-	"./en-ie": 263,
-	"./en-ie.js": 263,
-	"./en-il": 264,
-	"./en-il.js": 264,
-	"./en-nz": 265,
-	"./en-nz.js": 265,
-	"./eo": 266,
-	"./eo.js": 266,
-	"./es": 267,
-	"./es-do": 268,
-	"./es-do.js": 268,
-	"./es-us": 269,
-	"./es-us.js": 269,
-	"./es.js": 267,
-	"./et": 270,
-	"./et.js": 270,
-	"./eu": 271,
-	"./eu.js": 271,
-	"./fa": 272,
-	"./fa.js": 272,
-	"./fi": 273,
-	"./fi.js": 273,
-	"./fo": 274,
-	"./fo.js": 274,
-	"./fr": 275,
-	"./fr-ca": 276,
-	"./fr-ca.js": 276,
-	"./fr-ch": 277,
-	"./fr-ch.js": 277,
-	"./fr.js": 275,
-	"./fy": 278,
-	"./fy.js": 278,
-	"./gd": 279,
-	"./gd.js": 279,
-	"./gl": 280,
-	"./gl.js": 280,
-	"./gom-latn": 281,
-	"./gom-latn.js": 281,
-	"./gu": 282,
-	"./gu.js": 282,
-	"./he": 283,
-	"./he.js": 283,
-	"./hi": 284,
-	"./hi.js": 284,
-	"./hr": 285,
-	"./hr.js": 285,
-	"./hu": 286,
-	"./hu.js": 286,
-	"./hy-am": 287,
-	"./hy-am.js": 287,
-	"./id": 288,
-	"./id.js": 288,
-	"./is": 289,
-	"./is.js": 289,
-	"./it": 290,
-	"./it.js": 290,
-	"./ja": 291,
-	"./ja.js": 291,
-	"./jv": 292,
-	"./jv.js": 292,
-	"./ka": 293,
-	"./ka.js": 293,
-	"./kk": 294,
-	"./kk.js": 294,
-	"./km": 295,
-	"./km.js": 295,
-	"./kn": 296,
-	"./kn.js": 296,
-	"./ko": 297,
-	"./ko.js": 297,
-	"./ky": 298,
-	"./ky.js": 298,
-	"./lb": 299,
-	"./lb.js": 299,
-	"./lo": 300,
-	"./lo.js": 300,
-	"./lt": 301,
-	"./lt.js": 301,
-	"./lv": 302,
-	"./lv.js": 302,
-	"./me": 303,
-	"./me.js": 303,
-	"./mi": 304,
-	"./mi.js": 304,
-	"./mk": 305,
-	"./mk.js": 305,
-	"./ml": 306,
-	"./ml.js": 306,
-	"./mn": 307,
-	"./mn.js": 307,
-	"./mr": 308,
-	"./mr.js": 308,
-	"./ms": 309,
-	"./ms-my": 310,
-	"./ms-my.js": 310,
-	"./ms.js": 309,
-	"./mt": 311,
-	"./mt.js": 311,
-	"./my": 312,
-	"./my.js": 312,
-	"./nb": 313,
-	"./nb.js": 313,
-	"./ne": 314,
-	"./ne.js": 314,
-	"./nl": 315,
-	"./nl-be": 316,
-	"./nl-be.js": 316,
-	"./nl.js": 315,
-	"./nn": 317,
-	"./nn.js": 317,
-	"./pa-in": 318,
-	"./pa-in.js": 318,
-	"./pl": 319,
-	"./pl.js": 319,
-	"./pt": 320,
-	"./pt-br": 321,
-	"./pt-br.js": 321,
-	"./pt.js": 320,
-	"./ro": 322,
-	"./ro.js": 322,
-	"./ru": 323,
-	"./ru.js": 323,
-	"./sd": 324,
-	"./sd.js": 324,
-	"./se": 325,
-	"./se.js": 325,
-	"./si": 326,
-	"./si.js": 326,
-	"./sk": 327,
-	"./sk.js": 327,
-	"./sl": 328,
-	"./sl.js": 328,
-	"./sq": 329,
-	"./sq.js": 329,
-	"./sr": 330,
-	"./sr-cyrl": 331,
-	"./sr-cyrl.js": 331,
-	"./sr.js": 330,
-	"./ss": 332,
-	"./ss.js": 332,
-	"./sv": 333,
-	"./sv.js": 333,
-	"./sw": 334,
-	"./sw.js": 334,
-	"./ta": 335,
-	"./ta.js": 335,
-	"./te": 336,
-	"./te.js": 336,
-	"./tet": 337,
-	"./tet.js": 337,
-	"./tg": 338,
-	"./tg.js": 338,
-	"./th": 339,
-	"./th.js": 339,
-	"./tl-ph": 340,
-	"./tl-ph.js": 340,
-	"./tlh": 341,
-	"./tlh.js": 341,
-	"./tr": 342,
-	"./tr.js": 342,
-	"./tzl": 343,
-	"./tzl.js": 343,
-	"./tzm": 344,
-	"./tzm-latn": 345,
-	"./tzm-latn.js": 345,
-	"./tzm.js": 344,
-	"./ug-cn": 346,
-	"./ug-cn.js": 346,
-	"./uk": 347,
-	"./uk.js": 347,
-	"./ur": 348,
-	"./ur.js": 348,
-	"./uz": 349,
-	"./uz-latn": 350,
-	"./uz-latn.js": 350,
-	"./uz.js": 349,
-	"./vi": 351,
-	"./vi.js": 351,
-	"./x-pseudo": 352,
-	"./x-pseudo.js": 352,
-	"./yo": 353,
-	"./yo.js": 353,
-	"./zh-cn": 354,
-	"./zh-cn.js": 354,
-	"./zh-hk": 355,
-	"./zh-hk.js": 355,
-	"./zh-tw": 356,
-	"./zh-tw.js": 356
-};
-function webpackContext(req) {
-	return __webpack_require__(webpackContextResolve(req));
-};
-function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) // check for number or string
-		throw new Error("Cannot find module '" + req + "'.");
-	return id;
-};
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 502;
-
-/***/ }),
-
-/***/ 54:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(357);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(356);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3215,6 +3056,7 @@ var hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
 var walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 var depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
 var withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
+var binaryOptionBetURL = 'http://178.128.50.224:3000/game3/placeBets';
 var DataProvider = /** @class */ (function () {
     function DataProvider(http, auth) {
         this.http = http;
@@ -3290,6 +3132,14 @@ var DataProvider = /** @class */ (function () {
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId);
         return this.http.post(hashManualCoutURL, requestBody, httpHeader);
     };
+    DataProvider.prototype.postBetGame3 = function (amount, orderType, accid) {
+        // var sessionToken = this.auth.getSessionToken();
+        var httpHeader = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("amount", amount).set("orderType", orderType).set("accid", accid);
+        return this.http.post(binaryOptionBetURL, requestBody, httpHeader);
+    };
     DataProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_2__global_auth_global_auth__["a" /* GlobalAuthProvider */]])
@@ -3298,6 +3148,275 @@ var DataProvider = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=data.js.map
+
+/***/ }),
+
+/***/ 501:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": 233,
+	"./af.js": 233,
+	"./ar": 234,
+	"./ar-dz": 235,
+	"./ar-dz.js": 235,
+	"./ar-kw": 236,
+	"./ar-kw.js": 236,
+	"./ar-ly": 237,
+	"./ar-ly.js": 237,
+	"./ar-ma": 238,
+	"./ar-ma.js": 238,
+	"./ar-sa": 239,
+	"./ar-sa.js": 239,
+	"./ar-tn": 240,
+	"./ar-tn.js": 240,
+	"./ar.js": 234,
+	"./az": 241,
+	"./az.js": 241,
+	"./be": 242,
+	"./be.js": 242,
+	"./bg": 243,
+	"./bg.js": 243,
+	"./bm": 244,
+	"./bm.js": 244,
+	"./bn": 245,
+	"./bn.js": 245,
+	"./bo": 246,
+	"./bo.js": 246,
+	"./br": 247,
+	"./br.js": 247,
+	"./bs": 248,
+	"./bs.js": 248,
+	"./ca": 249,
+	"./ca.js": 249,
+	"./cs": 250,
+	"./cs.js": 250,
+	"./cv": 251,
+	"./cv.js": 251,
+	"./cy": 252,
+	"./cy.js": 252,
+	"./da": 253,
+	"./da.js": 253,
+	"./de": 254,
+	"./de-at": 255,
+	"./de-at.js": 255,
+	"./de-ch": 256,
+	"./de-ch.js": 256,
+	"./de.js": 254,
+	"./dv": 257,
+	"./dv.js": 257,
+	"./el": 258,
+	"./el.js": 258,
+	"./en-au": 259,
+	"./en-au.js": 259,
+	"./en-ca": 260,
+	"./en-ca.js": 260,
+	"./en-gb": 261,
+	"./en-gb.js": 261,
+	"./en-ie": 262,
+	"./en-ie.js": 262,
+	"./en-il": 263,
+	"./en-il.js": 263,
+	"./en-nz": 264,
+	"./en-nz.js": 264,
+	"./eo": 265,
+	"./eo.js": 265,
+	"./es": 266,
+	"./es-do": 267,
+	"./es-do.js": 267,
+	"./es-us": 268,
+	"./es-us.js": 268,
+	"./es.js": 266,
+	"./et": 269,
+	"./et.js": 269,
+	"./eu": 270,
+	"./eu.js": 270,
+	"./fa": 271,
+	"./fa.js": 271,
+	"./fi": 272,
+	"./fi.js": 272,
+	"./fo": 273,
+	"./fo.js": 273,
+	"./fr": 274,
+	"./fr-ca": 275,
+	"./fr-ca.js": 275,
+	"./fr-ch": 276,
+	"./fr-ch.js": 276,
+	"./fr.js": 274,
+	"./fy": 277,
+	"./fy.js": 277,
+	"./gd": 278,
+	"./gd.js": 278,
+	"./gl": 279,
+	"./gl.js": 279,
+	"./gom-latn": 280,
+	"./gom-latn.js": 280,
+	"./gu": 281,
+	"./gu.js": 281,
+	"./he": 282,
+	"./he.js": 282,
+	"./hi": 283,
+	"./hi.js": 283,
+	"./hr": 284,
+	"./hr.js": 284,
+	"./hu": 285,
+	"./hu.js": 285,
+	"./hy-am": 286,
+	"./hy-am.js": 286,
+	"./id": 287,
+	"./id.js": 287,
+	"./is": 288,
+	"./is.js": 288,
+	"./it": 289,
+	"./it.js": 289,
+	"./ja": 290,
+	"./ja.js": 290,
+	"./jv": 291,
+	"./jv.js": 291,
+	"./ka": 292,
+	"./ka.js": 292,
+	"./kk": 293,
+	"./kk.js": 293,
+	"./km": 294,
+	"./km.js": 294,
+	"./kn": 295,
+	"./kn.js": 295,
+	"./ko": 296,
+	"./ko.js": 296,
+	"./ky": 297,
+	"./ky.js": 297,
+	"./lb": 298,
+	"./lb.js": 298,
+	"./lo": 299,
+	"./lo.js": 299,
+	"./lt": 300,
+	"./lt.js": 300,
+	"./lv": 301,
+	"./lv.js": 301,
+	"./me": 302,
+	"./me.js": 302,
+	"./mi": 303,
+	"./mi.js": 303,
+	"./mk": 304,
+	"./mk.js": 304,
+	"./ml": 305,
+	"./ml.js": 305,
+	"./mn": 306,
+	"./mn.js": 306,
+	"./mr": 307,
+	"./mr.js": 307,
+	"./ms": 308,
+	"./ms-my": 309,
+	"./ms-my.js": 309,
+	"./ms.js": 308,
+	"./mt": 310,
+	"./mt.js": 310,
+	"./my": 311,
+	"./my.js": 311,
+	"./nb": 312,
+	"./nb.js": 312,
+	"./ne": 313,
+	"./ne.js": 313,
+	"./nl": 314,
+	"./nl-be": 315,
+	"./nl-be.js": 315,
+	"./nl.js": 314,
+	"./nn": 316,
+	"./nn.js": 316,
+	"./pa-in": 317,
+	"./pa-in.js": 317,
+	"./pl": 318,
+	"./pl.js": 318,
+	"./pt": 319,
+	"./pt-br": 320,
+	"./pt-br.js": 320,
+	"./pt.js": 319,
+	"./ro": 321,
+	"./ro.js": 321,
+	"./ru": 322,
+	"./ru.js": 322,
+	"./sd": 323,
+	"./sd.js": 323,
+	"./se": 324,
+	"./se.js": 324,
+	"./si": 325,
+	"./si.js": 325,
+	"./sk": 326,
+	"./sk.js": 326,
+	"./sl": 327,
+	"./sl.js": 327,
+	"./sq": 328,
+	"./sq.js": 328,
+	"./sr": 329,
+	"./sr-cyrl": 330,
+	"./sr-cyrl.js": 330,
+	"./sr.js": 329,
+	"./ss": 331,
+	"./ss.js": 331,
+	"./sv": 332,
+	"./sv.js": 332,
+	"./sw": 333,
+	"./sw.js": 333,
+	"./ta": 334,
+	"./ta.js": 334,
+	"./te": 335,
+	"./te.js": 335,
+	"./tet": 336,
+	"./tet.js": 336,
+	"./tg": 337,
+	"./tg.js": 337,
+	"./th": 338,
+	"./th.js": 338,
+	"./tl-ph": 339,
+	"./tl-ph.js": 339,
+	"./tlh": 340,
+	"./tlh.js": 340,
+	"./tr": 341,
+	"./tr.js": 341,
+	"./tzl": 342,
+	"./tzl.js": 342,
+	"./tzm": 343,
+	"./tzm-latn": 344,
+	"./tzm-latn.js": 344,
+	"./tzm.js": 343,
+	"./ug-cn": 345,
+	"./ug-cn.js": 345,
+	"./uk": 346,
+	"./uk.js": 346,
+	"./ur": 347,
+	"./ur.js": 347,
+	"./uz": 348,
+	"./uz-latn": 349,
+	"./uz-latn.js": 349,
+	"./uz.js": 348,
+	"./vi": 350,
+	"./vi.js": 350,
+	"./x-pseudo": 351,
+	"./x-pseudo.js": 351,
+	"./yo": 352,
+	"./yo.js": 352,
+	"./zh-cn": 353,
+	"./zh-cn.js": 353,
+	"./zh-hk": 354,
+	"./zh-hk.js": 354,
+	"./zh-tw": 355,
+	"./zh-tw.js": 355
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 501;
 
 /***/ }),
 
@@ -3428,8 +3547,8 @@ var SmartAudioProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -3571,7 +3690,7 @@ var ProgressBarComponent = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InnerWalletComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_data_data__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers_data_data__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_global_auth_global_auth__ = __webpack_require__(28);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3636,5 +3755,5 @@ var InnerWalletComponent = /** @class */ (function () {
 
 /***/ })
 
-},[421]);
+},[420]);
 //# sourceMappingURL=main.js.map
