@@ -42,10 +42,12 @@
         <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>
       </ion-col>
       <ion-col col-4>
-        <button ion-button full [disabled]="isBetDisabled" (click)="betHigher()">Higher</button>
+        <button ion-button [color]="isBetDisabled ? 'dark' : 'higher-green'"
+         full [disabled]="isBetDisabled" (click)="betHigher()"><span style="font-weight:700; color:whitesmoke">Higher</span></button>
       </ion-col>
       <ion-col col-4>
-        <button ion-button full [disabled]="isBetDisabled" (click)="betLower()">Lower</button>
+        <button ion-button [color]="isBetDisabled ? 'dark' : 'lower-red'" 
+        full  [disabled]="isBetDisabled" (click)="betLower()"><span style="font-weight:700; color:whitesmoke">Lower</span></button>
       </ion-col>
     </ion-row>
 

@@ -113,7 +113,7 @@ export class StreamPage {
       // console.log("Received data type  " + receivedData.type);
       localActiveBet = this.hasActiveBet;
       localEntryPrice = this.entryPrice;
-      console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
+      // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
 
       if (receivedData.type === 'gameStart') {
         // console.log("received gameStart");
@@ -164,6 +164,7 @@ export class StreamPage {
         gameValuesToPush = receivedData.currentPrice;
 
         if (this.currGameState !== 'gameEnd') {
+          //TOGGLE STATE TO GAME END
           if (this.hasActiveBet){
             this.destroyBetInstance();
           }
@@ -172,6 +173,8 @@ export class StreamPage {
           this.showGameEnded = true;
           this.currGameState = 'gameEnd';
           this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
+          //Update past game
+          this.updatePastGame();
           //restart gameTimer
           this.gameTimer = 15;
           console.log("Toggled state " + this.currGameState);
@@ -201,7 +204,7 @@ export class StreamPage {
           //can create function to copy here from received data above?
           //or create socket here and update value here;
           getClassValue: function () {
-            console.log("is calling get class value but returning " + this.testGlobalVar);
+            // console.log("is calling get class value but returning " + this.testGlobalVar);
             return this.testGlobalVar;
           },
 
@@ -218,21 +221,21 @@ export class StreamPage {
             var count = 0;
             // var value = this.randomIntRange(3000,8000);
             console.log("how many datasets i have " + chart.data.datasets.length);
-            console.log("pushing " + gameValuesToPush);
+            // console.log("pushing " + gameValuesToPush);
             chart.data.datasets[0].data.push({
               x: Date.now(),
               y: gameValuesToPush,
             });
 
-            console.log('check active bet here ' + localActiveBet);
+            // console.log('check active bet here ' + localActiveBet);
             if (localActiveBet) {
-              console.log("Entered if condition");
+              // console.log("Entered if condition");
               // console.log("buychart value is " + chart.data.datasets[1].data[0]);
               chart.data.datasets[1].data.push({
                 x: Date.now(),
                 y: localEntryPrice,
               })
-              console.log("After push entry value" + localEntryPrice);
+              // console.log("After push entry value" + localEntryPrice);
             };
             // chart.data.datasets.forEach(function (dataset: any) {
             //   if (count == 0) {
@@ -348,7 +351,6 @@ export class StreamPage {
 
   destroyBetInstance(){
     console.log("pop buyline chart")
-    console.log("POP DATASET HERE");
     this.datasets.pop();
     this.chart.refresh();
   }
@@ -358,11 +360,11 @@ export class StreamPage {
     var color;
 
     if (orderType === "long") {
-      color = 'red';
+      color = 'green';
     }
 
     else {
-      color = 'green';
+      color = 'red';
     }
     var newDataset = {
       label: 'Buy Price',
@@ -379,16 +381,13 @@ export class StreamPage {
   }
 
   betHigher() {
-
-
-
-
     this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
       console.log("Received entry price " + data.entryPrice);
       if (parseInt(data.status) === 200) {
+        this.isBetDisabled=true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'long';
         this.buyDataset(this.roundBetType, data.entryPrice);
@@ -454,6 +453,7 @@ export class StreamPage {
       // this.auth.setAccValue(data.accountValue);
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
+        this.isBetDisabled=true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'short';
         this.entryPrice = data.entryPrice;
@@ -501,6 +501,66 @@ export class StreamPage {
           alert.onDidDismiss(() => {
           })
         }
+      }
+    );
+  }
+  updatePastGame(){
+    this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
+      // pass the response from HTTP Request into local variable1 receivedData
+      // var receivedData= JSON.parse(data);
+      console.log("Updating past game entry price " + data.entryPrice);
+      console.log("Updating past game end price " + data.endPrice);
+      console.log("Updating past game profit  " + data.profit);
+      console.log("Updating past game gameName " + data.gameName);
+
+      if (parseInt(data.status) === 200) {
+        // this.isBetDisabled=true;
+        // this.boughtIntoGame3 = true;
+        // this.roundBetType = 'long';
+        // this.buyDataset(this.roundBetType, data.entryPrice);
+        // this.auth.setAccValue(data.accountValue);
+        // this.walletAmount = this.auth.getAccValue();
+        // this.entryPrice = data.entryPrice;
+        // this.isManualBetDisabled = true;
+        // this.isManualCoutDisabled = false;
+        // this.hasActiveBet = true;
+        // this.game3BetAmount = '';
+        // let alert = this.alertCtrl.create({
+        //   title: 'SUCCESS',
+        //   subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
+        //   buttons: ['OK']
+        // });
+        // alert.present();
+        // alert.onDidDismiss(() => {
+        // })
+      }
+    },
+      err => {
+        console.log("Error occured while getting past transactions");
+        // console.log(err);
+        // console.log(err.error.message);
+        // console.log(err.message);
+        // if (err.status === 0) {
+        //   let alert = this.alertCtrl.create({
+        //     title: 'ERROR',
+        //     subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+        //     buttons: ['OK']
+        //   });
+
+        //   alert.present();
+        //   console.log("Hit Error 0");
+        // }
+        // else {
+
+        //   let alert = this.alertCtrl.create({
+        //     title: 'Error',
+        //     subTitle: err.error.message,
+        //     buttons: ['OK']
+        //   });
+        //   alert.present();
+        //   alert.onDidDismiss(() => {
+        //   })
+        // }
       }
     );
   }
