@@ -170,6 +170,13 @@ export class LoginPage {
       if (err.error instanceof Error) {
         console.log("Client-side error occured.");
       } else {
+        let alert = this.alertCtrl.create({
+          title: 'ERROR',
+          subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+          buttons: ['OK']
+        });
+
+        alert.present();
         console.log("Server-side error occured.");
       }
     });

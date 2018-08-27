@@ -23,6 +23,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class StreamPage {
   @ViewChild(BaseChartDirective) chart: any;
+  historicalGame3: Array<any>;
   showGameTime: boolean;
   showGameEnded: boolean;
   showCountdown: boolean;
@@ -97,7 +98,7 @@ export class StreamPage {
     console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
     // this.isGameTime = true;
-    this.testGlobalVar = 7000;
+    this.historicalGame3 = new Array();
   }
 
   ngOnInit() {
@@ -510,12 +511,22 @@ export class StreamPage {
     this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
+      this.historicalGame3 = new Array();
       console.log("Updating past game entry price " + data.entryPrice);
       console.log("Updating past game end price " + data.endPrice);
       console.log("Updating past game profit  " + data.profit);
       console.log("Updating past game gameName " + data.gameName);
 
       if (parseInt(data.status) === 200) {
+        //set up for 1 bet per game first
+        var transaction = {
+          "entryPrice":  data.entryPrice,
+          "betType": data.gameName,
+          "endPrice": data.endPrice,
+          "profit": parseInt(data.profit)
+        }
+
+        this.historicalGame3.push(transaction);
         // this.isBetDisabled=true;
         // this.boughtIntoGame3 = true;
         // this.roundBetType = 'long';
