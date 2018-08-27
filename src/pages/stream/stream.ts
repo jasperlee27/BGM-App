@@ -292,8 +292,8 @@ export class StreamPage {
             padding: 5,
             display: true,
             stepSize: 1000,
-            min: 6675.6,
-            max: 6675.8,
+            min: 6668.5,
+            max: 6668.7,
             // mirror: true,
             // drawTicks: true,
           },
@@ -350,6 +350,7 @@ export class StreamPage {
     console.log("pop buyline chart")
     console.log("POP DATASET HERE");
     this.datasets.pop();
+    this.chart.refresh();
   }
 
   buyDataset(orderType, entryPrice) {
@@ -367,7 +368,7 @@ export class StreamPage {
       label: 'Buy Price',
       backgroundColor: color,
       borderColor: color,
-      borderWidth: 5,
+      borderWidth: 1,
       fill: false,
       lineTension: 0,
       data: [],
