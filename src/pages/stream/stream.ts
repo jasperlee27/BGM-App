@@ -43,6 +43,7 @@ export class StreamPage {
   isGuestLogin;
   socket: SocketIOClient.Socket;
   currGameState;
+  currGame3ID;
   timerValue;
   gameTimer;
   finalRoundValue;
@@ -139,7 +140,8 @@ export class StreamPage {
           this.showCountdown = true;
           this.showGameEnded = false;
           this.currGameState = 'countdown';
-          console.log("Toggled state " + this.currGameState);
+          this.currGame3ID = receivedData.GameId;
+          console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
         }
       }
 
@@ -150,11 +152,13 @@ export class StreamPage {
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if (this.currGameState !== 'game') {
+          this.currGame3ID = receivedData.GameId;
           this.showGameTime = true;
           this.showCountdown = false;
           this.showGameEnded = false;
           this.currGameState = 'game';
           console.log("Toggled state " + this.currGameState);
+          console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
         }
       }
 
@@ -165,7 +169,7 @@ export class StreamPage {
 
         if (this.currGameState !== 'gameEnd') {
           //TOGGLE STATE TO GAME END
-          if (this.hasActiveBet){
+          if (this.hasActiveBet) {
             this.destroyBetInstance();
           }
           this.hasActiveBet = false;
@@ -308,7 +312,7 @@ export class StreamPage {
           },
         }],
 
-        }
+      }
 
     };
 
@@ -349,7 +353,7 @@ export class StreamPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  destroyBetInstance(){
+  destroyBetInstance() {
     console.log("pop buyline chart")
     this.datasets.pop();
     this.chart.refresh();
@@ -381,13 +385,14 @@ export class StreamPage {
   }
 
   betHigher() {
+    //to pass in currGame3ID
     this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
       console.log("Received entry price " + data.entryPrice);
       if (parseInt(data.status) === 200) {
-        this.isBetDisabled=true;
+        this.isBetDisabled = true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'long';
         this.buyDataset(this.roundBetType, data.entryPrice);
@@ -441,10 +446,7 @@ export class StreamPage {
   }
 
   betLower() {
-
-    // this.buyDataset();
-
-
+    //to pass in currGame3ID
     this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
@@ -453,7 +455,7 @@ export class StreamPage {
       // this.auth.setAccValue(data.accountValue);
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
-        this.isBetDisabled=true;
+        this.isBetDisabled = true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'short';
         this.entryPrice = data.entryPrice;
@@ -504,7 +506,7 @@ export class StreamPage {
       }
     );
   }
-  updatePastGame(){
+  updatePastGame() {
     this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
