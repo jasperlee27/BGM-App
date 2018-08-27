@@ -49,15 +49,16 @@
       Next game in {{timerValue}} s
     </div>
   </div>
-  <br>
-  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">
+  <!-- Commented to remvoe auto bet for now -->
+  <!-- <br> -->
+  <!-- <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">
     <ion-segment-button outline value="manual">
       Manual
     </ion-segment-button>
-    <ion-segment-button outline value="auto">
+    <ion-segment-button disabled outline value="auto">
       Auto
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment> -->
 
   <div [ngSwitch]="hashBetType">
     <ion-list *ngSwitchCase="'manual'" ngSelected="selected">
