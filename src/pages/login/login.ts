@@ -9,6 +9,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { DataProvider } from '../../providers/data/data';
+import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -163,8 +164,14 @@ export class LoginPage {
         this.auth.setSessionToken("");
         this.auth.setAccValue(0);
       }
-    }, err => {
-      console.log("Error response occured." + err);
+    }, (err: HttpErrorResponse)=> {
+      console.log("Error logged " + err);
+      
+      if (err.error instanceof Error) {
+        console.log("Client-side error occured.");
+      } else {
+        console.log("Server-side error occured.");
+      }
     });
   
   }
