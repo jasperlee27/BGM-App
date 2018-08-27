@@ -99,6 +99,7 @@ export class StreamPage {
     this.isGuestLogin = this.auth.getGuestLogin();
     // this.isGameTime = true;
     this.historicalGame3 = new Array();
+    this.updatePastGame();
   }
 
   ngOnInit() {
@@ -387,7 +388,7 @@ export class StreamPage {
 
   betHigher() {
     //to pass in currGame3ID
-    this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(data => {
+    this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId(), this.currGame3ID).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
@@ -448,7 +449,7 @@ export class StreamPage {
 
   betLower() {
     //to pass in currGame3ID
-    this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(data => {
+    this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(),this.currGame3ID).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
@@ -507,73 +508,34 @@ export class StreamPage {
       }
     );
   }
+
   updatePastGame() {
     this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       this.historicalGame3 = new Array();
+      // console.log("Updating past game entry price " + data.entryPrice);
+      // console.log("Updating past game end price " + data.endPrice);
+      // console.log("Updating past game profit  " + data.profit);
+      // console.log("Updating past game gameName " + data.gameName);
+
+      // if (parseInt(data.status) === 200) {
+      //set up for 1 bet per game first
       console.log("Updating past game entry price " + data.entryPrice);
       console.log("Updating past game end price " + data.endPrice);
       console.log("Updating past game profit  " + data.profit);
       console.log("Updating past game gameName " + data.gameName);
-
-      if (parseInt(data.status) === 200) {
-        //set up for 1 bet per game first
-        var transaction = {
-          "entryPrice":  data.entryPrice,
-          "betType": data.gameName,
-          "endPrice": data.endPrice,
-          "profit": parseInt(data.profit)
-        }
-
-        this.historicalGame3.push(transaction);
-        // this.isBetDisabled=true;
-        // this.boughtIntoGame3 = true;
-        // this.roundBetType = 'long';
-        // this.buyDataset(this.roundBetType, data.entryPrice);
-        // this.auth.setAccValue(data.accountValue);
-        // this.walletAmount = this.auth.getAccValue();
-        // this.entryPrice = data.entryPrice;
-        // this.isManualBetDisabled = true;
-        // this.isManualCoutDisabled = false;
-        // this.hasActiveBet = true;
-        // this.game3BetAmount = '';
-        // let alert = this.alertCtrl.create({
-        //   title: 'SUCCESS',
-        //   subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
-        //   buttons: ['OK']
-        // });
-        // alert.present();
-        // alert.onDidDismiss(() => {
-        // })
+      var transaction = {
+        "entryPrice": data.entryPrice.toFixed(2),
+        "betType": data.gameName,
+        "endPrice": data.endPrice.toFixed(2),
+        "profit": parseInt(data.profit)
       }
+      this.historicalGame3.push(transaction);
+      // }
     },
       err => {
         console.log("Error occured while getting past transactions");
-        // console.log(err);
-        // console.log(err.error.message);
-        // console.log(err.message);
-        // if (err.status === 0) {
-        //   let alert = this.alertCtrl.create({
-        //     title: 'ERROR',
-        //     subTitle: 'Server cannot be reached at this time. <br> Please try again later',
-        //     buttons: ['OK']
-        //   });
-
-        //   alert.present();
-        //   console.log("Hit Error 0");
-        // }
-        // else {
-
-        //   let alert = this.alertCtrl.create({
-        //     title: 'Error',
-        //     subTitle: err.error.message,
-        //     buttons: ['OK']
-        //   });
-        //   alert.present();
-        //   alert.onDidDismiss(() => {
-        //   })
-        // }
       }
     );
   }
