@@ -54,16 +54,17 @@
       <ion-scroll scrollY="true">
         <ion-list col-12 no-lines>
           <ion-list-header no-lines style="color:#f3ba2e">
-            <span col-3>Price</span>
-            <span col-3>Bet Type</span>
-            <span col-3>Close</span>
-            <span col-3 item-end style="text-align:right;">Profit</span>
+            <ion-col col-4>Price</ion-col>
+            <ion-col col-2>Bet Type</ion-col>
+            <ion-col col-3>Close</ion-col>
+            <ion-col item-end col-3 >Profit</ion-col>
           </ion-list-header>
-          <ion-item style="font-size:12px" *ngFor="let transaction of historicalGame3">
-            <span col-3>{{transaction.entryPrice}}</span>
-            <span col-3>{{transaction.betType}}</span>
-            <span col-3>{{transaction.endPrice}}</span>
-            <span col-3 item-end [style.color]="transaction.profit > 0 ? 'green' : 'red'" style="font-weight:700; text-align:right">{{transaction.profit}}</span>
+          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">
+            <ion-col col-4>{{transaction.entryPrice}}</ion-col>
+            <!-- <span col-3>Lo</span> -->
+            <ion-col col-2>{{transaction.betType}}</ion-col>
+            <ion-col col-3><span style="padding-left:10%">{{transaction.endPrice}}</span></ion-col>
+            <ion-col item-end col-3><span [style.color]="transaction.profit > 0 ? 'green' : 'red'" style="font-weight:700; text-align:right">{{transaction.profit}}</span></ion-col>
           </ion-item>
         </ion-list>
       </ion-scroll>

@@ -519,20 +519,22 @@ export class StreamPage {
       // console.log("Updating past game profit  " + data.profit);
       // console.log("Updating past game gameName " + data.gameName);
 
-      // if (parseInt(data.status) === 200) {
+      if (parseInt(data.status) === 200) {
       //set up for 1 bet per game first
-      console.log("Updating past game entry price " + data.entryPrice);
-      console.log("Updating past game end price " + data.endPrice);
-      console.log("Updating past game profit  " + data.profit);
-      console.log("Updating past game gameName " + data.gameName);
+      console.log("Updating past game entry price " + data.data.entryPrice);
+      console.log("Updating past game end price " + data.data.endPrice);
+      console.log("Updating past game profit  " + data.data.profit);
+      console.log("Updating past game gameName " + data.data.gameName);
+      this.auth.setAccValue(data.accountValue);
+      this.walletAmount=this.auth.getAccValue();
       var transaction = {
-        "entryPrice": data.entryPrice.toFixed(2),
-        "betType": data.gameName,
-        "endPrice": data.endPrice.toFixed(2),
-        "profit": parseInt(data.profit)
+        "entryPrice": data.data.entryPrice.toFixed(2),
+        "betType": data.data.orderTypeDisplay,
+        "endPrice": data.data.endPrice.toFixed(2),
+        "profit": parseInt(data.data.profit)
       }
       this.historicalGame3.push(transaction);
-      // }
+      }
     },
       err => {
         console.log("Error occured while getting past transactions");
