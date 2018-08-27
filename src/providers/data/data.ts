@@ -4,6 +4,7 @@ import { Observable } from '../../../node_modules/rxjs/Observable';
 import { GlobalAuthProvider } from '../global-auth/global-auth';
 import { RequestOptions } from '../../../node_modules/@angular/http';
 
+const serverHealthURL = 'http://178.128.50.224:3000';
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
@@ -22,6 +23,11 @@ export class DataProvider {
   constructor(public http: HttpClient, private auth: GlobalAuthProvider) {
     console.log('Hello DataProvider Provider');
   }
+  //get server health for guest view
+  getServerHealth(): Observable<any> {
+    return this.http.get('http://178.128.50.224:3000');
+  }
+
   //login
   postLogin(username, password): Observable<any> {
     const httpHeader = {

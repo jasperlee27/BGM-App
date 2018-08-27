@@ -76,8 +76,8 @@ export class LoginPage {
   passwordInput: string = 'jasper';
   receivedData;
   showInvalidLogin: boolean = false;
-  
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController){
+
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController) {
   }
 
   // ionViewDidLoad() {
@@ -92,18 +92,18 @@ export class LoginPage {
     // this.smartAudio.play('startGame3');
     this.smartAudio.play('tabSwitch'); // this.navCtrl.setRoot(TabsPage);
     var usernameToPost = this.usernameInput;
-    this.showInvalidLogin= false;
+    this.showInvalidLogin = false;
 
-    if (usernameToPost!=null){
+    if (usernameToPost != null) {
       this.auth.setUsername(usernameToPost.toLowerCase());
-      console.log ("before lower  case " + usernameToPost);
+      console.log("before lower  case " + usernameToPost);
       usernameToPost = usernameToPost.toLowerCase();
-      console.log ("after lower case " + usernameToPost);
+      console.log("after lower case " + usernameToPost);
     }
 
-    this.dataProvider.postLogin(usernameToPost,this.passwordInput).subscribe(data => {
+    this.dataProvider.postLogin(usernameToPost, this.passwordInput).subscribe(data => {
       //receive successfully
-      this.showInvalidLogin= false;
+      this.showInvalidLogin = false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       //parse response from server
       console.log("Login reponse");
@@ -113,38 +113,38 @@ export class LoginPage {
       this.auth.setAccId(this.receivedData._id);
       this.auth.setAccValue(this.receivedData.accountValue);
       this.auth.setGuestLogin(false);
-      
+
       this.auth.setSessionToken(this.receivedData.token);
       console.log("session Token set as " + this.auth.getSessionToken());
-      if (parseInt(this.receivedData.require2FA)===0){
+      if (parseInt(this.receivedData.require2FA) === 0) {
         this.navCtrl.setRoot(TabsPage);
       }
 
-      else{
-        this.navCtrl.push(this.twoFApage);       
+      else {
+        this.navCtrl.push(this.twoFApage);
       }
-  
+
     },
-    err => {
-      if (err.status===0){
-        let alert = this.alertCtrl.create({
-          title: 'ERROR',
-          subTitle: 'Server cannot be reached at this time. <br> Please try again later',
-          buttons: ['OK']
-        });
-    
-        alert.present();
-        console.log("Hit Error 0");
-      }
+      err => {
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
 
-      else{
-        console.log("Error occured while logging in or not authorized");
-        this.showInvalidLogin= true;
-      }
+          alert.present();
+          console.log("Hit Error 0");
+        }
 
-      console.log(err);
-    });
-    
+        else {
+          console.log("Error occured while logging in or not authorized");
+          this.showInvalidLogin = true;
+        }
+
+        console.log(err);
+      });
+
     // this.navCtrl.setRoot(TabsPage);
     console.log("login function activated");
   }
@@ -152,13 +152,21 @@ export class LoginPage {
   viewAsGuest() {
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
-    this.auth.setAccId("guest");
-    this.auth.setUsername("guest");
-    this.auth.setGuestLogin(true);
-    this.navCtrl.setRoot(TabsPage);
-    console.log("view as guest only");
-    this.auth.setSessionToken("");
-    this.auth.setAccValue(0);
+    this.dataProvider.getServerHealth().subscribe(data => {
+      if (data.message !== ''){
+        console.log("received " + data.message);
+        this.auth.setAccId("guest");
+        this.auth.setUsername("guest");
+        this.auth.setGuestLogin(true);
+        this.navCtrl.setRoot(TabsPage);
+        console.log("view as guest only");
+        this.auth.setSessionToken("");
+        this.auth.setAccValue(0);
+      }
+    }, err => {
+      console.log("Error response occured." + err);
+    });
+  
   }
 
   showHide(): any {
