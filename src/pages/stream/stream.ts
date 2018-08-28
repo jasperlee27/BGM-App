@@ -64,28 +64,26 @@ export class StreamPage {
       },
       { // Short
         backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: '#3F719E',
-        pointBackgroundColor: '#3F719E',
-        pointBorderColor: '#3F719E',
-        pointRadius: 0,
-        pointHoverBackgroundColor: '#3F719E',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+        borderColor: '#FF0000',
+        pointBackgroundColor: '#FF0000',
+        pointBorderColor: '#FF0000',
+        pointHoverBackgroundColor: '#FF0000',
+        pointHoverBorderColor: '#FF0000'
       },
       { // Long
         backgroundColor: 'rgba(0,0,0,0)',
-        borderColor: 'red',
-        pointBackgroundColor: '#9575CD',
-        pointBorderColor: '#9575CD',
-        pointRadius: 0,
-        pointHoverBackgroundColor: '#9575CD',
-        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+        borderColor: '#2D8632',
+        pointBackgroundColor: '#2D8632',
+        pointBorderColor: '#2D8632',
+        pointHoverBackgroundColor: '#2D8632',
+        pointHoverBorderColor: '#2D8632'
       }
     ];
 
   datasets: any[] =
     [
       { data: [], fill: false, label: 'BitCoin', },
-      { data: [], showLine: false, pointRadius: 10, label: 'Short' },
+      { data: [], showLine: false, pointRadius: 5, label: 'Short' },
       { data: [], pointRadius: 5, label: 'Long' }
 
     ];
@@ -208,9 +206,9 @@ export class StreamPage {
       if (parseInt(receivedData[0].shortOrders) === 0) {
         //this is to insert in long chart
         // console.log("received gameStart");
-        this.chart.datasets[1].data.push({
+        this.chart.datasets[2].data.push({
           x: Date.now(),
-          y: receivedData[0].longOrders,
+          y: receivedData[0].price,
         });
         console.log("Long Orders here " + receivedData[0].longOrders);
         // this.chart.refresh();
@@ -221,7 +219,7 @@ export class StreamPage {
         console.log("Short Orders here " + receivedData[0].shortOrders);
         this.chart.datasets[1].data.push({
           x: Date.now(),
-          y: receivedData[0].shortOrders,
+          y: gameValuesToPush,
         });
         // this.chart.refresh();
       }
@@ -239,7 +237,7 @@ export class StreamPage {
       },
       plugins: {
         streaming: {
-          refresh: 1000,
+          refresh: 100,
           duration: 30000,
           //can create function to copy here from received data above?
           //or create socket here and update value here;
