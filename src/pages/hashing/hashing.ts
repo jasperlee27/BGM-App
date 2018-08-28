@@ -300,6 +300,7 @@ export class HashingPage {
       else if (receivedData.type === "countdown") {
         if (this.currGameState!== 'countdown'){
           this.currGameState='countdown';
+          this.walletAmount=this.auth.getAccValue();
           //TODO: Sound on bust
         }
         //log currentGameID here

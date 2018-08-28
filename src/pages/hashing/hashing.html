@@ -60,7 +60,13 @@
     </ion-segment-button>
   </ion-segment> -->
 
-  
+  <ion-item no-lines>
+    <ion-range min="0" [max]="walletAmount" [disabled]="isManualBetDisabled" [(ngModel)]="hashManualBetAmount" color="secondary">
+      <ion-label range-left>0</ion-label>
+      <ion-label range-right>{{walletAmount}}</ion-label>
+    </ion-range>
+  </ion-item>
+
   <div [ngSwitch]="hashBetType">
     <ion-list *ngSwitchCase="'manual'" ngSelected="selected">
       <br>
@@ -70,7 +76,7 @@
           <ion-label color="primary">AMOUNT: </ion-label>
         </ion-col>
         <ion-col col-7>
-          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>
+          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isManualBetDisabled"></ion-input>
         </ion-col>
         <ion-col col-2>
           <ion-label item-end color="primary">BGM</ion-label>
