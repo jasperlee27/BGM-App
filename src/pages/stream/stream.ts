@@ -62,31 +62,31 @@ export class StreamPage {
         pointHoverBackgroundColor: '#f3ba2e', //changing inside hover box legend
         pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
       },
-      // { // Short
-      //   backgroundColor: 'rgba(0,0,0,0)',
-      //   borderColor: '#3F719E',
-      //   pointBackgroundColor: '#3F719E',
-      //   pointBorderColor: '#3F719E',
-      //   pointRadius: 0,
-      //   pointHoverBackgroundColor: '#3F719E',
-      //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      // },
-      // { // Long
-      //   backgroundColor: 'rgba(0,0,0,0)',
-      //   borderColor: 'red',
-      //   pointBackgroundColor: '#9575CD',
-      //   pointBorderColor: '#9575CD',
-      //   pointRadius: 0,
-      //   pointHoverBackgroundColor: '#9575CD',
-      //   pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      // }
+      { // Short
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: '#3F719E',
+        pointBackgroundColor: '#3F719E',
+        pointBorderColor: '#3F719E',
+        pointRadius: 0,
+        pointHoverBackgroundColor: '#3F719E',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      },
+      { // Long
+        backgroundColor: 'rgba(0,0,0,0)',
+        borderColor: 'red',
+        pointBackgroundColor: '#9575CD',
+        pointBorderColor: '#9575CD',
+        pointRadius: 0,
+        pointHoverBackgroundColor: '#9575CD',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      }
     ];
 
   datasets: any[] =
     [
       { data: [], fill: false, label: 'BitCoin', },
-      // { data: [], showLine: false, pointRadius: 5, label: 'Short' },
-      // { data: [], pointRadius: 0, label: 'Long' }
+      { data: [], showLine: false, pointRadius: 10, label: 'Short' },
+      { data: [], pointRadius: 5, label: 'Long' }
 
     ];
 
@@ -208,12 +208,22 @@ export class StreamPage {
       if (parseInt(receivedData[0].shortOrders) === 0) {
         //this is to insert in long chart
         // console.log("received gameStart");
+        this.chart.datasets[1].data.push({
+          x: Date.now(),
+          y: receivedData[0].longOrders,
+        });
         console.log("Long Orders here " + receivedData[0].longOrders);
+        // this.chart.refresh();
         //one instance
       }
       else {
         //this is to insert in short chart
         console.log("Short Orders here " + receivedData[0].shortOrders);
+        this.chart.datasets[1].data.push({
+          x: Date.now(),
+          y: receivedData[0].shortOrders,
+        });
+        // this.chart.refresh();
       }
     });
     // buffer=[[7000],[Date.now()]];
@@ -261,7 +271,7 @@ export class StreamPage {
             if (localActiveBet) {
               // console.log("Entered if condition");
               // console.log("buychart value is " + chart.data.datasets[1].data[0]);
-              chart.data.datasets[1].data.push({
+              chart.data.datasets[3].data.push({
                 x: Date.now(),
                 y: localEntryPrice,
               })

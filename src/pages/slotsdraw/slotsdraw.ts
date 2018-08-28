@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import * as $ from "jquery";
 import * as jquerySlot from '../../assets/js/jquery.slotmachine.js';
@@ -33,7 +33,7 @@ export class SlotsdrawPage {
   winnerNo4;
   winnerNo5;
   receivedData;
-
+  @ViewChild('btn') myBtn; 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController) {
     // this.isMachineShown = false;
   }
@@ -50,6 +50,7 @@ export class SlotsdrawPage {
         this.winnerNo3 =  this.winner.charAt(2);
         this.winnerNo4 =  this.winner.charAt(3);
         this.winnerNo5 =  this.winner.charAt(4);
+        this.getWinner();
       }
     },
       err => {
@@ -64,7 +65,6 @@ export class SlotsdrawPage {
   }
 
   ngAfterViewInit() {
-
 
   }
 

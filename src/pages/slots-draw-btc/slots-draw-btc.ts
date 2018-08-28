@@ -51,6 +51,7 @@ export class SlotsDrawBtcPage {
         this.winnerNo3 =  this.winner.charAt(2);
         this.winnerNo4 =  this.winner.charAt(3);
         this.winnerNo5 =  this.winner.charAt(4);
+        // this.getWinner();
       }
     },
       err => {
@@ -65,8 +66,7 @@ export class SlotsDrawBtcPage {
   }
 
   ngAfterViewInit() {
-
-
+    
   }
 
   getWinner() {
