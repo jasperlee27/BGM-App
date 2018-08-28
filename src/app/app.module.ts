@@ -32,6 +32,7 @@ import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
 import { DataProvider } from '../providers/data/data';
 import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
+import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
     RoulettePage,
     TrehuntPage,
     SlotsdrawPage,
+    SlotsDrawBtcPage,
     BiddingPage,
     HashingPage,
     ContactPage,
@@ -67,6 +69,7 @@ import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
     RoulettePage,
     TrehuntPage,
     SlotsdrawPage,
+    SlotsDrawBtcPage,
     BiddingPage,
     HashingPage,
     ContactPage,

@@ -4,6 +4,7 @@ import { SlotsdrawPage } from '../slotsdraw/slotsdraw';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { InnerWalletComponent } from '../../components/inner-wallet/inner-wallet';
+import { SlotsDrawBtcPage } from '../slots-draw-btc/slots-draw-btc';
 
 /**
  * Generated class for the TrehuntPage page.
@@ -125,7 +126,7 @@ export class TrehuntPage {
           this.isETHDrawAvail=false;
         }
 
-        console.log("btc draw available " + this.isETHDrawAvail);
+        console.log("eth draw available " + this.isETHDrawAvail);
         this.loadBTCProgress = ((this.currBTCtix / this.totalBTCtix) * 100).toFixed(2);
         if (parseInt(this.loadBTCProgress)===100){
           this.BTCTixDisabled=true;
@@ -154,7 +155,7 @@ export class TrehuntPage {
 
   viewBTCResults() {
     console.log("Going to BTC lucky draw");
-    this.navCtrl.push(SlotsdrawPage);
+    this.navCtrl.push(SlotsDrawBtcPage);
   }
 
   viewETHResults() {

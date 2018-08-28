@@ -1,0 +1,99 @@
+<!--
+  Generated template for the SlotsdrawPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Lucky Draw</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid style="height: 100%">
+    <ion-row justify-content-center align-items-center style="height: 100%">
+      <ion-col>
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'" id="machine1" class="machine">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine2" class="machine">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine3" class="machine">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine4" class="machine">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine5" class="machine">
+          <div>0</div>
+          <div>1</div>
+          <div>2</div>
+          <div>3</div>
+          <div>4</div>
+          <div>5</div>
+          <div>6</div>
+          <div>7</div>
+          <div>8</div>
+          <div>9</div>
+        </div>
+      </ion-col>
+      <!-- <ion-col class="winner-button" col-12 text-center>
+        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>
+      </ion-col> -->
+    </ion-row>
+    <ion-row>
+      <ion-col class="winner-button" col-12 text-center>
+        <button ion-button id="luckyDrawShuffle" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

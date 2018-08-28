@@ -21,10 +21,10 @@ declare var SlotMachine;
 
 @IonicPage()
 @Component({
-  selector: 'page-slotsdraw',
-  templateUrl: 'slotsdraw.html',
+  selector: 'page-slots-draw-btc',
+  templateUrl: 'slots-draw-btc.html',
 })
-export class SlotsdrawPage {
+export class SlotsDrawBtcPage {
   isMachineShown;
   winner;
   winnerNo1;
@@ -32,17 +32,18 @@ export class SlotsdrawPage {
   winnerNo3;
   winnerNo4;
   winnerNo5;
+  toAlertUserAlert;
   receivedData;
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController) {
     // this.isMachineShown = false;
+
   }
   ionViewWillEnter() {
-    this.dataProvider.postTrehuntGameWinner(this.auth.getAccId(), "ETH").subscribe(data => {
+    this.dataProvider.postTrehuntGameWinner(this.auth.getAccId(), "BTC").subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
 
       if (parseInt(data.status) === 200) {
-        this.receivedData = data;
+        this.receivedData= data;
         this.winner = data.winnerNo;
         console.log("number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
         this.winnerNo1 =  this.winner.charAt(0);
@@ -145,13 +146,11 @@ export class SlotsdrawPage {
       self.toDo();
     }
   }
-
-
   toDo(){
     console.log("Entered here");
     let toAlertUserAlert = this.alertController.create({
       title: 'Congratulations',
-      subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 ETH',
+      subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 BTC',
       buttons: ['OK']
     });
     toAlertUserAlert.present();
