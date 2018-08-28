@@ -56,10 +56,10 @@ export class StreamPage {
       { // Actual BTC graph
         backgroundColor: 'rgba(0,0,0,0)',
         borderColor: '#f3ba2e',
-        pointBackgroundColor: '#3AA57D',
+        pointBackgroundColor: '#f3ba2e',
         // pointBorderColor: '#fafafa',
         pointRadius: 0,
-        pointHoverBackgroundColor: '#3AA57D', //changing inside hover box legend
+        pointHoverBackgroundColor: '#f3ba2e', //changing inside hover box legend
         pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
       },
       // { // Short
@@ -192,6 +192,30 @@ export class StreamPage {
       }
     });
 
+
+
+    //INSERTION HERE
+
+    this.socket.on('Game3orders', (data: any) => {
+      // console.log(JSON.parse(data));
+      var receivedData = JSON.parse(data);
+      // console.log(receivedData[0].longOrders);
+      // console.log(receivedData[0].shortOrders);
+      // console.log(receivedData[0].price);
+      // console.log("Received data type  " + receivedData.type);
+      // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
+
+      if (parseInt(receivedData[0].shortOrders) === 0) {
+        //this is to insert in long chart
+        // console.log("received gameStart");
+        console.log("Long Orders here " + receivedData[0].longOrders);
+        //one instance
+      }
+      else {
+        //this is to insert in short chart
+        console.log("Short Orders here " + receivedData[0].shortOrders);
+      }
+    });
     // buffer=[[7000],[Date.now()]];
     // this.startGame(10);
     var test = this.testGlobalVar;
@@ -449,7 +473,7 @@ export class StreamPage {
 
   betLower() {
     //to pass in currGame3ID
-    this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(),this.currGame3ID).subscribe(data => {
+    this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
       console.log("bought " + this.game3BetAmount);
@@ -520,20 +544,20 @@ export class StreamPage {
       // console.log("Updating past game gameName " + data.gameName);
 
       if (parseInt(data.status) === 200) {
-      //set up for 1 bet per game first
-      console.log("Updating past game entry price " + data.data.entryPrice);
-      console.log("Updating past game end price " + data.data.endPrice);
-      console.log("Updating past game profit  " + data.data.profit);
-      console.log("Updating past game gameName " + data.data.gameName);
-      this.auth.setAccValue(data.accountValue);
-      this.walletAmount=this.auth.getAccValue();
-      var transaction = {
-        "entryPrice": data.data.entryPrice.toFixed(2),
-        "betType": data.data.orderTypeDisplay,
-        "endPrice": data.data.endPrice.toFixed(2),
-        "profit": parseInt(data.data.profit)
-      }
-      this.historicalGame3.push(transaction);
+        //set up for 1 bet per game first
+        console.log("Updating past game entry price " + data.data.entryPrice);
+        console.log("Updating past game end price " + data.data.endPrice);
+        console.log("Updating past game profit  " + data.data.profit);
+        console.log("Updating past game gameName " + data.data.gameName);
+        this.auth.setAccValue(data.accountValue);
+        this.walletAmount = this.auth.getAccValue();
+        var transaction = {
+          "entryPrice": data.data.entryPrice.toFixed(2),
+          "betType": data.data.orderTypeDisplay,
+          "endPrice": data.data.endPrice.toFixed(2),
+          "profit": parseInt(data.data.profit)
+        }
+        this.historicalGame3.push(transaction);
       }
     },
       err => {
