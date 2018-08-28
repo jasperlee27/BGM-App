@@ -8,6 +8,7 @@ const serverHealthURL = 'http://178.128.50.224:3000';
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
+const trehuntWinnerURL = 'http://178.128.50.224:3000/game1/getWinner';
 const trehuntBuyURL = 'http://178.128.50.224:3000/game1/placeBets';
 const hashManualBetURL = 'http://178.128.50.224:3000/game2/placeBets';
 const hashManualCoutURL = 'http://178.128.50.224:3000/game2/cashOut';
@@ -86,6 +87,17 @@ export class DataProvider {
     return this.http.post(trehuntStatusURL, requestBody, httpHeader);
   }
 
+  postTrehuntGameWinner(accid, gameType): Observable<any> {
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
+    var requestBody = new HttpParams().set("accid", accid).set("gameType",gameType);
+    return this.http.post(trehuntWinnerURL, requestBody, httpHeader);
+  }
+
+
+  //status 0 will be no draw, 1 will be draw
   //buy game 1 tickets
   postBuyGame1(accid, gameId, amount): Observable<any> {
     var sessionToken = this.auth.getSessionToken();

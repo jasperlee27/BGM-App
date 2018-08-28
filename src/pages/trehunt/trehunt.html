@@ -37,10 +37,10 @@
     <!-- for view game results -->
     <ion-row>
       <ion-col>
-        <button ion-button small color="secondary" style="text-transform: none;" [disabled]="BTCTixDisabled" (click)="viewBTCResults()">View BTC Results</button>
+        <button ion-button small color="secondary" style="text-transform: none;" small [color]="isBTCDrawAvail ? 'primary' : 'dark'" [disabled]="!isBTCDrawAvail" (click)="viewBTCResults()">View BTC Results</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="secondary" style="text-transform: none;" small [disabled]="ETHTixDisabled" (click)="viewETHResults()">View ETH Results</button>
+        <button ion-button color="secondary" style="text-transform: none;" small [color]="isETHDrawAvail ? 'primary' : 'dark'" [disabled]="!isETHDrawAvail" (click)="viewETHResults()">View ETH Results</button>
       </ion-col>
     </ion-row>
     <!-- for current tix own -->

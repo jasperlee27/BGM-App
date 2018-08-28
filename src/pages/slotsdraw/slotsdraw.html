@@ -17,7 +17,7 @@
   <ion-grid style="height: 100%">
     <ion-row justify-content-center align-items-center style="height: 100%">
       <ion-col>
-        <div id="machine1" class="machine">
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'" id="machine1" class="machine">
           <div>0</div>
           <div>1</div>
           <div>2</div>
@@ -31,7 +31,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div id="machine2" class="machine">
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine2" class="machine">
           <div>0</div>
           <div>1</div>
           <div>2</div>
@@ -45,7 +45,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div id="machine3" class="machine">
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine3" class="machine">
           <div>0</div>
           <div>1</div>
           <div>2</div>
@@ -59,7 +59,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div id="machine4" class="machine">
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine4" class="machine">
           <div>0</div>
           <div>1</div>
           <div>2</div>
@@ -73,7 +73,7 @@
         </div>
       </ion-col>
       <ion-col>
-        <div id="machine5" class="machine">
+        <div [style.visibility]="isMachineShown ? 'visible' : 'hidden'"  id="machine5" class="machine">
           <div>0</div>
           <div>1</div>
           <div>2</div>
@@ -86,10 +86,13 @@
           <div>9</div>
         </div>
       </ion-col>
+      <!-- <ion-col class="winner-button" col-12 text-center>
+        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>
+      </ion-col> -->
     </ion-row>
     <ion-row>
       <ion-col class="winner-button" col-12 text-center>
-        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>
+        <button ion-button id="luckyDrawShuffle" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>
       </ion-col>
     </ion-row>
   </ion-grid>

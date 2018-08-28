@@ -37,6 +37,11 @@ export class TrehuntPage {
   purchaseETHGameID: string
   walletAmount;
   isGuestLogin;
+  isBTCDrawAvail;
+  isETHDrawAvail;
+  BTCTixDisabled;
+  ETHTixDisabled;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
     // this.currBTCprice = this.randomIntRange(8000, 10000);
     // this.currETHprice = this.randomIntRange(600, 800);
@@ -84,29 +89,61 @@ export class TrehuntPage {
     //Making post request here
     console.log("Updating game status with accId= " + this.auth.getAccId());
     this.dataProvider.postTrehuntStatus(this.auth.getAccId()).subscribe(data => {
-      this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
-      console.log("Game 1 HTTP Request refresh status successful");
+      if (data.status === 200) {
+        this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
+        console.log("Game 1 HTTP Request refresh status successful");
+        // console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
+        // + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
+        // ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
 
-      // console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
-      // + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
-      // ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
+        //BTC updates
+        this.currBTCGameID = this.receivedData.data[1].gameName;
+        this.purchaseBTCGameID = this.receivedData.data[1]._id;
+        this.totalBTCtix = this.receivedData.data[1].totalAmount;
+        this.currBTCtix = this.receivedData.data[1].currentAmount;
+        this.currOwnBTCtix = this.receivedData.data[1].orders.length;
+        if (parseInt(this.receivedData.data[1].status) === 1){
+          this.isBTCDrawAvail=true;
+        }
 
-      //BTC updates
-      this.currBTCGameID = this.receivedData.data[1].gameName;
-      this.purchaseBTCGameID = this.receivedData.data[1]._id;
-      this.totalBTCtix = this.receivedData.data[1].totalAmount;
-      this.currBTCtix = this.receivedData.data[1].currentAmount;
-      this.currOwnBTCtix = this.receivedData.data[1].orders.length;
-      //ETH updates
-      this.currETHGameID = this.receivedData.data[0].gameName;
-      this.purchaseETHGameID = this.receivedData.data[0]._id;
-      this.totalETHtix = this.receivedData.data[0].totalAmount;
-      this.currETHtix = this.receivedData.data[0].currentAmount;
-      this.currOwnETHtix = this.receivedData.data[0].orders.length;
+        else{
+          this.isBTCDrawAvail=false;
+        }
+        console.log("btc draw available " + this.isBTCDrawAvail);
 
+        //ETH updates
+        this.currETHGameID = this.receivedData.data[0].gameName;
+        this.purchaseETHGameID = this.receivedData.data[0]._id;
+        this.totalETHtix = this.receivedData.data[0].totalAmount;
+        this.currETHtix = this.receivedData.data[0].currentAmount;
+        this.currOwnETHtix = this.receivedData.data[0].orders.length;
+        if (parseInt(this.receivedData.data[0].status) === 1){
+          this.isETHDrawAvail=true;
+        }
 
-      this.loadBTCProgress = ((this.currBTCtix / this.totalBTCtix) * 100).toFixed(2);
-      this.loadETHProgress = ((this.currETHtix / this.totalETHtix) * 100).toFixed(2);
+        else{
+          this.isETHDrawAvail=false;
+        }
+
+        console.log("btc draw available " + this.isETHDrawAvail);
+        this.loadBTCProgress = ((this.currBTCtix / this.totalBTCtix) * 100).toFixed(2);
+        if (parseInt(this.loadBTCProgress)===100){
+          this.BTCTixDisabled=true;
+        }
+
+        else{
+          this.BTCTixDisabled=false;
+        }
+
+        this.loadETHProgress = ((this.currETHtix / this.totalETHtix) * 100).toFixed(2);
+        if (parseInt(this.loadETHProgress)===100){
+          this.ETHTixDisabled=true;
+        }
+
+        else{
+          this.ETHTixDisabled=false;
+        }
+      }
     },
       err => {
         console.log("Error occured while retrieving game 1 status");
@@ -135,11 +172,12 @@ export class TrehuntPage {
 
 
     //passing in params & buying tickets
-    console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currBTCGameID + " amount to buy= " + this.amountBTCtix);
+ 
     this.dataProvider.postBuyGame1(this.auth.getAccId(), this.purchaseBTCGameID, this.amountBTCtix).subscribe(data => {
       // pass the response from HTTP Request into local variable receivedData
 
       if (parseInt(data.status) === 200) {
+        console.log("params accId= " + this.auth.getAccId() + " currBTC gameID " + this.currBTCGameID + " amount to buy= " + this.amountBTCtix);
         console.log("Game 1 buying btc okay");
         console.log("actual bought tix= " + data.amount);
         console.log("accountValue after posting " + data.accountValue);
