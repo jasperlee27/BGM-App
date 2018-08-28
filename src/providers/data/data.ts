@@ -113,20 +113,16 @@ export class DataProvider {
   
   //bet for game 3
   postBetGame3(amount, orderType, accid, gameId): Observable<any> {
-    // var sessionToken = this.auth.getSessionToken();
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
     var requestBody = new HttpParams().set("amount", amount).set("orderType", orderType).set("accid", accid).set("gameId",gameId);
     return this.http.post(binaryOptionBetURL, requestBody, httpHeader);
   }
 
   //past game 3 bets
   postPastGame3(accid): Observable<any> {
-    // var sessionToken = this.auth.getSessionToken();
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
     var requestBody = new HttpParams().set("accid", accid);
     return this.http.post(binaryOptionPastGameURL, requestBody, httpHeader);
   }

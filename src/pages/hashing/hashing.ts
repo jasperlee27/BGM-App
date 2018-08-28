@@ -274,7 +274,9 @@ export class HashingPage {
 
       else if (receivedData.type === "busted") {
         if (this.currGameState!== 'busted'){
-          this.smartAudio.play('game2explode');
+          if (this.hasActiveManualBet){
+            this.smartAudio.play('game2explode');
+          }
           this.currGameState='busted';
           //TODO: Sound on bust
         }

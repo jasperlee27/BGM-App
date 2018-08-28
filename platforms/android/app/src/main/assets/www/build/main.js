@@ -113,15 +113,35 @@ var LoginPage = /** @class */ (function () {
         console.log("login function activated");
     };
     LoginPage.prototype.viewAsGuest = function () {
+        var _this = this;
         // this.navCtrl.setRoot(TabsPage);
         // this.navCtrl.push(this.twoFApage);
-        this.auth.setAccId("guest");
-        this.auth.setUsername("guest");
-        this.auth.setGuestLogin(true);
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
-        console.log("view as guest only");
-        this.auth.setSessionToken("");
-        this.auth.setAccValue(0);
+        this.dataProvider.getServerHealth().subscribe(function (data) {
+            if (data.message !== '') {
+                console.log("received " + data.message);
+                _this.auth.setAccId("guest");
+                _this.auth.setUsername("guest");
+                _this.auth.setGuestLogin(true);
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */]);
+                console.log("view as guest only");
+                _this.auth.setSessionToken("");
+                _this.auth.setAccValue(0);
+            }
+        }, function (err) {
+            console.log("Error logged " + err);
+            if (err.error instanceof Error) {
+                console.log("Client-side error occured.");
+            }
+            else {
+                var alert_2 = _this.alertCtrl.create({
+                    title: 'ERROR',
+                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+                    buttons: ['OK']
+                });
+                alert_2.present();
+                console.log("Server-side error occured.");
+            }
+        });
     };
     LoginPage.prototype.showHide = function () {
         this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
@@ -971,7 +991,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <br>\n\n  <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment>\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualCoutDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n\n\n  <br>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <!-- Commented to remvoe auto bet for now -->\n\n  <!-- <br> -->\n\n  <!-- <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button disabled outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment> -->\n\n\n\n  \n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <br>\n\n      <!-- for manual -->\n\n      <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualCoutDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], HashingPage);
@@ -1843,6 +1863,7 @@ var StreamPage = /** @class */ (function () {
         this.dataProvider = dataProvider;
         this.alertCtrl = alertCtrl;
         this.isBetDisabled = true;
+        this.hasActiveBet = false;
         this.count = 30.0;
         this.boughtIntoGame3 = false;
         this.yDataReceived = Math.random() * 20;
@@ -1860,24 +1881,6 @@ var StreamPage = /** @class */ (function () {
                 pointHoverBackgroundColor: '#3AA57D',
                 pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
             },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#3F719E',
-                pointBackgroundColor: '#3F719E',
-                pointBorderColor: '#3F719E',
-                pointRadius: 0,
-                pointHoverBackgroundColor: '#3F719E',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: 'red',
-                pointBackgroundColor: '#9575CD',
-                pointBorderColor: '#9575CD',
-                pointRadius: 0,
-                pointHoverBackgroundColor: '#9575CD',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-            }
         ];
         this.datasets = [
             { data: [], fill: false, label: 'BitCoin', },
@@ -1887,7 +1890,8 @@ var StreamPage = /** @class */ (function () {
         console.log("socket for BinaryOptions conencted");
         this.isGuestLogin = this.auth.getGuestLogin();
         // this.isGameTime = true;
-        this.testGlobalVar = 7000;
+        this.historicalGame3 = new Array();
+        this.updatePastGame();
     }
     StreamPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -1896,11 +1900,14 @@ var StreamPage = /** @class */ (function () {
         //on game, countdown, gamestart. NO game end yet
         var gameValuesToPush;
         var localActiveBet;
+        var localEntryPrice;
         this.socket.on('Game3', function (data) {
             // console.log(JSON.parse(data));
             var receivedData = JSON.parse(data);
             // console.log("Received data type  " + receivedData.type);
             localActiveBet = _this.hasActiveBet;
+            localEntryPrice = _this.entryPrice;
+            // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
             if (receivedData.type === 'gameStart') {
                 // console.log("received gameStart");
                 _this.isBetDisabled = true;
@@ -1925,7 +1932,8 @@ var StreamPage = /** @class */ (function () {
                     _this.showCountdown = true;
                     _this.showGameEnded = false;
                     _this.currGameState = 'countdown';
-                    console.log("Toggled state " + _this.currGameState);
+                    _this.currGame3ID = receivedData.GameId;
+                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
                 }
             }
             else if (receivedData.type === 'game') {
@@ -1935,11 +1943,13 @@ var StreamPage = /** @class */ (function () {
                 // console.log("Updating current price in game " + gameValuesToPush);
                 // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
                 if (_this.currGameState !== 'game') {
+                    _this.currGame3ID = receivedData.GameId;
                     _this.showGameTime = true;
                     _this.showCountdown = false;
                     _this.showGameEnded = false;
                     _this.currGameState = 'game';
                     console.log("Toggled state " + _this.currGameState);
+                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
                 }
             }
             else if (receivedData.type === 'gameEnd') {
@@ -1947,11 +1957,17 @@ var StreamPage = /** @class */ (function () {
                 _this.showGameTime = false;
                 gameValuesToPush = receivedData.currentPrice;
                 if (_this.currGameState !== 'gameEnd') {
+                    //TOGGLE STATE TO GAME END
+                    if (_this.hasActiveBet) {
+                        _this.destroyBetInstance();
+                    }
                     _this.hasActiveBet = false;
                     _this.showCountdown = false;
                     _this.showGameEnded = true;
                     _this.currGameState = 'gameEnd';
                     _this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
+                    //Update past game
+                    _this.updatePastGame();
                     //restart gameTimer
                     _this.gameTimer = 15;
                     console.log("Toggled state " + _this.currGameState);
@@ -1979,7 +1995,7 @@ var StreamPage = /** @class */ (function () {
                     //can create function to copy here from received data above?
                     //or create socket here and update value here;
                     getClassValue: function () {
-                        console.log("is calling get class value but returning " + this.testGlobalVar);
+                        // console.log("is calling get class value but returning " + this.testGlobalVar);
                         return this.testGlobalVar;
                     },
                     updateVar: function () {
@@ -1993,18 +2009,21 @@ var StreamPage = /** @class */ (function () {
                         this.updateVar();
                         var count = 0;
                         // var value = this.randomIntRange(3000,8000);
-                        console.log("pushing " + gameValuesToPush);
+                        console.log("how many datasets i have " + chart.data.datasets.length);
+                        // console.log("pushing " + gameValuesToPush);
                         chart.data.datasets[0].data.push({
                             x: Date.now(),
                             y: gameValuesToPush,
                         });
-                        console.log('check active bet here ' + localActiveBet);
+                        // console.log('check active bet here ' + localActiveBet);
                         if (localActiveBet) {
-                            console.log("Entered if condition");
+                            // console.log("Entered if condition");
+                            // console.log("buychart value is " + chart.data.datasets[1].data[0]);
                             chart.data.datasets[1].data.push({
                                 x: Date.now(),
-                                y: chart.data.datasets[1].data[0],
+                                y: localEntryPrice,
                             });
+                            // console.log("After push entry value" + localEntryPrice);
                         }
                         ;
                         // chart.data.datasets.forEach(function (dataset: any) {
@@ -2057,8 +2076,8 @@ var StreamPage = /** @class */ (function () {
                             padding: 5,
                             display: true,
                             stepSize: 1000,
-                            min: 6600,
-                            suggestedMax: 6900,
+                            suggestedMin: 6600,
+                            suggestedMax: 6800,
                         },
                         gridLines: {
                             lineWidth: 0.5,
@@ -2098,41 +2117,49 @@ var StreamPage = /** @class */ (function () {
     StreamPage.prototype.delay = function (ms) {
         return new Promise(function (resolve) { return setTimeout(resolve, ms); });
     };
+    StreamPage.prototype.destroyBetInstance = function () {
+        console.log("pop buyline chart");
+        this.datasets.pop();
+        this.chart.refresh();
+    };
     StreamPage.prototype.buyDataset = function (orderType, entryPrice) {
         console.log("Try to add new dataset");
         var color;
         if (orderType === "long") {
-            color = 'red';
+            color = 'green';
         }
         else {
-            color = 'green';
+            color = 'red';
         }
         var newDataset = {
             label: 'Buy Price',
-            backgroundColor: 'red',
-            borderColor: 'red',
-            borderWidth: 5,
-            // fill: false,
+            backgroundColor: color,
+            borderColor: color,
+            borderWidth: 10,
+            fill: false,
             lineTension: 0,
-            data: [entryPrice],
-            pointRadius: 5,
+            data: [],
+            pointRadius: 0,
         };
         this.datasets.push(newDataset);
         this.chart.refresh();
     };
     StreamPage.prototype.betHigher = function () {
         var _this = this;
-        this.boughtIntoGame3 = true;
-        this.roundBetType = 'long';
-        this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId()).subscribe(function (data) {
+        //to pass in currGame3ID
+        this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
             // pass the response from HTTP Request into local variable1 receivedData
             // var receivedData= JSON.parse(data);
             console.log("bought " + _this.game3BetAmount);
             console.log("Received entry price " + data.entryPrice);
-            // this.buyDataset(this.roundBetType, data.entryPrice);
-            // this.auth.setAccValue(data.accountValue);
-            // this.walletAmount = this.auth.getAccValue();
             if (parseInt(data.status) === 200) {
+                _this.isBetDisabled = true;
+                _this.boughtIntoGame3 = true;
+                _this.roundBetType = 'long';
+                _this.buyDataset(_this.roundBetType, data.entryPrice);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
+                _this.entryPrice = data.entryPrice;
                 // this.isManualBetDisabled = true;
                 // this.isManualCoutDisabled = false;
                 _this.hasActiveBet = true;
@@ -2174,10 +2201,8 @@ var StreamPage = /** @class */ (function () {
     };
     StreamPage.prototype.betLower = function () {
         var _this = this;
-        this.boughtIntoGame3 = true;
-        this.roundBetType = 'short';
-        // this.buyDataset();
-        this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId()).subscribe(function (data) {
+        //to pass in currGame3ID
+        this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
             // pass the response from HTTP Request into local variable1 receivedData
             // var receivedData= JSON.parse(data);
             console.log("bought " + _this.game3BetAmount);
@@ -2185,6 +2210,13 @@ var StreamPage = /** @class */ (function () {
             // this.auth.setAccValue(data.accountValue);
             // this.walletAmount = this.auth.getAccValue();
             if (parseInt(data.status) === 200) {
+                _this.isBetDisabled = true;
+                _this.boughtIntoGame3 = true;
+                _this.roundBetType = 'short';
+                _this.entryPrice = data.entryPrice;
+                _this.buyDataset(_this.roundBetType, data.entryPrice);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
                 // this.hasActiveManualBet = true;
                 // this.isManualBetDisabled = true;
                 // this.isManualCoutDisabled = false
@@ -2225,6 +2257,36 @@ var StreamPage = /** @class */ (function () {
             }
         });
     };
+    StreamPage.prototype.updatePastGame = function () {
+        var _this = this;
+        this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            _this.historicalGame3 = new Array();
+            // console.log("Updating past game entry price " + data.entryPrice);
+            // console.log("Updating past game end price " + data.endPrice);
+            // console.log("Updating past game profit  " + data.profit);
+            // console.log("Updating past game gameName " + data.gameName);
+            if (parseInt(data.status) === 200) {
+                //set up for 1 bet per game first
+                console.log("Updating past game entry price " + data.data.entryPrice);
+                console.log("Updating past game end price " + data.data.endPrice);
+                console.log("Updating past game profit  " + data.data.profit);
+                console.log("Updating past game gameName " + data.data.gameName);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
+                var transaction = {
+                    "entryPrice": data.data.entryPrice.toFixed(2),
+                    "betType": data.data.orderTypeDisplay,
+                    "endPrice": data.data.endPrice.toFixed(2),
+                    "profit": parseInt(data.data.profit)
+                };
+                _this.historicalGame3.push(transaction);
+            }
+        }, function (err) {
+            console.log("Error occured while getting past transactions");
+        });
+    };
     StreamPage.prototype.calcRoundResult = function () {
     };
     __decorate([
@@ -2233,7 +2295,7 @@ var StreamPage = /** @class */ (function () {
     ], StreamPage.prototype, "chart", void 0);
     StreamPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf = "showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isBetDisabled" (click)="betHigher()">Higher</button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button full [disabled]="isBetDisabled" (click)="betLower()">Lower</button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n        <!-- top up and withdraw buttons-->\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
+            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf = "showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'higher-green\'"\n\n         full [disabled]="isBetDisabled" (click)="betHigher()"><span style="font-weight:700; color:whitesmoke">Higher</span></button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'lower-red\'" \n\n        full  [disabled]="isBetDisabled" (click)="betLower()"><span style="font-weight:700; color:whitesmoke">Lower</span></button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row style="height:25%">\n\n      <ion-scroll scrollY="true">\n\n        <ion-list col-12 no-lines>\n\n          <ion-list-header no-lines style="color:#f3ba2e">\n\n            <ion-col col-4>Price</ion-col>\n\n            <ion-col col-2>Bet Type</ion-col>\n\n            <ion-col col-3>Close</ion-col>\n\n            <ion-col item-end col-3 >Profit</ion-col>\n\n          </ion-list-header>\n\n          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">\n\n            <ion-col col-4>{{transaction.entryPrice}}</ion-col>\n\n            <!-- <span col-3>Lo</span> -->\n\n            <ion-col col-2>{{transaction.betType}}</ion-col>\n\n            <ion-col col-3><span style="padding-left:10%">{{transaction.endPrice}}</span></ion-col>\n\n            <ion-col item-end col-3><span [style.color]="transaction.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{transaction.profit}}</span></ion-col>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-scroll>\n\n    </ion-row>\n\n    <!-- <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card> -->\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], StreamPage);
@@ -2676,11 +2738,11 @@ var map = {
 		6
 	],
 	"../pages/slotsdraw/slotsdraw.module": [
-		661,
+		662,
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
-		662,
+		661,
 		4
 	],
 	"../pages/stream/stream.module": [
@@ -2974,8 +3036,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
@@ -3047,6 +3109,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+var serverHealthURL = 'http://178.128.50.224:3000';
 var loginUrl = 'http://178.128.50.224:3000/login/';
 var pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions';
 var trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
@@ -3057,12 +3120,17 @@ var walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 var depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
 var withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
 var binaryOptionBetURL = 'http://178.128.50.224:3000/game3/placeBets';
+var binaryOptionPastGameURL = 'http://178.128.50.224:3000/game3/getGame3PastGame';
 var DataProvider = /** @class */ (function () {
     function DataProvider(http, auth) {
         this.http = http;
         this.auth = auth;
         console.log('Hello DataProvider Provider');
     }
+    //get server health for guest view
+    DataProvider.prototype.getServerHealth = function () {
+        return this.http.get('http://178.128.50.224:3000');
+    };
     //login
     DataProvider.prototype.postLogin = function (username, password) {
         var httpHeader = {
@@ -3132,13 +3200,23 @@ var DataProvider = /** @class */ (function () {
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("gameId", gameId);
         return this.http.post(hashManualCoutURL, requestBody, httpHeader);
     };
-    DataProvider.prototype.postBetGame3 = function (amount, orderType, accid) {
+    //bet for game 3
+    DataProvider.prototype.postBetGame3 = function (amount, orderType, accid, gameId) {
         // var sessionToken = this.auth.getSessionToken();
         var httpHeader = {
             headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
         };
-        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("amount", amount).set("orderType", orderType).set("accid", accid);
+        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("amount", amount).set("orderType", orderType).set("accid", accid).set("gameId", gameId);
         return this.http.post(binaryOptionBetURL, requestBody, httpHeader);
+    };
+    //past game 3 bets
+    DataProvider.prototype.postPastGame3 = function (accid) {
+        // var sessionToken = this.auth.getSessionToken();
+        var httpHeader = {
+            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
+        };
+        var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid);
+        return this.http.post(binaryOptionPastGameURL, requestBody, httpHeader);
     };
     DataProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["Injectable"])(),

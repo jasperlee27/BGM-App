@@ -42,6 +42,10 @@ export class SlotsdrawPage {
         auto: false,
         direction: 'up',
         delay: 500,
+        randomize() {
+          return 5;
+        }
+        // randomize:5
       });
 
       const element2 = document.querySelector('#machine2');
@@ -50,6 +54,9 @@ export class SlotsdrawPage {
         auto: false,
         direction: 'up',
         delay: 500,
+        randomize() {
+          return 5;
+        }
       });
 
 
@@ -59,6 +66,9 @@ export class SlotsdrawPage {
         auto: false,
         direction: 'up',
         delay: 500,
+        randomize() {
+          return 5;
+        }
       });
 
 
@@ -68,6 +78,9 @@ export class SlotsdrawPage {
         auto: false,
         direction: 'up',
         delay: 500,
+        randomize() {
+          return 5;
+        }
       });
 
       const element5 = document.querySelector('#machine5');
@@ -76,32 +89,37 @@ export class SlotsdrawPage {
         auto: false,
         direction: 'up',
         delay: 500,
+        randomize() {
+          return 5;
+        }
       });
 
 
-      setTimeout(function () {
-        machine1.shuffle(10, onComplete1);
-        machine2.shuffle(15);
-        machine3.shuffle(20);
-        machine4.shuffle(25);
-        machine5.shuffle(30);
-      }, 0);
+      // setTimeout(function () {
+      machine1.shuffle(10, onComplete1);
+      machine2.shuffle(15);
+      machine3.shuffle(20);
+      machine4.shuffle(25);
+      machine5.shuffle(30);
+      // }, 0);
 
       function onComplete1(active) {
+
+        // machine1.setRandomize(5);
         // if (machine1.next() != 5){
-          // console.log(active);
-          // if (active!=5){
-          //   console.log(machine1.next());
-          //   onComplete1(active);
-          // }
-          console.log("Active = "  + active);
-          // var chosen = 5;
-          // var spinDifference = Math.abs(active-chosen);
-          // console.log("spinDiff = "  + spinDifference);
-          // for (var i = 0; i < spinDifference; i++){
-            // console.log("Loop = "  + i);
-            machine1.setRandomize(5);
-          // }
+        // console.log(active);
+        // if (active!=5){
+        //   console.log(machine1.next());
+        //   onComplete1(active);
+        // }
+        console.log("Active = " + active);
+        // var chosen = 5;
+        // var spinDifference = Math.abs(active-chosen);
+        // console.log("spinDiff = "  + spinDifference);
+        // for (var i = 0; i < spinDifference; i++){
+        // console.log("Loop = "  + i);
+        // machine1.setRandomize(5);
+        // }
 
         // }
         // onComplete1();
