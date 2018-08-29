@@ -1,14 +1,38 @@
 page-slots-draw-btc {
 
         .machine{
+            margin-left:8px;
+            color:white;
+            // margin-bottom: -40px;
+            // margin-bottom:-40px !important;
             height: 50px;
             max-height: 50px;
             font-size: 50px;
             display: block;
-            
+            // border-width:10px;
+            // border-color:white;
+        }
+        .image-center{
+            margin-top: 70px;
+            margin-bottom: 80px;
+            text-align: center;
+        }   
+        .banner-center{
+            margin-left: 8px;
+            margin-bottom: -48px;
+            text-align: center;
+        }   
+          .square {
+            padding-right:5px;
+            border:5px solid color($colors,primary);
+            margin:2px;
+            height: 75px;
+            width: 75px;
+            background-color: color($colors,dark);
           }
           .winner-button{
-              padding-bottom:0%;
+            margin-left: 0px;
+            padding-bottom:0%;
               
           }
           ion-button {
