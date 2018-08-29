@@ -1073,6 +1073,7 @@ var HomePage = /** @class */ (function () {
         var _this = this;
         this.platform.ready().then(function () {
             _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
+                _this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
                 _this.nativeAudio.loop('bgmLoopHome');
             });
         });
@@ -3051,11 +3052,11 @@ var map = {
 		7
 	],
 	"../pages/slots-draw-btc/slots-draw-btc.module": [
-		662,
+		661,
 		6
 	],
 	"../pages/slotsdraw/slotsdraw.module": [
-		661,
+		662,
 		5
 	],
 	"../pages/splash-logo/splash-logo.module": [
@@ -3501,8 +3502,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slots-draw-btc/slots-draw-btc.module#SlotsDrawBtcPageModule', name: 'SlotsDrawBtcPage', segment: 'slots-draw-btc', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },

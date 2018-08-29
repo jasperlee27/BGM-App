@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
   ionViewDidLoad() {
     this.platform.ready().then(() => {
       this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+        this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
         this.nativeAudio.loop('bgmLoopHome');
       });
     });
