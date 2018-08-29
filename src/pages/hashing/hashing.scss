@@ -15,11 +15,16 @@ page-hashing {
     .outer-circle {
        text-align:center;
        text-decoration: none !important; 
-       margin-top: 10% !important;
+       margin-top: 15% !important;
        margin-left: 40%;
        font-size: 24px;
        z-index: 200; position:relative;
      }
+
+    .rangeSlider{
+        border-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);
+    }
 
      .arrow-head {
         text-align: end;

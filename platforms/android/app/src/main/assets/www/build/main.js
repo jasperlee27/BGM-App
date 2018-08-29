@@ -2705,6 +2705,8 @@ var SlotsdrawPage = /** @class */ (function () {
         this.alertController = alertController;
         this.smartAudio = smartAudio;
         // this.isMachineShown = false;
+        this.isWinnerButtonDisabled = false;
+        this.winnerID = '';
     }
     SlotsdrawPage.prototype.ionViewWillEnter = function () {
         var _this = this;
@@ -2736,6 +2738,7 @@ var SlotsdrawPage = /** @class */ (function () {
     SlotsdrawPage.prototype.ngAfterViewInit = function () {
     };
     SlotsdrawPage.prototype.getWinner = function () {
+        this.isWinnerButtonDisabled = true;
         this.isMachineShown = true;
         this.smartAudio.play('startslot');
         // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
@@ -2814,13 +2817,18 @@ var SlotsdrawPage = /** @class */ (function () {
         this.smartAudio.play('slotcomplete');
     };
     SlotsdrawPage.prototype.toDo = function () {
+        var _this = this;
         console.log("Entered here");
+        this.winnerID = this.receivedData.winnerUser;
         var toAlertUserAlert = this.alertController.create({
             title: 'Congratulations',
             subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 ETH',
             buttons: ['OK']
         });
         toAlertUserAlert.present();
+        toAlertUserAlert.onDidDismiss(function () {
+            _this.isWinnerButtonDisabled = false;
+        });
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('btn'),
@@ -2828,7 +2836,7 @@ var SlotsdrawPage = /** @class */ (function () {
     ], SlotsdrawPage.prototype, "myBtn", void 0);
     SlotsdrawPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-slotsdraw',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\slotsdraw\slotsdraw.html"*/'<!--\n\n  Generated template for the SlotsdrawPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n      <ion-title>ETH Lucky Draw</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n    <div style="position:relative;" class="image-center">\n\n      <!-- <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 0;" style=background:transparent>\n\n      <img width="100%" height="130" src="../assets/imgs/banner.png" style="position: absolute; top: 0; left: 0;" style=background:transparent> -->\n\n      <img width="130" height="130" src="../assets/imgs/ethereum.png" style="position: absolute; top: 0; left: 31%;" >\n\n      <img  width="100%" height="130" src="../assets/imgs/BlueBanner.png" style="position: relative; top: 86px; left: 0;">\n\n    </div>\n\n    <ion-grid>\n\n      <ion-row justify-content-center align-items-center>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine1" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine2" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine3" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine4" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine5" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <!-- <ion-col class="winner-button" col-12 text-center>\n\n          <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>\n\n        </ion-col> -->\n\n      </ion-row>\n\n      <!-- <div class="banner-center">\n\n        <ion-img width="100%" height="130" src="../assets/imgs/banner.png" style=background:transparent></ion-img>\n\n      </div> -->\n\n      <ion-row>\n\n        <ion-col class="winner-button" col-12 text-center>\n\n          <button ion-button id="luckyDrawShuffle" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\slotsdraw\slotsdraw.html"*/,
+            selector: 'page-slotsdraw',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\slotsdraw\slotsdraw.html"*/'<!--\n\n  Generated template for the SlotsdrawPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n      <ion-title>ETH Lucky Draw</ion-title>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n    <div style="position:relative;" class="image-center">\n\n      <!-- <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 0;" style=background:transparent>\n\n      <img width="100%" height="130" src="../assets/imgs/banner.png" style="position: absolute; top: 0; left: 0;" style=background:transparent> -->\n\n      <img width="130" height="130" src="../assets/imgs/ethereum.png" style="position: absolute; top: 0; left: 31%;" >\n\n      <img  width="100%" height="130" src="../assets/imgs/BlueBanner.png" style="position: relative; top: 86px; left: 0;">\n\n      <span style="position: relative; top: 8px; left: 0; font-size:18px; font-weight:700; z-index: 200; color: #222222;">{{winnerID}}</span>\n\n    </div>\n\n    <ion-grid>\n\n      <ion-row justify-content-center align-items-center>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine1" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine2" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine3" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine4" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <ion-col class="square">\n\n          <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine5" class="machine">\n\n            <div>0</div>\n\n            <div>1</div>\n\n            <div>2</div>\n\n            <div>3</div>\n\n            <div>4</div>\n\n            <div>5</div>\n\n            <div>6</div>\n\n            <div>7</div>\n\n            <div>8</div>\n\n            <div>9</div>\n\n          </div>\n\n        </ion-col>\n\n        <!-- <ion-col class="winner-button" col-12 text-center>\n\n          <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>\n\n        </ion-col> -->\n\n      </ion-row>\n\n      <!-- <div class="banner-center">\n\n        <ion-img width="100%" height="130" src="../assets/imgs/banner.png" style=background:transparent></ion-img>\n\n      </div> -->\n\n      <ion-row>\n\n        <ion-col class="winner-button" col-12 text-center>\n\n          <button ion-button id="luckyDrawShuffle" [disabled]="isWinnerButtonDisabled" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n  </ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\slotsdraw\slotsdraw.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
     ], SlotsdrawPage);
@@ -2873,13 +2881,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  */
 var SlotsDrawBtcPage = /** @class */ (function () {
     function SlotsDrawBtcPage(navCtrl, navParams, dataProvider, auth, alertController, smartAudio) {
-        // this.isMachineShown = false;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.dataProvider = dataProvider;
         this.auth = auth;
         this.alertController = alertController;
         this.smartAudio = smartAudio;
+        // this.isMachineShown = false;
+        this.winnerID = '';
+        this.isWinnerButtonDisabled = false;
     }
     SlotsDrawBtcPage.prototype.ionViewWillEnter = function () {
         var _this = this;
@@ -2911,6 +2921,7 @@ var SlotsDrawBtcPage = /** @class */ (function () {
     SlotsDrawBtcPage.prototype.ngAfterViewInit = function () {
     };
     SlotsDrawBtcPage.prototype.getWinner = function () {
+        this.isWinnerButtonDisabled = true;
         this.smartAudio.play('startslot');
         this.isMachineShown = true;
         // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
@@ -2989,17 +3000,22 @@ var SlotsDrawBtcPage = /** @class */ (function () {
         this.smartAudio.play('slotcomplete');
     };
     SlotsDrawBtcPage.prototype.toDo = function () {
+        var _this = this;
         console.log("Entered here");
+        this.winnerID = this.receivedData.winnerUser;
         var toAlertUserAlert = this.alertController.create({
             title: 'Congratulations',
             subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 BTC',
             buttons: ['OK']
         });
         toAlertUserAlert.present();
+        toAlertUserAlert.onDidDismiss(function () {
+            _this.isWinnerButtonDisabled = false;
+        });
     };
     SlotsDrawBtcPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-slots-draw-btc',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\slots-draw-btc\slots-draw-btc.html"*/'<!--\n  Generated template for the SlotsdrawPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>BTC Lucky Draw</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <div style="position:relative;" class="image-center">\n    <!-- <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 0;" style=background:transparent>\n    <img width="100%" height="130" src="../assets/imgs/banner.png" style="position: absolute; top: 0; left: 0;" style=background:transparent> -->\n    <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 32%;" >\n    <img  width="100%" height="130" src="../assets/imgs/banner.png" style="position: relative; top: 78px; left: 0;">\n  </div>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine1" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine2" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine3" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine4" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine5" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <!-- <ion-col class="winner-button" col-12 text-center>\n        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>\n      </ion-col> -->\n    </ion-row>\n    <!-- <div class="banner-center">\n      <ion-img width="100%" height="130" src="../assets/imgs/banner.png" style=background:transparent></ion-img>\n    </div> -->\n    <ion-row>\n      <ion-col class="winner-button" col-12 text-center>\n        <button ion-button id="luckyDrawShuffle" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\slots-draw-btc\slots-draw-btc.html"*/,
+            selector: 'page-slots-draw-btc',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\slots-draw-btc\slots-draw-btc.html"*/'<!--\n  Generated template for the SlotsdrawPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>BTC Lucky Draw</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <div style="position:relative;" class="image-center">\n    <!-- <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 0;" style=background:transparent>\n    <img width="100%" height="130" src="../assets/imgs/banner.png" style="position: absolute; top: 0; left: 0;" style=background:transparent> -->\n    <img width="120" height="120" src="../assets/imgs/Bitcoin.png" style="position: absolute; top: 0; left: 32%;" >\n    <img  width="100%" height="130" src="../assets/imgs/banner.png" style="position: relative; top: 78px; left: 0;">\n    <span style="position: relative; top: 6px; left: 0; font-size:20px; font-weight:700; z-index: 200; color: #222222;">{{winnerID}}</span>\n  </div>\n  <ion-grid>\n    <ion-row justify-content-center align-items-center>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine1" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine2" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine3" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine4" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <ion-col class="square">\n        <div [style.visibility]="isMachineShown ? \'visible\' : \'hidden\'" id="machine5" class="machine">\n          <div>0</div>\n          <div>1</div>\n          <div>2</div>\n          <div>3</div>\n          <div>4</div>\n          <div>5</div>\n          <div>6</div>\n          <div>7</div>\n          <div>8</div>\n          <div>9</div>\n        </div>\n      </ion-col>\n      <!-- <ion-col class="winner-button" col-12 text-center>\n        <button ion-button id="luckyDrawShuffle" type="button" class="ShuffleBtn">Get Winner!</button>\n      </ion-col> -->\n    </ion-row>\n    <!-- <div class="banner-center">\n      <ion-img width="100%" height="130" src="../assets/imgs/banner.png" style=background:transparent></ion-img>\n    </div> -->\n    <ion-row>\n      <ion-col class="winner-button" col-12 text-center>\n        <button ion-button id="luckyDrawShuffle" [disabled]="isWinnerButtonDisabled" (click)="getWinner()" class="ShuffleBtn">Get Winner!</button>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\slots-draw-btc\slots-draw-btc.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
     ], SlotsDrawBtcPage);
@@ -3068,11 +3084,11 @@ var map = {
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
-		665,
+		666,
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		666,
+		665,
 		1
 	],
 	"../pages/wallet/wallet.module": [
@@ -3506,8 +3522,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 }),

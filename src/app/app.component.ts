@@ -38,7 +38,7 @@ export class MyApp {
       smartAudio.preload('startslot', 'assets/audio/StartSlot.mp3', 'simple');
       smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3', 'complex');
       smartAudio.preload('game2explode', 'assets/audio/game2xploded.mp3', 'simple');
- 
+      smartAudio.preload('game3countdown', 'assets/audio/game3Countdown.wav', 'simple');
     })
   }
 }

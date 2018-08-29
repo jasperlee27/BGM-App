@@ -68,13 +68,12 @@
         </ion-col>
       </ion-row>
       <br>
-      <ion-item no-lines>
+      <ion-item no-lines class="rangeSlider">
         <ion-range min="0" [max]="walletAmount" step="1" [disabled]="isManualBetDisabled" [(ngModel)]="hashManualBetAmount" color="secondary">
           <ion-label range-left>0</ion-label>
           <ion-label range-right>{{walletAmount}}</ion-label>
         </ion-range>
       </ion-item>
-      <br><br>
       <!-- <ion-row>
         <ion-col col-3>
           <ion-label color="primary">AMOUNT: </ion-label>

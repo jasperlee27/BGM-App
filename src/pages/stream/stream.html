@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Game 3: Binary Options</ion-title>
     <div class="walletDisplay">
-      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>
+      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>
     </div>
   </ion-navbar>
 
@@ -20,7 +20,7 @@
   <ion-grid style="height:100%; width:100%">
     <ion-row>
       <ion-col col-12>
-        <div class="bet-timer" *ngIf = "showCountdown">
+        <div class="bet-timer" *ngIf="showCountdown">
           Next game in {{timerValue}} s
         </div>
         <div class="game-timer" *ngIf="showGameTime">
@@ -36,35 +36,47 @@
       <canvas baseChart [chartType]="'line'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"
         width=100% height=80%></canvas>
     </ion-row>
-    <br>
+    <br><br>
     <ion-row>
       <ion-col col-4>
-        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>
+        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="true"></ion-input>
       </ion-col>
       <ion-col col-4>
-        <button ion-button [color]="isBetDisabled ? 'dark' : 'higher-green'"
-         full [disabled]="isBetDisabled" (click)="betHigher()"><span style="font-weight:700; color:whitesmoke">Higher</span></button>
+        <button ion-button [color]="isBetDisabled ? 'dark' : 'higher-green'" full [disabled]="isBetDisabled" (click)="betHigher()">
+          <span style="font-weight:700; color:whitesmoke">Higher</span>
+        </button>
       </ion-col>
       <ion-col col-4>
-        <button ion-button [color]="isBetDisabled ? 'dark' : 'lower-red'" 
-        full  [disabled]="isBetDisabled" (click)="betLower()"><span style="font-weight:700; color:whitesmoke">Lower</span></button>
+        <button ion-button [color]="isBetDisabled ? 'dark' : 'lower-red'" full [disabled]="isBetDisabled" (click)="betLower()">
+          <span style="font-weight:700; color:whitesmoke">Lower</span>
+        </button>
       </ion-col>
     </ion-row>
-    <ion-row style="height:25%">
+    <ion-item no-lines class="rangeSlider"> 
+      <ion-range min="0" [max]="walletAmount" step="1" [disabled]="isBetDisabled" [(ngModel)]="game3BetAmount" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>{{walletAmount}}</ion-label>
+      </ion-range>
+    </ion-item>
+    <ion-row style="height:25%; width:100%">
       <ion-scroll scrollY="true">
         <ion-list col-12 no-lines>
           <ion-list-header no-lines style="color:#f3ba2e">
             <ion-col col-4>Price</ion-col>
             <ion-col col-2>Bet Type</ion-col>
             <ion-col col-3>Close</ion-col>
-            <ion-col item-end col-3 >Profit</ion-col>
+            <ion-col item-end col-3>Profit</ion-col>
           </ion-list-header>
           <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">
             <ion-col col-4>{{transaction.entryPrice}}</ion-col>
             <!-- <span col-3>Lo</span> -->
             <ion-col col-2>{{transaction.betType}}</ion-col>
-            <ion-col col-3><span style="padding-left:10%">{{transaction.endPrice}}</span></ion-col>
-            <ion-col item-end col-3><span [style.color]="transaction.profit > 0 ? 'green' : 'red'" style="font-weight:700; text-align:right">{{transaction.profit}}</span></ion-col>
+            <ion-col col-3>
+              <span style="padding-left:10%">{{transaction.endPrice}}</span>
+            </ion-col>
+            <ion-col item-end col-3>
+              <span [style.color]="transaction.profit > 0 ? 'green' : 'red'" style="font-weight:700; text-align:right">{{transaction.profit}}</span>
+            </ion-col>
           </ion-item>
         </ion-list>
       </ion-scroll>

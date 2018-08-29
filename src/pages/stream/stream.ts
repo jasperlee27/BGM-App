@@ -9,6 +9,7 @@ import { take, map } from 'rxjs/operators';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import * as io from 'socket.io-client';
 import { DataProvider } from '../../providers/data/data';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 /**
  * Generated class for the StreamPage page.
  *
@@ -50,6 +51,7 @@ export class StreamPage {
   finalRoundValue;
   priceFromGame;
   entryPrice;
+  musicPlayed;
   // private datamap: any;
   chartColors: any[] =
     [
@@ -90,7 +92,7 @@ export class StreamPage {
 
   options: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController, public smartAudio: SmartAudioProvider) {
     //do socket connection
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
@@ -98,6 +100,7 @@ export class StreamPage {
     // this.isGameTime = true;
     this.historicalGame3 = new Array();
     this.updatePastGame();
+    this.musicPlayed = false;
   }
 
   ngOnInit() {
@@ -132,6 +135,8 @@ export class StreamPage {
       else if (receivedData.type === 'countdown') {
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
         gameValuesToPush = receivedData.currentPrice;
+
+
         // console.log("Updating current price in countdown " + gameValuesToPush);
         // console.log("Counting down: " + receivedData.number);
         if (this.currGameState !== 'countdown') {
@@ -151,6 +156,13 @@ export class StreamPage {
         this.gameTimer = parseInt(receivedData.number);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+        if ((this.gameTimer < 5) && (this.hasActiveBet)) {
+          if (!this.musicPlayed) {
+            this.smartAudio.play('game3countdown');
+            this.musicPlayed = true;
+          }
+        }
+
         if (this.currGameState !== 'game') {
           this.currGame3ID = receivedData.GameId;
           this.showGameTime = true;
@@ -172,6 +184,7 @@ export class StreamPage {
           if (this.hasActiveBet) {
             this.destroyBetInstance();
           }
+          this.musicPlayed = false;
           this.hasActiveBet = false;
           this.showCountdown = false;
           this.showGameEnded = true;
@@ -356,32 +369,6 @@ export class StreamPage {
   ionViewWillEnter() {
     this.walletAmount = this.auth.getAccValue();
   }
-
-  // startStreaming() {
-  //   let interval = setInterval(() => {
-  //     var btcPrice = this.randomIntRange(4000, 8000);
-  //     this.datasets[0].data.push(btcPrice);
-  //     var currentTime = Date.now();
-  //     this.chartLabels.push(currentTime);
-  //     this.chart.labels.shift();
-  //     this.chart.refresh();
-  //   }, 300)
-  // }
-
-  // async startGame(countdown: number) {
-  //   this.isGameTime = true;
-  //   console.log("Game 3 Started");
-  //   this.count = countdown;
-  //   var noOfCounts = (this.count * 10)
-
-  //   this.countDownGame3 = timer(0, 100).pipe(
-  //     take(noOfCounts),
-  //     map(() => (this.count -= 0.1).toFixed(1))
-  //   );
-
-  //   await this.delay((this.count * 1000));
-  //   this.endGame();
-  // }
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
