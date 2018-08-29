@@ -19682,13 +19682,13 @@ ion-range ion-icon {
 }
 
 .range-ios .range-knob {
-  left: 7px;
-  top: 7px;
+  left: 13px;
+  top: 13px;
   border-radius: 50%;
   position: absolute;
-  width: 28px;
-  height: 28px;
-  background: #fff;
+  width: 16px;
+  height: 16px;
+  background: #f3ba2e;
   -webkit-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.13), 0 0 0 1px rgba(0, 0, 0, 0.02);
   box-shadow: 0 3px 1px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.13), 0 0 0 1px rgba(0, 0, 0, 0.02);
   pointer-events: none;
@@ -36822,14 +36822,77 @@ page-roulette ion-button {
   border-width: 1em;
 }
 
-page-slotsdraw .machine {
+page-slots-draw-btc .machine {
+  margin-left: 8px;
+  color: white;
   height: 50px;
   max-height: 50px;
   font-size: 50px;
   display: block;
 }
 
+page-slots-draw-btc .image-center {
+  margin-top: 70px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+page-slots-draw-btc .banner-center {
+  margin-left: 8px;
+  margin-bottom: -48px;
+  text-align: center;
+}
+
+page-slots-draw-btc .square {
+  padding-right: 5px;
+  border: 5px solid #f3ba2e;
+  margin: 2px;
+  height: 75px;
+  width: 75px;
+  background-color: #222;
+}
+
+page-slots-draw-btc .winner-button {
+  margin-left: 0px;
+  padding-bottom: 0%;
+}
+
+page-slots-draw-btc ion-button {
+  text-align: center;
+}
+
+page-slotsdraw .machine {
+  margin-left: 8px;
+  color: white;
+  height: 50px;
+  max-height: 50px;
+  font-size: 50px;
+  display: block;
+}
+
+page-slotsdraw .image-center {
+  margin-top: 64px;
+  margin-bottom: 80px;
+  text-align: center;
+}
+
+page-slotsdraw .banner-center {
+  margin-left: 8px;
+  margin-bottom: -48px;
+  text-align: center;
+}
+
+page-slotsdraw .square {
+  padding-right: 5px;
+  border: 5px solid #f3ba2e;
+  margin: 2px;
+  height: 75px;
+  width: 75px;
+  background-color: #222;
+}
+
 page-slotsdraw .winner-button {
+  margin-left: 0px;
   padding-bottom: 0%;
 }
 

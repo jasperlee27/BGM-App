@@ -77,13 +77,33 @@ export class SmartAudioProvider {
     }
   }
 
+  stop(key) {
+
+    let audio = this.sounds.find((sound) => {
+      return sound.key === key;
+    });
+
+    // if (audio.type === 'html5') {
+    //   let audioAsset = new Audio(audio.asset);
+    //   audioAsset.stop();
+    // }
+    //else audio type native
+
+    this.nativeAudio.stop(audio.asset).then((res) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
+
   loop(key) {
     console.log("Calling generic loop...")
     let audio = this.sounds.find((sound) => {
       console.log("finding sound key");
-      console.log("Found sound key " +sound.key + " " + key);
+      console.log("Found sound key " + sound.key + " " + key);
       return sound.key === key;
-    }); 
+    });
 
     if (audio.type === 'html5') {
       let audioAsset = new Audio(audio.asset);

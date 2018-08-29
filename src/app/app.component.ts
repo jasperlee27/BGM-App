@@ -32,23 +32,13 @@ export class MyApp {
       statusBar.overlaysWebView(true);
       statusBar.backgroundColorByHexString('#000000');
       splashScreen.hide();
-      // let splash = modalCtrl.create(SplashLogoPage);
-      // splash.present();
-      // this.nativeAudio.preloadComplex('bgmLoop', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {     
-      //     this.nativeAudio.play('bgmLoop');
-      // });
-      // smartAudio.preload('bgmLoop', 'assets/audio/backgroundMusic.mp3', 'complex');
-      // smartAudio.loop('bgmLoop');
 
-      // smartAudio.preload('startGame3', 'assets/audio/game3initsound.mp3');
       smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3', 'simple');
-      // smartAudio.play('tabSwitch');
+      smartAudio.preload('slotcomplete', 'assets/audio/SlotComplete.wav', 'simple');
+      smartAudio.preload('startslot', 'assets/audio/StartSlot.mp3', 'simple');
       smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3', 'complex');
       smartAudio.preload('game2explode', 'assets/audio/game2xploded.mp3', 'simple');
-      // smartAudio.loop('tabSwitch2');
-      //   platform.registerBackButtonAction(() => {
-      //     this.navCtrl.pop();
-      // });
+ 
     })
   }
 }

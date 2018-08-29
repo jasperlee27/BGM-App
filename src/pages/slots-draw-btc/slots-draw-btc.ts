@@ -5,6 +5,7 @@ import * as jquerySlot from '../../assets/js/jquery.slotmachine.js';
 import * as jsSlot from '../../assets/js/jquery.slotmachine.js';
 import { DataProvider } from '../../providers/data/data';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 
 declare var SlotMachine;
 
@@ -34,7 +35,7 @@ export class SlotsDrawBtcPage {
   winnerNo5;
   toAlertUserAlert;
   receivedData;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController, public smartAudio: SmartAudioProvider) {
     // this.isMachineShown = false;
 
   }
@@ -61,8 +62,12 @@ export class SlotsDrawBtcPage {
   }
 
   ionViewDidLoad() {
-
     console.log('ionViewDidLoad SlotsdrawPage');
+  }
+
+  ionViewWillLeave(){
+    this.smartAudio.stop('startslot');
+    this.smartAudio.stop('slotcomplete');
   }
 
   ngAfterViewInit() {
@@ -70,8 +75,9 @@ export class SlotsDrawBtcPage {
   }
 
   getWinner() {
+    this.smartAudio.play('startslot');
     this.isMachineShown = true;
-    console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
+    // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
     const btnShuffle = document.querySelector("#luckyDrawShuffle");
     //first machine
     var winner= this.winner;
@@ -133,19 +139,28 @@ export class SlotsDrawBtcPage {
         return winner.charAt(4);
       }
     });
-    machine1.shuffle(10);
-    machine2.shuffle(15);
-    machine3.shuffle(20);
-    machine4.shuffle(25);
-    machine5.shuffle(30, onComplete5);
+    machine1.shuffle(8,onComplete);
+    machine2.shuffle(14,onComplete);
+    machine3.shuffle(19,onComplete);
+    machine4.shuffle(23,onComplete);
+    machine5.shuffle(26, onComplete5);
     var self = this;
 
+    function onComplete(){
+      self.playComplete();
+    }
     function onComplete5(){
       // var toAlertUserAlert= this.toAlertUserAlert;
       // toAlertUserAlert.present();
+      self.playComplete();
       self.toDo();
     }
   }
+
+  playComplete(){
+    this.smartAudio.play('slotcomplete');
+  }
+
   toDo(){
     console.log("Entered here");
     let toAlertUserAlert = this.alertController.create({
