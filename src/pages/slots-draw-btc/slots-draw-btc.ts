@@ -35,9 +35,12 @@ export class SlotsDrawBtcPage {
   winnerNo5;
   toAlertUserAlert;
   receivedData;
+  winnerID;
+  isWinnerButtonDisabled:boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController, public smartAudio: SmartAudioProvider) {
     // this.isMachineShown = false;
-
+    this.winnerID='';
+    this.isWinnerButtonDisabled=false;
   }
   ionViewWillEnter() {
     this.dataProvider.postTrehuntGameWinner(this.auth.getAccId(), "BTC").subscribe(data => {
@@ -75,6 +78,7 @@ export class SlotsDrawBtcPage {
   }
 
   getWinner() {
+    this.isWinnerButtonDisabled=true;
     this.smartAudio.play('startslot');
     this.isMachineShown = true;
     // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
@@ -163,12 +167,16 @@ export class SlotsDrawBtcPage {
 
   toDo(){
     console.log("Entered here");
+    this.winnerID=this.receivedData.winnerUser;
     let toAlertUserAlert = this.alertController.create({
       title: 'Congratulations',
       subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 BTC',
       buttons: ['OK']
     });
     toAlertUserAlert.present();
+    toAlertUserAlert.onDidDismiss(() => {
+      this.isWinnerButtonDisabled=false;
+    })
   }
 
 }

@@ -33,10 +33,15 @@ export class SlotsdrawPage {
   winnerNo3;
   winnerNo4;
   winnerNo5;
+  winnerID;
   receivedData;
+  isWinnerButtonDisabled: boolean;
+
   @ViewChild('btn') myBtn; 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider, private alertController: AlertController, public smartAudio: SmartAudioProvider) {
     // this.isMachineShown = false;
+    this.isWinnerButtonDisabled=false;
+    this.winnerID='';
   }
   ionViewWillEnter() {
     this.dataProvider.postTrehuntGameWinner(this.auth.getAccId(), "ETH").subscribe(data => {
@@ -75,6 +80,7 @@ export class SlotsdrawPage {
   }
 
   getWinner() {
+    this.isWinnerButtonDisabled=true;
     this.isMachineShown = true;
     this.smartAudio.play('startslot');
     // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
@@ -165,12 +171,17 @@ export class SlotsdrawPage {
 
   toDo(){
     console.log("Entered here");
+    this.winnerID=this.receivedData.winnerUser;
+    
     let toAlertUserAlert = this.alertController.create({
       title: 'Congratulations',
       subTitle: 'To User ID: ' + this.receivedData.winnerUser + ' <br>Winner of 1 ETH',
       buttons: ['OK']
     });
     toAlertUserAlert.present();
+    toAlertUserAlert.onDidDismiss(() => {
+      this.isWinnerButtonDisabled=false;
+    })
   }
 
 }
