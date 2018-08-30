@@ -85,9 +85,9 @@ export class StreamPage {
 
   datasets: any[] =
     [
-      { data: [], fill: false, label: 'BitCoin', },
+      { data: [], showLine: true, fill: false, label: 'BitCoin', },
       { data: [], showLine: false, pointRadius: 5, label: 'Short' },
-      { data: [], pointRadius: 5, label: 'Long' }
+      { data: [], showLine: false, pointRadius: 5, label: 'Long' }
 
     ];
 
@@ -164,7 +164,7 @@ export class StreamPage {
       else if (receivedData.type === 'game') {
         this.isBetDisabled = true;
         gameValuesToPush = receivedData.currentPrice;
-        this.gameTimer = parseInt(receivedData.number);
+        this.gameTimer = parseFloat(receivedData.number).toFixed(1);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if ((this.gameTimer < 5) && (this.hasActiveBet)) {
@@ -188,7 +188,7 @@ export class StreamPage {
       else if (receivedData.type === 'gameEnd') {
         //game ended;
         this.showGameTime = false;
-        gameValuesToPush = receivedData.currentPrice;
+        gameValuesToPush = receivedData.endValue;
 
         if (this.currGameState !== 'gameEnd') {
           //TOGGLE STATE TO GAME END
@@ -206,7 +206,7 @@ export class StreamPage {
           //Update past game
           this.updatePastGame();
           //restart gameTimer
-          this.gameTimer = 15;
+          this.gameTimer = 15.0;
           console.log("Toggled state " + this.currGameState);
         }
       }
@@ -358,9 +358,9 @@ export class StreamPage {
             fontSize: 12,
             padding: 5,
             display: true,
-            stepSize: 1000,
-            suggestedMin: 6600,
-            suggestedMax: 6800,
+            // stepSize: 1000,
+            // suggestedMin: 7010,
+            // suggestedMax: 7000,
             // mirror: true,
             // drawTicks: true,
           },
@@ -408,7 +408,7 @@ export class StreamPage {
       label: 'Buy Price',
       backgroundColor: color,
       borderColor: color,
-      borderWidth: 10,
+      borderWidth: 2,
       fill: false,
       lineTension: 0,
       data: [],

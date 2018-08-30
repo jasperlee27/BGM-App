@@ -24303,14 +24303,14 @@ ion-toast {
 .toggle-ios {
   position: relative;
   width: 51px;
-  height: 32px;
+  height: 24px;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   contain: strict;
 }
 
 .toggle-ios .toggle-icon {
-  border-radius: 16px;
+  border-radius: 12px;
   position: relative;
   display: block;
   width: 100%;
@@ -24326,7 +24326,7 @@ ion-toast {
   right: 2px;
   top: 2px;
   bottom: 2px;
-  border-radius: 16px;
+  border-radius: 12px;
   position: absolute;
   background-color: #242424;
   content: "";
@@ -24341,10 +24341,10 @@ ion-toast {
 .toggle-ios .toggle-inner {
   left: 2px;
   top: 2px;
-  border-radius: 14px;
+  border-radius: 10px;
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
   background-color: #242424;
   -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 1px rgba(0, 0, 0, 0.1);
@@ -24367,8 +24367,8 @@ ion-toast {
 }
 
 .toggle-ios.toggle-checked .toggle-inner {
-  -webkit-transform: translate3d(19px,  0,  0);
-  transform: translate3d(19px,  0,  0);
+  -webkit-transform: translate3d(27px,  0,  0);
+  transform: translate3d(27px,  0,  0);
 }
 
 .toggle-ios.toggle-activated.toggle-checked .toggle-inner::before {
@@ -24377,7 +24377,7 @@ ion-toast {
 }
 
 .toggle-ios.toggle-activated .toggle-inner {
-  width: 34px;
+  width: 26px;
 }
 
 .toggle-ios.toggle-activated.toggle-checked .toggle-inner {
@@ -24452,7 +24452,7 @@ ion-toast {
   display: block;
   width: 100%;
   height: 100%;
-  background-color: #dedede;
+  background-color: #222;
   -webkit-transition: background-color 300ms;
   transition: background-color 300ms;
   pointer-events: none;
@@ -24479,13 +24479,13 @@ ion-toast {
 }
 
 .toggle-md.toggle-checked .toggle-icon {
-  background-color: #fae2a7;
+  background-color: #525151;
 }
 
 .toggle-md.toggle-checked .toggle-inner {
   -webkit-transform: translate3d(16px,  0,  0);
   transform: translate3d(16px,  0,  0);
-  background-color: #f3ba2e;
+  background-color: #f3ab2e;
 }
 
 .toggle-md.toggle-disabled,
@@ -37019,6 +37019,36 @@ page-stream .end-text {
 page-stream .walletDisplay {
   float: right;
   width: 40%;
+}
+
+page-toggle-two-fa .request-sms-button {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  text-align: center;
+  height: 130px;
+  width: 130px;
+  fill-opacity: 1;
+  font-size: 20px;
+}
+
+page-toggle-two-fa .request-sms-button.activated {
+  color: #f4f4f4;
+}
+
+page-toggle-two-fa #rounded {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border-color: gold;
+}
+
+page-toggle-two-fa .scroll-content {
+  overflow-y: hidden;
+}
+
+page-toggle-two-fa .timer {
+  color: #f3ba2e;
+  font-size: 28px;
 }
 
 page-trehunt ion-row {

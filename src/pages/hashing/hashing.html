@@ -69,8 +69,8 @@
       </ion-row>
       <br>
       <ion-item no-lines class="rangeSlider">
-        <ion-range min="0" [max]="walletAmount" [disabled]="isSliderDisabled" step="1" [(ngModel)]="hashManualBetAmount" color="secondary" (ionChange)="cValue($event, 'slider1')">
-          <ion-label range-left>0</ion-label>
+        <ion-range min="1" [max]="walletAmount" [disabled]="isSliderDisabled" step="1" [(ngModel)]="hashManualBetAmount" color="secondary" (ionChange)="cValue($event, 'slider1')">
+          <ion-label range-left>1</ion-label>
           <ion-label range-right>{{walletAmount}}</ion-label>
         </ion-range>
       </ion-item>
