@@ -53,7 +53,7 @@
       </ion-col>
     </ion-row>
     <ion-item no-lines class="rangeSlider"> 
-      <ion-range min="0" [max]="walletAmount" step="1" [(ngModel)]="game3BetAmount" color="secondary">
+      <ion-range min="0" [max]="walletAmount" step="1" [disabled]="isSliderDisabled" [(ngModel)]="game3BetAmount" color="secondary">
         <ion-label range-left>0</ion-label>
         <ion-label range-right>{{walletAmount}}</ion-label>
       </ion-range>

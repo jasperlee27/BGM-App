@@ -595,7 +595,7 @@ export class HashingPage {
   }
 
   cValue(event, slider){
-    console.log(" test here " +event.value);
+    // console.log(" test here " +event.value);
     // slider.destroy();
 
   }

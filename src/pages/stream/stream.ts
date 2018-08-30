@@ -52,6 +52,7 @@ export class StreamPage {
   priceFromGame;
   entryPrice;
   musicPlayed;
+  isSliderDisabled;
   // private datamap: any;
   chartColors: any[] =
     [
@@ -94,6 +95,7 @@ export class StreamPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController, public smartAudio: SmartAudioProvider) {
     //do socket connection
+    this.isSliderDisabled=true;
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
