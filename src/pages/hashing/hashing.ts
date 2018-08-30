@@ -35,6 +35,7 @@ export class HashingPage {
   isBurstTextHidden: boolean;
   isTimerHidden: boolean;
   isManualBetDisabled: boolean = true;
+  isSliderDisabled: boolean = true;
   isManualCoutDisabled: boolean = true;
   hasActiveManualBet: boolean = false;
   hashManualBetAmount;
@@ -255,11 +256,17 @@ export class HashingPage {
           //TODO: Sound 
         }
 
-
         this.isManualBetDisabled = true;
+
         if (this.hasActiveManualBet) {
           this.isManualCoutDisabled = false;
+          this.isSliderDisabled = true;
         }
+        
+        else{
+          this.isSliderDisabled = false;
+        }
+
         this.isTimerHidden = true;
         this.isBurstTextHidden = true;
         this.chartData[0].hidden = false;
@@ -285,6 +292,7 @@ export class HashingPage {
         // console.log("Received data type  " + receivedData.type);
         this.isManualCoutDisabled = true;
         this.isManualBetDisabled = true;
+        // this.isSliderDisabled= true;
         this.hasActiveManualBet = false;
         this.chartData[0].hidden = true;
         this.isChartHidden = true;
@@ -309,6 +317,7 @@ export class HashingPage {
         this.isManualCoutDisabled = true;
         if (!this.hasActiveManualBet) {
           this.isManualBetDisabled = false;
+          this.isSliderDisabled=false;
         }
         this.currentGameID = receivedData.gameId;
         // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
@@ -423,6 +432,7 @@ export class HashingPage {
       if (parseInt(data.status) === 200) {
         this.hasActiveManualBet = true;
         this.isManualBetDisabled = true;
+        this.isSliderDisabled= true;
         this.isManualCoutDisabled = false;
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
@@ -584,6 +594,11 @@ export class HashingPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
+  cValue(event, slider){
+    console.log(" test here " +event.value);
+    // slider.destroy();
+
+  }
   // updateIncrement(currValue: number) {
   //   if (currValue >= 10.0) {
   //     return 0.200;
