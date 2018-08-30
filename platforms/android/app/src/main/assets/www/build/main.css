@@ -36622,6 +36622,11 @@ page-hashing .outer-circle {
   position: relative;
 }
 
+page-hashing .rangeSlider {
+  border-color: transparent;
+  background-color: transparent;
+}
+
 page-hashing .arrow-head {
   text-align: end;
   margin-right: -10%;
@@ -36954,6 +36959,33 @@ page-stream ion-scroll {
 
 page-stream ion-input {
   font-size: 20px !important;
+}
+
+page-stream .text-input::-moz-placeholder {
+  color: white;
+}
+
+page-stream .text-input:-ms-input-placeholder {
+  color: white;
+}
+
+page-stream .text-input::-webkit-input-placeholder {
+  text-indent: 0;
+  color: white;
+}
+
+page-stream input:disabled {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+page-stream .item-input-disabled ion-label {
+  opacity: 1;
+}
+
+page-stream .rangeSlider {
+  border-color: transparent;
+  background-color: transparent;
 }
 
 page-stream .bet-timer {

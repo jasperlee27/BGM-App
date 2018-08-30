@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>
-      <ion-icon name="home"></ion-icon>
+      <!-- <ion-icon name="home"></ion-icon> -->
       Home
     </ion-title>
   </ion-navbar>
@@ -33,17 +33,17 @@
     <!-- About button -->
     <!--contact button-->
     <ion-row>
-        <ion-col col-12>
-          <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">
-            <span item-left style="color:#f3ba2e; font-size:16px;">
-              <span style="padding-right:8px">
+      <ion-col col-12>
+        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">
+          <span item-left style="color:#f3ba2e; font-size:16px;">
+            <span style="padding-right:8px">
               <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
-              </span>
-              About
             </span>
-          </button>
-        </ion-col>
-      </ion-row>
+            About
+          </span>
+        </button>
+      </ion-col>
+    </ion-row>
     <!--contact button-->
     <ion-row>
       <ion-col col-12>
@@ -55,6 +55,20 @@
             Contact Support
           </span>
         </button>
+      </ion-col>
+    </ion-row>
+    <!--update 2 FA -->
+    <ion-row>
+      <ion-col col-12>
+        <ion-item no-lines class="twoFA"  [style.visibility]="isGuest ? 'hidden' : 'visible'">
+            <span item-left style="color:#f3ba2e; font-size:16px;">
+                <span style="padding-right:8px">
+                  <ion-icon name="lock"></ion-icon>
+                </span>
+                Toggle 2FA
+              </span>
+          <ion-toggle [(ngModel)]="twoFAStatus"></ion-toggle>
+        </ion-item>
       </ion-col>
     </ion-row>
     <!--logout button-->

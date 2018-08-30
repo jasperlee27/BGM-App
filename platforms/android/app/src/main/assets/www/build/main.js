@@ -12,7 +12,7 @@ webpackJsonp([12],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(158);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_data_data__ = __webpack_require__(39);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -216,7 +216,7 @@ var LoginPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(155);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__trehunt_trehunt__ = __webpack_require__(161);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(156);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dummy_chat_dummy_chat__ = __webpack_require__(154);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -484,7 +484,7 @@ var DummyChatPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_data_data__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -997,7 +997,7 @@ var HashingPage = /** @class */ (function () {
     ], HashingPage.prototype, "chart", void 0);
     HashingPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <!-- Commented to remvoe auto bet for now -->\n\n  <!-- <br> -->\n\n  <!-- <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button disabled outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment> -->\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <!-- for manual -->\n\n      <ion-row style="font-size:16px;">\n\n        <ion-col col-12 text-center>\n\n          STAKE:&nbsp;&nbsp;\n\n          <span style="color:whitesmoke">{{hashManualBetAmount}}</span>&nbsp;&nbsp;BGM\n\n        </ion-col>\n\n      </ion-row>\n\n      <br>\n\n      <ion-item no-lines>\n\n        <ion-range min="0" [max]="walletAmount" step="1" [disabled]="isManualBetDisabled" [(ngModel)]="hashManualBetAmount" color="secondary">\n\n          <ion-label range-left>0</ion-label>\n\n          <ion-label range-right>{{walletAmount}}</ion-label>\n\n        </ion-range>\n\n      </ion-item>\n\n      <br><br>\n\n      <!-- <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isManualBetDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row> -->\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualCoutDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
+            selector: 'page-hashing',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/'<!--\n\n  Generated template for the HashingPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 2: Hashing</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n    <!-- <button item-icon-right class="button button-clear button-positive">Edit</button> -->\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content class="hashingContent" padding>\n\n  <!-- Graph -->\n\n  <div class="graphCntr" style="display: block; width: 100%; height: 50%;">\n\n    <!-- <ion-col col-12 col-md-12> -->\n\n    <canvas id="ctx" baseChart [chartType]="\'line\'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"\n\n      width="400" height="300" [legend]="false">\n\n      <!-- (chartClick)="onChartClick($event) -->\n\n    </canvas>\n\n    <!-- </ion-col> -->\n\n    <div class="arrow-head" [style.visibility]="isArrowHidden ? \'hidden\' : \'visible\'">\n\n      <ion-img width="70" height="70" src="../assets/imgs/test3.png" style=background:transparent></ion-img>\n\n    </div>\n\n\n\n    <div class="circle-cntr">\n\n      <div class="outer-circle" [style.visibility]="isChartHidden ? \'hidden\' : \'visible\'">\n\n        <svg xmlns="http://www.w3.org/2000/svg">\n\n          <circle cx="50" cy="50" r="50" fill="grey" fill-opacity="0.3" stroke="white" stroke-width="1" />\n\n          <text x="18%" y="35%" text-anchor="middle" fill="white" alignment-baseline="central">{{multiplierDisplay}} x</text>\n\n        </svg>\n\n      </div>\n\n    </div>\n\n\n\n    <div class="burst-text" [style.visibility]="isBurstTextHidden ? \'hidden\' : \'visible\'">\n\n      Busted @ {{finalValue}}x\n\n    </div>\n\n\n\n    <div class="timer-text" [style.visibility]="isTimerHidden ? \'hidden\' : \'visible\'">\n\n      Next game in {{timerValue}} s\n\n    </div>\n\n  </div>\n\n  <!-- Commented to remvoe auto bet for now -->\n\n  <!-- <br> -->\n\n  <!-- <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">\n\n    <ion-segment-button outline value="manual">\n\n      Manual\n\n    </ion-segment-button>\n\n    <ion-segment-button disabled outline value="auto">\n\n      Auto\n\n    </ion-segment-button>\n\n  </ion-segment> -->\n\n\n\n  <div [ngSwitch]="hashBetType">\n\n    <ion-list *ngSwitchCase="\'manual\'" ngSelected="selected">\n\n      <!-- for manual -->\n\n      <ion-row style="font-size:16px;">\n\n        <ion-col col-12 text-center>\n\n          STAKE:&nbsp;&nbsp;\n\n          <span style="color:whitesmoke">{{hashManualBetAmount}}</span>&nbsp;&nbsp;BGM\n\n        </ion-col>\n\n      </ion-row>\n\n      <br>\n\n      <ion-item no-lines class="rangeSlider">\n\n        <ion-range min="0" [max]="walletAmount" step="1" [(ngModel)]="hashManualBetAmount" color="secondary">\n\n          <ion-label range-left>0</ion-label>\n\n          <ion-label range-right>{{walletAmount}}</ion-label>\n\n        </ion-range>\n\n      </ion-item>\n\n      <!-- <ion-row>\n\n        <ion-col col-3>\n\n          <ion-label color="primary">AMOUNT: </ion-label>\n\n        </ion-col>\n\n        <ion-col col-7>\n\n          <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isManualBetDisabled"></ion-input>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <ion-label item-end color="primary">BGM</ion-label>\n\n        </ion-col>\n\n      </ion-row> -->\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualBetDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualBetDisabled"\n\n          (click)="hashManualBet()">BET</button>\n\n      </ion-row>\n\n      <ion-row>\n\n        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? \'dark\' : \'secondary\'" [disabled]="isManualCoutDisabled"\n\n          (click)="hashManualCout()">CASH OUT</button>\n\n      </ion-row>\n\n    </ion-list>\n\n\n\n    <ion-list *ngSwitchCase="\'auto\'">\n\n      <!-- for auto -->\n\n      <ion-card style="height:auto">\n\n        <ion-card-content>\n\n          <!-- base bet-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Base Bet: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoBasebet" placeholder="0" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Auto cashout at-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Cashout: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashAutoCashout" placeholder="2x" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n          <!-- Stop if-->\n\n          <ion-row>\n\n            <ion-col col-4>\n\n              <ion-label color="primary">Stop if: </ion-label>\n\n            </ion-col>\n\n            <ion-col col-8>\n\n              <ion-input id="rounded" type="number" outline [(ngModel)]="hashLimitWin" placeholder="10000" attr.text-center [disabled]="isInputDisabled"></ion-input>\n\n            </ion-col>\n\n          </ion-row>\n\n\n\n        </ion-card-content>\n\n      </ion-card>\n\n      <!--2 buttons start stop-->\n\n      <ion-row>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="deposit()">RUN</button>\n\n        </ion-col>\n\n        <ion-col col-6 text-center>\n\n          <button ion-button color="secondary" full (click)="withdraw()">STOP</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list>\n\n  </div>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\hashing\hashing.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_5__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
     ], HashingPage);
@@ -1848,6 +1848,7 @@ var WalletPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_data_data__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1865,6 +1866,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 /**
  * Generated class for the StreamPage page.
  *
@@ -1872,12 +1874,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var StreamPage = /** @class */ (function () {
-    function StreamPage(navCtrl, navParams, auth, dataProvider, alertCtrl) {
+    function StreamPage(navCtrl, navParams, auth, dataProvider, alertCtrl, smartAudio) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.auth = auth;
         this.dataProvider = dataProvider;
         this.alertCtrl = alertCtrl;
+        this.smartAudio = smartAudio;
         this.isBetDisabled = true;
         this.hasActiveBet = false;
         this.count = 30.0;
@@ -1926,6 +1929,7 @@ var StreamPage = /** @class */ (function () {
         // this.isGameTime = true;
         this.historicalGame3 = new Array();
         this.updatePastGame();
+        this.musicPlayed = false;
     }
     StreamPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -1976,6 +1980,12 @@ var StreamPage = /** @class */ (function () {
                 _this.gameTimer = parseInt(receivedData.number);
                 // console.log("Updating current price in game " + gameValuesToPush);
                 // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+                if ((_this.gameTimer < 5) && (_this.hasActiveBet)) {
+                    if (!_this.musicPlayed) {
+                        _this.smartAudio.play('game3countdown');
+                        _this.musicPlayed = true;
+                    }
+                }
                 if (_this.currGameState !== 'game') {
                     _this.currGame3ID = receivedData.GameId;
                     _this.showGameTime = true;
@@ -1995,6 +2005,7 @@ var StreamPage = /** @class */ (function () {
                     if (_this.hasActiveBet) {
                         _this.destroyBetInstance();
                     }
+                    _this.musicPlayed = false;
                     _this.hasActiveBet = false;
                     _this.showCountdown = false;
                     _this.showGameEnded = true;
@@ -2156,28 +2167,6 @@ var StreamPage = /** @class */ (function () {
     StreamPage.prototype.ionViewWillEnter = function () {
         this.walletAmount = this.auth.getAccValue();
     };
-    // startStreaming() {
-    //   let interval = setInterval(() => {
-    //     var btcPrice = this.randomIntRange(4000, 8000);
-    //     this.datasets[0].data.push(btcPrice);
-    //     var currentTime = Date.now();
-    //     this.chartLabels.push(currentTime);
-    //     this.chart.labels.shift();
-    //     this.chart.refresh();
-    //   }, 300)
-    // }
-    // async startGame(countdown: number) {
-    //   this.isGameTime = true;
-    //   console.log("Game 3 Started");
-    //   this.count = countdown;
-    //   var noOfCounts = (this.count * 10)
-    //   this.countDownGame3 = timer(0, 100).pipe(
-    //     take(noOfCounts),
-    //     map(() => (this.count -= 0.1).toFixed(1))
-    //   );
-    //   await this.delay((this.count * 1000));
-    //   this.endGame();
-    // }
     StreamPage.prototype.delay = function (ms) {
         return new Promise(function (resolve) { return setTimeout(resolve, ms); });
     };
@@ -2359,9 +2348,9 @@ var StreamPage = /** @class */ (function () {
     ], StreamPage.prototype, "chart", void 0);
     StreamPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount] = "walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf = "showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="isBetDisabled"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'higher-green\'"\n\n         full [disabled]="isBetDisabled" (click)="betHigher()"><span style="font-weight:700; color:whitesmoke">Higher</span></button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'lower-red\'" \n\n        full  [disabled]="isBetDisabled" (click)="betLower()"><span style="font-weight:700; color:whitesmoke">Lower</span></button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row style="height:25%">\n\n      <ion-scroll scrollY="true">\n\n        <ion-list col-12 no-lines>\n\n          <ion-list-header no-lines style="color:#f3ba2e">\n\n            <ion-col col-4>Price</ion-col>\n\n            <ion-col col-2>Bet Type</ion-col>\n\n            <ion-col col-3>Close</ion-col>\n\n            <ion-col item-end col-3 >Profit</ion-col>\n\n          </ion-list-header>\n\n          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">\n\n            <ion-col col-4>{{transaction.entryPrice}}</ion-col>\n\n            <!-- <span col-3>Lo</span> -->\n\n            <ion-col col-2>{{transaction.betType}}</ion-col>\n\n            <ion-col col-3><span style="padding-left:10%">{{transaction.endPrice}}</span></ion-col>\n\n            <ion-col item-end col-3><span [style.color]="transaction.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{transaction.profit}}</span></ion-col>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-scroll>\n\n    </ion-row>\n\n    <!-- <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card> -->\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
+            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf="showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br><br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="true"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'higher-green\'" full [disabled]="isBetDisabled" (click)="betHigher()">\n\n          <span style="font-weight:700; color:whitesmoke">Higher</span>\n\n        </button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'lower-red\'" full [disabled]="isBetDisabled" (click)="betLower()">\n\n          <span style="font-weight:700; color:whitesmoke">Lower</span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-item no-lines class="rangeSlider"> \n\n      <ion-range min="0" [max]="walletAmount" step="1" [(ngModel)]="game3BetAmount" color="secondary">\n\n        <ion-label range-left>0</ion-label>\n\n        <ion-label range-right>{{walletAmount}}</ion-label>\n\n      </ion-range>\n\n    </ion-item>\n\n    <ion-row style="height:25%; width:100%">\n\n      <ion-scroll scrollY="true">\n\n        <ion-list col-12 no-lines>\n\n          <ion-list-header no-lines style="color:#f3ba2e">\n\n            <ion-col col-4>Price</ion-col>\n\n            <ion-col col-2>Bet Type</ion-col>\n\n            <ion-col col-3>Close</ion-col>\n\n            <ion-col item-end col-3>Profit</ion-col>\n\n          </ion-list-header>\n\n          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">\n\n            <ion-col col-4>{{transaction.entryPrice}}</ion-col>\n\n            <!-- <span col-3>Lo</span> -->\n\n            <ion-col col-2>{{transaction.betType}}</ion-col>\n\n            <ion-col col-3>\n\n              <span style="padding-left:10%">{{transaction.endPrice}}</span>\n\n            </ion-col>\n\n            <ion-col item-end col-3>\n\n              <span [style.color]="transaction.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{transaction.profit}}</span>\n\n            </ion-col>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-scroll>\n\n    </ion-row>\n\n    <!-- <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card> -->\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
     ], StreamPage);
     return StreamPage;
 }());
@@ -2673,7 +2662,7 @@ var TrehuntPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_data__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2856,7 +2845,7 @@ var SlotsdrawPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_data_data__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3084,11 +3073,11 @@ var map = {
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
-		666,
+		665,
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		665,
+		666,
 		1
 	],
 	"../pages/wallet/wallet.module": [
@@ -3437,7 +3426,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_home_home__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_global_auth_global_auth__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_native_audio__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__pages_slotsdraw_slotsdraw__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_data_data__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__pages_dummy_chat_dummy_chat__ = __webpack_require__(154);
@@ -3522,8 +3511,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 }),
@@ -3563,6 +3552,139 @@ var AppModule = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ 46:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmartAudioProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__ = __webpack_require__(5);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+/*
+  Generated class for the SmartAudioProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var SmartAudioProvider = /** @class */ (function () {
+    function SmartAudioProvider(nativeAudio, platform) {
+        this.nativeAudio = nativeAudio;
+        //html5 init
+        //use html5 when using ionic serve
+        this.audioType = 'html5';
+        // audioType: string = 'native';
+        //sounds array keep track of sounds to use in application
+        this.sounds = [];
+        this.onSuccessPlaying = function (data) {
+            console.log("did call loop", data);
+        };
+        this.onError = function (data) {
+            console.log("loop hit error", data);
+        };
+        //switch to native
+        if (platform.is('cordova')) {
+            this.audioType = 'native';
+        }
+    }
+    //key is sound string id, asset is path
+    SmartAudioProvider.prototype.preload = function (key, asset, complexity) {
+        if (this.audioType === 'html5') {
+            var audio = {
+                key: key,
+                asset: asset,
+                type: 'html5'
+            };
+            this.sounds.push(audio);
+        }
+        else {
+            if (complexity === 'simple') {
+                this.nativeAudio.preloadSimple(key, asset);
+            }
+            else {
+                this.nativeAudio.preloadComplex(key, asset, 1, 1, 0);
+            }
+            var audio = {
+                key: key,
+                asset: asset,
+                type: 'native'
+            };
+            this.sounds.push(audio);
+        }
+        //todo: implement preload complex for bgm can fade
+    };
+    SmartAudioProvider.prototype.play = function (key) {
+        var audio = this.sounds.find(function (sound) {
+            return sound.key === key;
+        });
+        if (audio.type === 'html5') {
+            var audioAsset = new Audio(audio.asset);
+            audioAsset.play();
+        }
+        else {
+            this.nativeAudio.play(audio.asset).then(function (res) {
+                console.log(res);
+            }, function (err) {
+                console.log(err);
+            });
+        }
+    };
+    SmartAudioProvider.prototype.stop = function (key) {
+        var audio = this.sounds.find(function (sound) {
+            return sound.key === key;
+        });
+        // if (audio.type === 'html5') {
+        //   let audioAsset = new Audio(audio.asset);
+        //   audioAsset.stop();
+        // }
+        //else audio type native
+        this.nativeAudio.stop(audio.asset).then(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    SmartAudioProvider.prototype.loop = function (key) {
+        console.log("Calling generic loop...");
+        var audio = this.sounds.find(function (sound) {
+            console.log("finding sound key");
+            console.log("Found sound key " + sound.key + " " + key);
+            return sound.key === key;
+        });
+        if (audio.type === 'html5') {
+            var audioAsset = new Audio(audio.asset);
+            console.log("Calling html 5 type...");
+            audioAsset.play();
+        }
+        else {
+            console.log("Did it come to loop?");
+            console.log("What is audio key " + audio.key);
+            console.log("What is audio asset " + audio.asset);
+            this.nativeAudio.loop(audio.key).then(this.onSuccessPlaying, this.onError);
+        }
+    };
+    SmartAudioProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__["a" /* Platform */]])
+    ], SmartAudioProvider);
+    return SmartAudioProvider;
+}());
+
+//# sourceMappingURL=smart-audio.js.map
 
 /***/ }),
 
@@ -3842,139 +3964,6 @@ webpackContext.id = 502;
 
 /***/ }),
 
-/***/ 51:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SmartAudioProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__ = __webpack_require__(5);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-/*
-  Generated class for the SmartAudioProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var SmartAudioProvider = /** @class */ (function () {
-    function SmartAudioProvider(nativeAudio, platform) {
-        this.nativeAudio = nativeAudio;
-        //html5 init
-        //use html5 when using ionic serve
-        this.audioType = 'html5';
-        // audioType: string = 'native';
-        //sounds array keep track of sounds to use in application
-        this.sounds = [];
-        this.onSuccessPlaying = function (data) {
-            console.log("did call loop", data);
-        };
-        this.onError = function (data) {
-            console.log("loop hit error", data);
-        };
-        //switch to native
-        if (platform.is('cordova')) {
-            this.audioType = 'native';
-        }
-    }
-    //key is sound string id, asset is path
-    SmartAudioProvider.prototype.preload = function (key, asset, complexity) {
-        if (this.audioType === 'html5') {
-            var audio = {
-                key: key,
-                asset: asset,
-                type: 'html5'
-            };
-            this.sounds.push(audio);
-        }
-        else {
-            if (complexity === 'simple') {
-                this.nativeAudio.preloadSimple(key, asset);
-            }
-            else {
-                this.nativeAudio.preloadComplex(key, asset, 1, 1, 0);
-            }
-            var audio = {
-                key: key,
-                asset: asset,
-                type: 'native'
-            };
-            this.sounds.push(audio);
-        }
-        //todo: implement preload complex for bgm can fade
-    };
-    SmartAudioProvider.prototype.play = function (key) {
-        var audio = this.sounds.find(function (sound) {
-            return sound.key === key;
-        });
-        if (audio.type === 'html5') {
-            var audioAsset = new Audio(audio.asset);
-            audioAsset.play();
-        }
-        else {
-            this.nativeAudio.play(audio.asset).then(function (res) {
-                console.log(res);
-            }, function (err) {
-                console.log(err);
-            });
-        }
-    };
-    SmartAudioProvider.prototype.stop = function (key) {
-        var audio = this.sounds.find(function (sound) {
-            return sound.key === key;
-        });
-        // if (audio.type === 'html5') {
-        //   let audioAsset = new Audio(audio.asset);
-        //   audioAsset.stop();
-        // }
-        //else audio type native
-        this.nativeAudio.stop(audio.asset).then(function (res) {
-            console.log(res);
-        }, function (err) {
-            console.log(err);
-        });
-    };
-    SmartAudioProvider.prototype.loop = function (key) {
-        console.log("Calling generic loop...");
-        var audio = this.sounds.find(function (sound) {
-            console.log("finding sound key");
-            console.log("Found sound key " + sound.key + " " + key);
-            return sound.key === key;
-        });
-        if (audio.type === 'html5') {
-            var audioAsset = new Audio(audio.asset);
-            console.log("Calling html 5 type...");
-            audioAsset.play();
-        }
-        else {
-            console.log("Did it come to loop?");
-            console.log("What is audio key " + audio.key);
-            console.log("What is audio asset " + audio.asset);
-            this.nativeAudio.loop(audio.key).then(this.onSuccessPlaying, this.onError);
-        }
-    };
-    SmartAudioProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_2__node_modules_ionic_angular_platform_platform__["a" /* Platform */]])
-    ], SmartAudioProvider);
-    return SmartAudioProvider;
-}());
-
-//# sourceMappingURL=smart-audio.js.map
-
-/***/ }),
-
 /***/ 648:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3986,7 +3975,7 @@ var SmartAudioProvider = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(418);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(65);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4025,6 +4014,7 @@ var MyApp = /** @class */ (function () {
             smartAudio.preload('startslot', 'assets/audio/StartSlot.mp3', 'simple');
             smartAudio.preload('tabSwitch2', 'assets/audio/clickSound.mp3', 'complex');
             smartAudio.preload('game2explode', 'assets/audio/game2xploded.mp3', 'simple');
+            smartAudio.preload('game3countdown', 'assets/audio/game3Countdown.wav', 'simple');
         });
     }
     MyApp = __decorate([
