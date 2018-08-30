@@ -95,7 +95,7 @@ export class StreamPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider, private dataProvider: DataProvider, private alertCtrl: AlertController, public smartAudio: SmartAudioProvider) {
     //do socket connection
-    this.isSliderDisabled=true;
+    this.isSliderDisabled = true;
     this.socket = io.connect('http://178.128.50.224:3002');
     console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
@@ -122,9 +122,17 @@ export class StreamPage {
       // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
 
       if (receivedData.type === 'gameStart') {
+
         // console.log("received gameStart");
         this.isBetDisabled = true;
         if (this.currGameState !== 'gameStart') {
+          if (this.hasActiveBet) {
+            this.isSliderDisabled = true;
+          }
+
+          else {
+            this.isSliderDisabled = false;
+          }
           this.showGameTime = true;
           this.showCountdown = false;
           this.showGameEnded = false;
@@ -137,12 +145,13 @@ export class StreamPage {
       else if (receivedData.type === 'countdown') {
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
         gameValuesToPush = receivedData.currentPrice;
-
+        
 
         // console.log("Updating current price in countdown " + gameValuesToPush);
         // console.log("Counting down: " + receivedData.number);
         if (this.currGameState !== 'countdown') {
           this.isBetDisabled = false;
+          this.isSliderDisabled=false;
           this.showGameTime = false;
           this.showCountdown = true;
           this.showGameEnded = false;
@@ -185,6 +194,8 @@ export class StreamPage {
           //TOGGLE STATE TO GAME END
           if (this.hasActiveBet) {
             this.destroyBetInstance();
+            this.isSliderDisabled = false;
+            this.game3BetAmount='';
           }
           this.musicPlayed = false;
           this.hasActiveBet = false;
@@ -416,6 +427,7 @@ export class StreamPage {
       console.log("Received entry price " + data.entryPrice);
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
+        this.isSliderDisabled = true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'long';
         this.buyDataset(this.roundBetType, data.entryPrice);
@@ -425,7 +437,7 @@ export class StreamPage {
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false;
         this.hasActiveBet = true;
-        this.game3BetAmount = '';
+        // this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
@@ -479,6 +491,7 @@ export class StreamPage {
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
+        this.isSliderDisabled=true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'short';
         this.entryPrice = data.entryPrice;
@@ -489,7 +502,7 @@ export class StreamPage {
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false
         this.hasActiveBet = true;
-        this.game3BetAmount = '';
+        // this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
           subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
