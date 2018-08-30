@@ -33,6 +33,7 @@ import { SlotsdrawPage } from '../pages/slotsdraw/slotsdraw';
 import { DataProvider } from '../providers/data/data';
 import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
 import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
+import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
 
 @NgModule({
   declarations: [
@@ -50,10 +51,11 @@ import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
     LoginPage,
     HomePage,
     TwoFacAuthPage,
+    ToggleTwoFaPage,
     TabsPage,
     WalletPage,
     StreamPage,
-    DummyChatPage
+    DummyChatPage,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +79,7 @@ import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
     LoginPage,
     HomePage,
     TwoFacAuthPage,
+    ToggleTwoFaPage,
     WalletPage,
     TabsPage,
     StreamPage,

@@ -1,0 +1,51 @@
+<!--
+  Generated template for the TwoFacAuthPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar align-title="center">
+      <ion-title><span text-color="dark">Activate 2 FA</span></ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+      <ion-grid>
+        <!-- request SMS-->
+        <ion-row>
+          <ion-col col-12 text-center>
+            <div class="center" [style.visibility]="isRequestHidden ? 'hidden' : 'visible'">
+              <button ion-button [color]="isRequestEnabled ? 'secondary' : 'secondary'" [outline]="isRequestEnabled ? 'false' : 'true'" 
+              [disabled]="isRequestEnabled? null : 'disabled'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">
+              REQUEST<br>SMS</button>
+            </div>
+              <div class="timer" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">Request again in {{countDown | async}} s</div>
+          </ion-col>
+        </ion-row> 
+        
+        <!-- input SMS box -->
+        <ion-row>
+            <ion-col col-12 text-center>
+                <ion-item text-center no-lines id="rounded" style="width:70%; margin:auto" >
+                    <ion-label floating primary color="secondary">
+                       SMS Verification Code
+                    </ion-label>
+                    <ion-input type="text"></ion-input>
+                    </ion-item>
+            </ion-col>
+          </ion-row> 
+      <br>
+       <!--verify button-->
+        <ion-row>
+          <ion-col col-12 text-center>
+            <button ion-button small color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="verify2FA()">VERIFY</button>
+          </ion-col>
+        </ion-row> 
+        
+      </ion-grid>
+  </ion-content>
+  
