@@ -15,6 +15,7 @@ export class GlobalAuthProvider {
   private accId: string;
   private accValue: number;
   private sessionToken: string;
+  private twoFAstatus: number;
 
   constructor() {
     console.log('Hello GlobalAuthProvider Provider');
@@ -22,6 +23,14 @@ export class GlobalAuthProvider {
   
   setUsername(username: string){
     this.username=username;
+  }
+
+  get2FAStatus(){
+    return this.twoFAstatus;
+  }
+
+  set2FAStatus(twoFAstatus: number){
+    this.twoFAstatus=twoFAstatus;
   }
 
   getUsername(){

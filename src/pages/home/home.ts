@@ -7,9 +7,9 @@ import { TabsPage } from '../tabs/tabs';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/map';
-import * as io from 'socket.io-client';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
+import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
 
 // import { MyApp } from '../../app/app.component';
 
@@ -31,7 +31,9 @@ export class HomePage implements OnInit {
   messageText: string;
   messages: Array<any>;
   isGuest: boolean;
-
+  initTwoFAstatus: boolean;
+  twoFAstatus: boolean;
+  isToggled;
   // socket: SocketIOClient.Socket;
 
   constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
@@ -42,7 +44,18 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getNews();
+  }
 
+  ionViewWillEnter() {
+    if (this.auth.get2FAStatus() === 0) {
+      this.initTwoFAstatus = false;
+      this.twoFAstatus = false;
+    }
+
+    else {
+      this.initTwoFAstatus = true;
+      this.twoFAstatus = true;
+    }
   }
   //bgm loop works in home view, uncomment for mobile sound
   // ionViewDidLoad() {
@@ -132,5 +145,14 @@ export class HomePage implements OnInit {
     // console.log("rootnav = " +this.appCtrl.getRootNav());
     this.appCtrl.getRootNav().setRoot(LoginPage);
 
+  }
+
+  toggle2FA() {
+    console.log("init 2fa status " + this.initTwoFAstatus);
+    console.log("toggled 2fa " + this.twoFAstatus);
+    //both turn on and off also need verify 2FA
+    // if (this.twoFAstatus===true){
+    this.navCtrl.push(ToggleTwoFaPage);
+    // }
   }
 }

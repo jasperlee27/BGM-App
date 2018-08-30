@@ -67,7 +67,7 @@
                 </span>
                 Toggle 2FA
               </span>
-          <ion-toggle [(ngModel)]="twoFAStatus"></ion-toggle>
+          <ion-toggle [(ngModel)]="twoFAstatus" (ionChange)="toggle2FA()"></ion-toggle>
         </ion-item>
       </ion-col>
     </ion-row>

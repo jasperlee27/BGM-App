@@ -43,7 +43,15 @@ export class ToggleTwoFaPage {
 
   verify2FA(){
     //do post here and on success present alert on dismiss navigate back to home page
-    this.auth.setGuestLogin(false);
+    //toggle global var
+    if (this.auth.get2FAStatus()===1){
+      this.auth.set2FAStatus(0);
+    }
+
+    else{
+      this.auth.set2FAStatus(1);
+    }
+
     this.navCtrl.setRoot(TabsPage);
   }
   

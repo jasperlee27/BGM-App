@@ -116,8 +116,9 @@ export class LoginPage {
       this.auth.setGuestLogin(false);
 
       this.auth.setSessionToken(this.receivedData.token);
+      this.auth.set2FAStatus(parseInt(this.receivedData.require2FA));
       console.log("session Token set as " + this.auth.getSessionToken());
-      if (parseInt(this.receivedData.require2FA) === 0) {
+      if (this.auth.get2FAStatus() === 0) {
         this.navCtrl.setRoot(TabsPage);
       }
 
