@@ -89,6 +89,10 @@ export class TwoFacAuthPage {
       if (parseInt(data.status) === 200) {
         this.auth.setGuestLogin(false);
         this.navCtrl.setRoot(TabsPage);
+        this.auth.setAccValue(data.accountValue);
+        console.log("Set acc balance as  " + this.auth.getAccValue());
+        this.auth.setSessionToken(data.token);
+        console.log("session Token set as " + this.auth.getSessionToken());
         // let alert = this.alertCtrl.create({
         //   title: 'SUCCESS',
         //   subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
