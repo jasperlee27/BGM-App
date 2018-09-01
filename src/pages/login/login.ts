@@ -112,9 +112,9 @@ export class LoginPage {
       this.auth.setAccId(this.receivedData._id);
       console.log("Setting account id as " + this.receivedData._id);
       this.auth.set2FAStatus(parseInt(this.receivedData.require2FA));
-
-      //set account info only if successful login i.e do not req 2FA
-      if (this.auth.get2FAStatus() === 0) {
+      // var twoFAstatus= this.auth.get2FAStatus();
+      //set account info only if successful login i.e do not req 2FA [0,2]
+      if (this.auth.get2FAStatus() !== 1) {
         this.auth.setGuestLogin(false);
         this.auth.setAccValue(this.receivedData.accountValue);
         console.log("Setting acc balance as  " + this.receivedData.accountValue);
@@ -123,7 +123,7 @@ export class LoginPage {
         this.navCtrl.setRoot(TabsPage);
       }
 
-      //else nav to 2 FA page.
+      //else nav to 2 FA page when status == 1..
       else {
         this.navCtrl.push(this.twoFApage);
       }

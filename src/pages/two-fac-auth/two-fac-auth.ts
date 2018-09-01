@@ -90,6 +90,8 @@ export class TwoFacAuthPage {
         this.auth.setGuestLogin(false);
         this.navCtrl.setRoot(TabsPage);
         this.auth.setAccValue(data.accountValue);
+        this.auth.set2FAStatus(parseInt(data.require2FA));
+        console.log("Set 2FA status as " + this.auth.get2FAStatus());
         console.log("Set acc balance as  " + this.auth.getAccValue());
         this.auth.setSessionToken(data.token);
         console.log("session Token set as " + this.auth.getSessionToken());

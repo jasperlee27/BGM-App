@@ -47,13 +47,15 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
+    //if 0 then no 2FA needed
     if (this.auth.get2FAStatus() === 0) {
-      this.initTwoFAstatus = false;
+      // this.initTwoFAstatus = false;
       this.twoFAstatus = false;
     }
 
+    //else [1/2], 2FA needed is true
     else {
-      this.initTwoFAstatus = true;
+      // this.initTwoFAstatus = true;
       this.twoFAstatus = true;
     }
   }
@@ -148,7 +150,7 @@ export class HomePage implements OnInit {
   }
 
   toggle2FA() {
-    console.log("init 2fa status " + this.initTwoFAstatus);
+    // console.log("init 2fa status " + this.initTwoFAstatus);
     console.log("toggled 2fa " + this.twoFAstatus);
     //both turn on and off also need verify 2FA
     // if (this.twoFAstatus===true){
