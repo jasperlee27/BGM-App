@@ -28,6 +28,16 @@ export class MyApp {
     // alert(testVar);
     // splashScreen.hide();
 
+    // window.addEventListener("keyboardDidShow", () => {
+    //   document.activeElement.scrollIntoView(false);
+
+      // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
+      // if (elem !== undefined && elem.length > 0) {
+      //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
+      // }
+
+    // });
+
     platform.ready().then(() => {
       statusBar.overlaysWebView(true);
       statusBar.backgroundColorByHexString('#000000');

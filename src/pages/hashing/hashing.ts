@@ -51,8 +51,31 @@ export class HashingPage {
   currentGameID: string;
   walletAmount: any;
   isGuestLogin;
+  isCanvasShown;
 
   constructor(public navCtrl: NavController, private smartAudio: SmartAudioProvider, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
+    this.isCanvasShown=true;
+
+    window.addEventListener("keyboardDidShow", () => {
+      document.activeElement.scrollIntoView(false);
+      this.isCanvasShown=false;
+      // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
+      // if (elem !== undefined && elem.length > 0) {
+      //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
+      // }
+
+    });
+
+    window.addEventListener("keyboardWillHide", () => {
+      document.activeElement.scrollIntoView(false);
+      this.isCanvasShown=true;
+      // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
+      // if (elem !== undefined && elem.length > 0) {
+      //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
+      // }
+
+    });
+    
     this.isGuestLogin = this.auth.getGuestLogin();
     this.isArrowHidden = true;
     this.hashManualBetAmount=0;

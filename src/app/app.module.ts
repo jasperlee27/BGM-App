@@ -63,7 +63,11 @@ import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
     HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      scrollPadding: false,
+      scrollAssist: false,
+      autoFocusAssist: false,
+  })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

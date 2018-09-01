@@ -24479,7 +24479,7 @@ ion-toast {
 }
 
 .toggle-md.toggle-checked .toggle-icon {
-  background-color: #525151;
+  background-color: #bd8b34;
 }
 
 .toggle-md.toggle-checked .toggle-inner {
@@ -37021,6 +37021,25 @@ page-stream .walletDisplay {
   width: 40%;
 }
 
+page-toggle-two-fa .item-md.item-block .item-inner,
+page-toggle-two-fa .item-md.item-input.input-has-focus .item-inner,
+page-toggle-two-fa .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+page-toggle-two-fa .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+page-toggle-two-fa .list-md .item-input.input-has-focus:last-child,
+page-toggle-two-fa .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+page-toggle-two-fa .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+page-toggle-two-fa .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+page-toggle-two-fa .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 page-toggle-two-fa .request-sms-button {
   margin-top: 80px;
   margin-bottom: 20px;
@@ -37078,6 +37097,25 @@ page-trehunt .style-game-id {
 page-trehunt .style-current-tix {
   font-size: 14px;
   font-weight: 700px;
+}
+
+page-two-fac-auth .item-md.item-block .item-inner,
+page-two-fac-auth .item-md.item-input.input-has-focus .item-inner,
+page-two-fac-auth .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,
+page-two-fac-auth .item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+page-two-fac-auth .list-md .item-input.input-has-focus:last-child,
+page-two-fac-auth .list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):last-child,
+page-two-fac-auth .list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):last-child {
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+page-two-fac-auth .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+page-two-fac-auth .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 page-two-fac-auth .request-sms-button {

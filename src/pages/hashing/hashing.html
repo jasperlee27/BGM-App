@@ -21,7 +21,7 @@
   <!-- Graph -->
   <div class="graphCntr" style="display: block; width: 100%; height: 50%;">
     <!-- <ion-col col-12 col-md-12> -->
-    <canvas id="ctx" baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"
+    <canvas [style.visibility]="isCanvasShown ? 'visible' : 'hidden'" id="ctx" baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [options]="chartOptions" [colors]="chartColors"
       width="400" height="300" [legend]="false">
       <!-- (chartClick)="onChartClick($event) -->
     </canvas>
@@ -61,22 +61,18 @@
   <div [ngSwitch]="hashBetType">
     <ion-list *ngSwitchCase="'manual'" ngSelected="selected">
       <!-- for manual -->
-      <ion-row style="font-size:16px;">
+      <!-- <ion-row style="font-size:16px;">
         <ion-col col-12 text-center>
           STAKE:&nbsp;&nbsp;
           <span style="color:whitesmoke">{{hashManualBetAmount}}</span>&nbsp;&nbsp;BGM
         </ion-col>
       </ion-row>
-      <br>
-      <ion-item no-lines class="rangeSlider">
-        <ion-range min="1" [max]="walletAmount" [disabled]="isSliderDisabled" step="1" [(ngModel)]="hashManualBetAmount" color="secondary" (ionChange)="cValue($event, 'slider1')">
-          <ion-label range-left>1</ion-label>
-          <ion-label range-right>{{walletAmount}}</ion-label>
-        </ion-range>
-      </ion-item>
-      <!-- <ion-row>
+      <br> -->
+  
+      <!-- for input to scroll -->
+      <ion-row>
         <ion-col col-3>
-          <ion-label color="primary">AMOUNT: </ion-label>
+          <ion-label color="primary">STAKE: </ion-label>
         </ion-col>
         <ion-col col-7>
           <ion-input type="number" [(ngModel)]="hashManualBetAmount" placeholder="0" attr.text-center [disabled]="isManualBetDisabled"></ion-input>
@@ -84,7 +80,14 @@
         <ion-col col-2>
           <ion-label item-end color="primary">BGM</ion-label>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
+      <ion-item no-lines class="rangeSlider">
+        <ion-range min="1" [max]="walletAmount" [disabled]="isSliderDisabled" step="1" [(ngModel)]="hashManualBetAmount" color="secondary" (ionChange)="cValue($event, 'slider1')">
+          <ion-label range-left>1</ion-label>
+          <ion-label range-right>{{walletAmount}}</ion-label>
+        </ion-range>
+      </ion-item>
+
       <ion-row>
         <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled"
           (click)="hashManualBet()">BET</button>
