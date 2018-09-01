@@ -5,6 +5,7 @@ import { timer } from '../../../node_modules/rxjs/observable/timer';
 import { take, map } from 'rxjs/operators';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { DataProvider } from '../../providers/data/data';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ToggleTwoFaPage page.
@@ -37,17 +38,17 @@ export class ToggleTwoFaPage {
   }
 
   ionViewDidLoad() {
+    console.log("LAST VIEW " + this.navCtrl.last());
     this.navBar.backButtonClick = (e: UIEvent) => {
       console.log("Overriding navbar success");
       this.navCtrl.setRoot(TabsPage);
-
     }
     console.log('ionViewDidLoad TwoFacAuthPage');
-    // for (let i = 0; i < this.navCtrl.length(); i++) {
-    //   let v = this.navCtrl.getViews()[i];
-    //   console.log(v.component.name);
+    for (let i = 0; i < this.navCtrl.length(); i++) {
+      let v = this.navCtrl.getViews()[i];
+      console.log(v.component.name);
 
-    // }
+    }
   }
   requestedSMS() {
 
