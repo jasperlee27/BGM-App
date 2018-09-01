@@ -107,7 +107,7 @@ export class LoginPage {
       this.showInvalidLogin = false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       //parse response from server
-      this.auth.setGuestLogin(false);
+ 
       console.log("Login reponse");
       this.auth.setAccId(this.receivedData._id);
       console.log("Setting account id as " + this.receivedData._id);
@@ -115,6 +115,7 @@ export class LoginPage {
 
       //set account info only if successful login i.e do not req 2FA
       if (this.auth.get2FAStatus() === 0) {
+        this.auth.setGuestLogin(false);
         this.auth.setAccValue(this.receivedData.accountValue);
         console.log("Setting acc balance as  " + this.receivedData.accountValue);
         this.auth.setSessionToken(this.receivedData.token);

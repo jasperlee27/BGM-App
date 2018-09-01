@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { timer } from '../../../node_modules/rxjs/observable/timer';
 import { take, map } from 'rxjs/operators';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { DataProvider } from '../../providers/data/data';
 /**
  * Generated class for the TwoFacAuthPage page.
  *
@@ -24,8 +25,9 @@ export class TwoFacAuthPage {
   isOutline: boolean;
   countDown;
   count = 30.0;
+  codeInput;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: GlobalAuthProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public auth: GlobalAuthProvider, private dataProvider: DataProvider, public alertCtrl: AlertController) {
     this.isRequestHidden=false;
     this.isRequestEnabled=true;
     this.isTimerHidden=true;
@@ -35,13 +37,95 @@ export class TwoFacAuthPage {
     console.log('ionViewDidLoad TwoFacAuthPage');
   }
   requestedSMS(){
-    this.isRequestEnabled=false;
-    this.startCountdownTimer(30);
+
+    this.dataProvider.postSMSreq(this.auth.getAccId()).subscribe(data => {
+      if (parseInt(data.status) === 200) {
+        console.log("SMS sent " + data.message);
+        this.isRequestEnabled=false;
+        this.startCountdownTimer(30);
+        // let alert = this.alertCtrl.create({
+        //   title: 'SUCCESS',
+        //   subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
+        //   buttons: ['OK']
+        // });
+        // alert.present();
+        // alert.onDidDismiss(() => {
+        // })
+      }
+    },
+      err => {
+        console.log("Error occured while triggering SMS request");
+        console.log(err.message);
+
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
+
+          alert.present();
+          console.log("Hit Error 0");
+        }
+        else {
+
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: err.error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          alert.onDidDismiss(() => {
+          })
+        }
+      }
+    );
   }
 
   verify2FA(){
-    this.auth.setGuestLogin(false);
-    this.navCtrl.setRoot(TabsPage);
+    console.log("Posted with codeInput = " + this.codeInput);
+    this.dataProvider.postLogin2FA(this.auth.getAccId(), this.codeInput).subscribe(data => {
+
+      if (parseInt(data.status) === 200) {
+        this.auth.setGuestLogin(false);
+        this.navCtrl.setRoot(TabsPage);
+        // let alert = this.alertCtrl.create({
+        //   title: 'SUCCESS',
+        //   subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
+        //   buttons: ['OK']
+        // });
+        // alert.present();
+        // alert.onDidDismiss(() => {
+        // })
+      }
+    },
+      err => {
+        console.log("Error occured while logging in w 2FA");
+        console.log(err.message);
+
+        if (err.status === 0) {
+          let alert = this.alertCtrl.create({
+            title: 'ERROR',
+            subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+            buttons: ['OK']
+          });
+
+          alert.present();
+          console.log("Hit Error 0");
+        }
+        else {
+
+          let alert = this.alertCtrl.create({
+            title: 'Error',
+            subTitle: err.error.message,
+            buttons: ['OK']
+          });
+          alert.present();
+          alert.onDidDismiss(() => {
+          })
+        }
+      }
+    );
   }
   
   async startCountdownTimer(secondsToCount: number){
