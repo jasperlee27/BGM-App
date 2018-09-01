@@ -23,7 +23,7 @@
             [disabled]="isRequestEnabled? null : 'disabled'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">
             REQUEST<br>SMS</button>
           </div>
-            <div class="timer" [style.visibility]="isTimerHidden ? 'hidden' : 'visible'">Request again in {{countDown | async}} s</div>
+            <div class="timer" *ngIf="!isTimerHidden">Request again in {{countDown | async}} s</div>
         </ion-col>
       </ion-row> 
       

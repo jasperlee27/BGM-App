@@ -80,7 +80,7 @@ export class LoginPage {
 
   constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController) {
   }
- // uncomment for mobile load sound
+  // uncomment for mobile load sound
   // ionViewDidLoad() {
   //   this.platform.ready().then(() => {
   //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
@@ -107,21 +107,22 @@ export class LoginPage {
       this.showInvalidLogin = false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       //parse response from server
-      console.log("Login reponse");
-      console.log("account info " + this.receivedData.accountValue)
-      console.log("Setting account id as " + this.receivedData._id);
-      console.log("Setting acc balance as  " + this.receivedData.accountValue);
-      this.auth.setAccId(this.receivedData._id);
-      this.auth.setAccValue(this.receivedData.accountValue);
       this.auth.setGuestLogin(false);
-
-      this.auth.setSessionToken(this.receivedData.token);
+      console.log("Login reponse");
+      this.auth.setAccId(this.receivedData._id);
+      console.log("Setting account id as " + this.receivedData._id);
       this.auth.set2FAStatus(parseInt(this.receivedData.require2FA));
-      console.log("session Token set as " + this.auth.getSessionToken());
+
+      //set account info only if successful login i.e do not req 2FA
       if (this.auth.get2FAStatus() === 0) {
+        this.auth.setAccValue(this.receivedData.accountValue);
+        console.log("Setting acc balance as  " + this.receivedData.accountValue);
+        this.auth.setSessionToken(this.receivedData.token);
+        console.log("session Token set as " + this.auth.getSessionToken());
         this.navCtrl.setRoot(TabsPage);
       }
 
+      //else nav to 2 FA page.
       else {
         this.navCtrl.push(this.twoFApage);
       }
@@ -155,7 +156,7 @@ export class LoginPage {
     // this.navCtrl.setRoot(TabsPage);
     // this.navCtrl.push(this.twoFApage);
     this.dataProvider.getServerHealth().subscribe(data => {
-      if (data.message !== ''){
+      if (data.message !== '') {
         console.log("received " + data.message);
         this.auth.setAccId("guest");
         this.auth.setUsername("guest");
@@ -165,9 +166,9 @@ export class LoginPage {
         this.auth.setSessionToken("");
         this.auth.setAccValue(0);
       }
-    }, (err: HttpErrorResponse)=> {
+    }, (err: HttpErrorResponse) => {
       console.log("Error logged " + err);
-      
+
       if (err.error instanceof Error) {
         console.log("Client-side error occured.");
       } else {
@@ -181,7 +182,7 @@ export class LoginPage {
         console.log("Server-side error occured.");
       }
     });
-  
+
   }
 
   showHide(): any {

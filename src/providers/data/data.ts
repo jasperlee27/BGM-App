@@ -6,6 +6,8 @@ import { RequestOptions } from '../../../node_modules/@angular/http';
 
 const serverHealthURL = 'http://178.128.50.224:3000';
 const loginUrl = 'http://178.128.50.224:3000/login/';
+const login2FAUrl='http://178.128.50.224:3000/account/login2fa';
+const toggle2FAUrl='http://178.128.50.224:3000/account/toggle2FA';
 const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const trehuntWinnerURL = 'http://178.128.50.224:3000/game1/getWinner';
@@ -17,6 +19,7 @@ const depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
 const withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
 const binaryOptionBetURL = 'http://178.128.50.224:3000/game3/placeBets';
 const binaryOptionPastGameURL = 'http://178.128.50.224:3000/game3/getGame3PastGame';
+const reqSMSURL ='http://178.128.50.224:3000/requestSms';
 
 @Injectable()
 export class DataProvider {
@@ -26,10 +29,10 @@ export class DataProvider {
   }
   //get server health for guest view
   getServerHealth(): Observable<any> {
-    return this.http.get('http://178.128.50.224:3000');
+    return this.http.get(serverHealthURL);
   }
-
-  //login
+  
+  //login WITHOUT 2FA
   postLogin(username, password): Observable<any> {
     const httpHeader = {
       headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
@@ -37,6 +40,34 @@ export class DataProvider {
     var requestBody = new HttpParams().set("username", username).set("password", password);
     return this.http.post(loginUrl, requestBody, httpHeader);
   }
+  
+  //login WITH 2FA
+  postLogin2FA(accid, codeNo): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("codeNo", codeNo);
+    return this.http.post(login2FAUrl, requestBody, httpHeader);
+  }
+
+  //request SMS
+  postSMSreq(accid): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid);
+    return this.http.post(reqSMSURL, requestBody, httpHeader);
+  }
+  
+   //login WITH 2FA
+  postToggle2FA(accid, codeNo): Observable<any> {
+    const httpHeader = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
+    };
+    var requestBody = new HttpParams().set("accid", accid).set("codeNo", codeNo);
+    return this.http.post(toggle2FAUrl, requestBody, httpHeader);
+  }
+
   //current wallet amount
   postWalletAmount(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
@@ -95,7 +126,6 @@ export class DataProvider {
     var requestBody = new HttpParams().set("accid", accid).set("gameType",gameType);
     return this.http.post(trehuntWinnerURL, requestBody, httpHeader);
   }
-
 
   //status 0 will be no draw, 1 will be draw
   //buy game 1 tickets
