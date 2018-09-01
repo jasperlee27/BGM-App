@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Navbar, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { timer } from '../../../node_modules/rxjs/observable/timer';
 import { take, map } from 'rxjs/operators';
@@ -20,6 +20,7 @@ import { DataProvider } from '../../providers/data/data';
 })
 export class ToggleTwoFaPage {
 
+  @ViewChild(Navbar) navBar: Navbar;
 
   isRequestHidden: boolean;
   isRequestEnabled: boolean;
@@ -36,7 +37,17 @@ export class ToggleTwoFaPage {
   }
 
   ionViewDidLoad() {
+    this.navBar.backButtonClick = (e: UIEvent) => {
+      console.log("Overriding navbar success");
+      this.navCtrl.setRoot(TabsPage);
+
+    }
     console.log('ionViewDidLoad TwoFacAuthPage');
+    // for (let i = 0; i < this.navCtrl.length(); i++) {
+    //   let v = this.navCtrl.getViews()[i];
+    //   console.log(v.component.name);
+
+    // }
   }
   requestedSMS() {
 

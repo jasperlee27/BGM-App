@@ -8,16 +8,14 @@ page-stream {
     }
     .text-input::-moz-placeholder {
         color: white;
-      }
-      
-      .text-input:-ms-input-placeholder {
+    }
+    .text-input:-ms-input-placeholder {
         color: white;
-      }
-      
-      .text-input::-webkit-input-placeholder {
+    }
+    .text-input::-webkit-input-placeholder {
         text-indent: 0;
         color: white;
-      }
+    }
     input:disabled{
         color: #ffffff !important;
         opacity: 1 !important;

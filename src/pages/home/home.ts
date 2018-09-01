@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
+import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 
 // import { MyApp } from '../../app/app.component';
 
@@ -26,6 +27,8 @@ import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
   templateUrl: 'home.html',
 })
 export class HomePage implements OnInit {
+  twoFApage = TwoFacAuthPage;
+  toggleTwoFApage = ToggleTwoFaPage;
   displayStory: any;
   storyImage: any;
   messageText: string;
@@ -154,7 +157,9 @@ export class HomePage implements OnInit {
     console.log("toggled 2fa " + this.twoFAstatus);
     //both turn on and off also need verify 2FA
     // if (this.twoFAstatus===true){
-    this.navCtrl.push(ToggleTwoFaPage);
+    // this.navCtrl.push(this.twoFApage);
+    this.navCtrl.push(this.toggleTwoFApage);
+
     // }
   }
 }
