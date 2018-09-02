@@ -703,8 +703,9 @@ export class HashingPage {
     //20, 30,
     //base function
     if (currTime >= 20) {
+      // var acceptedList = [10.0, 20.0, 20.0];
       for (var i = 1.0; i <= currTime; i++) {
-        if ((i % 10) == 0) {
+        if ((i % 10) === 0) {
           continue;
         }
         var index = this.chartLabels.indexOf(i);
@@ -715,7 +716,7 @@ export class HashingPage {
       }
     }
 
-    else if ((currTime >= 15) && (currTime < 20)) {
+    else if ((currTime >= 15) && (currTime <= 20)) {
       var acceptedList = [10.0, 15.0, 20.0];
       for (var i = 1.0; i <= currTime; i++) {
         if (acceptedList.indexOf(i) !== -1) {
