@@ -145,13 +145,13 @@ export class StreamPage {
       else if (receivedData.type === 'countdown') {
         this.timerValue = parseFloat(receivedData.number).toFixed(1);
         gameValuesToPush = receivedData.currentPrice;
-        
+
 
         // console.log("Updating current price in countdown " + gameValuesToPush);
         // console.log("Counting down: " + receivedData.number);
         if (this.currGameState !== 'countdown') {
           this.isBetDisabled = false;
-          this.isSliderDisabled=false;
+          this.isSliderDisabled = false;
           this.showGameTime = false;
           this.showCountdown = true;
           this.showGameEnded = false;
@@ -195,7 +195,7 @@ export class StreamPage {
           if (this.hasActiveBet) {
             this.destroyBetInstance();
             this.isSliderDisabled = false;
-            this.game3BetAmount='';
+            this.game3BetAmount = '';
           }
           this.musicPlayed = false;
           this.hasActiveBet = false;
@@ -301,27 +301,7 @@ export class StreamPage {
               })
               // console.log("After push entry value" + localEntryPrice);
             };
-            // chart.data.datasets.forEach(function (dataset: any) {
-            //   if (count == 0) {
-            //     // var value = Math.random() * 3000 + 4500;
-            //     var value = 100;
-            //     value = this.randomIntRange();
-            //   }
 
-            //   else if (count === 3) {
-            //     var value = 5000;
-            //   }
-
-            //   else {
-            //   }
-            //   var currDate = Date.now();
-
-            //   dataset.data.push({
-            //     x: currDate,
-            //     y: value,
-            //   });
-            //   count++;
-            // });
           },
           delay: 1500,
           frameRate: 30,
@@ -355,14 +335,17 @@ export class StreamPage {
           offset: true,
           ticks: {
             fontColor: "#f4f4f4",
-            fontSize: 12,
+            fontSize: 11,
             padding: 5,
             display: true,
-            // stepSize: 1000,
-            // suggestedMin: 7010,
-            // suggestedMax: 7000,
-            // mirror: true,
-            // drawTicks: true,
+            // callback: function (val) {
+            //   return val.toFixed(3);
+            //   // stepSize: 1000,
+            //   // suggestedMin: 7010,
+            //   // suggestedMax: 7000,
+            //   // mirror: true,
+            //   // drawTicks: true,
+            // },
           },
           gridLines: {
             lineWidth: 0.5,
@@ -430,10 +413,10 @@ export class StreamPage {
         this.isSliderDisabled = true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'long';
-        this.buyDataset(this.roundBetType, data.entryPrice);
+        this.buyDataset(this.roundBetType, parseFloat(data.entryPrice).toFixed(3));
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
-        this.entryPrice = data.entryPrice;
+        this.entryPrice = parseFloat(data.entryPrice).toFixed(3)
         // this.isManualBetDisabled = true;
         // this.isManualCoutDisabled = false;
         this.hasActiveBet = true;
@@ -491,7 +474,7 @@ export class StreamPage {
       // this.walletAmount = this.auth.getAccValue();
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
-        this.isSliderDisabled=true;
+        this.isSliderDisabled = true;
         this.boughtIntoGame3 = true;
         this.roundBetType = 'short';
         this.entryPrice = data.entryPrice;
@@ -562,9 +545,9 @@ export class StreamPage {
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         var transaction = {
-          "entryPrice": data.data.entryPrice.toFixed(2),
+          "entryPrice": parseFloat(data.data.entryPrice).toFixed(2),
           "betType": data.data.orderTypeDisplay,
-          "endPrice": data.data.endPrice.toFixed(2),
+          "endPrice": parseFloat(data.data.endPrice).toFixed(2),
           "profit": parseInt(data.data.profit)
         }
         this.historicalGame3.push(transaction);

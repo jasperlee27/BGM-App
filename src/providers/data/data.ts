@@ -59,11 +59,12 @@ export class DataProvider {
     return this.http.post(reqSMSURL, requestBody, httpHeader);
   }
   
-   //login WITH 2FA
+   //toggle 2FA
   postToggle2FA(accid, codeNo): Observable<any> {
-    const httpHeader = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
-    };
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded"}).append('x-access-token', sessionToken)};
+
     var requestBody = new HttpParams().set("accid", accid).set("codeNo", codeNo);
     return this.http.post(toggle2FAUrl, requestBody, httpHeader);
   }

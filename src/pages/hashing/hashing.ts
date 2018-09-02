@@ -78,7 +78,7 @@ export class HashingPage {
 
     this.isGuestLogin = this.auth.getGuestLogin();
     this.isArrowHidden = true;
-    this.hashManualBetAmount = 0;
+    this.hashManualBetAmount = 1;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
@@ -351,7 +351,7 @@ export class HashingPage {
       else if (receivedData.type === "busted") {
         if (this.currGameState !== 'busted') {
           if (this.hasActiveManualBet) {
-            this.hashManualBetAmount = 0;
+            this.hashManualBetAmount = 1;
             this.smartAudio.play('game2explode');
           }
           this.currGameState = 'busted';
