@@ -54,11 +54,11 @@ export class HashingPage {
   isCanvasShown;
 
   constructor(public navCtrl: NavController, private smartAudio: SmartAudioProvider, public navParams: NavParams, private auth: GlobalAuthProvider, public dataProvider: DataProvider, private alertCtrl: AlertController) {
-    this.isCanvasShown=true;
+    this.isCanvasShown = true;
 
     window.addEventListener("keyboardDidShow", () => {
       document.activeElement.scrollIntoView(false);
-      this.isCanvasShown=false;
+      this.isCanvasShown = false;
       // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
       // if (elem !== undefined && elem.length > 0) {
       //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
@@ -68,17 +68,17 @@ export class HashingPage {
 
     window.addEventListener("keyboardWillHide", () => {
       document.activeElement.scrollIntoView(false);
-      this.isCanvasShown=true;
+      this.isCanvasShown = true;
       // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
       // if (elem !== undefined && elem.length > 0) {
       //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
       // }
 
     });
-    
+
     this.isGuestLogin = this.auth.getGuestLogin();
     this.isArrowHidden = true;
-    this.hashManualBetAmount=0;
+    this.hashManualBetAmount = 0;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
     this.socket = io.connect('http://178.128.50.224:3001');
     console.log("socket for hashing conencted");
@@ -96,12 +96,11 @@ export class HashingPage {
     }
     ];
     this.chartLabels = [];
-
     this.chartOptions = {
       tooltips: {
         display: false,
       },
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       animation: {
         duration: 0
       },
@@ -127,7 +126,7 @@ export class HashingPage {
           ticks: {
             beginAtZero: true,
             min: 0,
-            maxTicksLimit: 3,
+            // maxTicksLimit: 4,
             suggestedMax: 2,
             fontColor: "white",
             display: true,
@@ -138,11 +137,15 @@ export class HashingPage {
             autoSkip: false,
             callback: function (value) {
               if (Number.isInteger(value)) {
+                if (value === 0){
+                  console.log("PRINTING VALUE 0");
+                }
                 return value + 's';
               }
 
               else {
                 return undefined;
+                // return value + 's';
               }
             },
           },
@@ -228,7 +231,19 @@ export class HashingPage {
   ngOnInit() {
     this.isChartHidden = false;
     // this.chartData[0].data = [1];
-    this.chartLabels = []
+    this.chartLabels =
+      [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
+        1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+        2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
+        3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
+        4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
+        5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
+        6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
+        7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
+        8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
+        9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
+      ];
+  
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
@@ -246,14 +261,38 @@ export class HashingPage {
       msg: 'Client to server, can you hear me server?'
     });
 
+    this.socket.on('preGameLoad', (data: any) => {
+      var receivedData = JSON.parse(data);
+      // for (var i = 0; i < recei)
+
+      if (receivedData.timeArr.length > 0) {
+        this.chartLabels = receivedData.timeArr;
+        // this.chartLabels.push(receivedData.timeArr[0]);
+        // this.chartLabels.push(receivedData.timeArr[receivedData.timeArr.length - 1]);
+        console.log("IN my chart labels " + this.chartLabels + "size of arr " + this.chartLabels.length);
+        this.chartData[0].data = receivedData.priceArr;
+        // this.chartData[0].data.push(receivedData.priceArr[0]);
+        // this.chartData[0].data.push(receivedData.priceArr[receivedData.priceArr.length - 1]);
+        console.log("IN my chart data " + this.chartData[0].data + "size of arr " + this.chartData[0].data.length);
+        this.chart.refresh();
+        // console.log("price array " + receivedData.priceArr);
+        // console.log("time array " + receivedData.timeArr);
+      }
+
+    });
+    //emit to server
+    this.socket.emit('chat message', {
+      msg: 'Client to server, can you hear me server?'
+    });
+
     this.socket.on('Game2', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
 
       if (receivedData.type === 'GameStart') {
-        if (this.currGameState!== 'GameStart'){
-          this.currGameState='GameStart';
+        if (this.currGameState !== 'GameStart') {
+          this.currGameState = 'GameStart';
           //TODO: Sound 
         }
         //one instance
@@ -274,8 +313,8 @@ export class HashingPage {
       }
       else if (receivedData.type === 'game') {
 
-        if (this.currGameState!== 'game'){
-          this.currGameState='game';
+        if (this.currGameState !== 'game') {
+          this.currGameState = 'game';
           //TODO: Sound 
         }
 
@@ -285,8 +324,8 @@ export class HashingPage {
           this.isManualCoutDisabled = false;
           this.isSliderDisabled = true;
         }
-        
-        else{
+
+        else {
           this.isSliderDisabled = false;
         }
 
@@ -296,20 +335,23 @@ export class HashingPage {
         this.isChartHidden = false;
         this.multiplierDisplay = receivedData.number;
         // this.dataToPush = receivedData.number;
+        if (receivedData.number >= 2) {
+          //pseudo chart label
+          this.chartLabels.push('');
+        }
 
-        this.chartLabels.push(1.01);
         this.chartData[0].data.push(receivedData.number);
 
         this.chart.refresh();
       }
 
       else if (receivedData.type === "busted") {
-        if (this.currGameState!== 'busted'){
-          if (this.hasActiveManualBet){
+        if (this.currGameState !== 'busted') {
+          if (this.hasActiveManualBet) {
             this.hashManualBetAmount = 0;
             this.smartAudio.play('game2explode');
           }
-          this.currGameState='busted';
+          this.currGameState = 'busted';
           //TODO: Sound on bust
         }
         // console.log("Received data type  " + receivedData.type);
@@ -326,21 +368,34 @@ export class HashingPage {
         this.timer("stop");
         this.isLocGameTimerStarted = false;
         this.chartLabels = [];
+        this.chartLabels =
+        [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
+          1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+          2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
+          3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
+          4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
+          5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
+          6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
+          7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
+          8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
+          9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
+        ];
+   
         this.chartData[0].data = [];
 
       }
 
       else if (receivedData.type === "countdown") {
-        if (this.currGameState!== 'countdown'){
-          this.currGameState='countdown';
-          this.walletAmount=this.auth.getAccValue();
+        if (this.currGameState !== 'countdown') {
+          this.currGameState = 'countdown';
+          this.walletAmount = this.auth.getAccValue();
           //TODO: Sound on bust
         }
         //log currentGameID here
         this.isManualCoutDisabled = true;
         if (!this.hasActiveManualBet) {
           this.isManualBetDisabled = false;
-          this.isSliderDisabled=false;
+          this.isSliderDisabled = false;
         }
         this.currentGameID = receivedData.gameId;
         // console.log("Received type " + receivedData.type + " and stored current game id as " + this.currentGameID);
@@ -353,7 +408,7 @@ export class HashingPage {
 
       else {
         //do nth
-        this.currGameState='';
+        this.currGameState = '';
       }
       // this.socket.emit('event3', {
       //   msg: 'Yes, its working for me!!'
@@ -363,13 +418,6 @@ export class HashingPage {
     this.socket.on('Game3', (data: any) => {
       console.log("Receiving game 3 event " + data.msg);
     });
-
-    // let interval = setInterval(() => {
-    //   this.chartLabels.push(Date.now());
-    //   this.chartData[0].data.push(this.dataToPush);
-    //   this.chart.refresh();
-    // }, 100)
-    // this.generateChart(33.58);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad HashingPage');
@@ -388,28 +436,54 @@ export class HashingPage {
         time++;
         // console.log("Counting timer " + time + "s");
 
-        if (time > 20) {
-          if (time % 20 === 0) {
-            this.chartLabels.push(time);
-            // console.log("Successfully pushed " + time);
-          }
-        }
-
         if (time > 15) {
+          
           if (time % 10 === 0) {
             this.chartLabels.push(time);
-            // console.log("Successfully pushed " + time);
+            if (time===30){
+              var index = this.chartLabels.indexOf(5.0); 
+              if (index !== -1) this.chartLabels[index]=5.1;
+              // console.log("Found index here " + index);
+
+              var index2 = this.chartLabels.indexOf(15.0); 
+              if (index2 !== -1) this.chartLabels[index2]=15.1;
+            }
+            //push 20
+            else if (time===20){  
+              var index = this.chartLabels.indexOf(6.0); 
+              if (index !== -1) this.chartLabels[index]=5.0;
+              // console.log("Found index here " + index);
+
+              var index2 = this.chartLabels.indexOf(8.0); 
+              if (index2 !== -1) this.chartLabels[index2]=8.1;
+            }
+
+            else{
+              ;
+            }
           }
         }
 
         else if (time >= 8) {
           if (time % 5 === 0) {
             this.chartLabels.push(time);
+            //push 10
+            if (time===10){  
+              var index = this.chartLabels.indexOf(2.0); 
+              console.log("Found index here " + index);
+              if (index !== -1) this.chartLabels[index]=2.1;
+            }
+            //push 15
+            else {
+              var index = this.chartLabels.indexOf(4.0); 
+              console.log("Found index here " + index);
+              if (index !== -1) this.chartLabels[index]=4.1;
+            }          
             // console.log("Successfully pushed " + time);
           }
         }
         else if (time === 7) {
-          this.chartLabels.push(time);
+          // this.chartLabels.push(time);
           // console.log("Successfully pushed " + time);
         }
 
@@ -419,13 +493,12 @@ export class HashingPage {
 
         else if (time > 2) {
           if (time % 2 === 0) {
-            this.chartLabels.push(time);
+            // this.chartLabels.push(time);
             // console.log("Successfully pushed " + time);
           }
         }
 
         else {
-          this.chartLabels.push(time);
           // console.log("Successfully pushed " + time);
         }
 
@@ -455,7 +528,7 @@ export class HashingPage {
       if (parseInt(data.status) === 200) {
         this.hasActiveManualBet = true;
         this.isManualBetDisabled = true;
-        this.isSliderDisabled= true;
+        this.isSliderDisabled = true;
         this.isManualCoutDisabled = false;
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
@@ -617,7 +690,7 @@ export class HashingPage {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  cValue(event, slider){
+  cValue(event, slider) {
     // console.log(" test here " +event.value);
     // slider.destroy();
 
