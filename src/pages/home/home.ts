@@ -63,14 +63,14 @@ export class HomePage implements OnInit {
     }
   }
   //bgm loop works in home view, uncomment for mobile sound
-  // ionViewDidLoad() {
-  //   this.platform.ready().then(() => {
-  //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-  //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-  //       this.nativeAudio.loop('bgmLoopHome');
-  //     });
-  //   });
-  // }
+  ionViewDidLoad() {
+    this.platform.ready().then(() => {
+      this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+        this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+        this.nativeAudio.loop('bgmLoopHome');
+      });
+    });
+  }
   //NEWS API
   getNews_Old() {
     console.log("button is working fine");

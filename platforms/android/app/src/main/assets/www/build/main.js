@@ -488,7 +488,7 @@ var HashingPage = /** @class */ (function () {
         });
         this.isGuestLogin = this.auth.getGuestLogin();
         this.isArrowHidden = true;
-        this.hashManualBetAmount = 0;
+        this.hashManualBetAmount = 1;
         // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
         this.socket = __WEBPACK_IMPORTED_MODULE_3_socket_io_client__["connect"]('http://178.128.50.224:3001');
         console.log("socket for hashing conencted");
@@ -509,7 +509,7 @@ var HashingPage = /** @class */ (function () {
             tooltips: {
                 display: false,
             },
-            maintainAspectRatio: true,
+            maintainAspectRatio: false,
             animation: {
                 duration: 0
             },
@@ -535,7 +535,7 @@ var HashingPage = /** @class */ (function () {
                         ticks: {
                             beginAtZero: true,
                             min: 0,
-                            maxTicksLimit: 3,
+                            // maxTicksLimit: 4,
                             suggestedMax: 2,
                             fontColor: "white",
                             display: true,
@@ -550,6 +550,7 @@ var HashingPage = /** @class */ (function () {
                                 }
                                 else {
                                     return undefined;
+                                    // return value + 's';
                                 }
                             },
                         },
@@ -627,7 +628,18 @@ var HashingPage = /** @class */ (function () {
         var _this = this;
         this.isChartHidden = false;
         // this.chartData[0].data = [1];
-        this.chartLabels = [];
+        this.chartLabels =
+            [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
+                1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+                2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
+                3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
+                4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
+                5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
+                6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
+                7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
+                8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
+                9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
+            ];
         this.multiplierDisplay = 1;
         this.finalValue = 0; //init as 0 first, to update later.
         this.isBurstTextHidden = true;
@@ -638,6 +650,31 @@ var HashingPage = /** @class */ (function () {
             _this.messages.push(msg);
             // console.log(msg);
             // console.log(this.messages);
+        });
+        //emit to server
+        this.socket.emit('chat message', {
+            msg: 'Client to server, can you hear me server?'
+        });
+        this.socket.on('preGameLoad', function (data) {
+            var receivedData = JSON.parse(data);
+            // for (var i = 0; i < recei)
+            if (receivedData.timeArr.length > 0) {
+                if (receivedData.priceArr.length > _this.chartLabels.length) {
+                    _this.chartLabels = receivedData.timeArr;
+                    _this.filterInitChartLabels(parseInt(receivedData.timeArr[receivedData.timeArr.length - 1]));
+                }
+                // this.chartLabels.push(receivedData.timeArr[0]);
+                // this.chartLabels.push(receivedData.timeArr[receivedData.timeArr.length - 1]);
+                console.log("IN my chart labels " + _this.chartLabels + "size of arr " + _this.chartLabels.length);
+                _this.chartData[0].data = receivedData.priceArr;
+                // this.chartData[0].data.push(receivedData.priceArr[0]);
+                // this.chartData[0].data.push(receivedData.priceArr[receivedData.priceArr.length - 1]);
+                console.log("IN my chart data " + _this.chartData[0].data + "size of arr " + _this.chartData[0].data.length);
+                _this.chart.refresh();
+                _this.timer("start", parseInt(receivedData.timeArr[receivedData.timeArr.length - 1]));
+                // console.log("price array " + receivedData.priceArr);
+                // console.log("time array " + receivedData.timeArr);
+            }
         });
         //emit to server
         this.socket.emit('chat message', {
@@ -657,7 +694,7 @@ var HashingPage = /** @class */ (function () {
                 if (!_this.isLocGameTimerStarted) {
                     _this.isLocGameTimerStarted = true;
                     console.log("START TIMER HERE");
-                    _this.timer("start");
+                    _this.timer("start", 0);
                 }
                 else {
                     //do nth
@@ -682,14 +719,17 @@ var HashingPage = /** @class */ (function () {
                 _this.isChartHidden = false;
                 _this.multiplierDisplay = receivedData.number;
                 // this.dataToPush = receivedData.number;
-                _this.chartLabels.push(1.01);
+                if (receivedData.number >= 2) {
+                    //pseudo chart label
+                    _this.chartLabels.push('');
+                }
                 _this.chartData[0].data.push(receivedData.number);
                 _this.chart.refresh();
             }
             else if (receivedData.type === "busted") {
                 if (_this.currGameState !== 'busted') {
                     if (_this.hasActiveManualBet) {
-                        _this.hashManualBetAmount = 0;
+                        _this.hashManualBetAmount = 1;
                         _this.smartAudio.play('game2explode');
                     }
                     _this.currGameState = 'busted';
@@ -706,9 +746,21 @@ var HashingPage = /** @class */ (function () {
                 _this.isTimerHidden = true;
                 _this.finalValue = parseFloat(receivedData.value).toFixed(2);
                 //reset chart and stop timer
-                _this.timer("stop");
+                _this.timer("stop", 0);
                 _this.isLocGameTimerStarted = false;
                 _this.chartLabels = [];
+                _this.chartLabels =
+                    [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
+                        1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+                        2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
+                        3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
+                        4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
+                        5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
+                        6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
+                        7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
+                        8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
+                        9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
+                    ];
                 _this.chartData[0].data = [];
             }
             else if (receivedData.type === "countdown") {
@@ -742,12 +794,6 @@ var HashingPage = /** @class */ (function () {
         this.socket.on('Game3', function (data) {
             console.log("Receiving game 3 event " + data.msg);
         });
-        // let interval = setInterval(() => {
-        //   this.chartLabels.push(Date.now());
-        //   this.chartData[0].data.push(this.dataToPush);
-        //   this.chart.refresh();
-        // }, 100)
-        // this.generateChart(33.58);
     };
     HashingPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad HashingPage');
@@ -755,33 +801,60 @@ var HashingPage = /** @class */ (function () {
     HashingPage.prototype.ionViewWillEnter = function () {
         this.walletAmount = this.auth.getAccValue();
     };
-    HashingPage.prototype.timer = function (action) {
+    HashingPage.prototype.timer = function (action, startTime) {
         var _this = this;
-        var time = 0;
+        var time = startTime;
         if (action === 'start') {
             this.timerInterval = setInterval(function () {
                 time++;
                 // console.log("Counting timer " + time + "s");
-                if (time > 20) {
-                    if (time % 20 === 0) {
-                        _this.chartLabels.push(time);
-                        // console.log("Successfully pushed " + time);
-                    }
-                }
                 if (time > 15) {
                     if (time % 10 === 0) {
                         _this.chartLabels.push(time);
-                        // console.log("Successfully pushed " + time);
+                        if (time === 30) {
+                            var index = _this.chartLabels.indexOf(5.0);
+                            if (index !== -1)
+                                _this.chartLabels[index] = 5.1;
+                            // console.log("Found index here " + index);
+                            var index2 = _this.chartLabels.indexOf(15.0);
+                            if (index2 !== -1)
+                                _this.chartLabels[index2] = 15.1;
+                        }
+                        else if (time === 20) {
+                            var index = _this.chartLabels.indexOf(6.0);
+                            if (index !== -1)
+                                _this.chartLabels[index] = 5.0;
+                            // console.log("Found index here " + index);
+                            var index2 = _this.chartLabels.indexOf(8.0);
+                            if (index2 !== -1)
+                                _this.chartLabels[index2] = 8.1;
+                        }
+                        else {
+                            ;
+                        }
                     }
                 }
                 else if (time >= 8) {
                     if (time % 5 === 0) {
                         _this.chartLabels.push(time);
+                        //push 10
+                        if (time === 10) {
+                            var index = _this.chartLabels.indexOf(2.0);
+                            console.log("Found index here " + index);
+                            if (index !== -1)
+                                _this.chartLabels[index] = 2.1;
+                        }
+                        else {
+                            var index = _this.chartLabels.indexOf(4.0);
+                            console.log("Found index here " + index);
+                            if (index !== -1)
+                                _this.chartLabels[index] = 4.1;
+                        }
                         // console.log("Successfully pushed " + time);
                     }
                 }
                 else if (time === 7) {
-                    _this.chartLabels.push(time);
+                    // this.chartLabels.push(time);
                     // console.log("Successfully pushed " + time);
                 }
                 else if (time === 6) {
@@ -789,12 +862,11 @@ var HashingPage = /** @class */ (function () {
                 }
                 else if (time > 2) {
                     if (time % 2 === 0) {
-                        _this.chartLabels.push(time);
+                        // this.chartLabels.push(time);
                         // console.log("Successfully pushed " + time);
                     }
                 }
                 else {
-                    _this.chartLabels.push(time);
                     // console.log("Successfully pushed " + time);
                 }
             }, 1000);
@@ -966,6 +1038,51 @@ var HashingPage = /** @class */ (function () {
         // console.log(" test here " +event.value);
         // slider.destroy();
     };
+    HashingPage.prototype.filterInitChartLabels = function (currTime) {
+        //20, 30,
+        //base function
+        if (currTime >= 20) {
+            // var acceptedList = [10.0, 20.0, 20.0];
+            for (var i = 1.0; i <= currTime; i++) {
+                if ((i % 10) === 0) {
+                    continue;
+                }
+                var index = this.chartLabels.indexOf(i);
+                // console.log("Found index here " + index);
+                console.log("Altering index before :  " + this.chartLabels[index]);
+                if (index !== -1)
+                    this.chartLabels[index] = i + 0.1;
+                console.log("Altering index after :  " + this.chartLabels[index]);
+            }
+        }
+        else if ((currTime >= 15) && (currTime <= 20)) {
+            var acceptedList = [10.0, 15.0, 20.0];
+            for (var i = 1.0; i <= currTime; i++) {
+                if (acceptedList.indexOf(i) !== -1) {
+                    continue;
+                }
+                var index = this.chartLabels.indexOf(i);
+                // console.log("Found index here " + index);
+                console.log("Altering index before :  " + this.chartLabels[index]);
+                if (index !== -1)
+                    this.chartLabels[index] = i + 0.1;
+                console.log("Altering index after :  " + this.chartLabels[index]);
+            }
+        }
+        else {
+            for (var i = 1.0; i <= currTime; i++) {
+                if (i === 10.0) {
+                    continue;
+                }
+                var index = this.chartLabels.indexOf(i);
+                // console.log("Found index here " + index);
+                console.log("Altering index before :  " + this.chartLabels[index]);
+                if (index !== -1)
+                    this.chartLabels[index] = i + 0.1;
+                console.log("Altering index after :  " + this.chartLabels[index]);
+            }
+        }
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__["BaseChartDirective"]),
         __metadata("design:type", Object)
@@ -1061,14 +1178,15 @@ var HomePage = /** @class */ (function () {
         }
     };
     //bgm loop works in home view, uncomment for mobile sound
-    // ionViewDidLoad() {
-    //   this.platform.ready().then(() => {
-    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-    //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-    //       this.nativeAudio.loop('bgmLoopHome');
-    //     });
-    //   });
-    // }
+    HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.platform.ready().then(function () {
+            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
+                _this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+                _this.nativeAudio.loop('bgmLoopHome');
+            });
+        });
+    };
     //NEWS API
     HomePage.prototype.getNews_Old = function () {
         var _this = this;
@@ -1975,24 +2093,6 @@ var StreamPage = /** @class */ (function () {
                             // console.log("After push entry value" + localEntryPrice);
                         }
                         ;
-                        // chart.data.datasets.forEach(function (dataset: any) {
-                        //   if (count == 0) {
-                        //     // var value = Math.random() * 3000 + 4500;
-                        //     var value = 100;
-                        //     value = this.randomIntRange();
-                        //   }
-                        //   else if (count === 3) {
-                        //     var value = 5000;
-                        //   }
-                        //   else {
-                        //   }
-                        //   var currDate = Date.now();
-                        //   dataset.data.push({
-                        //     x: currDate,
-                        //     y: value,
-                        //   });
-                        //   count++;
-                        // });
                     },
                     delay: 1500,
                     frameRate: 30,
@@ -2021,7 +2121,7 @@ var StreamPage = /** @class */ (function () {
                         offset: true,
                         ticks: {
                             fontColor: "#f4f4f4",
-                            fontSize: 12,
+                            fontSize: 11,
                             padding: 5,
                             display: true,
                         },
@@ -2081,10 +2181,10 @@ var StreamPage = /** @class */ (function () {
                 _this.isSliderDisabled = true;
                 _this.boughtIntoGame3 = true;
                 _this.roundBetType = 'long';
-                _this.buyDataset(_this.roundBetType, data.entryPrice);
+                _this.buyDataset(_this.roundBetType, parseFloat(data.entryPrice).toFixed(3));
                 _this.auth.setAccValue(data.accountValue);
                 _this.walletAmount = _this.auth.getAccValue();
-                _this.entryPrice = data.entryPrice;
+                _this.entryPrice = parseFloat(data.entryPrice).toFixed(3);
                 // this.isManualBetDisabled = true;
                 // this.isManualCoutDisabled = false;
                 _this.hasActiveBet = true;
@@ -2202,9 +2302,9 @@ var StreamPage = /** @class */ (function () {
                 _this.auth.setAccValue(data.accountValue);
                 _this.walletAmount = _this.auth.getAccValue();
                 var transaction = {
-                    "entryPrice": data.data.entryPrice.toFixed(2),
+                    "entryPrice": parseFloat(data.data.entryPrice).toFixed(2),
                     "betType": data.data.orderTypeDisplay,
-                    "endPrice": data.data.endPrice.toFixed(2),
+                    "endPrice": parseFloat(data.data.endPrice).toFixed(2),
                     "profit": parseInt(data.data.profit)
                 };
                 _this.historicalGame3.push(transaction);
@@ -3182,15 +3282,15 @@ var map = {
 		3
 	],
 	"../pages/trehunt/trehunt.module": [
-		668,
+		667,
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		669,
+		668,
 		1
 	],
 	"../pages/wallet/wallet.module": [
-		667,
+		669,
 		0
 	]
 };
@@ -3364,11 +3464,11 @@ var DataProvider = /** @class */ (function () {
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid);
         return this.http.post(reqSMSURL, requestBody, httpHeader);
     };
-    //login WITH 2FA
+    //toggle 2FA
     DataProvider.prototype.postToggle2FA = function (accid, codeNo) {
-        var httpHeader = {
-            headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ 'Content-Type': 'application/x-www-form-urlencoded' })
-        };
+        var sessionToken = this.auth.getSessionToken();
+        console.log("session token posted " + sessionToken);
+        var httpHeader = { headers: new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["c" /* HttpHeaders */]({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
         var requestBody = new __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["d" /* HttpParams */]().set("accid", accid).set("codeNo", codeNo);
         return this.http.post(toggle2FAUrl, requestBody, httpHeader);
     };
@@ -3661,9 +3761,9 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/toggle-two-fa/toggle-two-fa.module#ToggleTwoFaPageModule', name: 'ToggleTwoFaPage', segment: 'toggle-two-fa', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],

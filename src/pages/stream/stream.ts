@@ -167,7 +167,7 @@ export class StreamPage {
         this.gameTimer = parseFloat(receivedData.number).toFixed(1);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
-        if ((this.gameTimer < 5) && (this.hasActiveBet)) {
+        if ((this.gameTimer < 4.2) && (this.hasActiveBet)) {
           if (!this.musicPlayed) {
             this.smartAudio.play('game3countdown');
             this.musicPlayed = true;
@@ -303,7 +303,7 @@ export class StreamPage {
             };
 
           },
-          delay: 1500,
+          delay: 0,
           frameRate: 30,
         }
       },

@@ -73,8 +73,8 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
   loginState: any = "in";
-  usernameInput: string = 'jasper';
-  passwordInput: string = 'jasper';
+  usernameInput: string = 'Eric';
+  passwordInput: string = 'eric';
   receivedData;
   showInvalidLogin: boolean = false;
 
