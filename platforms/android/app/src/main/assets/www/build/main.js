@@ -50,8 +50,8 @@ var LoginPage = /** @class */ (function () {
         this.passwordType = 'password';
         this.passwordIcon = 'eye';
         this.loginState = "in";
-        this.usernameInput = 'jasper';
-        this.passwordInput = 'jasper';
+        this.usernameInput = 'Eric';
+        this.passwordInput = 'eric';
         this.showInvalidLogin = false;
     }
     // uncomment for mobile load sound
@@ -1970,7 +1970,7 @@ var StreamPage = /** @class */ (function () {
                 _this.gameTimer = parseFloat(receivedData.number).toFixed(1);
                 // console.log("Updating current price in game " + gameValuesToPush);
                 // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
-                if ((_this.gameTimer < 5) && (_this.hasActiveBet)) {
+                if ((_this.gameTimer < 4.2) && (_this.hasActiveBet)) {
                     if (!_this.musicPlayed) {
                         _this.smartAudio.play('game3countdown');
                         _this.musicPlayed = true;
@@ -2094,7 +2094,7 @@ var StreamPage = /** @class */ (function () {
                         }
                         ;
                     },
-                    delay: 1500,
+                    delay: 0,
                     frameRate: 30,
                 }
             },
