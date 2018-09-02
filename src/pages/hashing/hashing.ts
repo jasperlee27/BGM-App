@@ -137,9 +137,6 @@ export class HashingPage {
             autoSkip: false,
             callback: function (value) {
               if (Number.isInteger(value)) {
-                if (value === 0){
-                  console.log("PRINTING VALUE 0");
-                }
                 return value + 's';
               }
 
@@ -243,7 +240,7 @@ export class HashingPage {
         8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
         9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
       ];
-  
+
     this.multiplierDisplay = 1;
     this.finalValue = 0; //init as 0 first, to update later.
     this.isBurstTextHidden = true;
@@ -266,7 +263,11 @@ export class HashingPage {
       // for (var i = 0; i < recei)
 
       if (receivedData.timeArr.length > 0) {
-        this.chartLabels = receivedData.timeArr;
+
+        if (receivedData.priceArr.length > this.chartLabels.length) {
+          this.chartLabels = receivedData.timeArr;
+          this.filterInitChartLabels(parseInt(receivedData.timeArr[receivedData.timeArr.length - 1]));
+        }
         // this.chartLabels.push(receivedData.timeArr[0]);
         // this.chartLabels.push(receivedData.timeArr[receivedData.timeArr.length - 1]);
         console.log("IN my chart labels " + this.chartLabels + "size of arr " + this.chartLabels.length);
@@ -275,6 +276,8 @@ export class HashingPage {
         // this.chartData[0].data.push(receivedData.priceArr[receivedData.priceArr.length - 1]);
         console.log("IN my chart data " + this.chartData[0].data + "size of arr " + this.chartData[0].data.length);
         this.chart.refresh();
+        this.timer("start", parseInt(receivedData.timeArr[receivedData.timeArr.length - 1]));
+
         // console.log("price array " + receivedData.priceArr);
         // console.log("time array " + receivedData.timeArr);
       }
@@ -302,7 +305,7 @@ export class HashingPage {
         if (!this.isLocGameTimerStarted) {
           this.isLocGameTimerStarted = true;
           console.log("START TIMER HERE");
-          this.timer("start");
+          this.timer("start", 0);
         }
 
         else {
@@ -365,22 +368,22 @@ export class HashingPage {
         this.isTimerHidden = true;
         this.finalValue = parseFloat(receivedData.value).toFixed(2);
         //reset chart and stop timer
-        this.timer("stop");
+        this.timer("stop", 0);
         this.isLocGameTimerStarted = false;
         this.chartLabels = [];
         this.chartLabels =
-        [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
-          1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
-          2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
-          3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
-          4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
-          5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
-          6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
-          7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
-          8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
-          9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
-        ];
-   
+          [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.01,
+            1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0,
+            2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.01,
+            3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4.0,
+            4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.01,
+            5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0,
+            6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.01,
+            7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8.0,
+            8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9, 9.01,
+            9.1, 9.2, 9.3, 9.4, 9.5, 9.6, 9.7, 9.8, 9.9
+          ];
+
         this.chartData[0].data = [];
 
       }
@@ -427,8 +430,8 @@ export class HashingPage {
     this.walletAmount = this.auth.getAccValue();
   }
 
-  timer(action: string) {
-    var time: number = 0;
+  timer(action: string, startTime: number) {
+    var time: number = startTime;
 
 
     if (action === 'start') {
@@ -437,28 +440,28 @@ export class HashingPage {
         // console.log("Counting timer " + time + "s");
 
         if (time > 15) {
-          
+
           if (time % 10 === 0) {
             this.chartLabels.push(time);
-            if (time===30){
-              var index = this.chartLabels.indexOf(5.0); 
-              if (index !== -1) this.chartLabels[index]=5.1;
+            if (time === 30) {
+              var index = this.chartLabels.indexOf(5.0);
+              if (index !== -1) this.chartLabels[index] = 5.1;
               // console.log("Found index here " + index);
 
-              var index2 = this.chartLabels.indexOf(15.0); 
-              if (index2 !== -1) this.chartLabels[index2]=15.1;
+              var index2 = this.chartLabels.indexOf(15.0);
+              if (index2 !== -1) this.chartLabels[index2] = 15.1;
             }
             //push 20
-            else if (time===20){  
-              var index = this.chartLabels.indexOf(6.0); 
-              if (index !== -1) this.chartLabels[index]=5.0;
+            else if (time === 20) {
+              var index = this.chartLabels.indexOf(6.0);
+              if (index !== -1) this.chartLabels[index] = 5.0;
               // console.log("Found index here " + index);
 
-              var index2 = this.chartLabels.indexOf(8.0); 
-              if (index2 !== -1) this.chartLabels[index2]=8.1;
+              var index2 = this.chartLabels.indexOf(8.0);
+              if (index2 !== -1) this.chartLabels[index2] = 8.1;
             }
 
-            else{
+            else {
               ;
             }
           }
@@ -468,17 +471,17 @@ export class HashingPage {
           if (time % 5 === 0) {
             this.chartLabels.push(time);
             //push 10
-            if (time===10){  
-              var index = this.chartLabels.indexOf(2.0); 
+            if (time === 10) {
+              var index = this.chartLabels.indexOf(2.0);
               console.log("Found index here " + index);
-              if (index !== -1) this.chartLabels[index]=2.1;
+              if (index !== -1) this.chartLabels[index] = 2.1;
             }
             //push 15
             else {
-              var index = this.chartLabels.indexOf(4.0); 
+              var index = this.chartLabels.indexOf(4.0);
               console.log("Found index here " + index);
-              if (index !== -1) this.chartLabels[index]=4.1;
-            }          
+              if (index !== -1) this.chartLabels[index] = 4.1;
+            }
             // console.log("Successfully pushed " + time);
           }
         }
@@ -695,81 +698,50 @@ export class HashingPage {
     // slider.destroy();
 
   }
-  // updateIncrement(currValue: number) {
-  //   if (currValue >= 10.0) {
-  //     return 0.200;
-  //   }
-  //   else if (currValue >= 9.5) {
-  //     return 0.185;
-  //   }
-  //   else if (currValue >= 9.0) {
-  //     return 0.170;
-  //   }
-  //   else if (currValue >= 8.5) {
-  //     return 0.155;
-  //   }
-  //   else if (currValue >= 8.0) {
-  //     return 0.140;
-  //   }
-  //   else if (currValue >= 7.5) {
-  //     return 0.130;
-  //   }
-  //   else if (currValue >= 7.0) {
-  //     return 0.120;
-  //   }
-  //   else if (currValue >= 6.5) {
-  //     return 0.110;
-  //   }
-  //   else if (currValue >= 6.0) {
-  //     return 0.100;
-  //   }
-  //   else if (currValue >= 5.5) {
-  //     return 0.095;
-  //   }
-  //   else if (currValue >= 5.0) {
-  //     return 0.085;
-  //   }
-  //   else if (currValue >= 4.5) {
-  //     return 0.070;
-  //   }
-  //   else if (currValue >= 4.0) {
-  //     return 0.060;
-  //   }
-  //   else if (currValue >= 3.5) {
-  //     return 0.054;
-  //   }
-  //   else if (currValue >= 3.0) {
-  //     return 0.045;
-  //   }
-  //   else if (currValue >= 2.5) {
-  //     return 0.0380;
-  //   }
-  //   else if (currValue >= 2) {
-  //     return 0.0360;
-  //   }
-  //   else if (currValue >= 1.8) {
-  //     return 0.0300;
-  //   }
-  //   else if (currValue >= 1.5) {
-  //     return 0.027;
-  //   }
-  //   else if (currValue >= 1.3) {
-  //     return 0.0235;
-  //   }
-  //   // else if (currValue >= 1.25){
-  //   //   return 0.022;
-  //   // }
-  //   else if (currValue >= 1.2) {
-  //     return 0.02;
-  //   }
-  //   // else if (currValue >= 1.2){
-  //   //   return 0.018;
-  //   //}
-  //   else if (currValue >= 1.1) {
-  //     return 0.015;
-  //   }
 
-  //   else return 0.012;
-  // }
+  filterInitChartLabels(currTime: number) {
+    //20, 30,
+    //base function
+    if (currTime >= 20) {
+      for (var i = 1.0; i <= currTime; i++) {
+        if ((i % 10) == 0) {
+          continue;
+        }
+        var index = this.chartLabels.indexOf(i);
+        // console.log("Found index here " + index);
+        console.log("Altering index before :  " + this.chartLabels[index]);
+        if (index !== -1) this.chartLabels[index] = i + 0.1;
+        console.log("Altering index after :  " + this.chartLabels[index]);
+      }
+    }
 
+    else if ((currTime >= 15) && (currTime < 20)) {
+      var acceptedList = [10.0, 15.0, 20.0];
+      for (var i = 1.0; i <= currTime; i++) {
+        if (acceptedList.indexOf(i) !== -1) {
+          continue;
+        }
+        var index = this.chartLabels.indexOf(i);
+        // console.log("Found index here " + index);
+        console.log("Altering index before :  " + this.chartLabels[index]);
+        if (index !== -1) this.chartLabels[index] = i + 0.1;
+        console.log("Altering index after :  " + this.chartLabels[index]);
+      }
+    }
+    //(currTime >= 10)
+    else {
+      for (var i = 1.0; i <= currTime; i++) {
+        if (i === 10.0) {
+          continue;
+        }
+        var index = this.chartLabels.indexOf(i);
+
+        // console.log("Found index here " + index);
+        console.log("Altering index before :  " + this.chartLabels[index]);
+        if (index !== -1) this.chartLabels[index] = i + 0.1;
+        console.log("Altering index after :  " + this.chartLabels[index]);
+      }
+    }
+
+  }
 }
