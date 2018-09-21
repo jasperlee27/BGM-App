@@ -16,7 +16,7 @@ export class GlobalAuthProvider {
   private accValue: number;
   private sessionToken: string;
   private twoFAstatus: number;
-
+  private refID: string;
   constructor() {
     console.log('Hello GlobalAuthProvider Provider');
   }
@@ -63,6 +63,14 @@ export class GlobalAuthProvider {
 
   addAccValue(amount){
     this.accValue += parseFloat(amount);
+  }
+
+  setRefID(refId){
+    this.refID = refId;
+  }
+
+  getRefID(){
+    return this.refID;
   }
 
   setGuestLogin(control: boolean){

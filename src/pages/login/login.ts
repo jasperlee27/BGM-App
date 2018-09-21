@@ -73,8 +73,8 @@ export class LoginPage {
   passwordType: string = 'password';
   passwordIcon: string = 'eye';
   loginState: any = "in";
-  usernameInput: string = 'Eric';
-  passwordInput: string = 'eric';
+  usernameInput: string = 'jasper2';
+  passwordInput: string = 'jasper2';
   receivedData;
   showInvalidLogin: boolean = false;
 
@@ -120,6 +120,8 @@ export class LoginPage {
         console.log("Setting acc balance as  " + this.receivedData.accountValue);
         this.auth.setSessionToken(this.receivedData.token);
         console.log("session Token set as " + this.auth.getSessionToken());
+        this.auth.setRefID(this.receivedData.referralId);
+        console.log("Referral ID set as " + this.auth.getRefID());
         this.navCtrl.setRoot(TabsPage);
       }
 

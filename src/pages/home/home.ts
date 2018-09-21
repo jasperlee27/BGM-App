@@ -11,6 +11,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
+import { QrCodePage } from '../qr-code/qr-code';
 
 // import { MyApp } from '../../app/app.component';
 
@@ -29,6 +30,7 @@ import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 export class HomePage implements OnInit {
   twoFApage = TwoFacAuthPage;
   toggleTwoFApage = ToggleTwoFaPage;
+  qrPage = QrCodePage;
   displayStory: any;
   storyImage: any;
   messageText: string;
@@ -37,9 +39,10 @@ export class HomePage implements OnInit {
   initTwoFAstatus: boolean;
   twoFAstatus: boolean;
   isToggled;
+  createdCode = "https://" + "www.google.com";
   // socket: SocketIOClient.Socket;
 
-  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController) {
+  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController, public modalCtrl: ModalController) {
     // this.socket = io.connect('http://178.128.50.224:3001');
     // console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
@@ -63,14 +66,14 @@ export class HomePage implements OnInit {
     }
   }
   //bgm loop works in home view, uncomment for mobile sound
-  ionViewDidLoad() {
-    this.platform.ready().then(() => {
-      this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-        this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-        this.nativeAudio.loop('bgmLoopHome');
-      });
-    });
-  }
+  // ionViewDidLoad() {
+  //   this.platform.ready().then(() => {
+  //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+  //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+  //       this.nativeAudio.loop('bgmLoopHome');
+  //     });
+  //   });
+  // }
   //NEWS API
   getNews_Old() {
     console.log("button is working fine");
@@ -141,6 +144,23 @@ export class HomePage implements OnInit {
     });
 
     alert.present();
+  }
+
+  showQRcode() {
+    //to do alert
+    this.navCtrl.push(this.qrPage);
+
+    // let profileModal = this.modalCtrl.create(QrCodePage, { createdCode: this.createdCode });
+    // profileModal.onDidDismiss(data => {
+    //   console.log(data);
+    // });
+    // profileModal.present();
+  }
+
+  showCommission(){
+    console.log("Triggered comms page");
+    //check if master or agent
+    
   }
 
   logout() {

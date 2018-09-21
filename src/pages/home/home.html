@@ -60,15 +60,41 @@
     <!--update 2 FA -->
     <ion-row>
       <ion-col col-12>
-        <ion-item no-lines class="twoFA"  [style.visibility]="isGuest ? 'hidden' : 'visible'">
-            <span item-left style="color:#f3ba2e; font-size:16px;">
-                <span style="padding-right:8px">
-                  <ion-icon name="lock"></ion-icon>
-                </span>
-                Toggle 2FA
-              </span>
+        <ion-item no-lines class="twoFA" *ngIf="!isGuest">
+          <span item-left style="color:#f3ba2e; font-size:16px;">
+            <span style="padding-right:8px">
+              <ion-icon name="lock"></ion-icon>
+            </span>
+            Toggle 2FA
+          </span>
           <ion-toggle [(ngModel)]="twoFAstatus" (ionChange)="toggle2FA()"></ion-toggle>
         </ion-item>
+      </ion-col>
+    </ion-row>
+    <!--get ref QR code -->
+    <ion-row>
+      <ion-col col-12>
+        <button ion-item no-lines class="referQR" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showQRcode()">
+          <span item-left style="color:#f3ba2e; font-size:16px;">
+            <span style="padding-right:8px">
+              <ion-icon name="qr-scanner"></ion-icon>
+            </span>
+            Get Referral QR
+          </span>
+        </button>
+      </ion-col>
+    </ion-row>
+    <!--get comission page -->
+    <ion-row>
+      <ion-col col-12>
+        <button ion-item no-lines class="viewCommission" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showCommission()">
+          <span item-left style="color:#f3ba2e; font-size:16px;">
+            <span style="padding-right:8px">
+                <ion-icon ios="ios-cash-outline" md="md-cash"></ion-icon>
+            </span>
+            Comission Earned
+          </span>
+        </button>
       </ion-col>
     </ion-row>
     <!--logout button-->

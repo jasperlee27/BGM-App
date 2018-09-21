@@ -34,6 +34,8 @@ import { DataProvider } from '../providers/data/data';
 import { DummyChatPage } from '../pages/dummy-chat/dummy-chat';
 import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
 import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
+import { QrCodePage } from '../pages/qr-code/qr-code';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
     HomePage,
     TwoFacAuthPage,
     ToggleTwoFaPage,
+    QrCodePage,
     TabsPage,
     WalletPage,
     StreamPage,
@@ -63,6 +66,7 @@ import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
     HttpClientModule,
     ChartsModule,
     BrowserAnimationsModule,
+    NgxQRCodeModule,
     IonicModule.forRoot(MyApp, {
       scrollPadding: false,
       scrollAssist: false,
@@ -79,6 +83,7 @@ import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
     BiddingPage,
     HashingPage,
     ContactPage,
+    QrCodePage,
     SplashLogoPage,
     LoginPage,
     HomePage,

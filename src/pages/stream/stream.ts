@@ -57,7 +57,7 @@ export class StreamPage {
   chartColors: any[] =
     [
       { // Actual BTC graph
-        backgroundColor: 'rgba(0,0,0,0)',
+        backgroundColor: 'rgba(255, 206, 86, 0)',
         borderColor: '#f3ba2e',
         pointBackgroundColor: '#f3ba2e',
         // pointBorderColor: '#fafafa',
@@ -85,7 +85,7 @@ export class StreamPage {
 
   datasets: any[] =
     [
-      { data: [], showLine: true, fill: false, label: 'BitCoin', },
+      { data: [], showLine: true, fill:true, label: 'BitCoin', },
       { data: [], showLine: false, pointRadius: 5, label: 'Short' },
       { data: [], showLine: false, pointRadius: 5, label: 'Long' }
 
@@ -112,11 +112,14 @@ export class StreamPage {
     var gameValuesToPush;
     var localActiveBet;
     var localEntryPrice;
-
+    var lastCountDown;
+    var updatePriceFlag;
+    var currCountDown;
     this.socket.on('Game3', (data: any) => {
       // console.log(JSON.parse(data));
       var receivedData = JSON.parse(data);
       // console.log("Received data type  " + receivedData.type);
+
       localActiveBet = this.hasActiveBet;
       localEntryPrice = this.entryPrice;
       // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
@@ -163,6 +166,17 @@ export class StreamPage {
 
       else if (receivedData.type === 'game') {
         this.isBetDisabled = true;
+        // var updatePriceFlag; 
+        // var currCountDown;
+
+        // currCountDown = parseInt(receivedData.number);
+        // console.log("Current countdown = " + currCountDown);
+        // if (currCountDown < lastCountDown) {
+        //   gameValuesToPush = receivedData.currentPrice;
+        //   lastCountDown = currCountDown;
+        //   console.log("pushed value " + gameValuesToPush);
+        // }
+
         gameValuesToPush = receivedData.currentPrice;
         this.gameTimer = parseFloat(receivedData.number).toFixed(1);
         // console.log("Updating current price in game " + gameValuesToPush);
@@ -263,7 +277,7 @@ export class StreamPage {
       },
       plugins: {
         streaming: {
-          refresh: 100,
+          refresh: 500,
           duration: 30000,
           //can create function to copy here from received data above?
           //or create socket here and update value here;
@@ -303,7 +317,7 @@ export class StreamPage {
             };
 
           },
-          delay: 0,
+          delay: 2000,
           frameRate: 30,
         }
       },
