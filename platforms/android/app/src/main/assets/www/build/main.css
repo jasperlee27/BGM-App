@@ -36695,6 +36695,15 @@ page-home .scroll-content {
   overflow-y: hidden;
 }
 
+page-home ion-page.modal {
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+page-home .disabledfeature {
+  color: #8f8f8f;
+}
+
 page-login .item-md.item-block .item-inner,
 page-login .item-md.item-input.input-has-focus .item-inner,
 page-login .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,

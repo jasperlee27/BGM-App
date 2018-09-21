@@ -160,7 +160,7 @@ export class HomePage implements OnInit {
   showCommission(){
     console.log("Triggered comms page");
     //check if master or agent
-    
+
   }
 
   logout() {

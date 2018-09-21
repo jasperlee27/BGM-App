@@ -5,7 +5,8 @@ import { MyApp } from './app.component';
 import { HTTP } from '@ionic-native/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { RoulettePage } from '../pages/roulette/roulette';
 import { BiddingPage } from '../pages/bidding/bidding';
