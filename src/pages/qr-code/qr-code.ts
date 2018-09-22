@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 
 /**
@@ -18,7 +18,7 @@ export class QrCodePage {
   createdCode;
   qrData = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams, private auth: GlobalAuthProvider) {
   }
   ngOnInit(){
     this.createCode();
@@ -31,5 +31,9 @@ export class QrCodePage {
   createCode(){
    console.log("Creating Code");
    this.createdCode = "http://" + "178.128.50.224:3000/qr/" + this.auth.getRefID();
+  }
+  
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

@@ -37,6 +37,7 @@ import { SlotsDrawBtcPage } from '../pages/slots-draw-btc/slots-draw-btc';
 import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
 import { QrCodePage } from '../pages/qr-code/qr-code';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { NewModalPage } from '../pages/new-modal/new-modal';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     WalletPage,
     StreamPage,
     DummyChatPage,
+    NewModalPage,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +95,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
     WalletPage,
     TabsPage,
     StreamPage,
-    DummyChatPage
+    DummyChatPage,
+    NewModalPage
   ],
   providers: [
     StatusBar,

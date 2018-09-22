@@ -12,6 +12,7 @@ import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { QrCodePage } from '../qr-code/qr-code';
+import { NewModalPage } from '../new-modal/new-modal';
 
 // import { MyApp } from '../../app/app.component';
 
@@ -148,13 +149,13 @@ export class HomePage implements OnInit {
 
   showQRcode() {
     //to do alert
-    this.navCtrl.push(this.qrPage);
+    // this.navCtrl.push(this.qrPage);
 
-    // let profileModal = this.modalCtrl.create(QrCodePage, { createdCode: this.createdCode });
-    // profileModal.onDidDismiss(data => {
-    //   console.log(data);
+    let qrModal = this.modalCtrl.create(NewModalPage);
+    // qrModal.onDidDismiss(data => {
+    //   console.log("Dismissed modal");
     // });
-    // profileModal.present();
+    qrModal.present();
   }
 
   showCommission(){
