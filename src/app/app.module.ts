@@ -6,7 +6,7 @@ import { HTTP } from '@ionic-native/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {TreeTableModule} from "ng-treetable";
 
 import { RoulettePage } from '../pages/roulette/roulette';
 import { BiddingPage } from '../pages/bidding/bidding';
@@ -38,6 +38,7 @@ import { ToggleTwoFaPage } from '../pages/toggle-two-fa/toggle-two-fa';
 import { QrCodePage } from '../pages/qr-code/qr-code';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { NewModalPage } from '../pages/new-modal/new-modal';
+import { CommTreePage } from '../pages/comm-tree/comm-tree';
 
 @NgModule({
   declarations: [
@@ -62,9 +63,11 @@ import { NewModalPage } from '../pages/new-modal/new-modal';
     StreamPage,
     DummyChatPage,
     NewModalPage,
+    CommTreePage,
   ],
   imports: [
     BrowserModule,
+    TreeTableModule,
     HttpModule,
     HttpClientModule,
     ChartsModule,
@@ -96,7 +99,8 @@ import { NewModalPage } from '../pages/new-modal/new-modal';
     TabsPage,
     StreamPage,
     DummyChatPage,
-    NewModalPage
+    NewModalPage,
+    CommTreePage
   ],
   providers: [
     StatusBar,

@@ -13,6 +13,7 @@ import { ToggleTwoFaPage } from '../toggle-two-fa/toggle-two-fa';
 import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { QrCodePage } from '../qr-code/qr-code';
 import { NewModalPage } from '../new-modal/new-modal';
+import { CommTreePage } from '../comm-tree/comm-tree';
 
 // import { MyApp } from '../../app/app.component';
 
@@ -29,6 +30,7 @@ import { NewModalPage } from '../new-modal/new-modal';
   templateUrl: 'home.html',
 })
 export class HomePage implements OnInit {
+  commTreePage = CommTreePage;
   twoFApage = TwoFacAuthPage;
   toggleTwoFApage = ToggleTwoFaPage;
   qrPage = QrCodePage;
@@ -160,6 +162,7 @@ export class HomePage implements OnInit {
 
   showCommission(){
     console.log("Triggered comms page");
+    this.navCtrl.push(this.commTreePage);
     //check if master or agent
 
   }
