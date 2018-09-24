@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../node_modules/@ionic-native/native-audio';
+// import { CommTreePage } from '../pages/comm-tree/comm-tree';
 
 
 declare var testVar;

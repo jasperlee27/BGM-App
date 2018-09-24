@@ -6,8 +6,9 @@ import { HTTP } from '@ionic-native/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {TreeTableModule} from "ng-treetable";
-
+// import { TreeDiagram } from 'angular2-tree-diagram';
+import { OrgChartModule } from 'ng-org-chart';
+import { TreeTableModule } from "ng-treetable";
 import { RoulettePage } from '../pages/roulette/roulette';
 import { BiddingPage } from '../pages/bidding/bidding';
 import { ContactPage } from '../pages/contact/contact';
@@ -16,7 +17,6 @@ import { WalletPage } from '../pages/wallet/wallet';
 import { StreamPage } from '../pages/stream/stream';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
-
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -67,6 +67,8 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
   ],
   imports: [
     BrowserModule,
+    // TreeDiagram,
+    OrgChartModule,
     TreeTableModule,
     HttpModule,
     HttpClientModule,
@@ -77,7 +79,7 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
       scrollPadding: false,
       scrollAssist: false,
       autoFocusAssist: false,
-  })
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -109,8 +111,8 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
     NativeAudio,
     SmartAudioProvider,
     GlobalAuthProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider
   ]
 })
-export class AppModule {}
+export class AppModule { }
