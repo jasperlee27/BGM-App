@@ -8,6 +8,7 @@ const serverHealthURL = 'http://178.128.50.224:3000';
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const login2FAUrl='http://178.128.50.224:3000/account/login2fa';
 const toggle2FAUrl='http://178.128.50.224:3000/account/toggle2FA';
+const incentiveURL = 'http://178.128.50.224:3000/account/getincentive';
 const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const trehuntWinnerURL = 'http://178.128.50.224:3000/game1/getWinner';
@@ -30,6 +31,10 @@ export class DataProvider {
   //get server health for guest view
   getServerHealth(): Observable<any> {
     return this.http.get(serverHealthURL);
+  }
+
+  getIncentive(): Observable<any> {
+    return this.http.get(incentiveURL);
   }
   
   //login WITHOUT 2FA

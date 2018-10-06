@@ -18,6 +18,7 @@ import { StreamPage } from '../pages/stream/stream';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -39,6 +40,7 @@ import { QrCodePage } from '../pages/qr-code/qr-code';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { NewModalPage } from '../pages/new-modal/new-modal';
 import { CommTreePage } from '../pages/comm-tree/comm-tree';
+
 
 @NgModule({
   declarations: [
@@ -111,6 +113,7 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
     NativeAudio,
     SmartAudioProvider,
     GlobalAuthProvider,
+    InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DataProvider
   ]

@@ -88,8 +88,8 @@ export class HashingPage {
 
     this.chartColors = [{ // Actual Volume ETB
       backgroundColor: 'rgba(0, 0, 0, 0)',
-      borderColor: "#f3ba2e",
-      pointBackgroundColor: "#f3ba2e",
+      borderColor: "#f3ab2e",
+      pointBackgroundColor: "#f3ab2e",
       // pointBorderColor: '#fafafa',
       pointHoverBackgroundColor: 'rgb(255, 113, 0)', //changing inside hover box legend
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'  //changing hover point color
@@ -215,7 +215,7 @@ export class HashingPage {
           scaleLabel: {
             display: false,
             labelString: 'Multiplier',
-            fontColor: "#f3ba2e",
+            fontColor: "#f3ab2e",
             fontSize: 14,
             fontStyle: 'bold',
             fontFamily: 'roboto'

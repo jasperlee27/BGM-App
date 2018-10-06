@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "5.2.11",
     "@ionic-native/core": "4.7.0",
     "@ionic-native/http": "^4.11.0",
+    "@ionic-native/in-app-browser": "^4.15.0",
     "@ionic-native/native-audio": "^4.11.0",
     "@ionic-native/splash-screen": "4.7.0",
     "@ionic-native/status-bar": "^4.7.0",
@@ -38,6 +39,7 @@
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.1",
+    "cordova-plugin-inappbrowser": "^3.0.0",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
     "cordova-plugin-ionic-webview": "^2.0.1",
     "cordova-plugin-nativeaudio": "^3.0.9",
@@ -60,7 +62,6 @@
   "devDependencies": {
     "@angular/cli": "^6.0.8",
     "@ionic/app-scripts": "3.1.9",
-    "ionic": "3.20.0",
     "typescript": "~2.6.2"
   },
   "cordova": {
@@ -73,7 +74,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-advanced-http": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-nativeaudio": {}
+      "cordova-plugin-nativeaudio": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "browser",

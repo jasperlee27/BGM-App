@@ -10,6 +10,7 @@ import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { InAppBrowser } from '../../../node_modules/@ionic-native/in-app-browser';
 
 // import { TabsPage } from '../tabs/tabs';
 
@@ -78,7 +79,7 @@ export class LoginPage {
   receivedData;
   showInvalidLogin: boolean = false;
 
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController) {
+  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController, public inAppBrowser: InAppBrowser) {
   }
   // uncomment for mobile load sound
   // ionViewDidLoad() {
@@ -107,7 +108,7 @@ export class LoginPage {
       this.showInvalidLogin = false;
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       //parse response from server
- 
+
       console.log("Login reponse");
       this.auth.setAccId(this.receivedData._id);
       console.log("Setting account id as " + this.receivedData._id);
@@ -191,5 +192,10 @@ export class LoginPage {
   showHide(): any {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     this.passwordIcon = this.passwordIcon === 'eye' ? 'eye-off' : 'eye';
+  }
+
+  createAccount() {
+    const browser = this.inAppBrowser.create('http://ortustenoris.io/','_system');
+
   }
 }
