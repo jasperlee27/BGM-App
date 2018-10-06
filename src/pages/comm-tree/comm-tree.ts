@@ -17,8 +17,11 @@ import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
   templateUrl: 'comm-tree.html',
 })
 export class CommTreePage {
-  relationship;
-  graph=true;
+  viewOptions="table";
+  graph= true;
+  weekStakeComms;
+  weekProfitComms;
+
   input;
   topEmployee: IEmployee = {
     name: 'Admin',
@@ -175,6 +178,9 @@ export class CommTreePage {
       // if (data.message !== '') {
         console.log("received " + JSON.stringify(receivedData));
         this.input = receivedData[0].children;
+        this.topEmployee = receivedData[1];
+        this.weekProfitComms = receivedData[0].totalProfitGain;
+        this.weekStakeComms = receivedData[0].totalTranComm;
         // this.auth.setAccId("guest");
         // this.auth.setUsername("guest");
         // this.auth.setGuestLogin(true);

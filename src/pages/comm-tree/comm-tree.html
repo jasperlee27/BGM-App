@@ -14,27 +14,39 @@
 
 
 <ion-content padding>
+
   <ion-row>
-    <ion-list radio-group [(ngModel)]="relationship" (ionChange)="toggleEvent($event)">
+    <ion-col col-6-md text-center>
+      Stake Comms:
+      <br> {{weekStakeComms}}
+    </ion-col>
+
+    <ion-col col-6-md text-center>
+      Red Comms:
+      <br> {{weekProfitComms}}
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-list radio-group [(ngModel)]="viewOptions" (ionChange)="toggleEvent($event)">
       <ion-item>
         <ion-label>Table</ion-label>
-        <ion-radio value="table" checked ></ion-radio>
+        <ion-radio value="table" checked></ion-radio>
       </ion-item>
       <ion-item>
         <ion-label>Chart</ion-label>
-        <ion-radio value="chart" ></ion-radio>
+        <ion-radio value="chart"></ion-radio>
       </ion-item>
     </ion-list>
-
   </ion-row>
+
   <ion-scroll scrollX="true">
     <ion-row *ngIf="!graph" nowrap class="tableContainer">
-      <ay-treeTable [value]="input" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
-        <ay-column field="name" header="Name" [style]="{'width': '60%'}"></ay-column>
-        <ay-column field="weekStake" header="Stake" [style]="{'width': '20%','text-align':'right'}"></ay-column>
-        <ay-column field="stakeComm" header="Comms" [style]="{'width': '20%', 'text-align':'right'}"></ay-column>
-        <ay-column field="weekProfit" header="Profit" [style]="{'width': '20%', 'word-wrap':'break-word', 'text-align':'right'}"></ay-column>
-        <ay-column field="profComm" header="R. Comm" [style]="{'width': '20%', 'text-align':'right'}"></ay-column>
+      <ay-treeTable [value]="input" [rows]="10" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+        <ay-column field="name" header="Name" [style]="{'width': '40%' , 'background':'#222', 'color':'white' ,'border':'none'}"></ay-column>
+        <ay-column field="weekStake" header="Stake" [style]="{'width': '15%', 'background':'#222', 'color':'white' ,'border':'none', 'text-align':'right'}"></ay-column>
+        <ay-column field="stakeComm" header="Comms" [style]="{'width': '15%', 'background':'#222', 'color':'white' ,'border':'none', 'text-align':'right'}"></ay-column>
+        <ay-column field="weekProfit" header="Profit" [style]="{'width': '15%','background':'#222', 'color':'white' ,'border':'none', 'word-wrap':'break-word', 'text-align':'right'}"></ay-column>
+        <ay-column field="profComm" header="R. Comm" [style]="{'width': '15%','background':'#222', 'color':'white' ,'border':'none', 'text-align':'right'}"></ay-column>
       </ay-treeTable>
     </ion-row>
     <ion-row *ngIf="graph" col-12>

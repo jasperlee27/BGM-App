@@ -14,7 +14,7 @@
       <!-- username -->
       <ion-row>
         <ion-col col-12 col-md-8 offset-md-2>
-          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState">
+          <ion-item no-lines id="rounded" [@flyInBottomSlow]="fadeState" style="height:100%">
             <ion-label floating primary color="secondary">
               <ion-icon name="person"></ion-icon> Username
             </ion-label>
@@ -50,11 +50,11 @@
   <ion-row>
     <ion-col col-6 text-center>
       <button ion-button small outline color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600"
-        (click)="viewAsGuest()">View As Guest</button>
+        (click)="createAccount()">Create Account</button>
     </ion-col>
     <ion-col col-6 text-center>
       <button ion-button small outline color="secondary" [@loginFadeIn]="fadeState" style="color:secondary; font-size:14px; font-weight: 600"
-        (click)="createAccount()">Create Account</button>
+        (click)="viewAsGuest()">View As Guest</button>
     </ion-col>
   </ion-row>
   <!-- Create account -->

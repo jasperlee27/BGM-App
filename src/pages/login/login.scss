@@ -16,7 +16,11 @@ page-login {
         box-shadow: none;
     }
 
+    ion-grid{
+        height:100%;
+    }
 
+ 
     ion-icon{
         color:colors(primary);
         margin: auto;
