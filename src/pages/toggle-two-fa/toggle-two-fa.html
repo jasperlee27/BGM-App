@@ -18,8 +18,8 @@
         <ion-row>
           <ion-col col-12 text-center>
             <div class="center" [style.visibility]="isRequestHidden ? 'hidden' : 'visible'">
-              <button ion-button [color]="isRequestEnabled ? 'secondary' : 'secondary'" [outline]="isRequestEnabled ? 'false' : 'true'" 
-              [disabled]="isRequestEnabled? null : 'disabled'" class="request-sms-button" ion-button color="secondary" round (click)="requestedSMS()">
+              <button ion-button [outline]="isRequestEnabled ? 'false' : 'true'" 
+              [disabled]="isRequestEnabled? null : 'disabled'" class="request-sms-button" round (click)="requestedSMS()">
               REQUEST<br>SMS</button>
             </div>
               <div class="timer" *ngIf="!isTimerHidden">Request again in {{countDown | async}} s</div>
@@ -41,7 +41,7 @@
        <!--verify button-->
         <ion-row>
           <ion-col col-12 text-center>
-            <button ion-button small color="secondary" style="color:rgb(0, 0, 0); font-size:20px; font-weight: 800" (click)="toggle2FA()">TOGGLE</button>
+            <button ion-button small color="secondary" style="color:black; font-size:20px; font-weight: 800" (click)="toggle2FA()">TOGGLE</button>
           </ion-col>
         </ion-row> 
         

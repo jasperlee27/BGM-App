@@ -47,16 +47,6 @@
       Next game in {{timerValue}} s
     </div>
   </div>
-  <!-- Commented to remvoe auto bet for now -->
-  <!-- <br> -->
-  <!-- <ion-segment [(ngModel)]="hashBetType" color="primary" (ionChange)="toggleSegment($event)">
-    <ion-segment-button outline value="manual">
-      Manual
-    </ion-segment-button>
-    <ion-segment-button disabled outline value="auto">
-      Auto
-    </ion-segment-button>
-  </ion-segment> -->
 
   <div [ngSwitch]="hashBetType">
     <ion-list *ngSwitchCase="'manual'" ngSelected="selected">
@@ -89,11 +79,11 @@
       </ion-item>
 
       <ion-row>
-        <button ion-button full color="secondary" [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled"
+        <button [ngClass]="isManualBetDisabled? 'disabledButton' : 'enabledButton'" ion-button full [color]="isManualBetDisabled ? 'dark' : 'secondary'" [disabled]="isManualBetDisabled"
           (click)="hashManualBet()">BET</button>
       </ion-row>
       <ion-row>
-        <button ion-button full color="secondary" [color]="isManualCoutDisabled ? 'dark' : 'secondary'" [disabled]="isManualCoutDisabled"
+        <button [ngClass]="isManualCoutDisabled? 'disabledButton' : 'enabledButton'" ion-button full color="secondary" [color]="isManualCoutDisabled ? 'dark' : 'secondary'" [disabled]="isManualCoutDisabled"
           (click)="hashManualCout()">CASH OUT</button>
       </ion-row>
     </ion-list>

@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Game 1: Treasure!</ion-title>
     <div class="walletDisplay">
-      <inner-wallet *ngIf = "!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>
+      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>
     </div>
   </ion-navbar>
 
@@ -37,10 +37,12 @@
     <!-- for view game results -->
     <ion-row>
       <ion-col>
-        <button ion-button small color="secondary" style="text-transform: none;" small [color]="isBTCDrawAvail ? 'primary' : 'dark'" [disabled]="!isBTCDrawAvail" (click)="viewBTCResults()">View BTC Results</button>
+        <button [ngClass]="isBTCDrawAvail? 'enabledButton' : 'disabledButton'" [color]="isBTCDrawAvail ? 'secondary' : 'dark'" ion-button small style="text-transform: none;" small [disabled]="!isBTCDrawAvail"
+          (click)="viewBTCResults()">View BTC Results</button>
       </ion-col>
       <ion-col>
-        <button ion-button color="secondary" style="text-transform: none;" small [color]="isETHDrawAvail ? 'primary' : 'dark'" [disabled]="!isETHDrawAvail" (click)="viewETHResults()">View ETH Results</button>
+        <button [ngClass]="isETHDrawAvail? 'enabledButton' : 'disabledButton'" [color]="isETHDrawAvail ? 'secondary' : 'dark'"  ion-button small style="text-transform: none;" small [disabled]="!isETHDrawAvail"
+          (click)="viewETHResults()">View ETH Results</button>
       </ion-col>
     </ion-row>
     <!-- for current tix own -->
@@ -101,12 +103,12 @@
       <ion-col>
         No. BTC Ticket:
         <ion-input type="number" [(ngModel)]="amountBTCtix" placeholder="Tickets" attr.text-center [disabled]="BTCTixDisabled"></ion-input>
-        <button ion-button small color="secondary" [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>
+        <button ion-button small [disabled]="BTCTixDisabled" (click)="buyBTCtix()">Buy</button>
       </ion-col>
       <ion-col>
         No. ETH Ticket:
         <ion-input type="number" [(ngModel)]="amountETHtix" placeholder="Tickets" [disabled]="ETHTixDisabled"></ion-input>
-        <button ion-button color="secondary" small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>
+        <button ion-button small [disabled]="ETHTixDisabled" (click)="buyETHtix()">Buy</button>
       </ion-col>
     </ion-row>
   </ion-grid>
