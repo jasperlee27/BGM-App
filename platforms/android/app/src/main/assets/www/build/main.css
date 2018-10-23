@@ -5864,7 +5864,7 @@ button[disabled],
   border-radius: 4px;
   height: 2.3em;
   font-size: 1.6rem;
-  color: #fff;
+  color: #222;
   background-color: #f3ab2e;
   margin: 0.4rem 0.2rem;
   padding: 0 1em;
@@ -6295,7 +6295,7 @@ button[disabled],
   font-size: 1.4rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: #fff;
+  color: #222;
   background-color: #f3ab2e;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
@@ -6318,7 +6318,7 @@ button[disabled],
 }
 
 .button-md .button-effect {
-  background-color: #fff;
+  background-color: #222;
 }
 
 .button-large-md {
@@ -40018,6 +40018,14 @@ page-hashing .scroll-content {
   overflow-y: visible;
 }
 
+page-hashing .disabledButton {
+  color: white;
+}
+
+page-hashing .enabledButton {
+  color: black;
+}
+
 page-hashing .hashingContent {
   color: #f3ab2e;
 }
@@ -40122,6 +40130,10 @@ page-login .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):no
   border-bottom: none;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+
+page-login ion-grid {
+  height: 100%;
 }
 
 page-login ion-icon {
@@ -40512,6 +40524,10 @@ page-toggle-two-fa .item-md.item-input.ng-valid.input-has-value:not(.input-has-f
   box-shadow: none;
 }
 
+page-toggle-two-fa .center-black {
+  color: black !important;
+}
+
 page-toggle-two-fa .request-sms-button {
   margin-top: 80px;
   margin-bottom: 20px;
@@ -40549,6 +40565,14 @@ page-trehunt ion-row {
 page-trehunt .walletDisplay {
   float: right;
   width: 40%;
+}
+
+page-trehunt .disabledButton {
+  color: white;
+}
+
+page-trehunt .enabledButton {
+  color: black;
 }
 
 page-trehunt h2, page-trehunt h6 {

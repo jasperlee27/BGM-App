@@ -81,7 +81,7 @@ export class LoginPage {
 
   constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController, public inAppBrowser: InAppBrowser) {
   }
-  // uncomment for mobile load sound
+  // NOT WORKING
   // ionViewDidLoad() {
   //   this.platform.ready().then(() => {
   //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
