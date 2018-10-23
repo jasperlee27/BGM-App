@@ -146,7 +146,7 @@ export class StreamPage {
         //one instance
       }
       else if (receivedData.type === 'countdown') {
-        this.timerValue = parseFloat(receivedData.number).toFixed(1);
+        this.timerValue = Math.abs(parseFloat(receivedData.number)).toFixed(0);
         gameValuesToPush = receivedData.currentPrice;
 
 
@@ -178,7 +178,7 @@ export class StreamPage {
         // }
 
         gameValuesToPush = receivedData.currentPrice;
-        this.gameTimer = parseFloat(receivedData.number).toFixed(1);
+        this.gameTimer =  Math.abs(parseFloat(receivedData.number)).toFixed(0);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if ((this.gameTimer < 4.2) && (this.hasActiveBet)) {
@@ -277,7 +277,7 @@ export class StreamPage {
       },
       plugins: {
         streaming: {
-          refresh: 500,
+          refresh: 1000,
           duration: 30000,
           //can create function to copy here from received data above?
           //or create socket here and update value here;

@@ -17,16 +17,27 @@
 
   <ion-row>
     <ion-col col-6-md text-center>
-      Stake Comms:
-      <br> {{weekStakeComms}}
+      <span style="font-size:20px; color: #f3ab2e">Stake Comms:</span>
+      <br> <span style="font-size:24px;">{{weekStakeComms}}</span>
     </ion-col>
 
     <ion-col col-6-md text-center>
-      Red Comms:
-      <br> {{weekProfitComms}}
+      <span style="font-size:20px; color: #f3ab2e">Red Comms:</span>
+      <br> <span style="font-size:24px;">{{weekProfitComms}} </span> 
     </ion-col>
   </ion-row>
   <ion-row>
+    <ion-segment [(ngModel)]="viewOptions" color="primary" (ionChange)="toggleEvent($event)">
+      <ion-segment-button outline value="table" aria-selected="true">
+        Table
+      </ion-segment-button>
+      <ion-segment-button outline value="chart">
+        Chart
+      </ion-segment-button>
+    </ion-segment>
+  </ion-row>
+   
+  <!-- <ion-row>
     <ion-list radio-group [(ngModel)]="viewOptions" (ionChange)="toggleEvent($event)">
       <ion-item>
         <ion-label>Table</ion-label>
@@ -37,7 +48,7 @@
         <ion-radio value="chart"></ion-radio>
       </ion-item>
     </ion-list>
-  </ion-row>
+  </ion-row> -->
 
   <ion-scroll scrollX="true">
     <ion-row *ngIf="!graph" nowrap class="tableContainer">

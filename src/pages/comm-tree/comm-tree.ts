@@ -18,7 +18,7 @@ import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 })
 export class CommTreePage {
   viewOptions="table";
-  graph= true;
+  graph= false;
   weekStakeComms;
   weekProfitComms;
 
@@ -211,9 +211,9 @@ export class CommTreePage {
     console.log("event " + number);
   }
 
-  toggleEvent(value){
-    console.log(value);
-    if (value==="chart")
+  toggleEvent($event){
+    console.log($event.value);
+    if ($event.value==="chart")
     {
       this.graph=true;
     }
