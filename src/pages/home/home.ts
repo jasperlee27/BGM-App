@@ -69,14 +69,14 @@ export class HomePage implements OnInit {
     }
   }
   //bgm loop works in home view, uncomment for mobile sound
-  ionViewDidLoad() {
-    this.platform.ready().then(() => {
-      this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-        this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-        this.nativeAudio.loop('bgmLoopHome');
-      });
-    });
-  }
+  // ionViewDidLoad() {
+  //   this.platform.ready().then(() => {
+  //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+  //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+  //       this.nativeAudio.loop('bgmLoopHome');
+  //     });
+  //   });
+  // }
   //NEWS API
   getNews_Old() {
     console.log("button is working fine");
@@ -131,8 +131,8 @@ export class HomePage implements OnInit {
 
   showAbout() {
     let alert = this.alertCtrl.create({
-      title: 'About BGM',
-      subTitle: 'Blockchain Gaming Master v1.0.0',
+      title: 'About OT',
+      subTitle: 'Ortus Tenoris v1.0.0',
       buttons: ['OK']
     });
 
@@ -142,7 +142,7 @@ export class HomePage implements OnInit {
   showContact() {
     let alert = this.alertCtrl.create({
       title: 'Contact us',
-      subTitle: 'www.bgm.com/help',
+      subTitle: 'Please send us a mail at <a href="mailto:contact@ortustenoris.io?" target="_top">contact@ortustenoris.io</a>',
       buttons: ['OK']
     });
 

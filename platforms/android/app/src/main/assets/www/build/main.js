@@ -1,6 +1,6 @@
 webpackJsonp([16],{
 
-/***/ 130:
+/***/ 129:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,9 +8,9 @@ webpackJsonp([16],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bidding_bidding__ = __webpack_require__(159);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roulette_roulette__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__two_fac_auth_two_fac_auth__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_global_auth_global_auth__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(69);
@@ -662,10 +662,1277 @@ var DummyChatPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(388);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(641);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(643);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__toggle_two_fa_toggle_two_fa__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__two_fac_auth_two_fac_auth__ = __webpack_require__(91);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__qr_code_qr_code__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__new_modal_new_modal__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__comm_tree_comm_tree__ = __webpack_require__(160);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+// import { HTTP } from '@ionic-native/http';
+
+
+
+
+
+
+
+
+
+
+// import { MyApp } from '../../app/app.component';
+/**
+ * Generated class for the HomePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var HomePage = /** @class */ (function () {
+    // socket: SocketIOClient.Socket;
+    function HomePage(platform, http, navCtrl, navParams, appCtrl, auth, nativeAudio, alertCtrl, modalCtrl) {
+        this.platform = platform;
+        this.http = http;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.appCtrl = appCtrl;
+        this.auth = auth;
+        this.nativeAudio = nativeAudio;
+        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
+        this.commTreePage = __WEBPACK_IMPORTED_MODULE_13__comm_tree_comm_tree__["a" /* CommTreePage */];
+        this.twoFApage = __WEBPACK_IMPORTED_MODULE_10__two_fac_auth_two_fac_auth__["a" /* TwoFacAuthPage */];
+        this.toggleTwoFApage = __WEBPACK_IMPORTED_MODULE_9__toggle_two_fa_toggle_two_fa__["a" /* ToggleTwoFaPage */];
+        this.qrPage = __WEBPACK_IMPORTED_MODULE_11__qr_code_qr_code__["a" /* QrCodePage */];
+        this.createdCode = "https://" + "www.google.com";
+        // this.socket = io.connect('http://178.128.50.224:3001');
+        // console.log("socket conencted");
+        this.isGuest = auth.getGuestLogin();
+    }
+    HomePage.prototype.ngOnInit = function () {
+        this.getNews();
+    };
+    HomePage.prototype.ionViewWillEnter = function () {
+        //if 0 then no 2FA needed
+        if (this.auth.get2FAStatus() === 0) {
+            // this.initTwoFAstatus = false;
+            this.twoFAstatus = false;
+        }
+        else {
+            // this.initTwoFAstatus = true;
+            this.twoFAstatus = true;
+        }
+    };
+    //bgm loop works in home view, uncomment for mobile sound
+    // ionViewDidLoad() {
+    //   this.platform.ready().then(() => {
+    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
+    //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+    //       this.nativeAudio.loop('bgmLoopHome');
+    //     });
+    //   });
+    // }
+    //NEWS API
+    HomePage.prototype.getNews_Old = function () {
+        var _this = this;
+        console.log("button is working fine");
+        var path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
+        var encodedPath = encodeURI(path);
+        var timeoutMS = 100000;
+        this.http.get(encodedPath)
+            .timeout(timeoutMS)
+            .map(function (res) { return res.json(); }).subscribe(function (data) {
+            var responseData = data;
+            console.log(responseData);
+            _this.displayStory = responseData.articles[0].description;
+            _this.storyImage = responseData.articles[0].urlToImage;
+        }, function (err) {
+            console.log('error in getting news');
+        });
+    };
+    HomePage.prototype.getNews = function () {
+        var _this = this;
+        console.log("button is working fine");
+        // let imgPath = 'http://178.128.50.224:3000/getNews';
+        // let encodedImgPath = encodeURI(imgPath);
+        var timeoutMS = 100000;
+        this.storyImage = 'http://178.128.50.224:3000/getNews';
+        // this.http.get(encodedImgPath)
+        //   .timeout(timeoutMS)
+        //   .map(res => res.json()).subscribe(data => {
+        //     let responseData = data;
+        //     console.log(responseData);
+        //     this.storyImage = responseData;
+        //   },
+        //     err => {
+        //       console.log('error in getting news');
+        //     });
+        var textPath = 'http://178.128.50.224:3000/getNewsText';
+        var encodedTextPath = encodeURI(textPath);
+        this.http.get(encodedTextPath)
+            .timeout(timeoutMS)
+            .map(function (res) { return res.json(); }).subscribe(function (data) {
+            var responseData = data;
+            console.log(responseData.message);
+            _this.displayStory = responseData.message;
+        }, function (err) {
+            console.log('error in getting news');
+        });
+    };
+    HomePage.prototype.showAbout = function () {
+        var alert = this.alertCtrl.create({
+            title: 'About OT',
+            subTitle: 'Ortus Tenoris v1.0.0',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    HomePage.prototype.showContact = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Contact us',
+            subTitle: 'Please send us a mail at <a href="mailto:contact@ortustenoris.io?" target="_top">contact@ortustenoris.io</a>',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    HomePage.prototype.showQRcode = function () {
+        //to do alert
+        // this.navCtrl.push(this.qrPage);
+        var qrModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_12__new_modal_new_modal__["a" /* NewModalPage */]);
+        // qrModal.onDidDismiss(data => {
+        //   console.log("Dismissed modal");
+        // });
+        qrModal.present();
+    };
+    HomePage.prototype.showCommission = function () {
+        console.log("Triggered comms page");
+        this.navCtrl.push(this.commTreePage);
+        //check if master or agent
+    };
+    HomePage.prototype.logout = function () {
+        console.log("logout is working fine");
+        this.auth.setSessionToken("");
+        console.log("Destroy session token " + this.auth.getSessionToken());
+        // console.log("rootnav = " +this.appCtrl.getRootNav());
+        this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
+    };
+    HomePage.prototype.toggle2FA = function () {
+        // console.log("init 2fa status " + this.initTwoFAstatus);
+        console.log("toggled 2fa " + this.twoFAstatus);
+        //both turn on and off also need verify 2FA
+        // if (this.twoFAstatus===true){
+        // this.navCtrl.push(this.twoFApage);
+        this.navCtrl.push(this.toggleTwoFApage);
+        // }
+    };
+    HomePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>\n\n      <!-- <ion-icon name="home"></ion-icon> -->\n\n      Home\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%">\n\n\n\n    <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <img width=100% height=100% src={{this.storyImage}} style="background:transparent">\n\n      </ion-col>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      {{this.displayStory}}\n\n    </ion-row>\n\n    <br>\n\n    <!-- About button -->\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>\n\n            </span>\n\n            About\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showContact()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="call"></ion-icon>\n\n            </span>\n\n            Contact Support\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--update 2 FA -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <ion-item no-lines class="twoFA" *ngIf="!isGuest">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="lock"></ion-icon>\n\n            </span>\n\n            Toggle 2FA\n\n          </span>\n\n          <ion-toggle [(ngModel)]="twoFAstatus" (ionChange)="toggle2FA()"></ion-toggle>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--get ref QR code -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines class="referQR" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showQRcode()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="qr-scanner"></ion-icon>\n\n            </span>\n\n            Get Referral QR\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--get comission page -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines class="viewCommission" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showCommission()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n                <ion-icon ios="ios-cash-outline" md="md-cash"></ion-icon>\n\n            </span>\n\n            Comission Earned\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--logout button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" [style.visibility]="isGuest ? \'hidden\' : \'visible\'" (click)="logout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="log-out"></ion-icon>\n\n            </span>\n\n            Logout\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["g" /* ModalController */]])
+    ], HomePage);
+    return HomePage;
+}());
+
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 163:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoulettePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+// declare function init(): any; 
+// declare function drawRouletteShadow();
+// declare function drawArcs();
+// declare function drawPointer();
+var RoulettePage = /** @class */ (function () {
+    function RoulettePage(navCtrl, alertCtrl) {
+        this.navCtrl = navCtrl;
+        this.alertCtrl = alertCtrl;
+        this.disabled = false;
+        this.walletBallance = 1000;
+        // refreshUi();
+        // init();
+    }
+    RoulettePage.prototype.onSpin = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.disableSpinButton();
+                        reset();
+                        init();
+                        randomSpin();
+                        this.updateWalletBallance(-this.betAmount);
+                        console.log("My winner ID is " + winnerId);
+                        return [4 /*yield*/, this.delay(5010)];
+                    case 1:
+                        _a.sent();
+                        this.presentAlert(winnerId);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RoulettePage.prototype.ngOnInit = function () {
+        init();
+    };
+    RoulettePage.prototype.delay = function (ms) {
+        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+    };
+    RoulettePage.prototype.enableSpinButton = function () {
+        this.disabled = false;
+    };
+    RoulettePage.prototype.disableSpinButton = function () {
+        this.disabled = true;
+    };
+    RoulettePage.prototype.updateWalletBallance = function (amount) {
+        this.walletBallance += amount;
+    };
+    RoulettePage.prototype.presentAlert = function (winnerId) {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Congratualations',
+            subTitle: 'You have won ' + winnerId,
+            buttons: ['OK']
+        });
+        alert.present();
+        alert.onDidDismiss(function () {
+            _this.enableSpinButton();
+        });
+    };
+    RoulettePage.prototype.back = function () {
+        this.navCtrl.pop();
+    };
+    RoulettePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-roulette',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\roulette\roulette.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <!-- <button ion-button (click)="back()">Back</button> -->\n\n    <ion-title>\n\n      Game 1: Roulette\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  \n\n  <!-- <input type="button" ng-click"=randomSpin()" style="float:left;" id=\'spin\' /> -->\n\n  \n\n  <!-- <canvas id="canvas" width="500" height="500"></canvas> -->\n\n  <!-- <div id="holder" style="width:400px; height:400px;">\n\n  </div>\n\n  <button id="genBtn">Rotate</button>\n\n  <br />\n\n  <button id="rmBtn">Remove the winner and rotate</button>\n\n  <br>\n\n  <p>Click <b>Rotate</b> to update.</p>\n\n  <p>Bookmark <a id="bookmarklink" href=\'./roulette.html\'>this link</a> to save your list.</p> \n\n  <textarea id="items" name="items" rows="8" cols="15"> </textarea>\n\n  \n\n  <button id="genBtn">Rotate</button>\n\n  <br />\n\n  <button id="rmBtn">Remove the winner and rotate</button>\n\n  <br> -->\n\n  <div class="col-xs-12 col-sm-12 col-lg-12" id="holder" style="visibility:visible">\n\n  <!-- <div id="holder" style="width:100px; height:400px;"> -->\n\n  </div>\n\n  <div class="row">\n\n  Balance: {{walletBallance}} USD\n\n  </div>\n\n  <div class="row"> \n\n      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="spinInputAmount">\n\n          <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>\n\n      </div>\n\n    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">\n\n        <button ion-button [disabled]="disabled" (click)="onSpin()">Spin To Win!</button>\n\n    </div>\n\n  </div>\n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\roulette\roulette.html"*/
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
+    ], RoulettePage);
+    return RoulettePage;
+}());
+
+//# sourceMappingURL=roulette.js.map
+
+/***/ }),
+
+/***/ 164:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WalletPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_data_data__ = __webpack_require__(26);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the WalletPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+// declare function reset(): any;
+var WalletPage = /** @class */ (function () {
+    function WalletPage(navCtrl, navParams, alertCtrl, auth, dataProvider) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
+        this.auth = auth;
+        this.dataProvider = dataProvider;
+        this.walletType = 'investment';
+        this.refreshIcon = 'refresh';
+        this.currentView = 'game';
+        // balances: any = {
+        //   'investment': 12340,
+        //   'game': 750,
+        // };
+        this.statements = {
+            'investment': [
+                {
+                    time: '11/8 1200',
+                    name: 'Deposit',
+                    price: '11340'
+                },
+                {
+                    time: '10/8 1200',
+                    name: 'Withdraw',
+                    price: '-1000'
+                },
+                {
+                    time: '9/8 1200',
+                    name: 'Deposit',
+                    price: '2000'
+                },
+            ],
+            'game': [
+                {
+                    time: '11/8 1330',
+                    name: '1. Treasure',
+                    price: '1000'
+                },
+                {
+                    time: '10/8 0900',
+                    name: '2. Hashing',
+                    price: '-250'
+                }
+            ],
+        };
+        this.currentView = 'game';
+        this.walletBalance = this.auth.getAccValue();
+        this.historicalGames = new Array();
+    }
+    WalletPage.prototype.ngOnInit = function () {
+        this.updateStatementHistory();
+        // this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
+        //   //receive successfully
+        //   console.log("Received data here  " + data);
+        //   console.log("Login reponse");
+        //   for (var i = 0; i < data.orders.length; i++) {
+        //     //FOR loop iterate all and form objects//
+        //     //--STORE TIME--
+        //     // console.log("timestamp of first order " + data.orders[i].updated);
+        //     //convert time stamp
+        //     var myDate = new Date(data.orders[i].updated);
+        //     var localeDate = myDate.toLocaleString('en-GB');
+        //     console.log("locale date = " + localeDate);
+        //     var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
+        //     console.log("Formatted date: " + formattedDate);
+        //     //--STORE GAME NAME--
+        //     // console.log("" + data.orders[i].gameName);
+        //     //--STORE PROFIT--
+        //     // console.log("profit of first order " + data.orders[i].profit)
+        //     var singleGame = {
+        //       "time": formattedDate,
+        //       "gameID": data.orders[i].gameName,
+        //       "gameNo": data.orders[i].gameNo,
+        //       "profit": parseInt(data.orders[i].profit)
+        //     }
+        //     //push array
+        //     this.historicalGames.push(singleGame);
+        //     // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+        //     // console.log("historical game name size "  + this.historicalGames.length);
+        //   }
+        // },
+        //   err => {
+        //     console.log("Error occured while getting past transactions");
+        //     console.log(err);
+        //   });
+    };
+    WalletPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad WalletPage');
+    };
+    WalletPage.prototype.ionViewWillEnter = function () {
+        this.walletBalance = this.auth.getAccValue();
+        this.updateStatementHistory();
+    };
+    // toggleSegment($event) {
+    //   console.log("Chosen segment " + $event.value);
+    //   //update current view & wallet balance
+    //   this.currentView = $event.value;
+    //   this.walletBalance = this.balances[this.currentView];
+    // }
+    WalletPage.prototype.getStatements = function (type) {
+        // console.log("Call get statements");
+        return this.statements[type];
+    };
+    //driver functions, deposit withdraw
+    WalletPage.prototype.deposit = function () {
+        //check current view & present alert
+        // if (this.currentView === 'investment') {
+        //   this.investmentDeposit();
+        // }
+        if (this.currentView === 'game') {
+            this.gameDeposit();
+        }
+        else {
+            //do nothing
+            console.log("Entered exception for currentView on deposit");
+        }
+    };
+    WalletPage.prototype.withdraw = function () {
+        //check current view & present alert
+        // if (this.currentView === 'investment') {
+        //   this.investmentWithdraw();
+        // }
+        if (this.currentView === 'game') {
+            this.gameWithdraw();
+        }
+        else {
+            //do nothing
+            console.log("Entered exception for currentView on deposit");
+        }
+    };
+    // investmentDeposit() {
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Proceed to deposit?',
+    //     message: 'You will be redirected to the page for deposit',
+    //     buttons: [
+    //       {
+    //         text: 'Yes',
+    //         handler: () => {
+    //           console.log('Yes click to redirect');
+    //         }
+    //       },
+    //       {
+    //         text: 'No',
+    //         handler: () => {
+    //           console.log('Not opening page');
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   alert.present();
+    // }
+    // investmentWithdraw() {
+    //   let alert = this.alertCtrl.create({
+    //     title: 'Withdraw to bank',
+    //     message: 'Enter amount to withdraw',
+    //     inputs: [
+    //       {
+    //         name: 'Amount',
+    //         placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
+    //       },
+    //     ],
+    //     buttons: [
+    //       {
+    //         text: 'Cancel',
+    //         handler: (data) => {
+    //           console.log('Cancelled withdraw intended ' + data.Amount + ' to bank');
+    //         }
+    //       },
+    //       {
+    //         text: 'Withdraw',
+    //         handler: (data) => {
+    //           console.log('Processing withdraw ' + data.Amount + ' to bank');
+    //           console.log(JSON.stringify(data)); //to see the object
+    //           console.log("Amount input was " + data.Amount);
+    //           this.processInvWithdrawal(data.Amount);
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   alert.present();
+    // }
+    // processInvWithdrawal(amount: any) {
+    //   //to insert post call for withdrwal return then
+    //   let alert = this.alertCtrl.create({
+    //     title: 'SUCCESS',
+    //     subTitle: 'Your withdrawal of ' + amount + ' BGM was successful and will be reflected in your bank in 2 days',
+    //     buttons: ['OK']
+    //   });
+    //   alert.present();
+    // }
+    WalletPage.prototype.updateStatementHistory = function () {
+        var _this = this;
+        this.historicalGames = new Array();
+        this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(function (data) {
+            //receive successfully
+            // console.log("Received data here  " + data);
+            // console.log("Login reponse");
+            for (var i = 0; i < data.orders.length; i++) {
+                //FOR loop iterate all and form objects//
+                //--STORE TIME--
+                // console.log("timestamp of first order " + data.orders[i].updated);
+                //convert time stamp
+                var myDate = new Date(data.orders[i].updated);
+                var localeDate = myDate.toLocaleString('en-GB');
+                // console.log("locale date = " + localeDate);
+                var formattedDate = localeDate.substring(0, 5) + ' ' + localeDate.substring(12, 17);
+                // console.log("Formatted date: " + formattedDate);
+                //--STORE GAME NAME--
+                // console.log("" + data.orders[i].gameName);
+                //--STORE PROFIT--
+                // console.log("profit of first order " + data.orders[i].profit)
+                var singleGame = {
+                    "time": formattedDate,
+                    "gameID": data.orders[i].gameName,
+                    "gameNo": data.orders[i].gameNo,
+                    "profit": parseInt(data.orders[i].profit)
+                };
+                //push array
+                _this.historicalGames.push(singleGame);
+                // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+                // console.log("historical game name size "  + this.historicalGames.length);
+            }
+        }, function (err) {
+            console.log("Error occured while getting past transactions");
+            console.log(err);
+        });
+    };
+    WalletPage.prototype.gameDeposit = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Deposit Game Wallet',
+            message: 'Enter amount to transfer from investment wallet',
+            inputs: [
+                {
+                    name: 'Amount',
+                    placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                        console.log('Cancelled transfer intended ' + data.Amount + ' to game wallet');
+                    }
+                },
+                {
+                    text: 'Transfer',
+                    handler: function (data) {
+                        console.log('Processing transfer ' + data.Amount + ' to game wallet');
+                        _this.dataProvider.postDepositWallet(_this.auth.getAccId(), data.Amount).subscribe(function (resReceived) {
+                            //receive successfully
+                            console.log("account info " + resReceived.accountValue);
+                            _this.auth.setAccValue(resReceived.accountValue);
+                            _this.walletBalance = _this.auth.getAccValue();
+                            _this.updateStatementHistory();
+                            _this.processGameDeposit(resReceived.order.profit);
+                        }, function (err) {
+                            console.log("Error occured while depositing");
+                            console.log(err);
+                        });
+                        console.log(JSON.stringify(data)); //to see the object
+                        console.log("Amount input was " + data.Amount);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    WalletPage.prototype.processGameDeposit = function (amount) {
+        //to insert post call for withdrwal return then
+        var alert = this.alertCtrl.create({
+            title: 'SUCCESS',
+            subTitle: 'Your game wallet has successfully recharged ' + amount + ' BGM',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    WalletPage.prototype.gameWithdraw = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Withdraw From Game Wallet',
+            message: 'Enter amount to transfer to investment wallet',
+            inputs: [
+                {
+                    name: 'Amount',
+                    placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Cancel',
+                    handler: function (data) {
+                        console.log('Cancelled transfer intended ' + data.Amount + ' to investment wallet');
+                    }
+                },
+                {
+                    text: 'Transfer',
+                    handler: function (data) {
+                        console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
+                        _this.dataProvider.postWithdrawWallet(_this.auth.getAccId(), data.Amount).subscribe(function (resReceived) {
+                            //receive successfully
+                            console.log("account info " + resReceived.accountValue);
+                            _this.auth.setAccValue(resReceived.accountValue);
+                            _this.walletBalance = _this.auth.getAccValue();
+                            _this.updateStatementHistory();
+                            _this.processGameWithdrawal(Math.abs(resReceived.order.profit));
+                        }, function (err) {
+                            console.log("Error occured while withdrawing");
+                            console.log(err);
+                        });
+                        console.log(JSON.stringify(data)); //to see the object
+                        console.log("Amount input was " + data.Amount);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    WalletPage.prototype.processGameWithdrawal = function (amount) {
+        //to insert post call for withdrwal return then
+        var alert = this.alertCtrl.create({
+            title: 'SUCCESS',
+            subTitle: 'Your transfer of ' + amount + ' BGM to investment wallet was successful',
+            buttons: ['OK']
+        });
+        alert.present();
+    };
+    WalletPage.prototype.refreshWallet = function () {
+        var _this = this;
+        console.log("refreshing wallets");
+        this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(function (data) {
+            //parse response from server
+            console.log("Update wallet reponse");
+            console.log("Received acc balance as  " + data.accountValue);
+            _this.auth.setAccValue(parseInt(data.accountValue));
+            console.log("Global provider value of acc " + _this.auth.getAccValue());
+            _this.walletBalance = _this.auth.getAccValue();
+            //to present alert to refresh wallet
+            var alert = _this.alertCtrl.create({
+                title: 'SUCCESS',
+                subTitle: 'Wallet Refreshed',
+                buttons: ['OK']
+            });
+            alert.present();
+        }, function (err) {
+            console.log("Error occured while getting account balance");
+            var alert = _this.alertCtrl.create({
+                title: 'ERROR',
+                subTitle: 'Wallet cannot be refreshed at this time. Please try again.',
+                buttons: ['OK']
+            });
+            alert.present();
+            console.log(err);
+        });
+        // this.navCtrl.setRoot(TabsPage);
+        console.log("End getting amount");
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__["BaseChartDirective"]),
+        __metadata("design:type", Object)
+    ], WalletPage.prototype, "Game2Chart", void 0);
+    WalletPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\wallet\wallet.html"*/'<!--\n\n  Generated template for the WalletPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Wallet</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <!--toolbar for navigating wallet-->\n\n  <!-- <ion-toolbar color="app-bg">\n\n    <ion-segment [(ngModel)]="walletType" color="primary" (ionChange)="toggleSegment($event)">\n\n      <ion-segment-button outline value="investment">\n\n        Investment\n\n      </ion-segment-button>\n\n      <ion-segment-button outline value="game">\n\n        Game\n\n      </ion-segment-button>\n\n    </ion-segment>\n\n  </ion-toolbar> -->\n\n\n\n  <ion-card style="height:20%">\n\n    <ion-card-header color="primary" style="font-size:20px">\n\n      You have:\n\n    </ion-card-header>\n\n    <ion-card-content>\n\n      <ion-row>\n\n        <ion-col col-2>\n\n          <ion-img width="30" height="30" src="../assets/imgs/OT_Logo.png" style="background:transparent; padding-top:-5%;"></ion-img>\n\n        </ion-col>\n\n        <ion-col col-8>\n\n          <span class="align-right">{{walletBalance}}\n\n            <span style="color:#f3ba2e">OT</span>\n\n          </span>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <span class="refresh-button">\n\n            <button ion-button default clear icon-only (click)=refreshWallet()>\n\n              <ion-icon name="refresh"></ion-icon>\n\n            </button>\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- top up and withdraw buttons-->\n\n    </ion-card-content>\n\n  </ion-card>\n\n  <ion-row>\n\n    <ion-col col-6 text-center>\n\n      <button ion-button color="secondary" full (click)="deposit()" style="color:black;">DEPOSIT</button>\n\n    </ion-col>\n\n    <ion-col col-6 text-center>\n\n      <button ion-button color="secondary" full (click)="withdraw()" style="color:black;">WITHDRAW</button>\n\n    </ion-col>\n\n  </ion-row>\n\n  <!-- <ion-card style="height:50%">\n\n    <ion-card-content> -->\n\n  <ion-row style="height:80%">\n\n    <ion-scroll scrollY="true">\n\n      <ion-list col-12 no-lines>\n\n        <ion-list-header no-lines text-color="light">\n\n          <span col-2 item-start>Time</span>\n\n          <span col-6>[Game] Trans</span>\n\n          <span col-4 item-end style="text-align:right; padding-right:5%">W/L</span>\n\n        </ion-list-header>\n\n        <ion-item *ngFor="let games of historicalGames">\n\n          <span col-2 item-start style="font-size:12px">{{games.time}}</span>\n\n          <span col-6>[{{games.gameNo}}] {{games.gameID}}</span>\n\n          <span col-4 item-end [style.color]="games.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{ games.profit }}</span>\n\n        </ion-item>\n\n      </ion-list>\n\n    </ion-scroll>\n\n  </ion-row>\n\n  <!-- </ion-card-content>\n\n  </ion-card> -->\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\wallet\wallet.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_data_data__["a" /* DataProvider */]])
+    ], WalletPage);
+    return WalletPage;
+}());
+
+//# sourceMappingURL=wallet.js.map
+
+/***/ }),
+
+/***/ 165:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StreamPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_data_data__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(47);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+// import { getQueryValue } from '@angular/core/src/view/query';
+
+
+
+
+
+/**
+ * Generated class for the StreamPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var StreamPage = /** @class */ (function () {
+    function StreamPage(navCtrl, navParams, auth, dataProvider, alertCtrl, smartAudio) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.auth = auth;
+        this.dataProvider = dataProvider;
+        this.alertCtrl = alertCtrl;
+        this.smartAudio = smartAudio;
+        this.isBetDisabled = true;
+        this.hasActiveBet = false;
+        this.count = 30.0;
+        this.boughtIntoGame3 = false;
+        this.yDataReceived = Math.random() * 20;
+        this.testGlobalVar = 6000;
+        this.buffer = [[], []];
+        this.chartLabels = [];
+        // private datamap: any;
+        this.chartColors = [
+            {
+                backgroundColor: 'rgba(255, 206, 86, 0)',
+                borderColor: '#f3ba2e',
+                pointBackgroundColor: '#f3ba2e',
+                // pointBorderColor: '#fafafa',
+                pointRadius: 0,
+                pointHoverBackgroundColor: '#f3ba2e',
+                pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
+            },
+            {
+                backgroundColor: 'rgba(0,0,0,0)',
+                borderColor: '#FF0000',
+                pointBackgroundColor: '#FF0000',
+                pointBorderColor: '#FF0000',
+                pointHoverBackgroundColor: '#FF0000',
+                pointHoverBorderColor: '#FF0000'
+            },
+            {
+                backgroundColor: 'rgba(0,0,0,0)',
+                borderColor: '#2D8632',
+                pointBackgroundColor: '#2D8632',
+                pointBorderColor: '#2D8632',
+                pointHoverBackgroundColor: '#2D8632',
+                pointHoverBorderColor: '#2D8632'
+            }
+        ];
+        this.datasets = [
+            { data: [], showLine: true, fill: true, label: 'BitCoin', },
+            { data: [], showLine: false, pointRadius: 5, label: 'Short' },
+            { data: [], showLine: false, pointRadius: 5, label: 'Long' }
+        ];
+        //do socket connection
+        this.isSliderDisabled = true;
+        this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client__["connect"]('http://178.128.50.224:3002');
+        console.log("socket for BinaryOptions conencted");
+        this.isGuestLogin = this.auth.getGuestLogin();
+        // this.isGameTime = true;
+        this.historicalGame3 = new Array();
+        this.updatePastGame();
+        this.musicPlayed = false;
+    }
+    StreamPage.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log('ionViewDidLoad StreamPage');
+        //variable currentPrice,
+        //on game, countdown, gamestart. NO game end yet
+        var gameValuesToPush;
+        var localActiveBet;
+        var localEntryPrice;
+        var lastCountDown;
+        var updatePriceFlag;
+        var currCountDown;
+        this.socket.on('Game3', function (data) {
+            // console.log(JSON.parse(data));
+            var receivedData = JSON.parse(data);
+            // console.log("Received data type  " + receivedData.type);
+            localActiveBet = _this.hasActiveBet;
+            localEntryPrice = _this.entryPrice;
+            // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
+            if (receivedData.type === 'gameStart') {
+                // console.log("received gameStart");
+                _this.isBetDisabled = true;
+                if (_this.currGameState !== 'gameStart') {
+                    if (_this.hasActiveBet) {
+                        _this.isSliderDisabled = true;
+                    }
+                    else {
+                        _this.isSliderDisabled = false;
+                    }
+                    _this.showGameTime = true;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'gameStart';
+                    console.log("Toggled state " + _this.currGameState);
+                    //TODO: Sound 
+                }
+                //one instance
+            }
+            else if (receivedData.type === 'countdown') {
+                _this.timerValue = Math.abs(parseFloat(receivedData.number)).toFixed(0);
+                gameValuesToPush = receivedData.currentPrice;
+                // console.log("Updating current price in countdown " + gameValuesToPush);
+                // console.log("Counting down: " + receivedData.number);
+                if (_this.currGameState !== 'countdown') {
+                    _this.isBetDisabled = false;
+                    _this.isSliderDisabled = false;
+                    _this.showGameTime = false;
+                    _this.showCountdown = true;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'countdown';
+                    _this.currGame3ID = receivedData.GameId;
+                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
+                }
+            }
+            else if (receivedData.type === 'game') {
+                _this.isBetDisabled = true;
+                // var updatePriceFlag; 
+                // var currCountDown;
+                // currCountDown = parseInt(receivedData.number);
+                // console.log("Current countdown = " + currCountDown);
+                // if (currCountDown < lastCountDown) {
+                //   gameValuesToPush = receivedData.currentPrice;
+                //   lastCountDown = currCountDown;
+                //   console.log("pushed value " + gameValuesToPush);
+                // }
+                gameValuesToPush = receivedData.currentPrice;
+                _this.gameTimer = Math.abs(parseFloat(receivedData.number)).toFixed(0);
+                // console.log("Updating current price in game " + gameValuesToPush);
+                // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
+                if ((_this.gameTimer < 4.2) && (_this.hasActiveBet)) {
+                    if (!_this.musicPlayed) {
+                        _this.smartAudio.play('game3countdown');
+                        _this.musicPlayed = true;
+                    }
+                }
+                if (_this.currGameState !== 'game') {
+                    _this.currGame3ID = receivedData.GameId;
+                    _this.showGameTime = true;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = false;
+                    _this.currGameState = 'game';
+                    console.log("Toggled state " + _this.currGameState);
+                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
+                }
+            }
+            else if (receivedData.type === 'gameEnd') {
+                //game ended;
+                _this.showGameTime = false;
+                gameValuesToPush = receivedData.endValue;
+                if (_this.currGameState !== 'gameEnd') {
+                    //TOGGLE STATE TO GAME END
+                    if (_this.hasActiveBet) {
+                        _this.destroyBetInstance();
+                        _this.isSliderDisabled = false;
+                        _this.game3BetAmount = '';
+                    }
+                    _this.musicPlayed = false;
+                    _this.hasActiveBet = false;
+                    _this.showCountdown = false;
+                    _this.showGameEnded = true;
+                    _this.currGameState = 'gameEnd';
+                    _this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
+                    //Update past game
+                    _this.updatePastGame();
+                    //restart gameTimer
+                    _this.gameTimer = 15.0;
+                    console.log("Toggled state " + _this.currGameState);
+                }
+            }
+            else {
+                //do nth, error state.
+                _this.currGameState = '';
+            }
+        });
+        //INSERTION HERE
+        this.socket.on('Game3orders', function (data) {
+            // console.log(JSON.parse(data));
+            var receivedData = JSON.parse(data);
+            // console.log(receivedData[0].longOrders);
+            // console.log(receivedData[0].shortOrders);
+            // console.log(receivedData[0].price);
+            // console.log("Received data type  " + receivedData.type);
+            // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
+            if (parseInt(receivedData[0].shortOrders) === 0) {
+                //this is to insert in long chart
+                // console.log("received gameStart");
+                _this.chart.datasets[2].data.push({
+                    x: Date.now(),
+                    y: receivedData[0].price,
+                });
+                console.log("Long Orders here " + receivedData[0].longOrders);
+                // this.chart.refresh();
+                //one instance
+            }
+            else {
+                //this is to insert in short chart
+                console.log("Short Orders here " + receivedData[0].shortOrders);
+                _this.chart.datasets[1].data.push({
+                    x: Date.now(),
+                    y: gameValuesToPush,
+                });
+                // this.chart.refresh();
+            }
+        });
+        // buffer=[[7000],[Date.now()]];
+        // this.startGame(10);
+        var test = this.testGlobalVar;
+        this.options = {
+            legend: {
+                display: false
+            },
+            animation: {
+                duration: 0
+            },
+            plugins: {
+                streaming: {
+                    refresh: 1000,
+                    duration: 30000,
+                    //can create function to copy here from received data above?
+                    //or create socket here and update value here;
+                    getClassValue: function () {
+                        // console.log("is calling get class value but returning " + this.testGlobalVar);
+                        return this.testGlobalVar;
+                    },
+                    updateVar: function () {
+                        test = this.randomIntRange(5000, 8000);
+                    },
+                    randomIntRange: function (min, max) {
+                        // console.log("managed to call function");
+                        return Math.floor(Math.random() * (max - min + 1) + min);
+                    },
+                    onRefresh: function (chart) {
+                        this.updateVar();
+                        var count = 0;
+                        // var value = this.randomIntRange(3000,8000);
+                        console.log("how many datasets i have " + chart.data.datasets.length);
+                        // console.log("pushing " + gameValuesToPush);
+                        chart.data.datasets[0].data.push({
+                            x: Date.now(),
+                            y: gameValuesToPush,
+                        });
+                        // console.log('check active bet here ' + localActiveBet);
+                        if (localActiveBet) {
+                            // console.log("Entered if condition");
+                            // console.log("buychart value is " + chart.data.datasets[1].data[0]);
+                            chart.data.datasets[3].data.push({
+                                x: Date.now(),
+                                y: localEntryPrice,
+                            });
+                            // console.log("After push entry value" + localEntryPrice);
+                        }
+                        ;
+                    },
+                    delay: 2000,
+                    frameRate: 30,
+                }
+            },
+            scales: {
+                xAxes: [{
+                        type: 'realtime',
+                        offset: true,
+                        ticks: {
+                            fontColor: "#f4f4f4",
+                            fontSize: 12,
+                            padding: 5,
+                            display: true,
+                            stepSize: 1000,
+                            min: 0,
+                        },
+                        gridLines: {
+                            lineWidth: 0.5,
+                            display: false,
+                            drawTicks: true,
+                            color: "white",
+                        },
+                    }],
+                yAxes: [{
+                        offset: true,
+                        ticks: {
+                            fontColor: "#f4f4f4",
+                            fontSize: 11,
+                            padding: 5,
+                            display: true,
+                        },
+                        gridLines: {
+                            lineWidth: 0.5,
+                            display: false,
+                            drawTicks: true,
+                            color: "white",
+                        },
+                    }],
+            }
+        };
+    };
+    StreamPage.prototype.ionViewWillEnter = function () {
+        this.walletAmount = this.auth.getAccValue();
+    };
+    StreamPage.prototype.delay = function (ms) {
+        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
+    };
+    StreamPage.prototype.destroyBetInstance = function () {
+        console.log("pop buyline chart");
+        this.datasets.pop();
+        this.chart.refresh();
+    };
+    StreamPage.prototype.buyDataset = function (orderType, entryPrice) {
+        console.log("Try to add new dataset");
+        var color;
+        if (orderType === "long") {
+            color = 'green';
+        }
+        else {
+            color = 'red';
+        }
+        var newDataset = {
+            label: 'Buy Price',
+            backgroundColor: color,
+            borderColor: color,
+            borderWidth: 2,
+            fill: false,
+            lineTension: 0,
+            data: [],
+            pointRadius: 0,
+        };
+        this.datasets.push(newDataset);
+        this.chart.refresh();
+    };
+    StreamPage.prototype.betHigher = function () {
+        var _this = this;
+        //to pass in currGame3ID
+        this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            console.log("bought " + _this.game3BetAmount);
+            console.log("Received entry price " + data.entryPrice);
+            if (parseInt(data.status) === 200) {
+                _this.isBetDisabled = true;
+                _this.isSliderDisabled = true;
+                _this.boughtIntoGame3 = true;
+                _this.roundBetType = 'long';
+                _this.buyDataset(_this.roundBetType, parseFloat(data.entryPrice).toFixed(3));
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
+                _this.entryPrice = parseFloat(data.entryPrice).toFixed(3);
+                // this.isManualBetDisabled = true;
+                // this.isManualCoutDisabled = false;
+                _this.hasActiveBet = true;
+                // this.game3BetAmount = '';
+                var alert_1 = _this.alertCtrl.create({
+                    title: 'SUCCESS',
+                    subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
+                    buttons: ['OK']
+                });
+                alert_1.present();
+                alert_1.onDidDismiss(function () {
+                });
+            }
+        }, function (err) {
+            console.log("Error occured while placing long bet");
+            // console.log(err);
+            // console.log(err.error.message);
+            // console.log(err.message);
+            if (err.status === 0) {
+                var alert_2 = _this.alertCtrl.create({
+                    title: 'ERROR',
+                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+                    buttons: ['OK']
+                });
+                alert_2.present();
+                console.log("Hit Error 0");
+            }
+            else {
+                var alert_3 = _this.alertCtrl.create({
+                    title: 'Error',
+                    subTitle: err.error.message,
+                    buttons: ['OK']
+                });
+                alert_3.present();
+                alert_3.onDidDismiss(function () {
+                });
+            }
+        });
+    };
+    StreamPage.prototype.betLower = function () {
+        var _this = this;
+        //to pass in currGame3ID
+        this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            console.log("bought " + _this.game3BetAmount);
+            console.log("Received entry price " + data.entryPrice);
+            // this.auth.setAccValue(data.accountValue);
+            // this.walletAmount = this.auth.getAccValue();
+            if (parseInt(data.status) === 200) {
+                _this.isBetDisabled = true;
+                _this.isSliderDisabled = true;
+                _this.boughtIntoGame3 = true;
+                _this.roundBetType = 'short';
+                _this.entryPrice = data.entryPrice;
+                _this.buyDataset(_this.roundBetType, data.entryPrice);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
+                // this.hasActiveManualBet = true;
+                // this.isManualBetDisabled = true;
+                // this.isManualCoutDisabled = false
+                _this.hasActiveBet = true;
+                // this.game3BetAmount = '';
+                var alert_4 = _this.alertCtrl.create({
+                    title: 'SUCCESS',
+                    subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
+                    buttons: ['OK']
+                });
+                alert_4.present();
+                alert_4.onDidDismiss(function () {
+                });
+            }
+        }, function (err) {
+            console.log("Error occured while placing short bet");
+            // console.log(err);
+            // console.log(err.error.message);
+            // console.log(err.message);
+            if (err.status === 0) {
+                var alert_5 = _this.alertCtrl.create({
+                    title: 'ERROR',
+                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
+                    buttons: ['OK']
+                });
+                alert_5.present();
+                console.log("Hit Error 0");
+            }
+            else {
+                var alert_6 = _this.alertCtrl.create({
+                    title: 'Error',
+                    subTitle: err.error.message,
+                    buttons: ['OK']
+                });
+                alert_6.present();
+                alert_6.onDidDismiss(function () {
+                });
+            }
+        });
+    };
+    StreamPage.prototype.updatePastGame = function () {
+        var _this = this;
+        this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(function (data) {
+            // pass the response from HTTP Request into local variable1 receivedData
+            // var receivedData= JSON.parse(data);
+            _this.historicalGame3 = new Array();
+            // console.log("Updating past game entry price " + data.entryPrice);
+            // console.log("Updating past game end price " + data.endPrice);
+            // console.log("Updating past game profit  " + data.profit);
+            // console.log("Updating past game gameName " + data.gameName);
+            if (parseInt(data.status) === 200) {
+                //set up for 1 bet per game first
+                console.log("Updating past game entry price " + data.data.entryPrice);
+                console.log("Updating past game end price " + data.data.endPrice);
+                console.log("Updating past game profit  " + data.data.profit);
+                console.log("Updating past game gameName " + data.data.gameName);
+                _this.auth.setAccValue(data.accountValue);
+                _this.walletAmount = _this.auth.getAccValue();
+                var transaction = {
+                    "entryPrice": parseFloat(data.data.entryPrice).toFixed(2),
+                    "betType": data.data.orderTypeDisplay,
+                    "endPrice": parseFloat(data.data.endPrice).toFixed(2),
+                    "profit": parseInt(data.data.profit)
+                };
+                _this.historicalGame3.push(transaction);
+            }
+        }, function (err) {
+            console.log("Error occured while getting past transactions");
+        });
+    };
+    StreamPage.prototype.calcRoundResult = function () {
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__["BaseChartDirective"]),
+        __metadata("design:type", Object)
+    ], StreamPage.prototype, "chart", void 0);
+    StreamPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf="showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br><br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="true"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'higher-green\'" full [disabled]="isBetDisabled" (click)="betHigher()">\n\n          <span style="font-weight:700; color:whitesmoke">Higher</span>\n\n        </button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'lower-red\'" full [disabled]="isBetDisabled" (click)="betLower()">\n\n          <span style="font-weight:700; color:whitesmoke">Lower</span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-item no-lines class="rangeSlider"> \n\n      <ion-range min="1" [max]="walletAmount" step="1" [disabled]="isSliderDisabled" [(ngModel)]="game3BetAmount" color="secondary">\n\n        <ion-label range-left>1</ion-label>\n\n        <ion-label range-right>{{walletAmount}}</ion-label>\n\n      </ion-range>\n\n    </ion-item>\n\n    <ion-row style="height:25%; width:100%">\n\n      <ion-scroll scrollY="true">\n\n        <ion-list col-12 no-lines>\n\n          <ion-list-header no-lines style="color:#f3ba2e">\n\n            <ion-col col-4>Price</ion-col>\n\n            <ion-col col-2>Bet Type</ion-col>\n\n            <ion-col col-3>Close</ion-col>\n\n            <ion-col item-end col-3>Profit</ion-col>\n\n          </ion-list-header>\n\n          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">\n\n            <ion-col col-4>{{transaction.entryPrice}}</ion-col>\n\n            <!-- <span col-3>Lo</span> -->\n\n            <ion-col col-2>{{transaction.betType}}</ion-col>\n\n            <ion-col col-3>\n\n              <span style="padding-left:10%">{{transaction.endPrice}}</span>\n\n            </ion-col>\n\n            <ion-col item-end col-3>\n\n              <span [style.color]="transaction.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{transaction.profit}}</span>\n\n            </ion-col>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-scroll>\n\n    </ion-row>\n\n    <!-- <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card> -->\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
+    ], StreamPage);
+    return StreamPage;
+}());
+
+//# sourceMappingURL=stream.js.map
+
+/***/ }),
+
+/***/ 166:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HashingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_socket_io_client__);
@@ -1342,1274 +2609,6 @@ var HashingPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 163:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(388);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__ = __webpack_require__(641);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_timeout__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__ = __webpack_require__(643);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__toggle_two_fa_toggle_two_fa__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__two_fac_auth_two_fac_auth__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__qr_code_qr_code__ = __webpack_require__(171);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__new_modal_new_modal__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__comm_tree_comm_tree__ = __webpack_require__(160);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-// import { HTTP } from '@ionic-native/http';
-
-
-
-
-
-
-
-
-
-
-// import { MyApp } from '../../app/app.component';
-/**
- * Generated class for the HomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var HomePage = /** @class */ (function () {
-    // socket: SocketIOClient.Socket;
-    function HomePage(platform, http, navCtrl, navParams, appCtrl, auth, nativeAudio, alertCtrl, modalCtrl) {
-        this.platform = platform;
-        this.http = http;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.appCtrl = appCtrl;
-        this.auth = auth;
-        this.nativeAudio = nativeAudio;
-        this.alertCtrl = alertCtrl;
-        this.modalCtrl = modalCtrl;
-        this.commTreePage = __WEBPACK_IMPORTED_MODULE_13__comm_tree_comm_tree__["a" /* CommTreePage */];
-        this.twoFApage = __WEBPACK_IMPORTED_MODULE_10__two_fac_auth_two_fac_auth__["a" /* TwoFacAuthPage */];
-        this.toggleTwoFApage = __WEBPACK_IMPORTED_MODULE_9__toggle_two_fa_toggle_two_fa__["a" /* ToggleTwoFaPage */];
-        this.qrPage = __WEBPACK_IMPORTED_MODULE_11__qr_code_qr_code__["a" /* QrCodePage */];
-        this.createdCode = "https://" + "www.google.com";
-        // this.socket = io.connect('http://178.128.50.224:3001');
-        // console.log("socket conencted");
-        this.isGuest = auth.getGuestLogin();
-    }
-    HomePage.prototype.ngOnInit = function () {
-        this.getNews();
-    };
-    HomePage.prototype.ionViewWillEnter = function () {
-        //if 0 then no 2FA needed
-        if (this.auth.get2FAStatus() === 0) {
-            // this.initTwoFAstatus = false;
-            this.twoFAstatus = false;
-        }
-        else {
-            // this.initTwoFAstatus = true;
-            this.twoFAstatus = true;
-        }
-    };
-    //bgm loop works in home view, uncomment for mobile sound
-    HomePage.prototype.ionViewDidLoad = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
-                _this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-                _this.nativeAudio.loop('bgmLoopHome');
-            });
-        });
-    };
-    //NEWS API
-    HomePage.prototype.getNews_Old = function () {
-        var _this = this;
-        console.log("button is working fine");
-        var path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
-        var encodedPath = encodeURI(path);
-        var timeoutMS = 100000;
-        this.http.get(encodedPath)
-            .timeout(timeoutMS)
-            .map(function (res) { return res.json(); }).subscribe(function (data) {
-            var responseData = data;
-            console.log(responseData);
-            _this.displayStory = responseData.articles[0].description;
-            _this.storyImage = responseData.articles[0].urlToImage;
-        }, function (err) {
-            console.log('error in getting news');
-        });
-    };
-    HomePage.prototype.getNews = function () {
-        var _this = this;
-        console.log("button is working fine");
-        // let imgPath = 'http://178.128.50.224:3000/getNews';
-        // let encodedImgPath = encodeURI(imgPath);
-        var timeoutMS = 100000;
-        this.storyImage = 'http://178.128.50.224:3000/getNews';
-        // this.http.get(encodedImgPath)
-        //   .timeout(timeoutMS)
-        //   .map(res => res.json()).subscribe(data => {
-        //     let responseData = data;
-        //     console.log(responseData);
-        //     this.storyImage = responseData;
-        //   },
-        //     err => {
-        //       console.log('error in getting news');
-        //     });
-        var textPath = 'http://178.128.50.224:3000/getNewsText';
-        var encodedTextPath = encodeURI(textPath);
-        this.http.get(encodedTextPath)
-            .timeout(timeoutMS)
-            .map(function (res) { return res.json(); }).subscribe(function (data) {
-            var responseData = data;
-            console.log(responseData.message);
-            _this.displayStory = responseData.message;
-        }, function (err) {
-            console.log('error in getting news');
-        });
-    };
-    HomePage.prototype.showAbout = function () {
-        var alert = this.alertCtrl.create({
-            title: 'About BGM',
-            subTitle: 'Blockchain Gaming Master v1.0.0',
-            buttons: ['OK']
-        });
-        alert.present();
-    };
-    HomePage.prototype.showContact = function () {
-        var alert = this.alertCtrl.create({
-            title: 'Contact us',
-            subTitle: 'www.bgm.com/help',
-            buttons: ['OK']
-        });
-        alert.present();
-    };
-    HomePage.prototype.showQRcode = function () {
-        //to do alert
-        // this.navCtrl.push(this.qrPage);
-        var qrModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_12__new_modal_new_modal__["a" /* NewModalPage */]);
-        // qrModal.onDidDismiss(data => {
-        //   console.log("Dismissed modal");
-        // });
-        qrModal.present();
-    };
-    HomePage.prototype.showCommission = function () {
-        console.log("Triggered comms page");
-        this.navCtrl.push(this.commTreePage);
-        //check if master or agent
-    };
-    HomePage.prototype.logout = function () {
-        console.log("logout is working fine");
-        this.auth.setSessionToken("");
-        console.log("Destroy session token " + this.auth.getSessionToken());
-        // console.log("rootnav = " +this.appCtrl.getRootNav());
-        this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_3__login_login__["a" /* LoginPage */]);
-    };
-    HomePage.prototype.toggle2FA = function () {
-        // console.log("init 2fa status " + this.initTwoFAstatus);
-        console.log("toggled 2fa " + this.twoFAstatus);
-        //both turn on and off also need verify 2FA
-        // if (this.twoFAstatus===true){
-        // this.navCtrl.push(this.twoFApage);
-        this.navCtrl.push(this.toggleTwoFApage);
-        // }
-    };
-    HomePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/'<!--\n\n  Generated template for the HomePage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>\n\n      <!-- <ion-icon name="home"></ion-icon> -->\n\n      Home\n\n    </ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%">\n\n\n\n    <ion-row>\n\n      <ion-col col-12 text-center>\n\n        <img width=100% height=100% src={{this.storyImage}} style="background:transparent">\n\n      </ion-col>\n\n    </ion-row>\n\n    <br>\n\n    <ion-row>\n\n      {{this.displayStory}}\n\n    </ion-row>\n\n    <br>\n\n    <!-- About button -->\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showAbout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>\n\n            </span>\n\n            About\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--contact button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" (click)="showContact()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="call"></ion-icon>\n\n            </span>\n\n            Contact Support\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--update 2 FA -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <ion-item no-lines class="twoFA" *ngIf="!isGuest">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="lock"></ion-icon>\n\n            </span>\n\n            Toggle 2FA\n\n          </span>\n\n          <ion-toggle [(ngModel)]="twoFAstatus" (ionChange)="toggle2FA()"></ion-toggle>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--get ref QR code -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines class="referQR" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showQRcode()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="qr-scanner"></ion-icon>\n\n            </span>\n\n            Get Referral QR\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--get comission page -->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines class="viewCommission" *ngIf="!isGuest" color="dark" style="color:secondary;" (click)="showCommission()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n                <ion-icon ios="ios-cash-outline" md="md-cash"></ion-icon>\n\n            </span>\n\n            Comission Earned\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <!--logout button-->\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <button ion-item no-lines color="dark" style="color:secondary;" [style.visibility]="isGuest ? \'hidden\' : \'visible\'" (click)="logout()">\n\n          <span item-left style="color:#f3ba2e; font-size:16px;">\n\n            <span style="padding-right:8px">\n\n              <ion-icon name="log-out"></ion-icon>\n\n            </span>\n\n            Logout\n\n          </span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\home\home.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_7__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_8__node_modules_ionic_native_native_audio__["a" /* NativeAudio */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["g" /* ModalController */]])
-    ], HomePage);
-    return HomePage;
-}());
-
-//# sourceMappingURL=home.js.map
-
-/***/ }),
-
-/***/ 164:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoulettePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-// declare function init(): any; 
-// declare function drawRouletteShadow();
-// declare function drawArcs();
-// declare function drawPointer();
-var RoulettePage = /** @class */ (function () {
-    function RoulettePage(navCtrl, alertCtrl) {
-        this.navCtrl = navCtrl;
-        this.alertCtrl = alertCtrl;
-        this.disabled = false;
-        this.walletBallance = 1000;
-        // refreshUi();
-        // init();
-    }
-    RoulettePage.prototype.onSpin = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.disableSpinButton();
-                        reset();
-                        init();
-                        randomSpin();
-                        this.updateWalletBallance(-this.betAmount);
-                        console.log("My winner ID is " + winnerId);
-                        return [4 /*yield*/, this.delay(5010)];
-                    case 1:
-                        _a.sent();
-                        this.presentAlert(winnerId);
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    RoulettePage.prototype.ngOnInit = function () {
-        init();
-    };
-    RoulettePage.prototype.delay = function (ms) {
-        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
-    };
-    RoulettePage.prototype.enableSpinButton = function () {
-        this.disabled = false;
-    };
-    RoulettePage.prototype.disableSpinButton = function () {
-        this.disabled = true;
-    };
-    RoulettePage.prototype.updateWalletBallance = function (amount) {
-        this.walletBallance += amount;
-    };
-    RoulettePage.prototype.presentAlert = function (winnerId) {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Congratualations',
-            subTitle: 'You have won ' + winnerId,
-            buttons: ['OK']
-        });
-        alert.present();
-        alert.onDidDismiss(function () {
-            _this.enableSpinButton();
-        });
-    };
-    RoulettePage.prototype.back = function () {
-        this.navCtrl.pop();
-    };
-    RoulettePage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-roulette',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\roulette\roulette.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <!-- <button ion-button (click)="back()">Back</button> -->\n\n    <ion-title>\n\n      Game 1: Roulette\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  \n\n  <!-- <input type="button" ng-click"=randomSpin()" style="float:left;" id=\'spin\' /> -->\n\n  \n\n  <!-- <canvas id="canvas" width="500" height="500"></canvas> -->\n\n  <!-- <div id="holder" style="width:400px; height:400px;">\n\n  </div>\n\n  <button id="genBtn">Rotate</button>\n\n  <br />\n\n  <button id="rmBtn">Remove the winner and rotate</button>\n\n  <br>\n\n  <p>Click <b>Rotate</b> to update.</p>\n\n  <p>Bookmark <a id="bookmarklink" href=\'./roulette.html\'>this link</a> to save your list.</p> \n\n  <textarea id="items" name="items" rows="8" cols="15"> </textarea>\n\n  \n\n  <button id="genBtn">Rotate</button>\n\n  <br />\n\n  <button id="rmBtn">Remove the winner and rotate</button>\n\n  <br> -->\n\n  <div class="col-xs-12 col-sm-12 col-lg-12" id="holder" style="visibility:visible">\n\n  <!-- <div id="holder" style="width:100px; height:400px;"> -->\n\n  </div>\n\n  <div class="row">\n\n  Balance: {{walletBallance}} USD\n\n  </div>\n\n  <div class="row"> \n\n      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="spinInputAmount">\n\n          <ion-input type="number" [(ngModel)]="betAmount" placeholder="Amount" [disabled]="disabled"></ion-input>\n\n      </div>\n\n    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="spinButton">\n\n        <button ion-button [disabled]="disabled" (click)="onSpin()">Spin To Win!</button>\n\n    </div>\n\n  </div>\n\n  \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\roulette\roulette.html"*/
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */]])
-    ], RoulettePage);
-    return RoulettePage;
-}());
-
-//# sourceMappingURL=roulette.js.map
-
-/***/ }),
-
-/***/ 165:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return WalletPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_data_data__ = __webpack_require__(26);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the WalletPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-// declare function reset(): any;
-var WalletPage = /** @class */ (function () {
-    function WalletPage(navCtrl, navParams, alertCtrl, auth, dataProvider) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.alertCtrl = alertCtrl;
-        this.auth = auth;
-        this.dataProvider = dataProvider;
-        this.walletType = 'investment';
-        this.refreshIcon = 'refresh';
-        this.currentView = 'game';
-        // balances: any = {
-        //   'investment': 12340,
-        //   'game': 750,
-        // };
-        this.statements = {
-            'investment': [
-                {
-                    time: '11/8 1200',
-                    name: 'Deposit',
-                    price: '11340'
-                },
-                {
-                    time: '10/8 1200',
-                    name: 'Withdraw',
-                    price: '-1000'
-                },
-                {
-                    time: '9/8 1200',
-                    name: 'Deposit',
-                    price: '2000'
-                },
-            ],
-            'game': [
-                {
-                    time: '11/8 1330',
-                    name: '1. Treasure',
-                    price: '1000'
-                },
-                {
-                    time: '10/8 0900',
-                    name: '2. Hashing',
-                    price: '-250'
-                }
-            ],
-        };
-        this.currentView = 'game';
-        this.walletBalance = this.auth.getAccValue();
-        this.historicalGames = new Array();
-    }
-    WalletPage.prototype.ngOnInit = function () {
-        this.updateStatementHistory();
-        // this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
-        //   //receive successfully
-        //   console.log("Received data here  " + data);
-        //   console.log("Login reponse");
-        //   for (var i = 0; i < data.orders.length; i++) {
-        //     //FOR loop iterate all and form objects//
-        //     //--STORE TIME--
-        //     // console.log("timestamp of first order " + data.orders[i].updated);
-        //     //convert time stamp
-        //     var myDate = new Date(data.orders[i].updated);
-        //     var localeDate = myDate.toLocaleString('en-GB');
-        //     console.log("locale date = " + localeDate);
-        //     var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
-        //     console.log("Formatted date: " + formattedDate);
-        //     //--STORE GAME NAME--
-        //     // console.log("" + data.orders[i].gameName);
-        //     //--STORE PROFIT--
-        //     // console.log("profit of first order " + data.orders[i].profit)
-        //     var singleGame = {
-        //       "time": formattedDate,
-        //       "gameID": data.orders[i].gameName,
-        //       "gameNo": data.orders[i].gameNo,
-        //       "profit": parseInt(data.orders[i].profit)
-        //     }
-        //     //push array
-        //     this.historicalGames.push(singleGame);
-        //     // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
-        //     // console.log("historical game name size "  + this.historicalGames.length);
-        //   }
-        // },
-        //   err => {
-        //     console.log("Error occured while getting past transactions");
-        //     console.log(err);
-        //   });
-    };
-    WalletPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad WalletPage');
-    };
-    WalletPage.prototype.ionViewWillEnter = function () {
-        this.walletBalance = this.auth.getAccValue();
-        this.updateStatementHistory();
-    };
-    // toggleSegment($event) {
-    //   console.log("Chosen segment " + $event.value);
-    //   //update current view & wallet balance
-    //   this.currentView = $event.value;
-    //   this.walletBalance = this.balances[this.currentView];
-    // }
-    WalletPage.prototype.getStatements = function (type) {
-        // console.log("Call get statements");
-        return this.statements[type];
-    };
-    //driver functions, deposit withdraw
-    WalletPage.prototype.deposit = function () {
-        //check current view & present alert
-        // if (this.currentView === 'investment') {
-        //   this.investmentDeposit();
-        // }
-        if (this.currentView === 'game') {
-            this.gameDeposit();
-        }
-        else {
-            //do nothing
-            console.log("Entered exception for currentView on deposit");
-        }
-    };
-    WalletPage.prototype.withdraw = function () {
-        //check current view & present alert
-        // if (this.currentView === 'investment') {
-        //   this.investmentWithdraw();
-        // }
-        if (this.currentView === 'game') {
-            this.gameWithdraw();
-        }
-        else {
-            //do nothing
-            console.log("Entered exception for currentView on deposit");
-        }
-    };
-    // investmentDeposit() {
-    //   let alert = this.alertCtrl.create({
-    //     title: 'Proceed to deposit?',
-    //     message: 'You will be redirected to the page for deposit',
-    //     buttons: [
-    //       {
-    //         text: 'Yes',
-    //         handler: () => {
-    //           console.log('Yes click to redirect');
-    //         }
-    //       },
-    //       {
-    //         text: 'No',
-    //         handler: () => {
-    //           console.log('Not opening page');
-    //         }
-    //       }
-    //     ]
-    //   });
-    //   alert.present();
-    // }
-    // investmentWithdraw() {
-    //   let alert = this.alertCtrl.create({
-    //     title: 'Withdraw to bank',
-    //     message: 'Enter amount to withdraw',
-    //     inputs: [
-    //       {
-    //         name: 'Amount',
-    //         placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
-    //       },
-    //     ],
-    //     buttons: [
-    //       {
-    //         text: 'Cancel',
-    //         handler: (data) => {
-    //           console.log('Cancelled withdraw intended ' + data.Amount + ' to bank');
-    //         }
-    //       },
-    //       {
-    //         text: 'Withdraw',
-    //         handler: (data) => {
-    //           console.log('Processing withdraw ' + data.Amount + ' to bank');
-    //           console.log(JSON.stringify(data)); //to see the object
-    //           console.log("Amount input was " + data.Amount);
-    //           this.processInvWithdrawal(data.Amount);
-    //         }
-    //       }
-    //     ]
-    //   });
-    //   alert.present();
-    // }
-    // processInvWithdrawal(amount: any) {
-    //   //to insert post call for withdrwal return then
-    //   let alert = this.alertCtrl.create({
-    //     title: 'SUCCESS',
-    //     subTitle: 'Your withdrawal of ' + amount + ' BGM was successful and will be reflected in your bank in 2 days',
-    //     buttons: ['OK']
-    //   });
-    //   alert.present();
-    // }
-    WalletPage.prototype.updateStatementHistory = function () {
-        var _this = this;
-        this.historicalGames = new Array();
-        this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(function (data) {
-            //receive successfully
-            // console.log("Received data here  " + data);
-            // console.log("Login reponse");
-            for (var i = 0; i < data.orders.length; i++) {
-                //FOR loop iterate all and form objects//
-                //--STORE TIME--
-                // console.log("timestamp of first order " + data.orders[i].updated);
-                //convert time stamp
-                var myDate = new Date(data.orders[i].updated);
-                var localeDate = myDate.toLocaleString('en-GB');
-                // console.log("locale date = " + localeDate);
-                var formattedDate = localeDate.substring(0, 5) + ' ' + localeDate.substring(12, 17);
-                // console.log("Formatted date: " + formattedDate);
-                //--STORE GAME NAME--
-                // console.log("" + data.orders[i].gameName);
-                //--STORE PROFIT--
-                // console.log("profit of first order " + data.orders[i].profit)
-                var singleGame = {
-                    "time": formattedDate,
-                    "gameID": data.orders[i].gameName,
-                    "gameNo": data.orders[i].gameNo,
-                    "profit": parseInt(data.orders[i].profit)
-                };
-                //push array
-                _this.historicalGames.push(singleGame);
-                // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
-                // console.log("historical game name size "  + this.historicalGames.length);
-            }
-        }, function (err) {
-            console.log("Error occured while getting past transactions");
-            console.log(err);
-        });
-    };
-    WalletPage.prototype.gameDeposit = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Deposit Game Wallet',
-            message: 'Enter amount to transfer from investment wallet',
-            inputs: [
-                {
-                    name: 'Amount',
-                    placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
-                },
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: function (data) {
-                        console.log('Cancelled transfer intended ' + data.Amount + ' to game wallet');
-                    }
-                },
-                {
-                    text: 'Transfer',
-                    handler: function (data) {
-                        console.log('Processing transfer ' + data.Amount + ' to game wallet');
-                        _this.dataProvider.postDepositWallet(_this.auth.getAccId(), data.Amount).subscribe(function (resReceived) {
-                            //receive successfully
-                            console.log("account info " + resReceived.accountValue);
-                            _this.auth.setAccValue(resReceived.accountValue);
-                            _this.walletBalance = _this.auth.getAccValue();
-                            _this.updateStatementHistory();
-                            _this.processGameDeposit(resReceived.order.profit);
-                        }, function (err) {
-                            console.log("Error occured while depositing");
-                            console.log(err);
-                        });
-                        console.log(JSON.stringify(data)); //to see the object
-                        console.log("Amount input was " + data.Amount);
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    WalletPage.prototype.processGameDeposit = function (amount) {
-        //to insert post call for withdrwal return then
-        var alert = this.alertCtrl.create({
-            title: 'SUCCESS',
-            subTitle: 'Your game wallet has successfully recharged ' + amount + ' BGM',
-            buttons: ['OK']
-        });
-        alert.present();
-    };
-    WalletPage.prototype.gameWithdraw = function () {
-        var _this = this;
-        var alert = this.alertCtrl.create({
-            title: 'Withdraw From Game Wallet',
-            message: 'Enter amount to transfer to investment wallet',
-            inputs: [
-                {
-                    name: 'Amount',
-                    placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
-                },
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    handler: function (data) {
-                        console.log('Cancelled transfer intended ' + data.Amount + ' to investment wallet');
-                    }
-                },
-                {
-                    text: 'Transfer',
-                    handler: function (data) {
-                        console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
-                        _this.dataProvider.postWithdrawWallet(_this.auth.getAccId(), data.Amount).subscribe(function (resReceived) {
-                            //receive successfully
-                            console.log("account info " + resReceived.accountValue);
-                            _this.auth.setAccValue(resReceived.accountValue);
-                            _this.walletBalance = _this.auth.getAccValue();
-                            _this.updateStatementHistory();
-                            _this.processGameWithdrawal(Math.abs(resReceived.order.profit));
-                        }, function (err) {
-                            console.log("Error occured while withdrawing");
-                            console.log(err);
-                        });
-                        console.log(JSON.stringify(data)); //to see the object
-                        console.log("Amount input was " + data.Amount);
-                    }
-                }
-            ]
-        });
-        alert.present();
-    };
-    WalletPage.prototype.processGameWithdrawal = function (amount) {
-        //to insert post call for withdrwal return then
-        var alert = this.alertCtrl.create({
-            title: 'SUCCESS',
-            subTitle: 'Your transfer of ' + amount + ' BGM to investment wallet was successful',
-            buttons: ['OK']
-        });
-        alert.present();
-    };
-    WalletPage.prototype.refreshWallet = function () {
-        var _this = this;
-        console.log("refreshing wallets");
-        this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(function (data) {
-            //parse response from server
-            console.log("Update wallet reponse");
-            console.log("Received acc balance as  " + data.accountValue);
-            _this.auth.setAccValue(parseInt(data.accountValue));
-            console.log("Global provider value of acc " + _this.auth.getAccValue());
-            _this.walletBalance = _this.auth.getAccValue();
-            //to present alert to refresh wallet
-            var alert = _this.alertCtrl.create({
-                title: 'SUCCESS',
-                subTitle: 'Wallet Refreshed',
-                buttons: ['OK']
-            });
-            alert.present();
-        }, function (err) {
-            console.log("Error occured while getting account balance");
-            var alert = _this.alertCtrl.create({
-                title: 'ERROR',
-                subTitle: 'Wallet cannot be refreshed at this time. Please try again.',
-                buttons: ['OK']
-            });
-            alert.present();
-            console.log(err);
-        });
-        // this.navCtrl.setRoot(TabsPage);
-        console.log("End getting amount");
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_2_ng2_charts__["BaseChartDirective"]),
-        __metadata("design:type", Object)
-    ], WalletPage.prototype, "Game2Chart", void 0);
-    WalletPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-wallet',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\wallet\wallet.html"*/'<!--\n\n  Generated template for the WalletPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Wallet</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <!--toolbar for navigating wallet-->\n\n  <!-- <ion-toolbar color="app-bg">\n\n    <ion-segment [(ngModel)]="walletType" color="primary" (ionChange)="toggleSegment($event)">\n\n      <ion-segment-button outline value="investment">\n\n        Investment\n\n      </ion-segment-button>\n\n      <ion-segment-button outline value="game">\n\n        Game\n\n      </ion-segment-button>\n\n    </ion-segment>\n\n  </ion-toolbar> -->\n\n\n\n  <ion-card style="height:20%">\n\n    <ion-card-header color="primary" style="font-size:20px">\n\n      You have:\n\n    </ion-card-header>\n\n    <ion-card-content>\n\n      <ion-row>\n\n        <ion-col col-2>\n\n          <ion-img width="30" height="30" src="../assets/imgs/OT_Logo.png" style="background:transparent; padding-top:-5%;"></ion-img>\n\n        </ion-col>\n\n        <ion-col col-8>\n\n          <span class="align-right">{{walletBalance}}\n\n            <span style="color:#f3ba2e">OT</span>\n\n          </span>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <span class="refresh-button">\n\n            <button ion-button default clear icon-only (click)=refreshWallet()>\n\n              <ion-icon name="refresh"></ion-icon>\n\n            </button>\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <!-- top up and withdraw buttons-->\n\n    </ion-card-content>\n\n  </ion-card>\n\n  <ion-row>\n\n    <ion-col col-6 text-center>\n\n      <button ion-button color="secondary" full (click)="deposit()" style="color:black;">DEPOSIT</button>\n\n    </ion-col>\n\n    <ion-col col-6 text-center>\n\n      <button ion-button color="secondary" full (click)="withdraw()" style="color:black;">WITHDRAW</button>\n\n    </ion-col>\n\n  </ion-row>\n\n  <!-- <ion-card style="height:50%">\n\n    <ion-card-content> -->\n\n  <ion-row style="height:80%">\n\n    <ion-scroll scrollY="true">\n\n      <ion-list col-12 no-lines>\n\n        <ion-list-header no-lines text-color="light">\n\n          <span col-2 item-start>Time</span>\n\n          <span col-6>[Game] Trans</span>\n\n          <span col-4 item-end style="text-align:right; padding-right:5%">W/L</span>\n\n        </ion-list-header>\n\n        <ion-item *ngFor="let games of historicalGames">\n\n          <span col-2 item-start style="font-size:12px">{{games.time}}</span>\n\n          <span col-6>[{{games.gameNo}}] {{games.gameID}}</span>\n\n          <span col-4 item-end [style.color]="games.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{ games.profit }}</span>\n\n        </ion-item>\n\n      </ion-list>\n\n    </ion-scroll>\n\n  </ion-row>\n\n  <!-- </ion-card-content>\n\n  </ion-card> -->\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\wallet\wallet.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_3__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_data_data__["a" /* DataProvider */]])
-    ], WalletPage);
-    return WalletPage;
-}());
-
-//# sourceMappingURL=wallet.js.map
-
-/***/ }),
-
-/***/ 166:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StreamPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__ = __webpack_require__(545);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_chartjs_plugin_streaming__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_socket_io_client__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_data_data__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__ = __webpack_require__(47);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-// import { getQueryValue } from '@angular/core/src/view/query';
-
-
-
-
-
-/**
- * Generated class for the StreamPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var StreamPage = /** @class */ (function () {
-    function StreamPage(navCtrl, navParams, auth, dataProvider, alertCtrl, smartAudio) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.auth = auth;
-        this.dataProvider = dataProvider;
-        this.alertCtrl = alertCtrl;
-        this.smartAudio = smartAudio;
-        this.isBetDisabled = true;
-        this.hasActiveBet = false;
-        this.count = 30.0;
-        this.boughtIntoGame3 = false;
-        this.yDataReceived = Math.random() * 20;
-        this.testGlobalVar = 6000;
-        this.buffer = [[], []];
-        this.chartLabels = [];
-        // private datamap: any;
-        this.chartColors = [
-            {
-                backgroundColor: 'rgba(255, 206, 86, 0)',
-                borderColor: '#f3ba2e',
-                pointBackgroundColor: '#f3ba2e',
-                // pointBorderColor: '#fafafa',
-                pointRadius: 0,
-                pointHoverBackgroundColor: '#f3ba2e',
-                pointHoverBorderColor: 'rgba(148,159,177,0.8)' //changing hover point color
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#FF0000',
-                pointBackgroundColor: '#FF0000',
-                pointBorderColor: '#FF0000',
-                pointHoverBackgroundColor: '#FF0000',
-                pointHoverBorderColor: '#FF0000'
-            },
-            {
-                backgroundColor: 'rgba(0,0,0,0)',
-                borderColor: '#2D8632',
-                pointBackgroundColor: '#2D8632',
-                pointBorderColor: '#2D8632',
-                pointHoverBackgroundColor: '#2D8632',
-                pointHoverBorderColor: '#2D8632'
-            }
-        ];
-        this.datasets = [
-            { data: [], showLine: true, fill: true, label: 'BitCoin', },
-            { data: [], showLine: false, pointRadius: 5, label: 'Short' },
-            { data: [], showLine: false, pointRadius: 5, label: 'Long' }
-        ];
-        //do socket connection
-        this.isSliderDisabled = true;
-        this.socket = __WEBPACK_IMPORTED_MODULE_5_socket_io_client__["connect"]('http://178.128.50.224:3002');
-        console.log("socket for BinaryOptions conencted");
-        this.isGuestLogin = this.auth.getGuestLogin();
-        // this.isGameTime = true;
-        this.historicalGame3 = new Array();
-        this.updatePastGame();
-        this.musicPlayed = false;
-    }
-    StreamPage.prototype.ngOnInit = function () {
-        var _this = this;
-        console.log('ionViewDidLoad StreamPage');
-        //variable currentPrice,
-        //on game, countdown, gamestart. NO game end yet
-        var gameValuesToPush;
-        var localActiveBet;
-        var localEntryPrice;
-        var lastCountDown;
-        var updatePriceFlag;
-        var currCountDown;
-        this.socket.on('Game3', function (data) {
-            // console.log(JSON.parse(data));
-            var receivedData = JSON.parse(data);
-            // console.log("Received data type  " + receivedData.type);
-            localActiveBet = _this.hasActiveBet;
-            localEntryPrice = _this.entryPrice;
-            // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
-            if (receivedData.type === 'gameStart') {
-                // console.log("received gameStart");
-                _this.isBetDisabled = true;
-                if (_this.currGameState !== 'gameStart') {
-                    if (_this.hasActiveBet) {
-                        _this.isSliderDisabled = true;
-                    }
-                    else {
-                        _this.isSliderDisabled = false;
-                    }
-                    _this.showGameTime = true;
-                    _this.showCountdown = false;
-                    _this.showGameEnded = false;
-                    _this.currGameState = 'gameStart';
-                    console.log("Toggled state " + _this.currGameState);
-                    //TODO: Sound 
-                }
-                //one instance
-            }
-            else if (receivedData.type === 'countdown') {
-                _this.timerValue = Math.abs(parseFloat(receivedData.number)).toFixed(0);
-                gameValuesToPush = receivedData.currentPrice;
-                // console.log("Updating current price in countdown " + gameValuesToPush);
-                // console.log("Counting down: " + receivedData.number);
-                if (_this.currGameState !== 'countdown') {
-                    _this.isBetDisabled = false;
-                    _this.isSliderDisabled = false;
-                    _this.showGameTime = false;
-                    _this.showCountdown = true;
-                    _this.showGameEnded = false;
-                    _this.currGameState = 'countdown';
-                    _this.currGame3ID = receivedData.GameId;
-                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
-                }
-            }
-            else if (receivedData.type === 'game') {
-                _this.isBetDisabled = true;
-                // var updatePriceFlag; 
-                // var currCountDown;
-                // currCountDown = parseInt(receivedData.number);
-                // console.log("Current countdown = " + currCountDown);
-                // if (currCountDown < lastCountDown) {
-                //   gameValuesToPush = receivedData.currentPrice;
-                //   lastCountDown = currCountDown;
-                //   console.log("pushed value " + gameValuesToPush);
-                // }
-                gameValuesToPush = receivedData.currentPrice;
-                _this.gameTimer = Math.abs(parseFloat(receivedData.number)).toFixed(0);
-                // console.log("Updating current price in game " + gameValuesToPush);
-                // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
-                if ((_this.gameTimer < 4.2) && (_this.hasActiveBet)) {
-                    if (!_this.musicPlayed) {
-                        _this.smartAudio.play('game3countdown');
-                        _this.musicPlayed = true;
-                    }
-                }
-                if (_this.currGameState !== 'game') {
-                    _this.currGame3ID = receivedData.GameId;
-                    _this.showGameTime = true;
-                    _this.showCountdown = false;
-                    _this.showGameEnded = false;
-                    _this.currGameState = 'game';
-                    console.log("Toggled state " + _this.currGameState);
-                    console.log("Toggled state " + _this.currGameState + " changed curr game id " + _this.currGame3ID);
-                }
-            }
-            else if (receivedData.type === 'gameEnd') {
-                //game ended;
-                _this.showGameTime = false;
-                gameValuesToPush = receivedData.endValue;
-                if (_this.currGameState !== 'gameEnd') {
-                    //TOGGLE STATE TO GAME END
-                    if (_this.hasActiveBet) {
-                        _this.destroyBetInstance();
-                        _this.isSliderDisabled = false;
-                        _this.game3BetAmount = '';
-                    }
-                    _this.musicPlayed = false;
-                    _this.hasActiveBet = false;
-                    _this.showCountdown = false;
-                    _this.showGameEnded = true;
-                    _this.currGameState = 'gameEnd';
-                    _this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
-                    //Update past game
-                    _this.updatePastGame();
-                    //restart gameTimer
-                    _this.gameTimer = 15.0;
-                    console.log("Toggled state " + _this.currGameState);
-                }
-            }
-            else {
-                //do nth, error state.
-                _this.currGameState = '';
-            }
-        });
-        //INSERTION HERE
-        this.socket.on('Game3orders', function (data) {
-            // console.log(JSON.parse(data));
-            var receivedData = JSON.parse(data);
-            // console.log(receivedData[0].longOrders);
-            // console.log(receivedData[0].shortOrders);
-            // console.log(receivedData[0].price);
-            // console.log("Received data type  " + receivedData.type);
-            // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
-            if (parseInt(receivedData[0].shortOrders) === 0) {
-                //this is to insert in long chart
-                // console.log("received gameStart");
-                _this.chart.datasets[2].data.push({
-                    x: Date.now(),
-                    y: receivedData[0].price,
-                });
-                console.log("Long Orders here " + receivedData[0].longOrders);
-                // this.chart.refresh();
-                //one instance
-            }
-            else {
-                //this is to insert in short chart
-                console.log("Short Orders here " + receivedData[0].shortOrders);
-                _this.chart.datasets[1].data.push({
-                    x: Date.now(),
-                    y: gameValuesToPush,
-                });
-                // this.chart.refresh();
-            }
-        });
-        // buffer=[[7000],[Date.now()]];
-        // this.startGame(10);
-        var test = this.testGlobalVar;
-        this.options = {
-            legend: {
-                display: false
-            },
-            animation: {
-                duration: 0
-            },
-            plugins: {
-                streaming: {
-                    refresh: 1000,
-                    duration: 30000,
-                    //can create function to copy here from received data above?
-                    //or create socket here and update value here;
-                    getClassValue: function () {
-                        // console.log("is calling get class value but returning " + this.testGlobalVar);
-                        return this.testGlobalVar;
-                    },
-                    updateVar: function () {
-                        test = this.randomIntRange(5000, 8000);
-                    },
-                    randomIntRange: function (min, max) {
-                        // console.log("managed to call function");
-                        return Math.floor(Math.random() * (max - min + 1) + min);
-                    },
-                    onRefresh: function (chart) {
-                        this.updateVar();
-                        var count = 0;
-                        // var value = this.randomIntRange(3000,8000);
-                        console.log("how many datasets i have " + chart.data.datasets.length);
-                        // console.log("pushing " + gameValuesToPush);
-                        chart.data.datasets[0].data.push({
-                            x: Date.now(),
-                            y: gameValuesToPush,
-                        });
-                        // console.log('check active bet here ' + localActiveBet);
-                        if (localActiveBet) {
-                            // console.log("Entered if condition");
-                            // console.log("buychart value is " + chart.data.datasets[1].data[0]);
-                            chart.data.datasets[3].data.push({
-                                x: Date.now(),
-                                y: localEntryPrice,
-                            });
-                            // console.log("After push entry value" + localEntryPrice);
-                        }
-                        ;
-                    },
-                    delay: 2000,
-                    frameRate: 30,
-                }
-            },
-            scales: {
-                xAxes: [{
-                        type: 'realtime',
-                        offset: true,
-                        ticks: {
-                            fontColor: "#f4f4f4",
-                            fontSize: 12,
-                            padding: 5,
-                            display: true,
-                            stepSize: 1000,
-                            min: 0,
-                        },
-                        gridLines: {
-                            lineWidth: 0.5,
-                            display: false,
-                            drawTicks: true,
-                            color: "white",
-                        },
-                    }],
-                yAxes: [{
-                        offset: true,
-                        ticks: {
-                            fontColor: "#f4f4f4",
-                            fontSize: 11,
-                            padding: 5,
-                            display: true,
-                        },
-                        gridLines: {
-                            lineWidth: 0.5,
-                            display: false,
-                            drawTicks: true,
-                            color: "white",
-                        },
-                    }],
-            }
-        };
-    };
-    StreamPage.prototype.ionViewWillEnter = function () {
-        this.walletAmount = this.auth.getAccValue();
-    };
-    StreamPage.prototype.delay = function (ms) {
-        return new Promise(function (resolve) { return setTimeout(resolve, ms); });
-    };
-    StreamPage.prototype.destroyBetInstance = function () {
-        console.log("pop buyline chart");
-        this.datasets.pop();
-        this.chart.refresh();
-    };
-    StreamPage.prototype.buyDataset = function (orderType, entryPrice) {
-        console.log("Try to add new dataset");
-        var color;
-        if (orderType === "long") {
-            color = 'green';
-        }
-        else {
-            color = 'red';
-        }
-        var newDataset = {
-            label: 'Buy Price',
-            backgroundColor: color,
-            borderColor: color,
-            borderWidth: 2,
-            fill: false,
-            lineTension: 0,
-            data: [],
-            pointRadius: 0,
-        };
-        this.datasets.push(newDataset);
-        this.chart.refresh();
-    };
-    StreamPage.prototype.betHigher = function () {
-        var _this = this;
-        //to pass in currGame3ID
-        this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
-            // pass the response from HTTP Request into local variable1 receivedData
-            // var receivedData= JSON.parse(data);
-            console.log("bought " + _this.game3BetAmount);
-            console.log("Received entry price " + data.entryPrice);
-            if (parseInt(data.status) === 200) {
-                _this.isBetDisabled = true;
-                _this.isSliderDisabled = true;
-                _this.boughtIntoGame3 = true;
-                _this.roundBetType = 'long';
-                _this.buyDataset(_this.roundBetType, parseFloat(data.entryPrice).toFixed(3));
-                _this.auth.setAccValue(data.accountValue);
-                _this.walletAmount = _this.auth.getAccValue();
-                _this.entryPrice = parseFloat(data.entryPrice).toFixed(3);
-                // this.isManualBetDisabled = true;
-                // this.isManualCoutDisabled = false;
-                _this.hasActiveBet = true;
-                // this.game3BetAmount = '';
-                var alert_1 = _this.alertCtrl.create({
-                    title: 'SUCCESS',
-                    subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
-                    buttons: ['OK']
-                });
-                alert_1.present();
-                alert_1.onDidDismiss(function () {
-                });
-            }
-        }, function (err) {
-            console.log("Error occured while placing long bet");
-            // console.log(err);
-            // console.log(err.error.message);
-            // console.log(err.message);
-            if (err.status === 0) {
-                var alert_2 = _this.alertCtrl.create({
-                    title: 'ERROR',
-                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
-                    buttons: ['OK']
-                });
-                alert_2.present();
-                console.log("Hit Error 0");
-            }
-            else {
-                var alert_3 = _this.alertCtrl.create({
-                    title: 'Error',
-                    subTitle: err.error.message,
-                    buttons: ['OK']
-                });
-                alert_3.present();
-                alert_3.onDidDismiss(function () {
-                });
-            }
-        });
-    };
-    StreamPage.prototype.betLower = function () {
-        var _this = this;
-        //to pass in currGame3ID
-        this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(function (data) {
-            // pass the response from HTTP Request into local variable1 receivedData
-            // var receivedData= JSON.parse(data);
-            console.log("bought " + _this.game3BetAmount);
-            console.log("Received entry price " + data.entryPrice);
-            // this.auth.setAccValue(data.accountValue);
-            // this.walletAmount = this.auth.getAccValue();
-            if (parseInt(data.status) === 200) {
-                _this.isBetDisabled = true;
-                _this.isSliderDisabled = true;
-                _this.boughtIntoGame3 = true;
-                _this.roundBetType = 'short';
-                _this.entryPrice = data.entryPrice;
-                _this.buyDataset(_this.roundBetType, data.entryPrice);
-                _this.auth.setAccValue(data.accountValue);
-                _this.walletAmount = _this.auth.getAccValue();
-                // this.hasActiveManualBet = true;
-                // this.isManualBetDisabled = true;
-                // this.isManualCoutDisabled = false
-                _this.hasActiveBet = true;
-                // this.game3BetAmount = '';
-                var alert_4 = _this.alertCtrl.create({
-                    title: 'SUCCESS',
-                    subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
-                    buttons: ['OK']
-                });
-                alert_4.present();
-                alert_4.onDidDismiss(function () {
-                });
-            }
-        }, function (err) {
-            console.log("Error occured while placing short bet");
-            // console.log(err);
-            // console.log(err.error.message);
-            // console.log(err.message);
-            if (err.status === 0) {
-                var alert_5 = _this.alertCtrl.create({
-                    title: 'ERROR',
-                    subTitle: 'Server cannot be reached at this time. <br> Please try again later',
-                    buttons: ['OK']
-                });
-                alert_5.present();
-                console.log("Hit Error 0");
-            }
-            else {
-                var alert_6 = _this.alertCtrl.create({
-                    title: 'Error',
-                    subTitle: err.error.message,
-                    buttons: ['OK']
-                });
-                alert_6.present();
-                alert_6.onDidDismiss(function () {
-                });
-            }
-        });
-    };
-    StreamPage.prototype.updatePastGame = function () {
-        var _this = this;
-        this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(function (data) {
-            // pass the response from HTTP Request into local variable1 receivedData
-            // var receivedData= JSON.parse(data);
-            _this.historicalGame3 = new Array();
-            // console.log("Updating past game entry price " + data.entryPrice);
-            // console.log("Updating past game end price " + data.endPrice);
-            // console.log("Updating past game profit  " + data.profit);
-            // console.log("Updating past game gameName " + data.gameName);
-            if (parseInt(data.status) === 200) {
-                //set up for 1 bet per game first
-                console.log("Updating past game entry price " + data.data.entryPrice);
-                console.log("Updating past game end price " + data.data.endPrice);
-                console.log("Updating past game profit  " + data.data.profit);
-                console.log("Updating past game gameName " + data.data.gameName);
-                _this.auth.setAccValue(data.accountValue);
-                _this.walletAmount = _this.auth.getAccValue();
-                var transaction = {
-                    "entryPrice": parseFloat(data.data.entryPrice).toFixed(2),
-                    "betType": data.data.orderTypeDisplay,
-                    "endPrice": parseFloat(data.data.endPrice).toFixed(2),
-                    "profit": parseInt(data.data.profit)
-                };
-                _this.historicalGame3.push(transaction);
-            }
-        }, function (err) {
-            console.log("Error occured while getting past transactions");
-        });
-    };
-    StreamPage.prototype.calcRoundResult = function () {
-    };
-    __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_3__node_modules_ng2_charts__["BaseChartDirective"]),
-        __metadata("design:type", Object)
-    ], StreamPage.prototype, "chart", void 0);
-    StreamPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-stream',template:/*ion-inline-start:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/'<!--\n\n  Generated template for the StreamPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>Game 3: Binary Options</ion-title>\n\n    <div class="walletDisplay">\n\n      <inner-wallet *ngIf="!isGuestLogin" [walletAmount]="walletAmount"></inner-wallet>\n\n    </div>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding overflow-scroll="true">\n\n  <ion-grid style="height:100%; width:100%">\n\n    <ion-row>\n\n      <ion-col col-12>\n\n        <div class="bet-timer" *ngIf="showCountdown">\n\n          Next game in {{timerValue}} s\n\n        </div>\n\n        <div class="game-timer" *ngIf="showGameTime">\n\n          Game ending in {{gameTimer}} s\n\n        </div>\n\n        <div class="end-text" *ngIf="showGameEnded">\n\n          Round ended @ {{finalRoundValue}}\n\n        </div>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n    <ion-row style="height:50%; width:100%">\n\n      <canvas baseChart [chartType]="\'line\'" [datasets]="datasets" [colors]="chartColors" [labels]="chartLabels" [options]="options"\n\n        width=100% height=80%></canvas>\n\n    </ion-row>\n\n    <br><br>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-input type="number" [(ngModel)]="game3BetAmount" placeholder="Amount" attr.text-center [disabled]="true"></ion-input>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'higher-green\'" full [disabled]="isBetDisabled" (click)="betHigher()">\n\n          <span style="font-weight:700; color:whitesmoke">Higher</span>\n\n        </button>\n\n      </ion-col>\n\n      <ion-col col-4>\n\n        <button ion-button [color]="isBetDisabled ? \'dark\' : \'lower-red\'" full [disabled]="isBetDisabled" (click)="betLower()">\n\n          <span style="font-weight:700; color:whitesmoke">Lower</span>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-item no-lines class="rangeSlider"> \n\n      <ion-range min="1" [max]="walletAmount" step="1" [disabled]="isSliderDisabled" [(ngModel)]="game3BetAmount" color="secondary">\n\n        <ion-label range-left>1</ion-label>\n\n        <ion-label range-right>{{walletAmount}}</ion-label>\n\n      </ion-range>\n\n    </ion-item>\n\n    <ion-row style="height:25%; width:100%">\n\n      <ion-scroll scrollY="true">\n\n        <ion-list col-12 no-lines>\n\n          <ion-list-header no-lines style="color:#f3ba2e">\n\n            <ion-col col-4>Price</ion-col>\n\n            <ion-col col-2>Bet Type</ion-col>\n\n            <ion-col col-3>Close</ion-col>\n\n            <ion-col item-end col-3>Profit</ion-col>\n\n          </ion-list-header>\n\n          <ion-item style="font-size:14px" *ngFor="let transaction of historicalGame3">\n\n            <ion-col col-4>{{transaction.entryPrice}}</ion-col>\n\n            <!-- <span col-3>Lo</span> -->\n\n            <ion-col col-2>{{transaction.betType}}</ion-col>\n\n            <ion-col col-3>\n\n              <span style="padding-left:10%">{{transaction.endPrice}}</span>\n\n            </ion-col>\n\n            <ion-col item-end col-3>\n\n              <span [style.color]="transaction.profit > 0 ? \'green\' : \'red\'" style="font-weight:700; text-align:right">{{transaction.profit}}</span>\n\n            </ion-col>\n\n          </ion-item>\n\n        </ion-list>\n\n      </ion-scroll>\n\n    </ion-row>\n\n    <!-- <ion-card style="height:25%; font-size:4px;">\n\n      <ion-card-header color="primary">\n\n        Last Bet\n\n      </ion-card-header>\n\n      <ion-card-content>\n\n        <ion-row style="color:#f3ba2e">\n\n          <ion-col col-3>\n\n            Price\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Bet Type\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Close\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            Profit\n\n          </ion-col>\n\n        </ion-row>\n\n        <ion-row style="color:grey">\n\n          <ion-col col-3>\n\n            5800\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            Hi\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            6000\n\n          </ion-col>\n\n          <ion-col text-align-right col-3>\n\n            <span style="color:green">+300</span>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card> -->\n\n  </ion-grid>\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Jasper\Documents\BGM-App\src\pages\stream\stream.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular___["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_4__providers_global_auth_global_auth__["a" /* GlobalAuthProvider */], __WEBPACK_IMPORTED_MODULE_6__providers_data_data__["a" /* DataProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular___["a" /* AlertController */], __WEBPACK_IMPORTED_MODULE_7__providers_smart_audio_smart_audio__["a" /* SmartAudioProvider */]])
-    ], StreamPage);
-    return StreamPage;
-}());
-
-//# sourceMappingURL=stream.js.map
-
-/***/ }),
-
 /***/ 167:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3273,7 +3272,7 @@ var SlotsDrawBtcPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToggleTwoFaPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(372);
@@ -3738,11 +3737,11 @@ var map = {
 		13
 	],
 	"../pages/hashing/hashing.module": [
-		694,
+		695,
 		12
 	],
 	"../pages/home/home.module": [
-		695,
+		694,
 		11
 	],
 	"../pages/new-modal/new-modal.module": [
@@ -4066,25 +4065,25 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_platform_browser_animations__ = __webpack_require__(663);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ng_org_chart__ = __webpack_require__(665);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng_treetable__ = __webpack_require__(666);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_roulette_roulette__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_roulette_roulette__ = __webpack_require__(163);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_bidding_bidding__ = __webpack_require__(159);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_contact_contact__ = __webpack_require__(667);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(130);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_wallet_wallet__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_stream_stream__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_tabs_tabs__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_login_login__ = __webpack_require__(129);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_wallet_wallet__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_stream_stream__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_tabs_tabs__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_splash_logo_splash_logo__ = __webpack_require__(434);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_charts_ng2_charts__ = __webpack_require__(668);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_ng2_charts_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__ionic_native_in_app_browser__ = __webpack_require__(387);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__ionic_native_status_bar__ = __webpack_require__(428);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__ionic_native_splash_screen__ = __webpack_require__(136);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_hashing_hashing__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_hashing_hashing__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_trehunt_trehunt__ = __webpack_require__(167);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_progress_bar_progress_bar__ = __webpack_require__(669);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_inner_wallet_inner_wallet__ = __webpack_require__(670);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_two_fac_auth_two_fac_auth__ = __webpack_require__(91);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_home_home__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_home_home__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_global_auth_global_auth__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ionic_native_native_audio__ = __webpack_require__(69);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_smart_audio_smart_audio__ = __webpack_require__(47);
@@ -4192,8 +4191,8 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/bidding/bidding.module#BiddingPageModule', name: 'BiddingPage', segment: 'bidding', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/comm-tree/comm-tree.module#CommTreePageModule', name: 'CommTreePage', segment: 'comm-tree', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/dummy-chat/dummy-chat.module#DummyChatPageModule', name: 'DummyChatPage', segment: 'dummy-chat', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/new-modal/new-modal.module#NewModalPageModule', name: 'NewModalPage', segment: 'new-modal', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/qr-code/qr-code.module#QrCodePageModule', name: 'QrCodePage', segment: 'qr-code', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
@@ -4669,7 +4668,7 @@ webpackContext.id = 518;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular___ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_splash_screen__ = __webpack_require__(136);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular_components_app_app__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_login_login__ = __webpack_require__(129);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(428);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__node_modules_ionic_native_native_audio__ = __webpack_require__(69);
@@ -4874,17 +4873,17 @@ var InnerWalletComponent = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 83:
+/***/ 81:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wallet_wallet__ = __webpack_require__(165);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream_stream__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(162);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wallet_wallet__ = __webpack_require__(164);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__stream_stream__ = __webpack_require__(165);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hashing_hashing__ = __webpack_require__(166);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__trehunt_trehunt__ = __webpack_require__(167);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(163);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home__ = __webpack_require__(162);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_smart_audio_smart_audio__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__dummy_chat_dummy_chat__ = __webpack_require__(161);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -4938,7 +4937,7 @@ var TabsPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TwoFacAuthPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_tabs__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__ = __webpack_require__(131);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__node_modules_rxjs_observable_timer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operators__ = __webpack_require__(372);
