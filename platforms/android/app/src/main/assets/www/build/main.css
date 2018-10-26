@@ -40113,6 +40113,11 @@ page-home .scroll-content {
   overflow-y: hidden;
 }
 
+page-login {
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+}
+
 page-login .item-md.item-block .item-inner,
 page-login .item-md.item-input.input-has-focus .item-inner,
 page-login .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus) .item-inner,

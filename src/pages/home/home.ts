@@ -56,20 +56,6 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getNews();
-
-    this.isCordova = this.platform.is("cordova");
-    this.isAndroid = this.platform.is("android");
-    this.isIOS = this.platform.is("ios");
-    console.log("value of cordova " + this.isCordova + " value  of android is " + this.isAndroid + " value of ios is " + this.isIOS);
-    if (this.isAndroid) {
-      console.log("android screen should be locked to prtrait");
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-    }
-    else if (this.isIOS) {
-      console.log("ios screen should be locked to prtrait");
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-    }
-
   }
 
   ionViewWillEnter() {
@@ -85,8 +71,21 @@ export class HomePage implements OnInit {
       this.twoFAstatus = true;
     }
   }
-  //bgm loop works in home view, uncomment for mobile sound
+  //bgm loop works in home view and portrait orientation, uncomment for mobile sound
   // ionViewDidLoad() {
+  //   this.isCordova = this.platform.is("cordova");
+  //   this.isAndroid = this.platform.is("android");
+  //   this.isIOS = this.platform.is("ios");
+  //   console.log("value of cordova " + this.isCordova + " value  of android is " + this.isAndroid + " value of ios is " + this.isIOS);
+  //   if (this.isAndroid) {
+  //     console.log("android screen should be locked to prtrait");
+  //     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  //   }
+  //   else if (this.isIOS) {
+  //     console.log("ios screen should be locked to prtrait");
+  //     this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+  //   }
+
   //   this.platform.ready().then(() => {
   //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
   //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);

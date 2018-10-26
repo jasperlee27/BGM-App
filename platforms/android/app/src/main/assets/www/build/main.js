@@ -1424,18 +1424,6 @@ var HomePage = /** @class */ (function () {
     }
     HomePage.prototype.ngOnInit = function () {
         this.getNews();
-        this.isCordova = this.platform.is("cordova");
-        this.isAndroid = this.platform.is("android");
-        this.isIOS = this.platform.is("ios");
-        console.log("value of cordova " + this.isCordova + " value  of android is " + this.isAndroid + " value of ios is " + this.isIOS);
-        if (this.isAndroid) {
-            console.log("android screen should be locked to prtrait");
-            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-        }
-        else if (this.isIOS) {
-            console.log("ios screen should be locked to prtrait");
-            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-        }
     };
     HomePage.prototype.ionViewWillEnter = function () {
         //if 0 then no 2FA needed
@@ -1449,14 +1437,27 @@ var HomePage = /** @class */ (function () {
         }
     };
     //bgm loop works in home view, uncomment for mobile sound
-    // ionViewDidLoad() {
-    //   this.platform.ready().then(() => {
-    //     this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(() => {
-    //       this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
-    //       this.nativeAudio.loop('bgmLoopHome');
-    //     });
-    //   });
-    // }
+    HomePage.prototype.ionViewDidLoad = function () {
+        var _this = this;
+        this.isCordova = this.platform.is("cordova");
+        this.isAndroid = this.platform.is("android");
+        this.isIOS = this.platform.is("ios");
+        console.log("value of cordova " + this.isCordova + " value  of android is " + this.isAndroid + " value of ios is " + this.isIOS);
+        if (this.isAndroid) {
+            console.log("android screen should be locked to prtrait");
+            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+        }
+        else if (this.isIOS) {
+            console.log("ios screen should be locked to prtrait");
+            this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+        }
+        this.platform.ready().then(function () {
+            _this.nativeAudio.preloadComplex('bgmLoopHome', 'assets/audio/backgroundMusic.mp3', 1, 1, 0).then(function () {
+                _this.nativeAudio.setVolumeForComplexAsset('bgmLoopHome', 0.5);
+                _this.nativeAudio.loop('bgmLoopHome');
+            });
+        });
+    };
     //NEWS API
     HomePage.prototype.getNews_Old = function () {
         var _this = this;
@@ -3768,11 +3769,11 @@ var map = {
 		10
 	],
 	"../pages/qr-code/qr-code.module": [
-		697,
+		698,
 		9
 	],
 	"../pages/roulette/roulette.module": [
-		698,
+		697,
 		8
 	],
 	"../pages/slots-draw-btc/slots-draw-btc.module": [
@@ -3800,11 +3801,11 @@ var map = {
 		2
 	],
 	"../pages/two-fac-auth/two-fac-auth.module": [
-		706,
+		705,
 		1
 	],
 	"../pages/wallet/wallet.module": [
-		705,
+		706,
 		0
 	]
 };
@@ -4215,16 +4216,16 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/hashing/hashing.module#HashingPageModule', name: 'HashingPage', segment: 'hashing', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/home/home.module#HomePageModule', name: 'HomePage', segment: 'home', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/new-modal/new-modal.module#NewModalPageModule', name: 'NewModalPage', segment: 'new-modal', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/qr-code/qr-code.module#QrCodePageModule', name: 'QrCodePage', segment: 'qr-code', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/roulette/roulette.module#WalletPageModule', name: 'RoulettePage', segment: 'roulette', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/qr-code/qr-code.module#QrCodePageModule', name: 'QrCodePage', segment: 'qr-code', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slots-draw-btc/slots-draw-btc.module#SlotsDrawBtcPageModule', name: 'SlotsDrawBtcPage', segment: 'slots-draw-btc', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/slotsdraw/slotsdraw.module#SlotsdrawPageModule', name: 'SlotsdrawPage', segment: 'slotsdraw', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/splash-logo/splash-logo.module#SplashLogoPageModule', name: 'SplashLogoPage', segment: 'splash-logo', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/stream/stream.module#StreamPageModule', name: 'StreamPage', segment: 'stream', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/toggle-two-fa/toggle-two-fa.module#ToggleTwoFaPageModule', name: 'ToggleTwoFaPage', segment: 'toggle-two-fa', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/trehunt/trehunt.module#TrehuntPageModule', name: 'TrehuntPage', segment: 'trehunt', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/two-fac-auth/two-fac-auth.module#TwoFacAuthPageModule', name: 'TwoFacAuthPage', segment: 'two-fac-auth', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/wallet/wallet.module#WalletPageModule', name: 'WalletPage', segment: 'wallet', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],
