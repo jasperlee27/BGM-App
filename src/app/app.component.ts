@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 import { SmartAudioProvider } from '../providers/smart-audio/smart-audio';
 import { NativeAudio } from '../../node_modules/@ionic-native/native-audio';
+
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 // import { CommTreePage } from '../pages/comm-tree/comm-tree';
 
 
@@ -19,11 +21,12 @@ declare function init(): any;
 })
 export class MyApp {
   rootPage: any = LoginPage;
-
+  isCordova;
+  isAndroid;
   // rootPage:any = TabsPage;
   // platform: Platform;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider, private nativeAudio: NativeAudio) {
+  constructor(private screenOrientation: ScreenOrientation, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider, private nativeAudio: NativeAudio) {
     // statusBar.overlaysWebView(true);
     // statusBar.backgroundColorByHexString('#000000');
     // alert(testVar);
@@ -32,18 +35,31 @@ export class MyApp {
     // window.addEventListener("keyboardDidShow", () => {
     //   document.activeElement.scrollIntoView(false);
 
-      // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
-      // if (elem !== undefined && elem.length > 0) {
-      //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
-      // }
+    // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
+    // if (elem !== undefined && elem.length > 0) {
+    //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
+    // }
 
     // });
+    console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
+    // set to landscape
+
 
     platform.ready().then(() => {
       statusBar.overlaysWebView(true);
       statusBar.backgroundColorByHexString('#000000');
       splashScreen.hide();
-
+      // this.isCordova = platform.is("cordova");
+      // this.isAndroid = platform.is("android");
+      // console.log("value of cordova " + this.isCordova +" value  of android is " + this.isAndroid);
+      // console.log("screen orientation " + this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+      // console.log("screen orientation " + this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      // if (this.isAndroid) {
+      //   console.log("screen should be locked to prtrait");
+      //   this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      // }
+      
+      // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
       smartAudio.preload('tabSwitch', 'assets/audio/clickSound.mp3', 'simple');
       smartAudio.preload('slotcomplete', 'assets/audio/SlotComplete.wav', 'simple');
       smartAudio.preload('startslot', 'assets/audio/StartSlot.mp3', 'simple');

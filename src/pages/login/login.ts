@@ -11,7 +11,7 @@ import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
 import { InAppBrowser } from '../../../node_modules/@ionic-native/in-app-browser';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 // import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -79,7 +79,7 @@ export class LoginPage {
   receivedData;
   showInvalidLogin: boolean = false;
 
-  constructor(public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController, public inAppBrowser: InAppBrowser) {
+  constructor(private screenOrientation: ScreenOrientation, public platform: Platform, public navCtrl: NavController, public smartAudio: SmartAudioProvider, public auth: GlobalAuthProvider, private dataProvider: DataProvider, private nativeAudio: NativeAudio, private alertCtrl: AlertController, public inAppBrowser: InAppBrowser) {
   }
   // NOT WORKING
   // ionViewDidLoad() {
@@ -92,6 +92,7 @@ export class LoginPage {
 
   login() {
     // this.smartAudio.play('startGame3');
+    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
     this.smartAudio.play('tabSwitch'); // this.navCtrl.setRoot(TabsPage);
     var usernameToPost = this.usernameInput;
     this.showInvalidLogin = false;

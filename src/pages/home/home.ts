@@ -14,7 +14,7 @@ import { TwoFacAuthPage } from '../two-fac-auth/two-fac-auth';
 import { QrCodePage } from '../qr-code/qr-code';
 import { NewModalPage } from '../new-modal/new-modal';
 import { CommTreePage } from '../comm-tree/comm-tree';
-
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 // import { MyApp } from '../../app/app.component';
 
 /**
@@ -43,9 +43,12 @@ export class HomePage implements OnInit {
   twoFAstatus: boolean;
   isToggled;
   createdCode = "https://" + "www.google.com";
+  isCordova;
+  isAndroid;
+  isIOS;
   // socket: SocketIOClient.Socket;
 
-  constructor(public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController, public modalCtrl: ModalController) {
+  constructor(private screenOrientation: ScreenOrientation, public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController, public modalCtrl: ModalController) {
     // this.socket = io.connect('http://178.128.50.224:3001');
     // console.log("socket conencted");
     this.isGuest = auth.getGuestLogin();
@@ -53,6 +56,20 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.getNews();
+
+    this.isCordova = this.platform.is("cordova");
+    this.isAndroid = this.platform.is("android");
+    this.isIOS = this.platform.is("ios");
+    console.log("value of cordova " + this.isCordova + " value  of android is " + this.isAndroid + " value of ios is " + this.isIOS);
+    if (this.isAndroid) {
+      console.log("android screen should be locked to prtrait");
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+    else if (this.isIOS) {
+      console.log("ios screen should be locked to prtrait");
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    }
+
   }
 
   ionViewWillEnter() {
@@ -160,7 +177,7 @@ export class HomePage implements OnInit {
     qrModal.present();
   }
 
-  showCommission(){
+  showCommission() {
     console.log("Triggered comms page");
     this.navCtrl.push(this.commTreePage);
     //check if master or agent

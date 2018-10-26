@@ -36,11 +36,17 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "io.com.bgm"
+    },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "io.com.ot"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-file": {
       "PACKAGE_NAME": "io.com.bgm"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "io.com.ot"
     }
   }
 }

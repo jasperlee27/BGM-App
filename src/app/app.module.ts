@@ -18,6 +18,7 @@ import { StreamPage } from '../pages/stream/stream';
 import { TabsPage } from '../pages/tabs/tabs';
 import { SplashLogoPage } from '../pages/splash-logo/splash-logo';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { ScreenOrientation } from '@ionic-native/screen-orientation'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -115,7 +116,8 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
     GlobalAuthProvider,
     InAppBrowser,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    DataProvider
+    DataProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule { }
