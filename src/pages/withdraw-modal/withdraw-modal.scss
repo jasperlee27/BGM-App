@@ -1,3 +1,25 @@
 page-withdraw-modal {
+    text-align:center;
 
+    ::placeholder {
+        color: white;
+        opacity: 0.3;
+    }
+    
+    .input-style{
+        background-color: #222;
+
+    }
+    
+    input {
+        background-color : #222; 
+        color: #f3ab2e;
+        border:1px;
+        border-color: #111;
+        border-radius: 4px;
+        font-size:16px;
+        margin: 8px;
+        padding-left: 8px;
+      }
+      
 }
