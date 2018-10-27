@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-splashscreen@5.0.1",
-  "_id": "cordova-plugin-splashscreen@5.0.1",
+  "_from": "cordova-plugin-splashscreen@^5.0.1",
+  "_id": "cordova-plugin-splashscreen@5.0.2",
   "_inBundle": false,
-  "_integrity": "sha1-4icXJZOULCR5sOH3af7dwhyLVaM=",
+  "_integrity": "sha1-dH509W4gHNWFvGLRS8oZ9oZ/8e0=",
   "_location": "/cordova-plugin-splashscreen",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-splashscreen@5.0.1",
+    "raw": "cordova-plugin-splashscreen@^5.0.1",
     "name": "cordova-plugin-splashscreen",
     "escapedName": "cordova-plugin-splashscreen",
-    "rawSpec": "5.0.1",
+    "rawSpec": "^5.0.1",
     "saveSpec": null,
-    "fetchSpec": "5.0.1"
+    "fetchSpec": "^5.0.1"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.1.tgz",
-  "_shasum": "e227172593942c2479b0e1f769feddc21c8b55a3",
-  "_spec": "cordova-plugin-splashscreen@5.0.1",
-  "_where": "C:\\Users\\Jasper\\Documents\\Ionic 3 + Angular 5  Test",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-splashscreen/-/cordova-plugin-splashscreen-5.0.2.tgz",
+  "_shasum": "747e74f56e201cd585bc62d14bca19f6867ff1ed",
+  "_spec": "cordova-plugin-splashscreen@^5.0.1",
+  "_where": "C:\\Users\\Jasper\\Documents\\BGM-App",
   "author": {
     "name": "Apache Software Foundation"
   },
@@ -79,5 +79,5 @@
     "test": "npm run jshint"
   },
   "types": "./types/index.d.ts",
-  "version": "5.0.1"
+  "version": "5.0.2"
 }

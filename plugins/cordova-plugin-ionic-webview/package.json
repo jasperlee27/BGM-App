@@ -1,28 +1,28 @@
 {
-  "_from": "cordova-plugin-ionic-webview@^2.0.0",
-  "_id": "cordova-plugin-ionic-webview@2.0.1",
+  "_from": "cordova-plugin-ionic-webview@^2.0.1",
+  "_id": "cordova-plugin-ionic-webview@2.2.0",
   "_inBundle": false,
-  "_integrity": "sha512-KlHXqII1x+wZjwJKwB9Eomc4VhZXALFUSBD99V6U8J0DA8uHwxcgINfMe7sbAzgWVhrwV4Ow3RmODvohw3woGg==",
+  "_integrity": "sha512-mNTJaIRsz83Vntk2d3jrPCnlqEPQsfOJW6U2AzS7WV1T15Jj/STdXI/Uv1vIyvPVd9h1OLF+yu64ZsmQH2VRMQ==",
   "_location": "/cordova-plugin-ionic-webview",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-ionic-webview@^2.0.0",
+    "raw": "cordova-plugin-ionic-webview@^2.0.1",
     "name": "cordova-plugin-ionic-webview",
     "escapedName": "cordova-plugin-ionic-webview",
-    "rawSpec": "^2.0.0",
+    "rawSpec": "^2.0.1",
     "saveSpec": null,
-    "fetchSpec": "^2.0.0"
+    "fetchSpec": "^2.0.1"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.0.1.tgz",
-  "_shasum": "b572fc813b9d1305b5fd98f4efdd7776245d78fa",
-  "_spec": "cordova-plugin-ionic-webview@^2.0.0",
-  "_where": "C:\\Users\\Jasper\\Documents\\Ionic 3 + Angular 5  Test",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.2.0.tgz",
+  "_shasum": "190270e6598bd4a9d23bb93ce65e7d4dffceb31c",
+  "_spec": "cordova-plugin-ionic-webview@^2.0.1",
+  "_where": "C:\\Users\\Jasper\\Documents\\BGM-App",
   "author": {
     "name": "Ionic Team"
   },
@@ -57,9 +57,9 @@
     "url": "git+https://github.com/ionic-team/cordova-plugin-ionic-webview.git"
   },
   "scripts": {
-    "deploy": "np --yolo",
+    "deploy": "np",
     "sync_plugin_xml": "sync-cordova-xml package.json plugin.xml --output=plugin.xml",
     "version": "npm run sync_plugin_xml && git add plugin.xml"
   },
-  "version": "2.0.1"
+  "version": "2.2.0"
 }
