@@ -113,7 +113,7 @@ export class WalletPage {
     // if (this.currentView === 'investment') {
     //   this.investmentDeposit();
     // }
-    if (this.currentView === 'game') {
+    if (this.currentView === 'topups') {
       this.gameDeposit();
     }
     else {
@@ -142,7 +142,7 @@ export class WalletPage {
       this.updateStatementHistory();
       console.log("Able to dismiss with data: " + data.foo);
     });
-    
+
     if (this.currentView === 'topups') {
       // this.gameWithdraw();
       console.log("view in game and clicked withdraw");
@@ -221,12 +221,12 @@ export class WalletPage {
   // }
   gameDeposit() {
     let alert = this.alertCtrl.create({
-      title: 'Deposit Game Wallet',
-      message: 'Enter amount to transfer from investment wallet',
+      title: 'Request Deposit',
+      message: 'Enter requested amount to deposit',
       inputs: [
         {
           name: 'Amount',
-          placeholder: 'e.g 10000 (1BGM = 0.01 USD)'
+          placeholder: 'e.g 10000 (1 OT = 1 USD)'
         },
       ],
       buttons: [
@@ -237,20 +237,34 @@ export class WalletPage {
           }
         },
         {
-          text: 'Transfer',
+          text: 'Submit',
           handler: (data) => {
             console.log('Processing transfer ' + data.Amount + ' to game wallet');
-            this.dataProvider.postDepositWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
+            this.dataProvider.postReqDeposit(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
               //receive successfully
-              console.log("account info " + resReceived.accountValue)
-              this.auth.setAccValue(resReceived.accountValue);
-              this.walletBalance = this.auth.getAccValue();
-              this.updateStatementHistory();
-              this.processGameDeposit(resReceived.order.profit);
+              console.log("deposit status " + resReceived.status + " with token: " + resReceived.transaction.token);
+              this.updateOutstandingTopups();
+              console.log("status " + data.status)
+              let alert = this.alertCtrl.create({
+                title: 'Success',
+                subTitle: 'Your deposit request of ' + data.Amount + ' OT is successful. <br><br>Token ID: <span style="font-size:30px; font-weight:bolder"> ' + resReceived.transaction.token + '</span>'
+                +'<br><br>Please include your token ID in "Comments" when transferring to <br>[Bank Acc Details]',
+                buttons: ['OK']
+              });
+              alert.present();
+              // alert.onDidDismiss(() => {
+              // })
+
             },
               err => {
-                console.log("Error occured while depositing");
+                console.log("Error occured while requesting deposit");
                 console.log(err);
+                let alert = this.alertCtrl.create({
+                  title: 'Error',
+                  subTitle: 'Error occurred while requesting deposit.<br>Please try again later.',
+                  buttons: ['OK']
+                });
+                alert.present();
               });
 
             console.log(JSON.stringify(data)); //to see the object
@@ -262,6 +276,50 @@ export class WalletPage {
 
     alert.present();
   }
+
+  // gameDeposit_OLD() {
+  //   let alert = this.alertCtrl.create({
+  //     title: 'Request Deposit',
+  //     message: 'Enter requested amount to deposit',
+  //     inputs: [
+  //       {
+  //         name: 'Amount',
+  //         placeholder: 'e.g 10000 (1 OT = 1 USD)'
+  //       },
+  //     ],
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         handler: (data) => {
+  //           console.log('Cancelled transfer intended ' + data.Amount + ' to game wallet');
+  //         }
+  //       },
+  //       {
+  //         text: 'Submit',
+  //         handler: (data) => {
+  //           console.log('Processing transfer ' + data.Amount + ' to game wallet');
+  //           this.dataProvider.postDepositWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
+  //             //receive successfully
+  //             console.log("account info " + resReceived.accountValue)
+  //             this.auth.setAccValue(resReceived.accountValue);
+  //             this.walletBalance = this.auth.getAccValue();
+  //             this.updateStatementHistory();
+  //             this.processGameDeposit(resReceived.order.profit);
+  //           },
+  //             err => {
+  //               console.log("Error occured while depositing");
+  //               console.log(err);
+  //             });
+
+  //           console.log(JSON.stringify(data)); //to see the object
+  //           console.log("Amount input was " + data.Amount);
+  //         }
+  //       }
+  //     ]
+  //   });
+
+  //   alert.present();
+  // }
 
   processGameDeposit(amount: any) {
     //to insert post call for withdrwal return then
