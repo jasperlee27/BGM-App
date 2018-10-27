@@ -130,11 +130,19 @@ export class WalletPage {
     let modal = this.modalCtrl.create(WithdrawModalPage);
     modal.present();
     modal.onDidDismiss(data => {
-      this.refreshWallet();
+      this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(data => {
+        this.auth.setAccValue(parseInt(data.accountValue));
+        this.walletBalance = this.auth.getAccValue();
+      },
+        err => {
+          console.log(err);
+        });
+
       this.updateOutstandingTopups();
       this.updateStatementHistory();
       console.log("Able to dismiss with data: " + data.foo);
     });
+    
     if (this.currentView === 'topups') {
       // this.gameWithdraw();
       console.log("view in game and clicked withdraw");
@@ -421,13 +429,13 @@ export class WalletPage {
         // console.log("timestamp of first order " + data.orders[i].updated);
         //convert time stamp
         var indToken = data.data[i].token;
-        console.log("this is token " + indToken);
+        // console.log("this is token " + indToken);
         //--STORE T/Amt--
-        var indAmt = "[" + data.data[i].transType.substring(0,1) + "] " + data.data[i].amount;
-        console.log("this is token " + indAmt);
+        var indAmt = "[" + data.data[i].transType.substring(0, 1) + "] " + data.data[i].amount;
+        // console.log("this is token " + indAmt);
         //--STORE Status--
         var indStatus = data.data[i].status;
-        console.log("this is token " + indStatus);
+        // console.log("this is token " + indStatus);
         // console.log("profit of first order " + data.orders[i].profit)
         var singleTrans = {
           "token": indToken.toUpperCase(),

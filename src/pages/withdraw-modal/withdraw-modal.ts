@@ -89,21 +89,25 @@ export class WithdrawModalPage {
             console.log('Cancel clicked');
             return true;
           }
-          
+
         },
         {
           text: 'Withdraw',
           handler: () => {
             console.log('Withdraw clicked');
             //POST REQUEST
-            
-            if (this.makeWithdrawal(amtReq, bankTypeReq, accNoReq)){
-              this.dismiss();
-            }
 
-            else{
-              return true;
-            }
+            var withdrawSuccess = this.makeWithdrawal(amtReq, bankTypeReq, accNoReq);
+            // console.log("Withdraw success log here: " + withdrawSuccess);
+
+            // if (withdrawSuccess){
+            //   console.log("didnt check enter true");
+            //   this.dismiss();
+            // }
+
+            // else {
+            return true;
+            // }
           }
         }
       ]
@@ -115,22 +119,37 @@ export class WithdrawModalPage {
     return alert;
   }
 
-  makeWithdrawal(amtReq, bankTypeReq, accNoReq): boolean{
-    
+  makeWithdrawal(amtReq, bankTypeReq, accNoReq): Promise<boolean> {
+
     console.log('Requesting withdraw');
-    this.dataProvider.postReqWithdrawal(this.auth.getAccId(),amtReq,bankTypeReq,accNoReq).subscribe(data => {
+    this.dataProvider.postReqWithdrawal(this.auth.getAccId(), amtReq, bankTypeReq, accNoReq).subscribe(data => {
       //receive successfully
       console.log("status " + data.status)
-      // this.auth.setAccValue(resReceived.accountValue);
-      // this.walletBalance = this.auth.getAccValue();
-      // this.updateStatementHistory();
-      // this.processGameWithdrawal(Math.abs(resReceived.order.profit));
+      let alert = this.alertCtrl.create({
+        title: 'Success',
+        subTitle: 'Your withdrawal request is now pending. <br>Going back to wallet.',
+        buttons: ['OK']
+      });
+      alert.present();
+      alert.onDidDismiss(() => {
+        this.dismiss();
+      })
+      console.log("returning true");
+      // this.dismiss();
+      return true;
     },
       err => {
         console.log("Error occured while withdrawing");
         console.log(err);
+        let alert = this.alertCtrl.create({
+          title: 'Error',
+          subTitle: 'Something went wrong with your request.<br>Please try again later.',
+          buttons: ['OK']
+        });
+        alert.present();
+        console.log("returning false");
+        return false;
       });
-    return true;
-    return false;
+    return;
   }
 }
