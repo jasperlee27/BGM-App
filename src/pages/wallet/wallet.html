@@ -79,10 +79,10 @@
           <span col-5>[Type] Amt</span>
           <span col-4 item-end style="text-align:right; padding-right:5%">Status</span>
         </ion-list-header>
-        <ion-item *ngFor="let games of historicalGames">
-          <span col-3 item-start style="font-size:12px">{{games.time}}</span>
-          <span col-5>[{{games.gameNo}}] {{games.gameID}}</span>
-          <span col-4 item-end [style.color]="games.profit > 0 ? 'green' : 'red'" style="font-size:12px; font-weight:700; text-align:right">Pending {{ games.profit }}</span>
+        <ion-item *ngFor="let topUps of outstandingTopups">
+          <span col-3 item-start style="font-size:12px">{{topUps.token}}</span>
+          <span col-5>{{topUps.amount}} </span>
+          <span col-4 item-end [style.color]="topUps.status === 'Pending' ? 'orange' : 'green'" style="font-size:12px; font-weight:700; text-align:right">{{topUps.status}}</span>
         </ion-item>
       </ion-list>
     </ion-scroll>

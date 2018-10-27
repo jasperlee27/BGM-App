@@ -20,6 +20,7 @@ import { WithdrawModalPage } from '../withdraw-modal/withdraw-modal';
 })
 export class WalletPage {
   historicalGames: Array<any>;
+  outstandingTopups: Array<any>;
 
   walletType = 'investment';
   refreshIcon = 'refresh';
@@ -69,49 +70,13 @@ export class WalletPage {
     this.currentView = 'current';
     this.walletBalance = this.auth.getAccValue();
     this.historicalGames = new Array();
+    this.outstandingTopups = new Array();
   }
 
   ngOnInit() {
     this.updateStatementHistory();
-    // this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
-    //   //receive successfully
-
-    //   console.log("Received data here  " + data);
-    //   console.log("Login reponse");
-
-
-    //   for (var i = 0; i < data.orders.length; i++) {
-    //     //FOR loop iterate all and form objects//
-    //     //--STORE TIME--
-    //     // console.log("timestamp of first order " + data.orders[i].updated);
-    //     //convert time stamp
-    //     var myDate = new Date(data.orders[i].updated);
-    //     var localeDate = myDate.toLocaleString('en-GB');
-    //     console.log("locale date = " + localeDate);
-    //     var formattedDate = localeDate.substring(0,5) + ' '+ localeDate.substring(12, 17);
-    //     console.log("Formatted date: " + formattedDate);
-
-    //     //--STORE GAME NAME--
-    //     // console.log("" + data.orders[i].gameName);
-    //     //--STORE PROFIT--
-    //     // console.log("profit of first order " + data.orders[i].profit)
-    //     var singleGame = {
-    //       "time": formattedDate,
-    //       "gameID": data.orders[i].gameName,
-    //       "gameNo": data.orders[i].gameNo,
-    //       "profit": parseInt(data.orders[i].profit)
-    //     }
-    //     //push array
-    //     this.historicalGames.push(singleGame);
-    //     // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
-    //     // console.log("historical game name size "  + this.historicalGames.length);
-    //   }
-    // },
-    //   err => {
-    //     console.log("Error occured while getting past transactions");
-    //     console.log(err);
-    //   });
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad WalletPage');
   }
@@ -121,19 +86,18 @@ export class WalletPage {
     this.updateStatementHistory();
   }
 
-  // toggleSegment($event) {
-  //   console.log("Chosen segment " + $event.value);
-  //   //update current view & wallet balance
-  //   this.currentView = $event.value;
-  //   this.walletBalance = this.balances[this.currentView];
-  // }
-
-
   toggleEvent($event) {
     console.log($event.value);
     //update current view & wallet balance
     this.currentView = $event.value;
-    console.log("current view = " + this.currentView);
+    if (this.currentView === 'topups') {
+      console.log("entered top ups and updating trans");
+      this.updateOutstandingTopups();
+    }
+
+    else {
+      console.log("current view = " + this.currentView);
+    }
   }
 
   getStatements(type: any) {
@@ -243,47 +207,6 @@ export class WalletPage {
 
   //   alert.present();
   // }
-  updateStatementHistory() {
-    this.historicalGames = new Array();
-    this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
-      //receive successfully
-
-      // console.log("Received data here  " + data);
-      // console.log("Login reponse");
-
-
-      for (var i = 0; i < data.orders.length; i++) {
-        //FOR loop iterate all and form objects//
-        //--STORE TIME--
-        // console.log("timestamp of first order " + data.orders[i].updated);
-        //convert time stamp
-        var myDate = new Date(data.orders[i].updated);
-        var localeDate = myDate.toLocaleString('en-GB');
-        // console.log("locale date = " + localeDate);
-        var formattedDate = localeDate.substring(0, 5) + ' ' + localeDate.substring(12, 17);
-        // console.log("Formatted date: " + formattedDate);
-
-        //--STORE GAME NAME--
-        // console.log("" + data.orders[i].gameName);
-        //--STORE PROFIT--
-        // console.log("profit of first order " + data.orders[i].profit)
-        var singleGame = {
-          "time": formattedDate,
-          "gameID": data.orders[i].gameName,
-          "gameNo": data.orders[i].gameNo,
-          "profit": parseInt(data.orders[i].profit)
-        }
-        //push array
-        this.historicalGames.push(singleGame);
-        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
-        // console.log("historical game name size "  + this.historicalGames.length);
-      }
-    },
-      err => {
-        console.log("Error occured while getting past transactions");
-        console.log(err);
-      });
-  }
   gameDeposit() {
     let alert = this.alertCtrl.create({
       title: 'Deposit Game Wallet',
@@ -435,4 +358,87 @@ export class WalletPage {
 
   }
 
+
+  updateStatementHistory() {
+    this.historicalGames = new Array();
+    this.dataProvider.postPastTransactions(this.auth.getAccId()).subscribe(data => {
+      //receive successfully
+
+      // console.log("Received data here  " + data);
+      // console.log("Login reponse");
+
+
+      for (var i = 0; i < data.orders.length; i++) {
+        //FOR loop iterate all and form objects//
+        //--STORE TIME--
+        // console.log("timestamp of first order " + data.orders[i].updated);
+        //convert time stamp
+        var myDate = new Date(data.orders[i].updated);
+        var localeDate = myDate.toLocaleString('en-GB');
+        // console.log("locale date = " + localeDate);
+        var formattedDate = localeDate.substring(0, 5) + ' ' + localeDate.substring(12, 17);
+        // console.log("Formatted date: " + formattedDate);
+
+        //--STORE GAME NAME--
+        // console.log("" + data.orders[i].gameName);
+        //--STORE PROFIT--
+        // console.log("profit of first order " + data.orders[i].profit)
+        var singleGame = {
+          "time": formattedDate,
+          "gameID": data.orders[i].gameName,
+          "gameNo": data.orders[i].gameNo,
+          "profit": parseInt(data.orders[i].profit)
+        }
+        //push array
+        this.historicalGames.push(singleGame);
+        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+        // console.log("historical game name size "  + this.historicalGames.length);
+      }
+    },
+      err => {
+        console.log("Error occured while getting past transactions");
+        console.log(err);
+      });
+  }
+
+
+  updateOutstandingTopups() {
+    this.outstandingTopups = new Array();
+    this.dataProvider.postOutstandingTopups(this.auth.getAccId()).subscribe(data => {
+      // receive successfully
+
+      console.log("Received outstanding top ups here  " + data.status);
+      console.log("Acc id " + this.auth.getAccId());
+
+
+      for (var i = 0; i < data.data.length; i++) {
+        //FOR loop iterate all and form objects//
+        //--STORE TOKEN--
+        // console.log("timestamp of first order " + data.orders[i].updated);
+        //convert time stamp
+        var indToken = data.data[i].token;
+        console.log("this is token " + indToken);
+        //--STORE T/Amt--
+        var indAmt = "[" + data.data[i].transType.substring(0,1) + "] " + data.data[i].amount;
+        console.log("this is token " + indAmt);
+        //--STORE Status--
+        var indStatus = data.data[i].status;
+        console.log("this is token " + indStatus);
+        // console.log("profit of first order " + data.orders[i].profit)
+        var singleTrans = {
+          "token": indToken.toUpperCase(),
+          "amount": indAmt,
+          "status": indStatus
+        }
+        //push array
+        this.outstandingTopups.push(singleTrans);
+        // console.log("Display historical game" + this.historicalGames[i].time + " gameID = " + this.historicalGames[i].gameID + " profit = " + this.historicalGames[i].profit);
+        // console.log("historical game name size "  + this.historicalGames.length);
+      }
+    },
+      err => {
+        console.log("Error occured while getting past top ups");
+        console.log(err);
+      });
+  }
 }
