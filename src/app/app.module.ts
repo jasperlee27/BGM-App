@@ -41,6 +41,7 @@ import { QrCodePage } from '../pages/qr-code/qr-code';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { NewModalPage } from '../pages/new-modal/new-modal';
 import { CommTreePage } from '../pages/comm-tree/comm-tree';
+import { WithdrawModalPage } from '../pages/withdraw-modal/withdraw-modal';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
     DummyChatPage,
     NewModalPage,
     CommTreePage,
+    WithdrawModalPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import { CommTreePage } from '../pages/comm-tree/comm-tree';
     StreamPage,
     DummyChatPage,
     NewModalPage,
-    CommTreePage
+    CommTreePage,
+    WithdrawModalPage
   ],
   providers: [
     StatusBar,

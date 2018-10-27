@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular/';
 import { BaseChartDirective } from 'ng2-charts';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { DataProvider } from '../../providers/data/data';
+import { WithdrawModalPage } from '../withdraw-modal/withdraw-modal';
 
 /**
  * Generated class for the WalletPage page.
@@ -20,11 +21,10 @@ import { DataProvider } from '../../providers/data/data';
 export class WalletPage {
   historicalGames: Array<any>;
 
-
   walletType = 'investment';
   refreshIcon = 'refresh';
   walletBalance;
-  currentView = 'game';
+  currentView;
 
   @ViewChild(BaseChartDirective) Game2Chart: any;
 
@@ -65,8 +65,8 @@ export class WalletPage {
     ],
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private auth: GlobalAuthProvider, private dataProvider: DataProvider) {
-    this.currentView = 'game';
+  constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private modalCtrl: ModalController, private auth: GlobalAuthProvider, private dataProvider: DataProvider) {
+    this.currentView = 'current';
     this.walletBalance = this.auth.getAccValue();
     this.historicalGames = new Array();
   }
@@ -128,6 +128,14 @@ export class WalletPage {
   //   this.walletBalance = this.balances[this.currentView];
   // }
 
+
+  toggleEvent($event) {
+    console.log($event.value);
+    //update current view & wallet balance
+    this.currentView = $event.value;
+    console.log("current view = " + this.currentView);
+  }
+
   getStatements(type: any) {
     // console.log("Call get statements");
     return this.statements[type];
@@ -154,14 +162,22 @@ export class WalletPage {
     // if (this.currentView === 'investment') {
     //   this.investmentWithdraw();
     // }
-    if (this.currentView === 'game') {
-      this.gameWithdraw();
+    let modal = this.modalCtrl.create(WithdrawModalPage);
+    modal.present();
+    modal.onDidDismiss(data => {
+      console.log("Able to dismiss with data: " + data.foo);
+    });
+    if (this.currentView === 'topups') {
+      // this.gameWithdraw();
+      console.log("view in game and clicked withdraw");
     }
     else {
       //do nothing
       console.log("Entered exception for currentView on deposit");
     }
   }
+
+
 
   // investmentDeposit() {
   //   let alert = this.alertCtrl.create({
@@ -409,9 +425,9 @@ export class WalletPage {
           subTitle: 'Wallet cannot be refreshed at this time. Please try again.',
           buttons: ['OK']
         });
-  
+
         alert.present();
-  
+
         console.log(err);
       });
     // this.navCtrl.setRoot(TabsPage);
