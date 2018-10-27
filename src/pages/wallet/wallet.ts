@@ -411,7 +411,7 @@ export class WalletPage {
       console.log("Acc id " + this.auth.getAccId());
 
 
-      for (var i = 0; i < data.data.length; i++) {
+      for (var i = data.data.length - 1; i > 0; i--) {
         //FOR loop iterate all and form objects//
         //--STORE TOKEN--
         // console.log("timestamp of first order " + data.orders[i].updated);
