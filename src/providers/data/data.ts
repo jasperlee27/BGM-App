@@ -22,8 +22,8 @@ const binaryOptionPastGameURL = 'http://178.128.50.224:3000/game3/getGame3PastGa
 const walletAmountURL = 'http://178.128.50.224:3000/account/updatewalletamount';
 const depositWalletURL = 'http://178.128.50.224:3000/account/deposit';
 const getWalletReqURL = 'http://178.128.50.224:3000/account/getPastWithDepTransactions';
-const withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw';
-
+// const withdrawWalletURL = 'http://178.128.50.224:3000/account/withdraw'; old 
+const reqWithdrawalURL = 'http://178.128.50.224:3000/account/requestWithdrawal' //new
 
 
 
@@ -171,6 +171,15 @@ export class DataProvider {
     return this.http.post(getWalletReqURL, requestBody, httpHeader);
   }
 
+  postReqWithdrawal(accid,amtReq,bankTypeReq,accNoReq): Observable<any>{
+    var sessionToken = this.auth.getSessionToken();
+    // console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" })};
+
+    var requestBody = new HttpParams().set("accid", accid).set("amount",amtReq).set("bankType",bankTypeReq).set("bankNum",accNoReq);
+    return this.http.post(reqWithdrawalURL, requestBody, httpHeader);
+  }
+
 
   //deposit into game wallet
   postDepositWallet(accid, amount): Observable<any> {
@@ -183,14 +192,14 @@ export class DataProvider {
   }
 
   //withdraw from game wallet
-  postWithdrawWallet(accid, amount): Observable<any> {
-    var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
-    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
+  // postWithdrawWallet(accid, amount): Observable<any> {
+  //   var sessionToken = this.auth.getSessionToken();
+  //   console.log("session token posted " + sessionToken)
+  //   const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
-    var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
-    return this.http.post(withdrawWalletURL, requestBody, httpHeader);
-  }
+  //   var requestBody = new HttpParams().set("accid", accid).set("amount", amount);
+  //   return this.http.post(withdrawWalletURL, requestBody, httpHeader);
+  // }
 
 
 }

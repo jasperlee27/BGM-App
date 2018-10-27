@@ -84,6 +84,7 @@ export class WalletPage {
   ionViewWillEnter() {
     this.walletBalance = this.auth.getAccValue();
     this.updateStatementHistory();
+    // this.updateOutstandingTopups();
   }
 
   toggleEvent($event) {
@@ -129,6 +130,9 @@ export class WalletPage {
     let modal = this.modalCtrl.create(WithdrawModalPage);
     modal.present();
     modal.onDidDismiss(data => {
+      this.refreshWallet();
+      this.updateOutstandingTopups();
+      this.updateStatementHistory();
       console.log("Able to dismiss with data: " + data.foo);
     });
     if (this.currentView === 'topups') {
@@ -284,19 +288,19 @@ export class WalletPage {
           text: 'Transfer',
           handler: (data) => {
 
-            console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
-            this.dataProvider.postWithdrawWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
-              //receive successfully
-              console.log("account info " + resReceived.accountValue)
-              this.auth.setAccValue(resReceived.accountValue);
-              this.walletBalance = this.auth.getAccValue();
-              this.updateStatementHistory();
-              this.processGameWithdrawal(Math.abs(resReceived.order.profit));
-            },
-              err => {
-                console.log("Error occured while withdrawing");
-                console.log(err);
-              });
+            // console.log('Processing withdraw ' + data.Amount + ' to investment wallet');
+            // this.dataProvider.postWithdrawWallet(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
+            //   //receive successfully
+            //   console.log("account info " + resReceived.accountValue)
+            //   this.auth.setAccValue(resReceived.accountValue);
+            //   this.walletBalance = this.auth.getAccValue();
+            //   this.updateStatementHistory();
+            //   this.processGameWithdrawal(Math.abs(resReceived.order.profit));
+            // },
+            //   err => {
+            //     console.log("Error occured while withdrawing");
+            //     console.log(err);
+            //   });
             console.log(JSON.stringify(data)); //to see the object
             console.log("Amount input was " + data.Amount);
 
@@ -411,7 +415,7 @@ export class WalletPage {
       console.log("Acc id " + this.auth.getAccId());
 
 
-      for (var i = data.data.length - 1; i > 0; i--) {
+      for (var i = 0; i < data.data.length; i++) {
         //FOR loop iterate all and form objects//
         //--STORE TOKEN--
         // console.log("timestamp of first order " + data.orders[i].updated);

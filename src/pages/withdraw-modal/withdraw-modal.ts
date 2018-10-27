@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, AlertController }
 import { ViewController } from '../../../node_modules/ionic-angular/navigation/view-controller';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
+import { DataProvider } from '../../providers/data/data';
 
 /**
  * Generated class for the WithdrawModalPage page.
@@ -22,7 +23,7 @@ export class WithdrawModalPage {
     description: ''
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private auth: GlobalAuthProvider, public alertCtrl: AlertController) {
+  constructor(private dataProvider: DataProvider, public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, private auth: GlobalAuthProvider, public alertCtrl: AlertController) {
   }
 
   logForm(form) {
@@ -44,18 +45,12 @@ export class WithdrawModalPage {
     var bankTypeReq = myForm.value.bankType;
     var accNoReq = myForm.value.accNo;
     var message = 'Amount Requested: ' + amtReq + '\n Bank Type: ' + bankTypeReq + '\n Account No.: ' + accNoReq;
-    //Alert Controller CONFIRM
-    var success = this.presentConfirm(amtReq, bankTypeReq, accNoReq);
-    console.log("Returned boolean: " + success);
-
-
-    //TO POST REQUEST
-
-
-
+    //Alert Controller CONFIRM & POST REQUEST
+    this.presentConfirm(amtReq, bankTypeReq, accNoReq);
 
     //RESET FORM
     // myForm.reset();
+
     // console.log("After resetting: " + JSON.stringify(myForm.value));
     console.log("individaul vars " + amtReq + " bank type: " + bankTypeReq + " acc No : " + accNoReq + "acc id " + this.auth.getAccId());
     //check if form valid
@@ -100,7 +95,15 @@ export class WithdrawModalPage {
           text: 'Withdraw',
           handler: () => {
             console.log('Withdraw clicked');
-            this.dismiss();
+            //POST REQUEST
+            
+            if (this.makeWithdrawal(amtReq, bankTypeReq, accNoReq)){
+              this.dismiss();
+            }
+
+            else{
+              return true;
+            }
           }
         }
       ]
@@ -110,5 +113,24 @@ export class WithdrawModalPage {
     //   console.log('Yes/No', data);
     // });
     return alert;
+  }
+
+  makeWithdrawal(amtReq, bankTypeReq, accNoReq): boolean{
+    
+    console.log('Requesting withdraw');
+    this.dataProvider.postReqWithdrawal(this.auth.getAccId(),amtReq,bankTypeReq,accNoReq).subscribe(data => {
+      //receive successfully
+      console.log("status " + data.status)
+      // this.auth.setAccValue(resReceived.accountValue);
+      // this.walletBalance = this.auth.getAccValue();
+      // this.updateStatementHistory();
+      // this.processGameWithdrawal(Math.abs(resReceived.order.profit));
+    },
+      err => {
+        console.log("Error occured while withdrawing");
+        console.log(err);
+      });
+    return true;
+    return false;
   }
 }
