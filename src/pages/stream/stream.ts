@@ -85,7 +85,7 @@ export class StreamPage {
 
   datasets: any[] =
     [
-      { data: [], showLine: true, fill:true, label: 'BitCoin', },
+      { data: [], showLine: true, fill: true, label: 'BitCoin', },
       { data: [], showLine: false, pointRadius: 5, label: 'Short' },
       { data: [], showLine: false, pointRadius: 5, label: 'Long' }
 
@@ -178,7 +178,7 @@ export class StreamPage {
         // }
 
         gameValuesToPush = receivedData.currentPrice;
-        this.gameTimer =  Math.abs(parseFloat(receivedData.number)).toFixed(0);
+        this.gameTimer = Math.abs(parseFloat(receivedData.number)).toFixed(0);
         // console.log("Updating current price in game " + gameValuesToPush);
         // console.log("Game timer : " + receivedData.number + " price " + receivedData.currentPrice);
         if ((this.gameTimer < 4.2) && (this.hasActiveBet)) {
@@ -216,7 +216,7 @@ export class StreamPage {
           this.showCountdown = false;
           this.showGameEnded = true;
           this.currGameState = 'gameEnd';
-          this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(2);
+          this.finalRoundValue = parseFloat(receivedData.endValue).toFixed(3);
           //Update past game
           this.updatePastGame();
           //restart gameTimer
@@ -229,10 +229,6 @@ export class StreamPage {
         this.currGameState = '';
       }
     });
-
-
-
-    //INSERTION HERE
 
     this.socket.on('Game3orders', (data: any) => {
       // console.log(JSON.parse(data));
@@ -297,15 +293,12 @@ export class StreamPage {
           onRefresh: function (chart: any) {
             this.updateVar();
             var count = 0;
-            // var value = this.randomIntRange(3000,8000);
-            console.log("how many datasets i have " + chart.data.datasets.length);
-            // console.log("pushing " + gameValuesToPush);
+
             chart.data.datasets[0].data.push({
               x: Date.now(),
               y: gameValuesToPush,
             });
 
-            // console.log('check active bet here ' + localActiveBet);
             if (localActiveBet) {
               // console.log("Entered if condition");
               // console.log("buychart value is " + chart.data.datasets[1].data[0]);
@@ -442,6 +435,14 @@ export class StreamPage {
         });
         alert.present();
         alert.onDidDismiss(() => {
+          this.historicalGame3 = new Array();
+          var transaction = {
+            "entryPrice": parseFloat(data.entryPrice).toFixed(3),
+            "betType": data.orderTypeDisplay,
+            "endPrice": "-",
+            "profit": "-"
+          }
+          this.historicalGame3.push(transaction);
         })
       }
     },
@@ -469,6 +470,7 @@ export class StreamPage {
           });
           alert.present();
           alert.onDidDismiss(() => {
+
           })
         }
       }
@@ -507,14 +509,21 @@ export class StreamPage {
         });
         alert.present();
         alert.onDidDismiss(() => {
+          this.historicalGame3 = new Array();
+          var transaction = {
+            "entryPrice": parseFloat(data.entryPrice).toFixed(3),
+            "betType": data.orderTypeDisplay,
+            "endPrice": "-",
+            "profit": "-"
+          }
+          this.historicalGame3.push(transaction);
+
         })
       }
     },
       err => {
         console.log("Error occured while placing short bet");
-        // console.log(err);
-        // console.log(err.error.message);
-        // console.log(err.message);
+
         if (err.status === 0) {
           let alert = this.alertCtrl.create({
             title: 'ERROR',
@@ -542,13 +551,9 @@ export class StreamPage {
 
   updatePastGame() {
     this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
-      // pass the response from HTTP Request into local variable1 receivedData
-      // var receivedData= JSON.parse(data);
+
       this.historicalGame3 = new Array();
-      // console.log("Updating past game entry price " + data.entryPrice);
-      // console.log("Updating past game end price " + data.endPrice);
-      // console.log("Updating past game profit  " + data.profit);
-      // console.log("Updating past game gameName " + data.gameName);
+
 
       if (parseInt(data.status) === 200) {
         //set up for 1 bet per game first
@@ -559,9 +564,9 @@ export class StreamPage {
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         var transaction = {
-          "entryPrice": parseFloat(data.data.entryPrice).toFixed(2),
+          "entryPrice": parseFloat(data.data.entryPrice).toFixed(3),
           "betType": data.data.orderTypeDisplay,
-          "endPrice": parseFloat(data.data.endPrice).toFixed(2),
+          "endPrice": parseFloat(data.data.endPrice).toFixed(3),
           "profit": parseInt(data.data.profit)
         }
         this.historicalGame3.push(transaction);

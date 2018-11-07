@@ -28,7 +28,7 @@ export class NewModalPage {
 
   createCode() {
     console.log("Creating Code");
-    this.createdCode = "http://" + "178.128.50.224:3000/qr/" + this.auth.getRefID();
+    this.createdCode = "http://" + "ortustenoris.io/signup/" + this.auth.getRefID();
   }
 
   dismiss() {
