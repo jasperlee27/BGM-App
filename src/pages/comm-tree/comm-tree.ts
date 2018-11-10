@@ -19,6 +19,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 })
 export class CommTreePage {
   viewOptions = "table";
+  currentView = "table";
   weekStakeComms;
   weekProfitComms;
   aComm = false;
@@ -174,47 +175,70 @@ export class CommTreePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider) {
   }
-  
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommTreePage');
   }
 
   ionViewWillEnter() {
-    this.updateDisplayType();
+    //if type == 0, call agent api, if type == 1, call master api
+    var accType = this.auth.getAccType();
+    if (accType === 0) {
+      this.updateAData();
+    }
 
-    this.dataProvider.getIncentive().subscribe(receivedData => {
+    else if (accType === 1) {
+      this.updateMData();
+    }
+
+    else {
+      console.log("Admin requesting nil data");
+    }
+    this.updateDisplayType();
+    if (this.currentView==="chart"){
+      this.displayMTable = false;
+      this.displayATable = false;
+    }
+  }
+
+  updateAData() {
+    this.dataProvider.postAIncentive(this.auth.getAccId()).subscribe(receivedData => {
       // if (data.message !== '') {
       console.log("received " + JSON.stringify(receivedData));
       this.input = receivedData[0].children;
       this.topEmployee = receivedData[1];
-      this.weekProfitComms = receivedData[0].totalProfitGain;
+      // this.weekProfitComms = receivedData[0].totalProfitGain;
       this.weekStakeComms = receivedData[0].totalTranComm;
-      // this.auth.setAccId("guest");
-      // this.auth.setUsername("guest");
-      // this.auth.setGuestLogin(true);
-      // this.navCtrl.setRoot(TabsPage);
-      // console.log("view as guest only");
-      // this.auth.setSessionToken("");
-      // this.auth.setAccValue(0);
-      // }
     }, (err: HttpErrorResponse) => {
       console.log("Error logged " + err);
 
       if (err.error instanceof Error) {
         console.log("Client-side error occured.");
       } else {
-        // let alert = this.alertCtrl.create({
-        //   title: 'ERROR',
-        //   subTitle: 'Server cannot be reached at this time. <br> Please try again later',
-        //   buttons: ['OK']
-        // });
-
-        // alert.present();
         console.log("Server-side error occured.");
       }
     });
   }
 
+  updateMData() {
+    this.dataProvider.postMIncentive(this.auth.getAccId()).subscribe(receivedData => {
+      // if (data.message !== '') {
+      console.log("received " + JSON.stringify(receivedData));
+      this.input = receivedData[0].children;
+      this.topEmployee = receivedData[1];
+      this.weekProfitComms = receivedData[0].totalProfitGain;
+      this.weekStakeComms = receivedData[0].totalTranComm;
+    }, (err: HttpErrorResponse) => {
+      console.log("Error logged " + err);
+
+      if (err.error instanceof Error) {
+        console.log("Client-side error occured.");
+      } else {
+        console.log("Server-side error occured.");
+      }
+    });
+
+  }
   changeEvent(number) {
     console.log("event " + number);
   }
@@ -223,10 +247,12 @@ export class CommTreePage {
     console.log($event.value);
     if ($event.value === "chart") {
       this.graph = true;
-      this.displayATable=false;
-      this.displayMTable=false;
+      this.displayATable = false;
+      this.displayMTable = false;
+      this.currentView="chart";
     }
     else {
+      this.currentView="table";
       this.graph = false;
       this.updateDisplayType();
     }

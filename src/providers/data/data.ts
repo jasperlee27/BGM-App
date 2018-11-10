@@ -8,7 +8,9 @@ const serverHealthURL = 'http://178.128.50.224:3000';
 const loginUrl = 'http://178.128.50.224:3000/login/';
 const login2FAUrl = 'http://178.128.50.224:3000/account/login2fa';
 const toggle2FAUrl = 'http://178.128.50.224:3000/account/toggle2FA';
-const incentiveURL = 'http://178.128.50.224:3000/account/getincentive';
+const aIncentiveURL = 'http://178.128.50.224:3000/account/incentiveA';
+const mIncentiveURL = 'http://178.128.50.224:3000/account/incentiveM';
+
 const pastTransactionsURL = 'http://178.128.50.224:3000/account/getPastTransactions'
 const trehuntStatusURL = 'http://178.128.50.224:3000/game1/getCurrentGame';
 const trehuntWinnerURL = 'http://178.128.50.224:3000/game1/getWinner';
@@ -40,8 +42,22 @@ export class DataProvider {
     return this.http.get(serverHealthURL);
   }
 
-  getIncentive(): Observable<any> {
-    return this.http.get(incentiveURL);
+  postAIncentive(accid): Observable<any> {
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }) };
+    // const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
+    var requestBody = new HttpParams().set("accid", accid);
+    return this.http.post(aIncentiveURL, requestBody, httpHeader);
+  }
+
+  postMIncentive(accid): Observable<any> {
+    var sessionToken = this.auth.getSessionToken();
+    console.log("session token posted " + sessionToken)
+    const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }) };
+    // const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
+    var requestBody = new HttpParams().set("accid", accid);
+    return this.http.post(mIncentiveURL, requestBody, httpHeader);
   }
 
   //login WITHOUT 2FA

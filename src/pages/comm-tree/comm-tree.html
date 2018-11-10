@@ -74,7 +74,7 @@
         <ay-column field="profComm" header="R. Comm" [style]="{'width': '15%','background':'#222', 'color':'white' ,'border':'none', 'text-align':'right'}"></ay-column>
       </ay-treeTable>
     </ion-row>
-    <ion-row *ngIf="displayATable" nowrap class="tableContainer">
+    <ion-row *ngIf="displayATable" nowrap class="smallTableContainer">
       <ay-treeTable [value]="input" [rows]="10" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
         <ay-column field="name" header="Name" [style]="{'width': '40%' , 'background':'#222', 'color':'white' ,'border':'none'}"></ay-column>
         <ay-column field="weekStake" header="Stake" [style]="{'width': '15%', 'background':'#222', 'color':'white' ,'border':'none', 'text-align':'right'}"></ay-column>
