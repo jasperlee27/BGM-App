@@ -14,10 +14,19 @@
           Scan QR Here
         </ion-col>
       </ion-row>
-      <ion-col col-12 text-center>
-        <!-- QR Code here -->
-        <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
-      </ion-col>
+      <ion-row>
+        <ion-col col-12 text-center>
+          <!-- QR Code here -->
+          <ngx-qrcode [qrc-value]="createdCode"></ngx-qrcode>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 text-center style="font-size:16px; font: weight 700;">
+          <!-- Referral ID here -->
+          <span style="color:white">Referral ID:</span>
+          <span style="color:#f3ab2e">{{refID}}</span>
+        </ion-col>
+      </ion-row>
     </div>
   </div>
 

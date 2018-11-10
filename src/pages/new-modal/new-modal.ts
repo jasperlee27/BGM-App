@@ -17,6 +17,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 export class NewModalPage {
   createdCode;
   qrData = null;
+  refID;
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, private auth: GlobalAuthProvider) {
 
@@ -24,6 +25,7 @@ export class NewModalPage {
 
   ngOnInit() {
     this.createCode();
+    this.refID = this.auth.getRefID();
   }
 
   createCode() {
