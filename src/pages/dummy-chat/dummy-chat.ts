@@ -40,7 +40,7 @@ export class DummyChatPage {
   }
 
   ionViewWillEnter() {
-    this.scrollToBottom();
+    if (this.content._scroll) this.content.scrollToBottom(0);
   }
 
   scrollToBottom() {
