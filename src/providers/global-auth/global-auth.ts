@@ -13,6 +13,7 @@ export class GlobalAuthProvider {
   public isAuthenticated: boolean = false;
   private username: string;
   private accId: string;
+  private accType: number;
   private accValue: number;
   private sessionToken: string;
   private twoFAstatus: number;
@@ -43,6 +44,14 @@ export class GlobalAuthProvider {
 
   getAccId(){
     return this.accId;
+  }
+
+  setAccType(accType: number){
+    this.accType=accType;
+  }
+
+  getAccType(){
+    return this.accType;
   }
 
   setSessionToken(sessionToken: string){

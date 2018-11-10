@@ -90,6 +90,7 @@ export class TwoFacAuthPage {
         this.auth.setGuestLogin(false);
         this.navCtrl.setRoot(TabsPage);
         this.auth.setAccValue(data.accountValue);
+        this.auth.setAccType(data.accType);
         this.auth.set2FAStatus(parseInt(data.require2FA));
         this.auth.setRefID(data.referralId);
         console.log("Set 2FA status as " + this.auth.get2FAStatus());

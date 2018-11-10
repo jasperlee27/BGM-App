@@ -119,7 +119,8 @@ export class LoginPage {
       if (this.auth.get2FAStatus() !== 1) {
         this.auth.setGuestLogin(false);
         this.auth.setAccValue(this.receivedData.accountValue);
-        console.log("Setting acc balance as  " + this.receivedData.accountValue);
+        this.auth.setAccType(this.receivedData.accType);
+        console.log("Setting acc type as  " + this.auth.getAccType());
         this.auth.setSessionToken(this.receivedData.token);
         console.log("session Token set as " + this.auth.getSessionToken());
         this.auth.setRefID(this.receivedData.referralId);
@@ -196,7 +197,7 @@ export class LoginPage {
   }
 
   createAccount() {
-    const browser = this.inAppBrowser.create('http://ortustenoris.io/','_system');
+    const browser = this.inAppBrowser.create('http://ortustenoris.io/signup','_system');
 
   }
 }
