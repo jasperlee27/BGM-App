@@ -18,8 +18,7 @@ export class InnerWalletComponent {
   // walletAmount;
 
   constructor(private dataProvider: DataProvider, private auth: GlobalAuthProvider) {
-    // console.log('Hello InnerWalletComponent Component');
-    // this.text = 'Hello World';
+
   }
 
   ngOnInit(){
@@ -31,18 +30,12 @@ export class InnerWalletComponent {
     this.dataProvider.postWalletAmount(this.auth.getAccId()).subscribe(data => {
 
       //parse response from server
-      console.log("Update wallet reponse");
-      console.log("Received acc balance as  " + data.accountValue);
       this.auth.setAccValue(parseInt(data.accountValue));
-      console.log("Global provider value of acc " +this.auth.getAccValue());
       this.walletAmount = this.auth.getAccValue();
     },
     err => {
-      console.log("Error occured while getting account balance");
       console.log(err);
     });
-    // this.navCtrl.setRoot(TabsPage);
-    console.log("End getting amount");
   }
   
 }

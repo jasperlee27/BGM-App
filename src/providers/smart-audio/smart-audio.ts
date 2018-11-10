@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 import { NativeAudio } from '../../../node_modules/@ionic-native/native-audio';
 import { Platform } from '../../../node_modules/ionic-angular/platform/platform';
 
-/*
-  Generated class for the SmartAudioProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class SmartAudioProvider {
   //html5 init

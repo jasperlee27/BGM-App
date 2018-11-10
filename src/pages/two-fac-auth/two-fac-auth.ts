@@ -108,7 +108,7 @@ export class TwoFacAuthPage {
       }
     },
       err => {
-        console.log("Error occured while logging in w 2FA");
+    
         console.log(err.message);
 
         if (err.status === 0) {

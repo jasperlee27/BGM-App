@@ -59,7 +59,6 @@ export class BiddingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BiddingPage');
   }
 
   bidGame(){
@@ -91,13 +90,11 @@ export class BiddingPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-    console.log("This is math.random " +Math.round(Math.random()*1000));
+
     this.updatePoolAmount(Math.round(Math.random() * 1000));
     this.updateNoPlayers(Math.round(Math.random() * 10));
 
     setTimeout(() => {
-      console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
   }

@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import * as io from 'socket.io-client';
 import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import { Observable } from '../../../node_modules/rxjs/Observable';
-// import { Content } from ‘@ionic-angular’;
-/**
- * Generated class for the DummyChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,13 +21,7 @@ export class DummyChatPage {
     this.username = this.auth.getUsername();
     this.toolbarFooterColor = 'dark';
     this.socket = io.connect('http://178.128.50.224:3006');
-    console.log("socket for hashing conencted");
 
-    // this.getMessages().subscribe(message => {
-    //   // var msgToPush= JSON.parse(message);
-    //   // this.messages.push(message);
-    //   console.log("subscribed and after pushing into msgs  " + this.messages);
-    // });
 
     this.messages = new Array();
   }
@@ -49,7 +36,6 @@ export class DummyChatPage {
     });
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DummyChatPage');
   }
 
   ngOnInit() {
@@ -60,10 +46,10 @@ export class DummyChatPage {
       var msgToPush = JSON.parse(msg);
       this.messages.push(msgToPush);
       this.scrollToBottom();
-      console.log("Original msg: " + msg);
-      console.log("parsed msg username: " + msgToPush.username);
-      console.log("parsed msg msg: " + msgToPush.msg);
-      console.log(this.messages);
+      // console.log("Original msg: " + msg);
+      // console.log("parsed msg username: " + msgToPush.username);
+      // console.log("parsed msg msg: " + msgToPush.msg);
+      // console.log(this.messages);
     });
 
     //emit to server
@@ -72,14 +58,6 @@ export class DummyChatPage {
       var jsonToSend = JSON.stringify(objToSend);
       this.socket.emit('chat message', jsonToSend);
     }
-
-    // this.socket.on('chat message', (data: any) => {
-    //   // console.log("Parsing JSON sent: " + JSON.parse(data));
-    //   var receivedData = JSON.parse(data);
-    //   console.log("JSON Username " + receivedData.username);
-    //   console.log("JSON message " + receivedData.msg);
-    //   console.log("Received chat message here " + data);
-    // });
 
     setTimeout(() => {
       this.content.scrollToBottom(300);//300ms animation speed
@@ -93,23 +71,5 @@ export class DummyChatPage {
     this.message = '';
   }
 
-  // getMessages() {
-  //   let observable = new Observable(observer => {
-  //     this.socket.on('chatmessage', (data) => {
-  //       observer.next(data);
-  //       console.log("in get messages " + data);
-  //     });
-  //   })
-  //   return observable;
-  // }
-
-  // getUsers() {
-  //   let observable = new Observable(observer => {
-  //     this.socket.on('users-changed', (data) => {
-  //       observer.next(data);
-  //     });
-  //   });
-  //   return observable;
-  // }
 
 }

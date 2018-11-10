@@ -59,7 +59,7 @@ export class SlotsDrawBtcPage {
       }
     },
       err => {
-        console.log("Error occured while getting ETH winner");
+        // console.log("Error occured while getting ETH winner");
         console.log(err);
       });
   }
@@ -92,7 +92,6 @@ export class SlotsDrawBtcPage {
       direction: 'up',
       delay: 500,
       randomize() {
-        console.log("winner No 1 " +  winner);
         return winner.charAt(0);
       }
       // randomize:5
@@ -166,7 +165,6 @@ export class SlotsDrawBtcPage {
   }
 
   toDo(){
-    console.log("Entered here");
     this.winnerID=this.receivedData.winnerUser;
     let toAlertUserAlert = this.alertController.create({
       title: 'Congratulations',

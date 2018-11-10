@@ -177,7 +177,6 @@ export class CommTreePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CommTreePage');
   }
 
   ionViewWillEnter() {
@@ -195,7 +194,7 @@ export class CommTreePage {
       console.log("Admin requesting nil data");
     }
     this.updateDisplayType();
-    if (this.currentView==="chart"){
+    if (this.currentView === "chart") {
       this.displayMTable = false;
       this.displayATable = false;
     }
@@ -204,7 +203,6 @@ export class CommTreePage {
   updateAData() {
     this.dataProvider.postAIncentive(this.auth.getAccId()).subscribe(receivedData => {
       // if (data.message !== '') {
-      console.log("received " + JSON.stringify(receivedData));
       this.input = receivedData[0].children;
       this.topEmployee = receivedData[1];
       // this.weekProfitComms = receivedData[0].totalProfitGain;
@@ -239,20 +237,16 @@ export class CommTreePage {
     });
 
   }
-  changeEvent(number) {
-    console.log("event " + number);
-  }
-
   toggleEvent($event) {
-    console.log($event.value);
+    // console.log($event.value);
     if ($event.value === "chart") {
       this.graph = true;
       this.displayATable = false;
       this.displayMTable = false;
-      this.currentView="chart";
+      this.currentView = "chart";
     }
     else {
-      this.currentView="table";
+      this.currentView = "table";
       this.graph = false;
       this.updateDisplayType();
     }

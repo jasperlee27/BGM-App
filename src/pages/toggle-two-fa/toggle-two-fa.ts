@@ -43,7 +43,7 @@ export class ToggleTwoFaPage {
       console.log("Overriding navbar success");
       this.navCtrl.setRoot(TabsPage);
     }
-    console.log('ionViewDidLoad TwoFacAuthPage');
+
     for (let i = 0; i < this.navCtrl.length(); i++) {
       let v = this.navCtrl.getViews()[i];
       console.log(v.component.name);
@@ -57,14 +57,7 @@ export class ToggleTwoFaPage {
         console.log("SMS sent " + data.message);
         this.isRequestEnabled = false;
         this.startCountdownTimer(30);
-        // let alert = this.alertCtrl.create({
-        //   title: 'SUCCESS',
-        //   subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
-        //   buttons: ['OK']
-        // });
-        // alert.present();
-        // alert.onDidDismiss(() => {
-        // })
+
       }
     },
       err => {
@@ -107,14 +100,7 @@ export class ToggleTwoFaPage {
         this.navCtrl.setRoot(TabsPage);
         this.auth.set2FAStatus(parseInt(data.require2FA));
         console.log("Set 2FA status as " + this.auth.get2FAStatus());
-        // let alert = this.alertCtrl.create({
-        //   title: 'SUCCESS',
-        //   subTitle: 'You have staked ' + this.hashManualBetAmount + ' for this game',
-        //   buttons: ['OK']
-        // });
-        // alert.present();
-        // alert.onDidDismiss(() => {
-        // })
+  
       }
     },
       err => {
@@ -144,9 +130,7 @@ export class ToggleTwoFaPage {
         }
       }
     );
-    // else {
-    //   this.auth.set2FAStatus(1);
-    // }
+
   }
 
   async startCountdownTimer(secondsToCount: number) {
@@ -154,11 +138,6 @@ export class ToggleTwoFaPage {
     this.count = secondsToCount;
     var noOfCounts = (this.count * 10)
 
-    //for 0.1s countdown
-    // this.countDown = timer(0,100).pipe(
-    //   take(noOfCounts),
-    //   map(()=> (this.count -= 0.1).toFixed(1))
-    // );
     //for 1s countdown
     this.countDown = timer(0, 1000).pipe(
       take(noOfCounts),

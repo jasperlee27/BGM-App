@@ -35,7 +35,6 @@ const reqSMSURL = 'http://178.128.50.224:3000/requestSms';
 export class DataProvider {
 
   constructor(public http: HttpClient, private auth: GlobalAuthProvider) {
-    console.log('Hello DataProvider Provider');
   }
   //get server health for guest view
   getServerHealth(): Observable<any> {

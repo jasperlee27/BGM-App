@@ -29,7 +29,7 @@ export class NewModalPage {
   }
 
   createCode() {
-    console.log("Creating Code");
+    // console.log("Creating Code");
     this.createdCode = "http://" + "ortustenoris.io/signup/" + this.auth.getRefID();
   }
 

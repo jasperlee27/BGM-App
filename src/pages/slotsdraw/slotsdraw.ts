@@ -50,7 +50,7 @@ export class SlotsdrawPage {
       if (parseInt(data.status) === 200) {
         this.receivedData = data;
         this.winner = data.winnerNo;
-        console.log("number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
+        // console.log("number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
         this.winnerNo1 =  this.winner.charAt(0);
         this.winnerNo2 =  this.winner.charAt(1);
         this.winnerNo3 =  this.winner.charAt(2);
@@ -60,14 +60,12 @@ export class SlotsdrawPage {
       }
     },
       err => {
-        console.log("Error occured while getting ETH winner");
         console.log(err);
       });
   }
 
   ionViewDidLoad() {
 
-    console.log('ionViewDidLoad SlotsdrawPage');
   }
 
   ionViewWillLeave(){
@@ -83,7 +81,6 @@ export class SlotsdrawPage {
     this.isWinnerButtonDisabled=true;
     this.isMachineShown = true;
     this.smartAudio.play('startslot');
-    // console.log("GETWINNER number received " +  this.winner + " " + this.winner.charAt(0) + " two " +  this.winner.charAt(1));
     const btnShuffle = document.querySelector("#luckyDrawShuffle");
     //first machine
     var winner= this.winner;
@@ -157,8 +154,7 @@ export class SlotsdrawPage {
     }
 
     function onComplete5(){
-      // var toAlertUserAlert= this.toAlertUserAlert;
-      // toAlertUserAlert.present();
+
       self.playComplete();
       self.toDo();
     }
@@ -170,7 +166,7 @@ export class SlotsdrawPage {
 
 
   toDo(){
-    console.log("Entered here");
+
     this.winnerID=this.receivedData.winnerUser;
     
     let toAlertUserAlert = this.alertController.create({

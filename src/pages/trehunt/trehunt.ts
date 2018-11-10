@@ -44,18 +44,7 @@ export class TrehuntPage {
   ETHTixDisabled;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
-    // this.currBTCprice = this.randomIntRange(8000, 10000);
-    // this.currETHprice = this.randomIntRange(600, 800);
-    // this.totalBTCtix = 8800;
-    // this.totalETHtix = 660;
-    // this.currBTCGameID = 'BTC027';
-    // this.currETHGameID = 'ETH005';
-    // this.currBTCtix = this.randomIntRange(1, this.totalBTCtix - 1);
-    // this.currETHtix = this.randomIntRange(1, this.totalETHtix - 1);
-    // this.currOwnBTCtix = this.randomIntRange(0, this.currBTCtix - 1);
-    // this.currOwnETHtix = this.randomIntRange(0, this.currETHtix - 1);
-    // // this.currBTCtix=8700;
-    // this.currETHtix=650;
+
     this.isGuestLogin = this.auth.getGuestLogin();
     //can retrieve accId from auth
     console.log("Trehunt successful in retrieving accID " + this.auth.getAccId());
@@ -93,10 +82,7 @@ export class TrehuntPage {
       if (data.status === 200) {
         this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
         console.log("Game 1 HTTP Request refresh status successful");
-        // console.log("index 0 array: gameid= "  + this.receivedData.data[0].gameid + ', gameName= ' + this.receivedData.data[0].gameName 
-        // + ', totalAmount= ' + this.receivedData.data[0].totalAmount + ', currAmount= ' + this.receivedData.data[0].currentAmount + 
-        // ', currOrders and updated= ' + this.receivedData.data[0].orders[0].tickets[0] + ' ' +this.receivedData.data[0].orders[0].updated);
-
+     
         //BTC updates
         this.currBTCGameID = this.receivedData.data[1].gameName;
         this.purchaseBTCGameID = this.receivedData.data[1]._id;
@@ -162,11 +148,6 @@ export class TrehuntPage {
     this.navCtrl.push(SlotsdrawPage);
     console.log("Going to ETH lucky draw");
   }
-  // not implementing btc eth live price
-  // updateBTCETHPrice() {
-  //   this.currBTCprice = this.randomIntRange(8000, 10000);
-  //   this.currETHprice = this.randomIntRange(600, 800);
-  // }
 
   buyBTCtix() {
     console.log("buying " + this.amountBTCtix + " BTC Tix");
@@ -193,9 +174,7 @@ export class TrehuntPage {
         console.log(err);
         this.presentErrorAlert();
       });
-    // this.currOwnBTCtix += parseInt(this.amountBTCtix);
 
-    // this.updateCurrBTCtix(this.amountBTCtix, "bought");
   }
 
   buyETHtix() {
@@ -222,10 +201,7 @@ export class TrehuntPage {
         console.log(err);
         this.presentErrorAlert();
       });
-    // console.log("bought " + this.amountETHtix + " ETH Tix");
-    // // this.presentAlert(this.amountETHtix, 'ETH');
-    // this.currOwnETHtix += parseInt(this.amountETHtix);
-    // this.updateCurrETHtix(this.amountETHtix, "bought");
+  
   }
 
 
@@ -276,7 +252,6 @@ export class TrehuntPage {
   updateCurrBTCtix(rangeBTCTixIncrease: number, type: string) {
 
     if (this.currBTCtix >= this.totalBTCtix) {
-      console.log("BTC terminating early");
       return;
     }
 
@@ -288,7 +263,7 @@ export class TrehuntPage {
       else {
         increment = this.randomIntRange(0, rangeBTCTixIncrease);
       }
-      // console.log("increment value " + increment);
+
       var targetValue = this.currBTCtix + parseInt(increment);
 
       if (targetValue >= this.totalBTCtix) {

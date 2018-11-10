@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular/';
 import * as Chart from "chart.js";
 import 'chartjs-plugin-streaming';
-// import { getQueryValue } from '@angular/core/src/view/query';
+
 import { BaseChartDirective } from '../../../node_modules/ng2-charts';
 import { timer } from 'rxjs/observable/timer'; // (for rxjs < 6) use 'rxjs/observable/timer'
 import { take, map } from 'rxjs/operators';
@@ -10,12 +10,7 @@ import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 import * as io from 'socket.io-client';
 import { DataProvider } from '../../providers/data/data';
 import { SmartAudioProvider } from '../../providers/smart-audio/smart-audio';
-/**
- * Generated class for the StreamPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -149,9 +144,6 @@ export class StreamPage {
         this.timerValue = Math.abs(parseFloat(receivedData.number)).toFixed(0);
         gameValuesToPush = receivedData.currentPrice;
 
-
-        // console.log("Updating current price in countdown " + gameValuesToPush);
-        // console.log("Counting down: " + receivedData.number);
         if (this.currGameState !== 'countdown') {
           this.isBetDisabled = false;
           this.isSliderDisabled = false;
@@ -166,16 +158,7 @@ export class StreamPage {
 
       else if (receivedData.type === 'game') {
         this.isBetDisabled = true;
-        // var updatePriceFlag; 
-        // var currCountDown;
-
-        // currCountDown = parseInt(receivedData.number);
-        // console.log("Current countdown = " + currCountDown);
-        // if (currCountDown < lastCountDown) {
-        //   gameValuesToPush = receivedData.currentPrice;
-        //   lastCountDown = currCountDown;
-        //   console.log("pushed value " + gameValuesToPush);
-        // }
+   
 
         gameValuesToPush = receivedData.currentPrice;
         this.gameTimer = Math.abs(parseFloat(receivedData.number)).toFixed(0);
@@ -231,13 +214,9 @@ export class StreamPage {
     });
 
     this.socket.on('Game3orders', (data: any) => {
-      // console.log(JSON.parse(data));
+
       var receivedData = JSON.parse(data);
-      // console.log(receivedData[0].longOrders);
-      // console.log(receivedData[0].shortOrders);
-      // console.log(receivedData[0].price);
-      // console.log("Received data type  " + receivedData.type);
-      // console.log("update this entry price " + this.entryPrice +" Local: "+ localEntryPrice);
+   
 
       if (parseInt(receivedData[0].shortOrders) === 0) {
         //this is to insert in long chart
@@ -300,13 +279,12 @@ export class StreamPage {
             });
 
             if (localActiveBet) {
-              // console.log("Entered if condition");
-              // console.log("buychart value is " + chart.data.datasets[1].data[0]);
+    
               chart.data.datasets[3].data.push({
                 x: Date.now(),
                 y: localEntryPrice,
               })
-              // console.log("After push entry value" + localEntryPrice);
+
             };
 
           },
@@ -345,14 +323,7 @@ export class StreamPage {
             fontSize: 11,
             padding: 5,
             display: true,
-            // callback: function (val) {
-            //   return val.toFixed(3);
-            //   // stepSize: 1000,
-            //   // suggestedMin: 7010,
-            //   // suggestedMax: 7000,
-            //   // mirror: true,
-            //   // drawTicks: true,
-            // },
+     
           },
           gridLines: {
             lineWidth: 0.5,
@@ -424,8 +395,7 @@ export class StreamPage {
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         this.entryPrice = parseFloat(data.entryPrice).toFixed(3)
-        // this.isManualBetDisabled = true;
-        // this.isManualCoutDisabled = false;
+
         this.hasActiveBet = true;
         // this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
@@ -448,9 +418,7 @@ export class StreamPage {
     },
       err => {
         console.log("Error occured while placing long bet");
-        // console.log(err);
-        // console.log(err.error.message);
-        // console.log(err.message);
+
         if (err.status === 0) {
           let alert = this.alertCtrl.create({
             title: 'ERROR',
@@ -484,10 +452,9 @@ export class StreamPage {
     this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
-      console.log("bought " + this.game3BetAmount);
-      console.log("Received entry price " + data.entryPrice);
-      // this.auth.setAccValue(data.accountValue);
-      // this.walletAmount = this.auth.getAccValue();
+      // console.log("bought " + this.game3BetAmount);
+      // console.log("Received entry price " + data.entryPrice);
+
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
         this.isSliderDisabled = true;
@@ -557,10 +524,7 @@ export class StreamPage {
 
       if (parseInt(data.status) === 200) {
         //set up for 1 bet per game first
-        console.log("Updating past game entry price " + data.data.entryPrice);
-        console.log("Updating past game end price " + data.data.endPrice);
-        console.log("Updating past game profit  " + data.data.profit);
-        console.log("Updating past game gameName " + data.data.gameName);
+
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         var transaction = {

@@ -19,7 +19,6 @@ export class GlobalAuthProvider {
   private twoFAstatus: number;
   private refID: string;
   constructor() {
-    console.log('Hello GlobalAuthProvider Provider');
   }
   
   setUsername(username: string){

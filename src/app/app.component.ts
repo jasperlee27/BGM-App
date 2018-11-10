@@ -27,23 +27,7 @@ export class MyApp {
   // platform: Platform;
 
   constructor(private screenOrientation: ScreenOrientation, platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, app: App, modalCtrl: ModalController, smartAudio: SmartAudioProvider, private nativeAudio: NativeAudio) {
-    // statusBar.overlaysWebView(true);
-    // statusBar.backgroundColorByHexString('#000000');
-    // alert(testVar);
-    // splashScreen.hide();
-
-    // window.addEventListener("keyboardDidShow", () => {
-    //   document.activeElement.scrollIntoView(false);
-
-    // const elem: HTMLCollectionOf<Element> = document.getElementsByClassName("scroll-content"); // The last content shown, so the current page
-    // if (elem !== undefined && elem.length > 0) {
-    //   elem[elem.length - 1].scrollTop += 40; // add 40px between the keyboard and the input
-    // }
-
-    // });
-    console.log(this.screenOrientation.type); // logs the current orientation, example: 'landscape'
-    // set to landscape
-
+    
 
     platform.ready().then(() => {
       statusBar.overlaysWebView(true);

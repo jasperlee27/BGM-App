@@ -38,7 +38,6 @@ export class RoulettePage {
     init();
     randomSpin();
     this.updateWalletBallance(-this.betAmount);
-    console.log ("My winner ID is " + winnerId);
     await this.delay(5010);
     this.presentAlert(winnerId);
   }

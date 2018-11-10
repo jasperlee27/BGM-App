@@ -99,9 +99,7 @@ export class LoginPage {
 
     if (usernameToPost != null) {
       this.auth.setUsername(usernameToPost.toLowerCase());
-      console.log("before lower  case " + usernameToPost);
       usernameToPost = usernameToPost.toLowerCase();
-      console.log("after lower case " + usernameToPost);
     }
 
     this.dataProvider.postLogin(usernameToPost, this.passwordInput).subscribe(data => {
@@ -110,22 +108,16 @@ export class LoginPage {
       this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData
       //parse response from server
 
-      console.log("Login reponse");
       this.auth.setAccId(this.receivedData._id);
-      console.log("Setting account id as " + this.receivedData._id);
       this.auth.set2FAStatus(parseInt(this.receivedData.require2FA));
-      console.log("received 2fa status on login " + this.receivedData.require2FA);
-      // var twoFAstatus= this.auth.get2FAStatus();
+    
       //set account info only if successful login i.e do not req 2FA [0,2]
       if (this.auth.get2FAStatus() !== 1) {
         this.auth.setGuestLogin(false);
         this.auth.setAccValue(this.receivedData.accountValue);
         this.auth.setAccType(this.receivedData.accType);
-        console.log("Setting acc type as  " + this.auth.getAccType());
         this.auth.setSessionToken(this.receivedData.token);
-        console.log("session Token set as " + this.auth.getSessionToken());
         this.auth.setRefID(this.receivedData.referralId);
-        console.log("Referral ID set as " + this.auth.getRefID());
         this.navCtrl.setRoot(TabsPage);
       }
 
@@ -160,16 +152,13 @@ export class LoginPage {
   }
 
   viewAsGuest() {
-    // this.navCtrl.setRoot(TabsPage);
-    // this.navCtrl.push(this.twoFApage);
+
     this.dataProvider.getServerHealth().subscribe(data => {
       if (data.message !== '') {
-        console.log("received " + data.message);
         this.auth.setAccId("guest");
         this.auth.setUsername("guest");
         this.auth.setGuestLogin(true);
         this.navCtrl.setRoot(TabsPage);
-        console.log("view as guest only");
         this.auth.setSessionToken("");
         this.auth.setAccValue(0);
       }

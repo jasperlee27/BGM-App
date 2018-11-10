@@ -25,11 +25,9 @@ export class QrCodePage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad QrCodePage');
   }
 
   createCode(){
-   console.log("Creating Code");
    this.createdCode = "http://" + "178.128.50.224:3000/qr/" + this.auth.getRefID();
   }
   

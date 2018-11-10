@@ -21,7 +21,6 @@ export class SplashLogoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SplashLogoPage');
     this.splashScreen.hide();
  
     setTimeout(() => {

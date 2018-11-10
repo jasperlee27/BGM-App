@@ -49,8 +49,7 @@ export class HomePage implements OnInit {
   // socket: SocketIOClient.Socket;
 
   constructor(private screenOrientation: ScreenOrientation, public platform: Platform, private http: Http, public navCtrl: NavController, public navParams: NavParams, public appCtrl: App, private auth: GlobalAuthProvider, public nativeAudio: NativeAudio, private alertCtrl: AlertController, public modalCtrl: ModalController) {
-    // this.socket = io.connect('http://178.128.50.224:3001');
-    // console.log("socket conencted");
+
     this.isGuest = auth.getGuestLogin();
   }
 
@@ -116,20 +115,10 @@ export class HomePage implements OnInit {
 
   getNews() {
     console.log("button is working fine");
-    // let imgPath = 'http://178.128.50.224:3000/getNews';
-    // let encodedImgPath = encodeURI(imgPath);
+ 
     let timeoutMS = 100000;
     this.storyImage = 'http://178.128.50.224:3000/getNews'
-    // this.http.get(encodedImgPath)
-    //   .timeout(timeoutMS)
-    //   .map(res => res.json()).subscribe(data => {
-    //     let responseData = data;
-    //     console.log(responseData);
-    //     this.storyImage = responseData;
-    //   },
-    //     err => {
-    //       console.log('error in getting news');
-    //     });
+
 
     let textPath = 'http://178.128.50.224:3000/getNewsText';
     let encodedTextPath = encodeURI(textPath);
@@ -166,13 +155,10 @@ export class HomePage implements OnInit {
   }
 
   showQRcode() {
-    //to do alert
-    // this.navCtrl.push(this.qrPage);
+
 
     let qrModal = this.modalCtrl.create(NewModalPage);
-    // qrModal.onDidDismiss(data => {
-    //   console.log("Dismissed modal");
-    // });
+
     qrModal.present();
   }
 
@@ -193,7 +179,6 @@ export class HomePage implements OnInit {
   }
 
   toggle2FA() {
-    // console.log("init 2fa status " + this.initTwoFAstatus);
     console.log("toggled 2fa " + this.twoFAstatus);
     //both turn on and off also need verify 2FA
     // if (this.twoFAstatus===true){
