@@ -94,7 +94,6 @@ export class HomePage implements OnInit {
   // }
   //NEWS API
   getNews_Old() {
-    console.log("button is working fine");
     let path = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey=bc62663fa4ac4c369f426682110037c2';
     let encodedPath = encodeURI(path);
     let timeoutMS = 100000;
@@ -114,7 +113,6 @@ export class HomePage implements OnInit {
   }
 
   getNews() {
-    console.log("button is working fine");
  
     let timeoutMS = 100000;
     this.storyImage = 'http://178.128.50.224:3000/getNews'

@@ -34,7 +34,6 @@ export class TwoFacAuthPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TwoFacAuthPage');
   }
   requestedSMS(){
 

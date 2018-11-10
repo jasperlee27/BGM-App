@@ -81,7 +81,6 @@ export class HashingPage {
     this.hashManualBetAmount = 1;
     // this.walletAmount = this.dataProvider.postWalletAmount(this.auth.getAccId);
     this.socket = io.connect('http://178.128.50.224:3001');
-    console.log("socket for hashing conencted");
     this.chartData = [
       { data: [], label: 'Hash Rate', pointRadius: 0, hidden: true, borderWidth: 5 },
     ];
@@ -270,11 +269,11 @@ export class HashingPage {
         }
         // this.chartLabels.push(receivedData.timeArr[0]);
         // this.chartLabels.push(receivedData.timeArr[receivedData.timeArr.length - 1]);
-        console.log("IN my chart labels " + this.chartLabels + "size of arr " + this.chartLabels.length);
+        // console.log("IN my chart labels " + this.chartLabels + "size of arr " + this.chartLabels.length);
         this.chartData[0].data = receivedData.priceArr;
         // this.chartData[0].data.push(receivedData.priceArr[0]);
         // this.chartData[0].data.push(receivedData.priceArr[receivedData.priceArr.length - 1]);
-        console.log("IN my chart data " + this.chartData[0].data + "size of arr " + this.chartData[0].data.length);
+        // console.log("IN my chart data " + this.chartData[0].data + "size of arr " + this.chartData[0].data.length);
         this.chart.refresh();
         this.timer("start", parseInt(receivedData.timeArr[receivedData.timeArr.length - 1]));
 
@@ -304,7 +303,6 @@ export class HashingPage {
 
         if (!this.isLocGameTimerStarted) {
           this.isLocGameTimerStarted = true;
-          console.log("START TIMER HERE");
           this.timer("start", 0);
         }
 
@@ -423,7 +421,6 @@ export class HashingPage {
     });
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HashingPage');
   }
 
   ionViewWillEnter() {
@@ -473,13 +470,11 @@ export class HashingPage {
             //push 10
             if (time === 10) {
               var index = this.chartLabels.indexOf(2.0);
-              console.log("Found index here " + index);
               if (index !== -1) this.chartLabels[index] = 2.1;
             }
             //push 15
             else {
               var index = this.chartLabels.indexOf(4.0);
-              console.log("Found index here " + index);
               if (index !== -1) this.chartLabels[index] = 4.1;
             }
             // console.log("Successfully pushed " + time);
@@ -510,7 +505,6 @@ export class HashingPage {
     }
 
     else {
-      console.log("Stopping real timer")
       clearInterval(this.timerInterval);
     }
 
@@ -710,9 +704,7 @@ export class HashingPage {
         }
         var index = this.chartLabels.indexOf(i);
         // console.log("Found index here " + index);
-        console.log("Altering index before :  " + this.chartLabels[index]);
         if (index !== -1) this.chartLabels[index] = i + 0.1;
-        console.log("Altering index after :  " + this.chartLabels[index]);
       }
     }
 
@@ -724,9 +716,7 @@ export class HashingPage {
         }
         var index = this.chartLabels.indexOf(i);
         // console.log("Found index here " + index);
-        console.log("Altering index before :  " + this.chartLabels[index]);
         if (index !== -1) this.chartLabels[index] = i + 0.1;
-        console.log("Altering index after :  " + this.chartLabels[index]);
       }
     }
     //(currTime >= 10)
@@ -738,9 +728,7 @@ export class HashingPage {
         var index = this.chartLabels.indexOf(i);
 
         // console.log("Found index here " + index);
-        console.log("Altering index before :  " + this.chartLabels[index]);
         if (index !== -1) this.chartLabels[index] = i + 0.1;
-        console.log("Altering index after :  " + this.chartLabels[index]);
       }
     }
 

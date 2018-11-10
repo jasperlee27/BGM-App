@@ -46,8 +46,6 @@ export class TrehuntPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private alertCtrl: AlertController, private dataProvider: DataProvider, public auth: GlobalAuthProvider) {
 
     this.isGuestLogin = this.auth.getGuestLogin();
-    //can retrieve accId from auth
-    console.log("Trehunt successful in retrieving accID " + this.auth.getAccId());
 
   }
 
@@ -57,7 +55,6 @@ export class TrehuntPage {
   }
 
   ionViewWillEnter() {
-    console.log("Fired event ionViewWillEnter");
     this.walletAmount = this.auth.getAccValue();
   }
 
@@ -77,7 +74,6 @@ export class TrehuntPage {
 
   updateCurrGameDetails() {
     //Making post request here
-    console.log("Updating game status with accId= " + this.auth.getAccId());
     this.dataProvider.postTrehuntStatus(this.auth.getAccId()).subscribe(data => {
       if (data.status === 200) {
         this.receivedData = data;  // pass the response from HTTP Request into local variable receivedData

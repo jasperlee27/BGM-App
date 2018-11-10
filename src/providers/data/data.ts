@@ -43,7 +43,6 @@ export class DataProvider {
 
   postAIncentive(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }) };
     // const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
     var requestBody = new HttpParams().set("accid", accid);
@@ -52,7 +51,6 @@ export class DataProvider {
 
   postMIncentive(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }) };
     // const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
     var requestBody = new HttpParams().set("accid", accid);
@@ -89,7 +87,6 @@ export class DataProvider {
   //toggle 2FA
   postToggle2FA(accid, codeNo): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
     var requestBody = new HttpParams().set("accid", accid).set("codeNo", codeNo);
@@ -98,7 +95,6 @@ export class DataProvider {
   //get past transactions
   postPastTransactions(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
     var requestBody = new HttpParams().set("accid", accid);
@@ -108,7 +104,6 @@ export class DataProvider {
   // get game1 curr status
   postTrehuntStatus(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
     var requestBody = new HttpParams().set("accid", accid);
@@ -117,7 +112,6 @@ export class DataProvider {
 
   postTrehuntGameWinner(accid, gameType): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
     var requestBody = new HttpParams().set("accid", accid).set("gameType", gameType);
@@ -170,7 +164,6 @@ export class DataProvider {
   //current wallet amount
   postWalletAmount(accid): Observable<any> {
     var sessionToken = this.auth.getSessionToken();
-    console.log("session token posted " + sessionToken)
     const httpHeader = { headers: new HttpHeaders({ "Content-Type'": "application/x-www-form-urlencoded" }).append('x-access-token', sessionToken) };
 
     var requestBody = new HttpParams().set("accid", accid);

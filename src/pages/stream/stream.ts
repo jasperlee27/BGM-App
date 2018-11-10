@@ -92,7 +92,6 @@ export class StreamPage {
     //do socket connection
     this.isSliderDisabled = true;
     this.socket = io.connect('http://178.128.50.224:3002');
-    console.log("socket for BinaryOptions conencted");
     this.isGuestLogin = this.auth.getGuestLogin();
     // this.isGameTime = true;
     this.historicalGame3 = new Array();
@@ -101,7 +100,6 @@ export class StreamPage {
   }
 
   ngOnInit() {
-    console.log('ionViewDidLoad StreamPage');
     //variable currentPrice,
     //on game, countdown, gamestart. NO game end yet
     var gameValuesToPush;
@@ -135,7 +133,7 @@ export class StreamPage {
           this.showCountdown = false;
           this.showGameEnded = false;
           this.currGameState = 'gameStart';
-          console.log("Toggled state " + this.currGameState);
+          // console.log("Toggled state " + this.currGameState);
           //TODO: Sound 
         }
         //one instance
@@ -152,7 +150,7 @@ export class StreamPage {
           this.showGameEnded = false;
           this.currGameState = 'countdown';
           this.currGame3ID = receivedData.GameId;
-          console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
+          // console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
         }
       }
 
@@ -177,8 +175,8 @@ export class StreamPage {
           this.showCountdown = false;
           this.showGameEnded = false;
           this.currGameState = 'game';
-          console.log("Toggled state " + this.currGameState);
-          console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
+          // console.log("Toggled state " + this.currGameState);
+          // console.log("Toggled state " + this.currGameState + " changed curr game id " + this.currGame3ID);
         }
       }
 
@@ -204,7 +202,7 @@ export class StreamPage {
           this.updatePastGame();
           //restart gameTimer
           this.gameTimer = 15.0;
-          console.log("Toggled state " + this.currGameState);
+          // console.log("Toggled state " + this.currGameState);
         }
       }
       else {
@@ -225,13 +223,11 @@ export class StreamPage {
           x: Date.now(),
           y: receivedData[0].price,
         });
-        console.log("Long Orders here " + receivedData[0].longOrders);
         // this.chart.refresh();
         //one instance
       }
       else {
         //this is to insert in short chart
-        console.log("Short Orders here " + receivedData[0].shortOrders);
         this.chart.datasets[1].data.push({
           x: Date.now(),
           y: gameValuesToPush,

@@ -148,7 +148,6 @@ export class LoginPage {
       });
 
     // this.navCtrl.setRoot(TabsPage);
-    console.log("login function activated");
   }
 
   viewAsGuest() {

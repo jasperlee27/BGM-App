@@ -31,7 +31,6 @@ export class WithdrawModalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad WithdrawModalPage');
   }
 
   dismiss() {
@@ -61,14 +60,12 @@ export class WithdrawModalPage {
       }
       //passwords match
       else {
-        console.log("Valid form, sending request");
         // this.dataApiService.postRegistration(myForm.value.username, myForm.value.password, myForm.value.email, myForm.value.countrySel, myForm.value.referralCode).subscribe(data => {
         //     console.log("Login reponse " + data);
         // },
         //     err => {
         //         console.log("Error: " + err.error.message);
         //     });
-        console.log("login function completed");
       }
     }
     //params not filled up

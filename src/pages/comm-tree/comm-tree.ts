@@ -221,7 +221,6 @@ export class CommTreePage {
   updateMData() {
     this.dataProvider.postMIncentive(this.auth.getAccId()).subscribe(receivedData => {
       // if (data.message !== '') {
-      console.log("received " + JSON.stringify(receivedData));
       this.input = receivedData[0].children;
       this.topEmployee = receivedData[1];
       this.weekProfitComms = receivedData[0].totalProfitGain;

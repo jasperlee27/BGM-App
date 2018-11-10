@@ -65,7 +65,6 @@ export class SlotsDrawBtcPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SlotsdrawPage');
   }
 
   ionViewWillLeave(){
