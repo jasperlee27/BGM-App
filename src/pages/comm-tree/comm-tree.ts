@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { IEmployee } from '../../../node_modules/ng-org-chart';
 import { DataProvider } from '../../providers/data/data';
 import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
+import { GlobalAuthProvider } from '../../providers/global-auth/global-auth';
 
 /**
  * Generated class for the CommTreePage page.
@@ -17,10 +18,14 @@ import { HttpErrorResponse } from '../../../node_modules/@angular/common/http';
   templateUrl: 'comm-tree.html',
 })
 export class CommTreePage {
-  viewOptions="table";
-  graph= false;
+  viewOptions = "table";
   weekStakeComms;
   weekProfitComms;
+  aComm = false;
+  mComm = false;
+  displayMTable = false;
+  displayATable = false;
+  graph = false;
 
   input;
   topEmployee: IEmployee = {
@@ -138,7 +143,7 @@ export class CommTreePage {
   //     ]
   //   }
   // ];
-  
+
   // rawInput: any = JSON.stringify({
   //   "data":
   //     [
@@ -167,27 +172,30 @@ export class CommTreePage {
   //     ]
   // });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider) {
-
+  constructor(public navCtrl: NavController, public navParams: NavParams, private dataProvider: DataProvider, private auth: GlobalAuthProvider) {
+  }
+  
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad CommTreePage');
   }
 
-  ionViewDidLoad() {
-    // this.input = JSON.parse(this.rawInput);
-    console.log('ionViewDidLoad CommTreePage');
+  ionViewWillEnter() {
+    this.updateDisplayType();
+
     this.dataProvider.getIncentive().subscribe(receivedData => {
       // if (data.message !== '') {
-        console.log("received " + JSON.stringify(receivedData));
-        this.input = receivedData[0].children;
-        this.topEmployee = receivedData[1];
-        this.weekProfitComms = receivedData[0].totalProfitGain;
-        this.weekStakeComms = receivedData[0].totalTranComm;
-        // this.auth.setAccId("guest");
-        // this.auth.setUsername("guest");
-        // this.auth.setGuestLogin(true);
-        // this.navCtrl.setRoot(TabsPage);
-        // console.log("view as guest only");
-        // this.auth.setSessionToken("");
-        // this.auth.setAccValue(0);
+      console.log("received " + JSON.stringify(receivedData));
+      this.input = receivedData[0].children;
+      this.topEmployee = receivedData[1];
+      this.weekProfitComms = receivedData[0].totalProfitGain;
+      this.weekStakeComms = receivedData[0].totalTranComm;
+      // this.auth.setAccId("guest");
+      // this.auth.setUsername("guest");
+      // this.auth.setGuestLogin(true);
+      // this.navCtrl.setRoot(TabsPage);
+      // console.log("view as guest only");
+      // this.auth.setSessionToken("");
+      // this.auth.setAccValue(0);
       // }
     }, (err: HttpErrorResponse) => {
       console.log("Error logged " + err);
@@ -207,19 +215,41 @@ export class CommTreePage {
     });
   }
 
-  changeEvent(number){
+  changeEvent(number) {
     console.log("event " + number);
   }
 
-  toggleEvent($event){
+  toggleEvent($event) {
     console.log($event.value);
-    if ($event.value==="chart")
-    {
-      this.graph=true;
+    if ($event.value === "chart") {
+      this.graph = true;
+      this.displayATable=false;
+      this.displayMTable=false;
+    }
+    else {
+      this.graph = false;
+      this.updateDisplayType();
+    }
+  }
+
+  updateDisplayType() {
+    var viewType = this.auth.getAccType();
+    if (viewType === 0) {
+      this.aComm = true;
+      this.displayATable = true;
+      this.mComm = false;
+      this.displayMTable = false;
     }
 
-    else{
-      this.graph=false;
+    else if (viewType === 1) {
+      this.aComm = false;
+      this.displayATable = false;
+      this.mComm = true;
+      this.displayMTable = true;
+    }
+
+    else {
+      console.log("Admin view is null");
     }
   }
 }
