@@ -114,6 +114,7 @@ export class LoginPage {
       this.auth.setAccId(this.receivedData._id);
       console.log("Setting account id as " + this.receivedData._id);
       this.auth.set2FAStatus(parseInt(this.receivedData.require2FA));
+      console.log("received 2fa status on login " + this.receivedData.require2FA);
       // var twoFAstatus= this.auth.get2FAStatus();
       //set account info only if successful login i.e do not req 2FA [0,2]
       if (this.auth.get2FAStatus() !== 1) {
@@ -197,7 +198,7 @@ export class LoginPage {
   }
 
   createAccount() {
-    const browser = this.inAppBrowser.create('http://ortustenoris.io/signup','_system');
+    const browser = this.inAppBrowser.create('http://ortustenoris.io/signup', '_system');
 
   }
 }
