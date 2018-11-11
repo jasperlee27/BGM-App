@@ -1,3 +1,21 @@
+.custom-alert-danger .alert-wrapper {
+    background-color: #F35E5D;
+    color: #222;
+}
+
+.custom-alert-danger button.alert-button{
+    color: #222;
+}
+
+.custom-alert-win .alert-wrapper {
+    background-color: #49BF51;
+    color: #222;
+}
+
+.custom-alert-win button.alert-button{
+    color: #222;
+}
+
 page-stream {
     ion-scroll {
         width:100%;
@@ -6,6 +24,7 @@ page-stream {
     ion-input{
         font-size:20px !important;
     }
+
     .text-input::-moz-placeholder {
         color: white;
     }

@@ -547,23 +547,25 @@ export class StreamPage {
         var betType = data.data.orderTypeDisplay;
         var titleToDisplay = "";
         var msgToDisplay = "";
+        var cssClassToDisplay = "";
 
         //positive -> win
         if (profit >= 0) {
-          titleToDisplay = "Congratulations!"
-          msgToDisplay = "You won " + profit + " for the last round! <br> Well done!"
+          titleToDisplay = "Congratulations!";
+          msgToDisplay = "You won " + profit + " for the last round! <br> Well done!";
+          cssClassToDisplay = "custom-alert-win";
         }
 
         else {
           titleToDisplay = "Unlucky!"
           msgToDisplay = "You lost " + Math.abs(profit) + " in the last round. <br> Better luck next time!"
-
+          cssClassToDisplay = "custom-alert-danger";
         }
 
         let alert = this.alertCtrl.create({
           title: titleToDisplay,
           subTitle: msgToDisplay,
-          cssClass: 'custom-alert-danger',
+          cssClass: cssClassToDisplay,
           buttons: ['OK']
         });
         alert.present();
