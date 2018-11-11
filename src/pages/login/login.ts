@@ -75,7 +75,7 @@ export class LoginPage {
   passwordIcon: string = 'eye';
   loginState: any = "in";
   usernameInput: string = 'Eric1';
-  passwordInput: string = 'eric1';
+  passwordInput: string = 'password';
   receivedData;
   showInvalidLogin: boolean = false;
 

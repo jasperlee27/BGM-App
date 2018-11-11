@@ -156,7 +156,7 @@ export class StreamPage {
 
       else if (receivedData.type === 'game') {
         this.isBetDisabled = true;
-   
+
 
         gameValuesToPush = receivedData.currentPrice;
         this.gameTimer = Math.abs(parseFloat(receivedData.number)).toFixed(0);
@@ -188,6 +188,7 @@ export class StreamPage {
         if (this.currGameState !== 'gameEnd') {
           //TOGGLE STATE TO GAME END
           if (this.hasActiveBet) {
+            this.displayRoundResult();
             this.destroyBetInstance();
             this.isSliderDisabled = false;
             this.game3BetAmount = '';
@@ -214,7 +215,7 @@ export class StreamPage {
     this.socket.on('Game3orders', (data: any) => {
 
       var receivedData = JSON.parse(data);
-   
+
 
       if (parseInt(receivedData[0].shortOrders) === 0) {
         //this is to insert in long chart
@@ -275,7 +276,7 @@ export class StreamPage {
             });
 
             if (localActiveBet) {
-    
+
               chart.data.datasets[3].data.push({
                 x: Date.now(),
                 y: localEntryPrice,
@@ -319,7 +320,7 @@ export class StreamPage {
             fontSize: 11,
             padding: 5,
             display: true,
-     
+
           },
           gridLines: {
             lineWidth: 0.5,
@@ -345,13 +346,13 @@ export class StreamPage {
   }
 
   destroyBetInstance() {
-    console.log("pop buyline chart")
+    // console.log("pop buyline chart")
     this.datasets.pop();
     this.chart.refresh();
   }
 
   buyDataset(orderType, entryPrice) {
-    console.log("Try to add new dataset");
+    // console.log("Try to add new dataset");
     var color;
 
     if (orderType === "long") {
@@ -380,8 +381,8 @@ export class StreamPage {
     this.dataProvider.postBetGame3(this.game3BetAmount, "long", this.auth.getAccId(), this.currGame3ID).subscribe(data => {
       // pass the response from HTTP Request into local variable1 receivedData
       // var receivedData= JSON.parse(data);
-      console.log("bought " + this.game3BetAmount);
-      console.log("Received entry price " + data.entryPrice);
+      // console.log("bought " + this.game3BetAmount);
+      // console.log("Received entry price " + data.entryPrice);
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
         this.isSliderDisabled = true;
@@ -520,7 +521,6 @@ export class StreamPage {
 
       if (parseInt(data.status) === 200) {
         //set up for 1 bet per game first
-
         this.auth.setAccValue(data.accountValue);
         this.walletAmount = this.auth.getAccValue();
         var transaction = {
@@ -538,7 +538,41 @@ export class StreamPage {
     );
   }
 
-  calcRoundResult() {
+  displayRoundResult() {
+    this.dataProvider.postPastGame3(this.auth.getAccId()).subscribe(data => {
+      if (parseInt(data.status) === 200) {
+        //alert if has active bet
+
+        var profit = parseInt(data.data.profit);
+        var betType = data.data.orderTypeDisplay;
+        var titleToDisplay = "";
+        var msgToDisplay = "";
+
+        //positive -> win
+        if (profit >= 0) {
+          titleToDisplay = "Congratulations!"
+          msgToDisplay = "You won " + profit + " for the last round! <br> Well done!"
+        }
+
+        else {
+          titleToDisplay = "Unlucky!"
+          msgToDisplay = "You lost " + Math.abs(profit) + " in the last round. <br> Better luck next time!"
+
+        }
+
+        let alert = this.alertCtrl.create({
+          title: titleToDisplay,
+          subTitle: msgToDisplay,
+          cssClass: 'custom-alert-danger',
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    },
+      err => {
+        console.log("Error occured while getting past transactions");
+      }
+    );
 
   }
 

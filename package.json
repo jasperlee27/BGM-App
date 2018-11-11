@@ -84,8 +84,8 @@
     },
     "platforms": [
       "browser",
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "description": "An Ionic project for BGM"
