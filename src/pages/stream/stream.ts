@@ -191,7 +191,7 @@ export class StreamPage {
             this.displayRoundResult();
             this.destroyBetInstance();
             this.isSliderDisabled = false;
-            this.game3BetAmount = '';
+            // this.game3BetAmount = '';
           }
           this.musicPlayed = false;
           this.hasActiveBet = false;
@@ -397,7 +397,7 @@ export class StreamPage {
         // this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
-          subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + data.entryPrice,
+          subTitle: 'You have staked ' + data.amount + ' on HIGHER end value at entry price of ' + parseFloat(data.entryPrice).toFixed(3),
           buttons: ['OK']
         });
         alert.present();
@@ -447,10 +447,7 @@ export class StreamPage {
   betLower() {
     //to pass in currGame3ID
     this.dataProvider.postBetGame3(this.game3BetAmount, "short", this.auth.getAccId(), this.currGame3ID).subscribe(data => {
-      // pass the response from HTTP Request into local variable1 receivedData
-      // var receivedData= JSON.parse(data);
-      // console.log("bought " + this.game3BetAmount);
-      // console.log("Received entry price " + data.entryPrice);
+
 
       if (parseInt(data.status) === 200) {
         this.isBetDisabled = true;
@@ -468,7 +465,7 @@ export class StreamPage {
         // this.game3BetAmount = '';
         let alert = this.alertCtrl.create({
           title: 'SUCCESS',
-          subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + data.entryPrice,
+          subTitle: 'You have staked ' + data.amount + ' on LOWER end value at entry price of ' + parseFloat(data.entryPrice).toFixed(3),
           buttons: ['OK']
         });
         alert.present();
@@ -566,7 +563,29 @@ export class StreamPage {
           title: titleToDisplay,
           subTitle: msgToDisplay,
           cssClass: cssClassToDisplay,
-          buttons: ['OK']
+          buttons: [
+            {
+              text: 'Repeat Bet',
+              // role: 'cancel',
+              handler: () => {
+                // console.log('Repeat bet clicked');
+                if (this.historicalGame3[0].betType.toUpperCase()==="HI"){
+                  this.betHigher();
+                }
+                else{
+                  this.betLower();
+                }
+                return true;
+              }
+    
+            },
+            {
+              text: 'OK',
+              handler: () => {
+                return true;
+              }
+            }
+          ]
         });
         alert.present();
       }
