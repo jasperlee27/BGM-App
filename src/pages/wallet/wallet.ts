@@ -156,22 +156,22 @@ export class WalletPage {
         {
           text: 'Cancel',
           handler: (data) => {
-            console.log('Cancelled transfer intended ' + data.Amount + ' to game wallet');
+            // console.log('Cancelled transfer intended ' + data.Amount + ' to game wallet');
           }
         },
         {
           text: 'Submit',
           handler: (data) => {
-            console.log('Processing transfer ' + data.Amount + ' to game wallet');
+            // console.log('Processing transfer ' + data.Amount + ' to game wallet');
             this.dataProvider.postReqDeposit(this.auth.getAccId(), data.Amount).subscribe(resReceived => {
               //receive successfully
-              console.log("deposit status " + resReceived.status + " with token: " + resReceived.transaction.token);
+              // console.log("deposit status " + resReceived.status + " with token: " + resReceived.transaction.token);
               this.updateOutstandingTopups();
-              console.log("status " + data.status)
+              // var toDepositDetails = " " + resReceived.bankType + " " + resReceived.bankDetails;
               let alert = this.alertCtrl.create({
                 title: 'Success',
                 subTitle: 'Your deposit request of ' + data.Amount + ' OT is successful. <br><br>Token ID: <span style="font-size:30px; font-weight:bolder"> ' + resReceived.transaction.token + '</span>'
-                +'<br><br>Please include your token ID in "Comments" when transferring to <br>[Bank Acc Details]',
+                +'<br><br>Please include your token ID in "Comments" when transferring to <br>[' + resReceived.bankType + " " + resReceived.bankDetails + ']',
                 buttons: ['OK']
               });
               alert.present();
